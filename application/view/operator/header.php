@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li > <!--class="active"-->
-                        <a href="operator/createContract">
+                        <a href="<?=URL.'operator/createContract';?>">
                             <i class="material-icons">insert_drive_file</i>
                             <p>Create Contract</p>
                         </a>
