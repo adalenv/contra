@@ -82,7 +82,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-blue pull-right">Update Profile</button>
+                                        <button type="submit" class="btn btn-info pull-right">Update Profile</button>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
