@@ -1,0 +1,12 @@
+<Directory /srv/location/dir>
+AllowOverride All
+
+RewriteRule ^(.*) public/$1 [L]
+
+
+allow from all
+Options +Indexes
+Require all granted
+Options +FollowSymLinks -MultiViews
+
+</Directory>
