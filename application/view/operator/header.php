@@ -18,6 +18,20 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <!--   Core JS Files   -->
+    <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo URL; ?>assets/js/material.min.js" type="text/javascript"></script>
+    <!--  Charts Plugin -->
+    <script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>
+    <!--  Dynamic Elements plugin -->
+    <script src="<?php echo URL; ?>assets/js/arrive.min.js"></script>
+    <!--  PerfectScrollbar Library -->
+    <script src="<?php echo URL; ?>assets/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
+    <!-- Material Dashboard javascript methods -->
+    <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
 </head>
 
 <body>
@@ -41,7 +55,7 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li > <!--class="active"-->
+                    <li class="createContractNav"> <!--class="active"-->
                         <a href="<?=URL.'operator/createContract';?>">
                             <i class="material-icons">insert_drive_file</i>
                             <p>Create Contract</p>
