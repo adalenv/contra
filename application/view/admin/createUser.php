@@ -4,28 +4,22 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">New Contract</h4>
-                                    <p class="category">Complete your contract</p>
+                                    <h4 class="title">Create User</h4>
+                                    <p class="category">Creating new user</p>
                                 </div>
                                 <div class="card-content">
-                                    <form>
+                                    <form action="<?=URL.'api/createUser';?>">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Company (disabled)</label>
-                                                    <input type="text" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Username</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" >
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">Email address</label>
-                                                    <input type="email" class="form-control">
+                                                    <label class="control-label">Password</label>
+                                                    <input type="password" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -46,43 +40,17 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">Adress</label>
-                                                    <input type="text" class="form-control">
+                                                    <label class="control-label">Role</label>
+                                                    <select class="form-control">
+                                                        <option value="operator">Operator</option>
+                                                        <option value="supervisor">Supervisor</option>
+                                                        <option value="backoffice">Backoffice</option>
+                                                        <option value="admin">Admin</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">City</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Country</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Postal Code</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>About Me</label>
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                                        <textarea class="form-control" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-info pull-right">Update Profile</button>
+                                        <button type="submit" class="btn btn-info pull-right">Create User</button>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>

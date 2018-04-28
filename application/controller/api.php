@@ -159,6 +159,7 @@ class api extends Controller
                         );
        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters); 
         $query->execute($insert);
+        header('location: '.URL.$_SESSION['role'].'/users');
     }
 
     public function editUser(){
