@@ -182,6 +182,11 @@ class api extends Controller
         $query->execute(array(':user_id' => $_POST['user_id']));
     }
 
+    public function s(){
+        $_SESSION['username']='test';
+        $_SESSION['role']='admin';
+        print_r($_SESSION);
+    }
 
 
 

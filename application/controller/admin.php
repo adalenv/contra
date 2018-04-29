@@ -37,8 +37,16 @@ class admin extends Controller
     }
 
     public function editUser($user_id){ 
+        $sql="SELECT * FROM users WHERE user_id=:user_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+        $user=$query->fetch();
         require APP . 'view/admin/header.php';
-        require APP . 'view/admin/ceditUser.php';
+        if($query->rowCount() <1){
+            echo "No user found!";
+        } else {
+            require APP . 'view/admin/editUser.php'; 
+        }
         require APP . 'view/admin/footer.php';
     }
 }

@@ -60,5 +60,5 @@
                 </div>
             </div>
             <script type="text/javascript">
-                $('.createContractNav').addClass('active');
+                $('.usersNav').addClass('active');
             </script>

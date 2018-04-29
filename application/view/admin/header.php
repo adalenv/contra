@@ -32,6 +32,7 @@
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
+    <script src="../assets/js/demo.js"></script>
 </head>
 
 <body>
@@ -41,56 +42,34 @@
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
         Tip 2: you can also add an image using data-image tag
-    -->
+    --> 
+    <?php  echo $_SESSION['role']; ?> 
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                    Contra
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
-                        <a href="dashboard.html">
-                            <i class="material-icons">insert_drive_file</i>
-                            <p>Dashboard</p>
+                        <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
+                            <i class="material-icons">assignment</i>
+                            <p>Contracts</p>
                         </a>
                     </li>
                     <li class="createContractNav"> <!--class="active"-->
-                        <a href="<?=URL.'operator/createContract';?>">
-                            <i class="material-icons">insert_drive_file</i>
+                        <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
+                            <i class="material-icons">note_add</i>
                             <p>Create Contract</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./table.html">
-                            <i class="material-icons">content_paste</i>
-                            <p>Table List</p>
+                    <li class="usersNav">
+                        <a href="<?=URL.$_SESSION['role'].'/users';?>">
+                            <i class="material-icons">group</i>
+                            <p>Users</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./typography.html">
-                            <i class="material-icons">library_books</i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./icons.html">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./maps.html">
-                            <i class="material-icons">location_on</i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./notifications.html">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
+
                     <li class="active-pro">
                         <a href="upgrade.html">
                             <i class="material-icons">unarchive</i>
@@ -110,7 +89,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> Profile </a>
+                        <a class="navbar-brand" href="#">  </a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
