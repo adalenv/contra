@@ -62,7 +62,7 @@ class Model
     public function deleteUser($user_id){
         $sql="DELETE FROM users WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
-       //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters); 
+       //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  
         if($query->execute(array(':user_id' => $user_id))){
             $_SESSION['delete_user']='success';
         } else {
