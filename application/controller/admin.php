@@ -32,6 +32,14 @@ class admin extends Controller
         require APP . 'view/admin/footer.php';
 
     }
+    public function viewUser($user_id){ 
+        $contracts=$this->model->getContractsByUser($user_id);
+        print_r($contracts);
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/viewUser.php';
+        require APP . 'view/admin/footer.php';
+
+    }
     public function createUser(){ 
         if(isset($_POST['create_user'])){
             $this->model->createUser();

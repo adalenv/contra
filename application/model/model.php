@@ -71,5 +71,18 @@ class Model
         header("location:".URL.$_SESSION['role'].'/users');
     }
 
+    public function getContractsByUser($user_id){
+        $from=(isset($_GET['from']))? $_GET['form']:0;
+        $limiter=30;
+        $sql="SELECT * FROM contracts WHERE `operator`=:user_id  ORDER BY contract_id LIMIT :fromV , :limiter";
+        $query = $this->db->prepare($sql);
+        $parameters=array(  ':user_id' =>(int)$user_id,
+                            ':fromV'=>$from,
+                            ':limiter'=>$limiter
+                        );
+        $query->execute($parameters);
+        return  '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  //$query->fetchAll();
+    }
+
 
 }

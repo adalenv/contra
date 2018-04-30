@@ -1,6 +1,20 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="col-md-3 ml-auto mr-auto text-center"></div>    
+                        <div class="col-md-6 ml-auto mr-auto text-center">
+                            <ul class=" card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="createUser" role="tablist">
+                                          <i class="material-icons">person_add</i>
+                                          Create User
+                                      </a>
+                                  </li>
+                              </ul>
+                        </div>
+                        <div class="col-md-3 ml-auto mr-auto text-center"></div> 
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
@@ -20,9 +34,9 @@
                                                 foreach ($users as $user) {
                                                    
                                                     $output.='<tr>
-                                                                <td>'.$user->first_name.' '.$user->last_name.'</td>
+                                                                <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
-                                                                <td><center><a type="button" rel="tooltip" class="btn btn-success user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
+                                                                <td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
                                                             </tr>';
                                                 }
                                                 echo $output;
