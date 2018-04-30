@@ -8,18 +8,18 @@
                                     <p class="category">Edit User</p>
                                 </div>
                                 <div class="card-content">
-                                    <form action="<?=URL.'api/createUser';?>">
+                                    <form action="" method="POST">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Username</label>
-                                                    <input type="text" value="<?=$user->username;?>" class="form-control" >
+                                                    <input type="text" name="username" value="<?=$user->username;?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Password</label>
-                                                    <input type="password" value="<?=$user->password;?>" class="form-control">
+                                                    <input type="password" name="password" value="<?=$user->password;?>" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -27,13 +27,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">First Name</label>
-                                                    <input type="text" value="<?=$user->first_name;?>" class="form-control">
+                                                    <input type="text" name="first_name" value="<?=$user->first_name;?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Last Name</label>
-                                                    <input type="text" value="<?=$user->last_name;?>" class="form-control">
+                                                    <input type="text" name="last_name" value="<?=$user->last_name;?>" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -41,7 +41,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Role</label>
-                                                    <select  class="form-control selectRole">
+                                                    <select name="role" class="form-control selectRole">
                                                         <option value="operator">Operator</option>
                                                         <option value="supervisor">Supervisor</option>
                                                         <option value="backoffice">Backoffice</option>
@@ -50,7 +50,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-info pull-right">Edit User</button>
+                                        <input type="hidden" name="edit_user">
+                                        <button type="submit" class="btn btn-info pull-right">Save Changes</button>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>

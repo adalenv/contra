@@ -26,9 +26,11 @@ class admin extends Controller
     }
 
     public function users(){ 
+        $users=$this->model->getUsers();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/users.php';
         require APP . 'view/admin/footer.php';
+
     }
     public function createUser(){ 
         require APP . 'view/admin/header.php';
@@ -37,12 +39,13 @@ class admin extends Controller
     }
 
     public function editUser($user_id){ 
-        $sql="SELECT * FROM users WHERE user_id=:user_id";
-        $query=$this->db->prepare($sql);
-        $query->execute(array(':user_id' => $user_id));
-        $user=$query->fetch();
+        if(isset($_POST['edit_user'])){
+            $this->model->editUser($user_id);
+            return;
+        }
+        $user=$this->model->getUser($user_id);
         require APP . 'view/admin/header.php';
-        if($query->rowCount() <1){
+        if(!isset($user->user_id)){
             echo "No user found!";
         } else {
             require APP . 'view/admin/editUser.php'; 

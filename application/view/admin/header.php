@@ -32,7 +32,7 @@
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
-    <script src="../assets/js/demo.js"></script>
+
 </head>
 
 <body>

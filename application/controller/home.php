@@ -1,16 +1,13 @@
 <?php
-session_start();
 class Home extends Controller{
 
     public function index(){
-        $_SESSION['user']='1';
-        $_SESSION['role']='operator';
-
         
         if (isset($_SESSION['user'])) {//if logged in
             header('location:'.URL.$_SESSION['role']);
         } else{//if not logged in
-            require APP.'view/login/index.php';
+           // require APP.'view/login/index.php';
+            echo 'no logged in';
         }
     }
 
