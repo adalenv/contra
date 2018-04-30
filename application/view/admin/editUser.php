@@ -51,6 +51,7 @@
                                             </div>
                                         </div>
                                         <input type="hidden" name="edit_user">
+                                        <a onclick="deleteUser(<?=$user->user_id;?>)" class="btn btn-danger pull-left">Delete</a>
                                         <button type="submit" class="btn btn-info pull-right">Save Changes</button>
                                         <div class="clearfix"></div>
                                     </form>
@@ -63,4 +64,19 @@
             <script type="text/javascript">
                 $('.usersNav').addClass('active');
                 $('.selectRole').val('<?=$user->role;?>');
+                  function deleteUser(user_id) {
+                    swal({
+                      title: 'Are you sure?',
+                      text: "You won't be able to revert this!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      cancelButtonColor: '#00bcd4',
+                      confirmButtonColor: '#f44336',
+                      confirmButtonText: 'Delete'
+                    }).then((result) => {
+                      if (result.value) {
+                        window.location.href='?deleteUser=true';
+                      }
+                    })
+                  }
             </script>

@@ -33,6 +33,10 @@ class admin extends Controller
 
     }
     public function createUser(){ 
+        if(isset($_POST['create_user'])){
+            $this->model->createUser();
+            return;
+        }
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/createUser.php';
         require APP . 'view/admin/footer.php';
@@ -41,6 +45,10 @@ class admin extends Controller
     public function editUser($user_id){ 
         if(isset($_POST['edit_user'])){
             $this->model->editUser($user_id);
+            return;
+        }
+        if (isset($_GET['deleteUser'])) {
+             $this->model->deleteUser($user_id);
             return;
         }
         $user=$this->model->getUser($user_id);
