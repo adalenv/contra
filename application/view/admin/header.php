@@ -46,12 +46,12 @@
     --> 
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Contra
+                    OPUS
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
+                    <li class="contractsNav"> 
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
                             <p>Contracts</p>

@@ -13,6 +13,14 @@ class admin extends Controller
         echo ' admin main page';
         require APP . 'view/admin/footer.php';
     }
+
+    function contracts()
+    {	$users=$this->model->getUsers();
+    	$contracts=$this->model->getContracts();
+   		require APP . 'view/admin/header.php';
+        require APP . 'view/admin/contracts.php';
+        require APP . 'view/admin/footer.php';
+    }
     
     public function createContract(){ 
         require APP . 'view/admin/header.php';
@@ -34,7 +42,6 @@ class admin extends Controller
     }
     public function viewUser($user_id){ 
         $contracts=$this->model->getContractsByUser($user_id);
-        print_r($contracts);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/viewUser.php';
         require APP . 'view/admin/footer.php';

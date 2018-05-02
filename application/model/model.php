@@ -61,8 +61,7 @@ class Model
 
     public function deleteUser($user_id){
         $sql="DELETE FROM users WHERE user_id=:user_id";
-        $query = $this->db->prepare($sql);
-       //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  
+        $query = $this->db->prepare($sql); 
         if($query->execute(array(':user_id' => $user_id))){
             $_SESSION['delete_user']='success';
         } else {
@@ -71,17 +70,48 @@ class Model
         header("location:".URL.$_SESSION['role'].'/users');
     }
 
-    public function getContractsByUser($user_id){
-        $from=(isset($_GET['from']))? $_GET['form']:0;
+    public function getContractsByUser($user_id ){
+        $page=(int)(isset($_GET['page'])? $_GET['page']:0);
         $limiter=30;
-        $sql="SELECT * FROM contracts WHERE `operator`=:user_id  ORDER BY contract_id LIMIT :fromV , :limiter";
+        $pager=$limiter*$page;
+        $sql='SELECT * FROM contracts WHERE operator=:user_id LIMIT :pager, :limiter ';
         $query = $this->db->prepare($sql);
-        $parameters=array(  ':user_id' =>(int)$user_id,
-                            ':fromV'=>$from,
-                            ':limiter'=>$limiter
-                        );
-        $query->execute($parameters);
-        return  '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  //$query->fetchAll();
+        $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    public function getContracts(){
+    	//$type,$proposal_number,$date,$name,$address,$location,$operator,$status,$cancellation_reason
+
+        $where='';
+        $page=(int)(isset($_GET['page'])? $_GET['page']:0);
+        $limiter=30;
+        $pager=$limiter*$page;
+        $contract_type=(isset($_GET['contract_type'])?$_GET['contract_type']:'%');
+        $operator=(isset($_GET['operator'])?$_GET['operator']:'%');
+        $contract_type=(isset($_GET['contract_type'])?$_GET['contract_type']:'%');
+
+
+        $output=array();
+        $sql="SELECT * FROM contracts WHERE  contract_type LIKE :contract_type AND operator LIKE :operator LIMIT :pager , :limiter";
+        echo $pager;
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+
+        $query->bindParam(':contract_type', $contract_type);
+        $query->bindParam(':operator', $operator, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+
+        $query->execute();
+        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters); 
+        return $query->fetchAll();
+
     }
 
 

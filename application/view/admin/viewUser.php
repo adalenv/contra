@@ -9,13 +9,13 @@
                                          <p class="category">Operator</p>
                                      </div>
                                     <div class="col-md-4">
-                                        <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+                                        <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate" style="float: right;">
                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
-                                                    <a href="#" aria-controls="datatables"  tabindex="0" class="page-link">< Previous</a>
+                                                    <a href="<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo'?page='.($_GET['page']-1); } } else {  } ?>" aria-controls="datatables"  tabindex="0" class="page-link"  >< Previous</a>
                                                 </li>
                                                 <li class="paginate_button page-item last" id="datatables_last">
-                                                    <a href="#" aria-controls="datatables"  tabindex="0" class="page-link">Next ></a>
+                                                    <a href="?page=<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>" aria-controls="datatables"  tabindex="0" class="page-link">Next ></a>
                                                 </li>
                                             </ul>
                                         </div>
