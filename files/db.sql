@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2018 at 10:19 AM
+-- Generation Time: May 02, 2018 at 07:23 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.23
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `contra`
+-- Database: `opusdb`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `audio_files` (
 
 CREATE TABLE IF NOT EXISTS `contracts` (
   `contract_id` int(11) NOT NULL AUTO_INCREMENT,
-  `contract_type` text NOT NULL,
+  `contract_type` enum('electricity','gas') NOT NULL,
   `proposal_number` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `address` text NOT NULL,
@@ -70,8 +70,21 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `iban_acountholder` int(50) NOT NULL,
   `iban_fiscal_code` int(50) NOT NULL,
   `payment` enum('postal','cc') NOT NULL,
-  PRIMARY KEY (`contract_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`contract_id`),
+  UNIQUE KEY `contract_id_2` (`contract_id`),
+  KEY `contract_id` (`contract_id`),
+  KEY `contract_id_3` (`contract_id`),
+  KEY `contract_id_4` (`contract_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `contracts`
+--
+
+INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `date`, `address`, `location`, `operator`, `status`, `cancellation_reason`, `gender`, `first_name`, `last_name`, `bussines_name`, `client_type`, `tel_number`, `alt_phone`, `cel_number`, `cel_number2`, `cel_number3`, `email`, `alt_email`, `nation`, `vat_number`, `birth_date`, `municipality`, `iban_code`, `iban_acountholder`, `iban_fiscal_code`, `payment`) VALUES
+(1, 'electricity', '54345', '2018-04-30 15:50:28', 'dfgdfg', 'dfgdfg', 5, 3, 'werwer\r\n', 'male', 'Baftjaro', 'Rosi', 'werwer', 'personal', '35345345', '', '345345345', '34534535345', '', '', '', '', '', '0000-00-00', '', '345345', 0, 0, 'postal'),
+(2, 'gas', '54345', '2018-04-30 15:50:28', 'dfgdfg', 'dfgdfg', 5, 3, 'werwer\r\n', 'male', 'Antonio', 'Vladi', 'werwer', 'personal', '35345345', '', '345345345', '34534535345', '', '', '', '', '', '0000-00-00', '', '345345', 0, 0, 'postal'),
+(3, 'electricity', '54345', '2018-04-30 15:50:28', 'dfgdfg', 'dfgdfg', 2, 3, 'werwer\r\n', 'male', 'Emanuele', 'Basha', 'werwer', 'personal', '35345345', '', '345345345', '34534535345', '', '', '', '', '', '0000-00-00', '', '345345', 0, 0, 'postal');
 
 -- --------------------------------------------------------
 
@@ -103,16 +116,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` enum('operator','supervisor','backoffice','admin') NOT NULL DEFAULT 'operator',
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `role`) VALUES
-(1, 'testadmin', 'paswwordi', 'Adalen', 'Vladi', 'admin'),
-(2, 'testoperator', 'operator1', 'Mike', 'Last', 'operator');
+(1, 'testadmin12', 'paswwordi', 'Adalen', 'Test', 'admin'),
+(5, 'testadmin12', 'paswwordi', 'user', 'Test', 'operator'),
+(6, 'testadmin12', 'paswwordi', 'test', 'Test', 'backoffice');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
