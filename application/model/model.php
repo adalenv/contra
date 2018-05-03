@@ -93,25 +93,77 @@ class Model
         $pager=$limiter*$page;
         $contract_type=(isset($_GET['contract_type'])?$_GET['contract_type']:'%');
         $operator=(isset($_GET['operator'])?$_GET['operator']:'%');
-        $contract_type=(isset($_GET['contract_type'])?$_GET['contract_type']:'%');
+        $date=(isset($_GET['date'])?$_GET['date']:'');
+        $client_name=(isset($_GET['client_name'])?$_GET['client_name']:'');
+        $status=(isset($_GET['status'])?$_GET['status']:'%');
+
+        /////////////////////////if is set id////////////////////////////
+        if (isset($_GET['id'])) {
+        	if ($_GET['id']!='') {
+        		$_GET['client_name']='';
+        		$_GET['operator']='%';
+        		$_GET['status']='%';
+        		$_GET['date']='';
+        		$_GET['contract_type']='%';
+		        $sql="SELECT * FROM contracts WHERE contract_id =:id";
+		        $query = $this->db->prepare($sql);
+		        $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+		        $query->execute();
+		        return $query->fetchAll();
+        	}
+        }
+        /////////////////////////////////////////////////////////////////
+
+        /////////////////////////////-date-////////////////////////////
+		if ($date!='') {
+	        $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
+			$date1 = date("Y-m-d", strtotime($date[0]));
+			$date2 = date("Y-m-d", strtotime($date[1]));
+		} else {
+			$date1 ="1999-01-01";
+			$date2 ="2099-01-01";
+		}
+		////////////////////////////////////////////////////////////////////
+
+		///////////////-name-//////////////////////////////////////////////
+		if ($client_name!=''){
+			if (count(explode(' ',$client_name))>1) { ///if both
+				$first_name=explode(' ',$client_name)[0].'%';
+				$last_name=explode(' ',$client_name)[1].'%';
+			}else{                          // if one part
+				$first_name=$client_name.'%';
+				$last_name='%';
+			}	
+		} else {						//if none
+				$first_name='%';
+				$last_name='%';
+		}
+		////////////////////////////////////////////////////////////////////
 
 
-        $output=array();
-        $sql="SELECT * FROM contracts WHERE  contract_type LIKE :contract_type AND operator LIKE :operator LIMIT :pager , :limiter";
-        echo $pager;
+
+        $sql="SELECT * FROM contracts 
+        		WHERE  contract_type LIKE :contract_type 
+        			AND operator LIKE :operator  
+        			AND  (DATE(`date`) >= DATE(:date1) AND DATE(`date`) <= DATE(:date2)) 
+        			AND ( (first_name LIKE :first_name AND last_name LIKE :last_name) 
+        				OR (first_name LIKE :last_name AND last_name LIKE :first_name)) 
+        			AND status LIKE :status  LIMIT :pager , :limiter";
+
         $query = $this->db->prepare($sql);
         $query->bindParam(':pager', $pager, PDO::PARAM_INT);
         $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
-
         $query->bindParam(':contract_type', $contract_type);
         $query->bindParam(':operator', $operator, PDO::PARAM_INT);
         $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
-        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        $query->bindParam(':date1', $date1);
+        $query->bindParam(':date2', $date2);
+      	$query->bindParam(':first_name', $first_name);
+        $query->bindParam(':last_name', $last_name);
+        $query->bindParam(':status', $status);
 
         $query->execute();
-        //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters); 
         return $query->fetchAll();
-
     }
 
 

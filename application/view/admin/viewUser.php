@@ -24,25 +24,31 @@
                                 <div class="card-content table-responsive">
                                     <table class="table table-hover">
                                         <thead>
+                                            <th>Type</th>
                                             <th>ID</th>
                                             <th>Date</th>
                                             <th>Client Name</th>
                                             <th>Adress</th>
                                             <th>Location</th>
-                                            <th>Operator</th>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $output='';
                                                 foreach ($contracts as $contract) {
-                                                    $output.='<tr>
-                                                                <td>'.$contract->contract_id.'</td>
+                                                    $output.='<tr>';
+                                                                if ($contract->contract_type=='gas') {
+                                                                    $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
+                                                                }elseif ($contract->contract_type=='electricity') {
+                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
+                                                                }
+                                                                
+
+                                                    $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.$contract->date.'</td>
                                                                 <td>'.$contract->first_name.' '.$contract->last_name.'</td>
                                                                 <td>'.$contract->address.'</td>
-                                                                <td>'.$contract->location.'</td>
-                                                                <td>'.$contract->operator.'</td>
-                                                                </tr>';
+                                                                <td>'.$contract->location.'</td>';
+                                                    $output.='</tr>';
                                                 }
                                                 echo $output;
                                              ?>

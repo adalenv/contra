@@ -1,4 +1,4 @@
-            <div class="content">
+            <div class="content" style="margin-top: 20px;">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3 ml-auto mr-auto text-center"></div>    
