@@ -83,11 +83,15 @@ class Model
 
         return $query->fetchAll();
     }
+    public function getContractById($contract_id ){
+        $sql='SELECT * FROM contracts WHERE contract_id=:contract_id ';
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':contract_id'=>$contract_id));
+        return $query->fetchAll();
+    }
 
     public function getContracts(){
     	//$type,$proposal_number,$date,$name,$address,$location,$operator,$status,$cancellation_reason
-
-        $where='';
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
         $limiter=30;
         $pager=$limiter*$page;

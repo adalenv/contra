@@ -33,6 +33,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
     <script src="<?php echo URL; ?>assets/js/sweetalert.min.js"></script>
+    <script src="<?php echo URL; ?>assets/js/dropzone.js"></script>
 
 
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/moment.min.js"></script>
