@@ -34,8 +34,7 @@
     <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
     <script src="<?php echo URL; ?>assets/js/sweetalert.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/dropzone.js"></script>
-
-
+    <link rel="stylesheet" type="text/css" href="<?php echo URL;?>assets/css/dropzone.css" />
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/moment.min.js"></script>
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/daterangepicker.css" />

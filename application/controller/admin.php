@@ -39,6 +39,13 @@ class admin extends Controller
         require APP . 'view/admin/viewContract.php';
         require APP . 'view/admin/footer.php';
     }
+    public function uploadDocuments(){ 
+    	$contracts=$this->model->uploadDocuments();
+        // require APP . 'view/admin/header.php';
+        // require APP . 'view/admin/viewContract.php';
+        // require APP . 'view/admin/footer.php';
+    }
+
     public function users(){ 
         $users=$this->model->getUsers();
         require APP . 'view/admin/header.php';

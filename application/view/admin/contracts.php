@@ -75,11 +75,10 @@
                                     </div>
                                         <input class="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
                                     <div class="col-md-3">
-                                        <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" class="btn btn-info submit_btn">
+                                                <a href="#" class="btn reset_btn">Reset</a>
                                             <span class="material-input"></span></div>
-                                        </center>
                                     </div>
                                 </div>
                             </ul>
@@ -160,6 +159,17 @@
 
 
                     $(function() {
+
+                        $('.reset_btn').on('click',function() {
+                            $('#contract_type').val('%');
+                            $('#operator').val('%');
+                            $('#status').val('%');
+                            $('#cancellation_reason').val('%');
+                            $('#id').val('');
+                            $('#Location').val('');
+                            $('#client_name').val('');
+                            document.forms[0].submit();
+                        });
 
                         $('.contractsNav').addClass('active');
 
