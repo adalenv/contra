@@ -52,6 +52,18 @@ class admin extends Controller
     }
 	/////////////////////////////////
 
+    //////////-audio-//////////////
+    public function uploadAudios(){ 
+    	$this->model->uploadAudios();
+    }
+    public function getAudios($contract_id){ 
+    	$this->model->getAudios($contract_id);
+    }
+    public function getAudio($audio_id){ 
+    	$this->model->getAudio($audio_id);
+    }
+	/////////////////////////////////
+
     public function users(){ 
         $users=$this->model->getUsers();
         require APP . 'view/admin/header.php';
@@ -59,6 +71,7 @@ class admin extends Controller
         require APP . 'view/admin/footer.php';
 
     }
+
     public function viewUser($user_id){ 
         $contracts=$this->model->getContractsByUser($user_id);
         require APP . 'view/admin/header.php';
@@ -66,6 +79,7 @@ class admin extends Controller
         require APP . 'view/admin/footer.php';
 
     }
+    
     public function createUser(){ 
         if(isset($_POST['create_user'])){
             $this->model->createUser();

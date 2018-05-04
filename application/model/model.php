@@ -25,6 +25,7 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
+
     public function createUser(){
         $sql="INSERT INTO users(username,password,first_name,last_name,role) VALUES (:username,:password,:first_name,:last_name,:role)";
         $query = $this->db->prepare($sql);
@@ -41,6 +42,7 @@ class Model
         }
         header("location:".URL.$_SESSION['role'].'/users');
     }
+
     public function editUser($user_id){
         $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
@@ -80,9 +82,9 @@ class Model
         $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
         $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $query->execute();
-
         return $query->fetchAll();
     }
+
     public function getContractById($contract_id ){
         $sql='SELECT * FROM contracts WHERE contract_id=:contract_id ';
         $query = $this->db->prepare($sql);
@@ -143,9 +145,6 @@ class Model
 				$last_name='%';
 		}
 		////////////////////////////////////////////////////////////////////
-
-
-
         $sql="SELECT * FROM contracts 
         		WHERE  contract_type LIKE :contract_type 
         			AND operator LIKE :operator  
@@ -171,17 +170,14 @@ class Model
     }
 
     public function uploadDocuments(){
-
     	$contract_id=$_POST['contract_id'];
 		$target_dir = APP."documents/";
 		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
 		$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
-
 			$sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
 			$query=$this->db->prepare($sql);
 			$query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
-
 		 	echo "success";
 		}else{
 			echo "fail";
@@ -189,54 +185,107 @@ class Model
     }
 
     public function getDocuments($contract_id){
-
-    	$sql="SELECT * FROM documents WHERE contract_id =:contract_id";
+    	$sql="SELECT DISTINCT `url`, `contract_id` `document_id` FROM documents WHERE `contract_id`=:contract_id";
     	$query=$this->db->prepare($sql);
     	$query->execute(array(':contract_id' =>$contract_id));
     	$documents=$query->fetchAll(PDO::FETCH_ASSOC);
-
         header('Content-type: application/json');
         echo json_encode($documents);
-
     }
 
     public function getDocument($document_id){
-    	
-    	$sql="SELECT * FROM documents WHERE document_id = :document_id";
+    	$sql="SELECT *  FROM documents WHERE `document_id`=:document_id";
     	$query=$this->db->prepare($sql);
     	$query->execute(array(':document_id' =>$document_id));
     	$document=$query->fetch();
-
+    	if (!$document) {
+    		echo  "File do not exist in database!";
+    		return;
+    	}
 		$target_dir = APP."documents/";
 		$target_file = $target_dir . basename($document->url);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);   
- 
-		switch(strtolower($ext)){  
-			case "txt": 
-				 $contents = file($target_file);  
-				 header("Content-type: plain/txt");  
-				 echo readfile($target_file);
-			break;  
-			case "jpg": 
-				 $contents = file($target_file);  
-				 header("Content-type: image/jpg");  
-				 echo readfile($target_file);
-			break;  
-			case "png": 				 
-				header("content-type: image/png");
-				readfile($target_file);
-			break;  
-			case "pdf": 				 
-				header("content-type: application/pdf");
-				echo readfile($target_file);
-			break; 
-			case 'docx':
-				echo "not suppoted yet";
-			break;
-
-		};
-
+ 		if (file_exists ($target_file)) {
+			switch(strtolower($ext)){  
+				case "txt": 
+					header("Content-type: plain/txt");  
+					readfile($target_file);
+				break;  
+				case "jpg": 
+					header("Content-type: image/jpg");  
+					readfile($target_file);
+				break;  
+				case "png": 				 
+					header("content-type: image/png");
+					readfile($target_file);
+				break;  
+				case "pdf": 				 
+					header("content-type: application/pdf");
+					readfile($target_file);
+				break; 
+				case 'docx':
+					echo "not suppoted yet";
+				break;
+			};
+		} else{
+			echo "File do not exist in server!";
+		}
 	}
 
+    public function uploadAudios(){
+    	$contract_id=$_POST['contract_id'];
+		$target_dir = APP."audios/";
+		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+		$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$sql="SELECT * FROM audios WHERE url = :url";
+		$query=$this->db->prepare($sql);
+		$query->execute(array(':url' =>$contract_id.'-'.$_FILES["file"]["name"]));
+		if ($result->fetchColumn()>0) {
+			if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+				$sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+				$query=$this->db->prepare($sql);
+				$query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+			 	echo "success";
+			}else{
+				echo "fail";
+			}
+		}else {
+			echo 'fail';
+		}
+    }
+
+    public function getAudios($contract_id){
+    	$sql="SELECT * FROM audios WHERE `contract_id`=:contract_id";
+    	$query=$this->db->prepare($sql);
+    	$query->execute(array(':contract_id' =>$contract_id));
+    	$audios=$query->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-type: application/json');
+        echo json_encode($audios);
+    }
+
+    public function getAudio($audio_id){
+    	$sql="SELECT *  FROM audios WHERE `audio_id`=:audio_id";
+    	$query=$this->db->prepare($sql);
+    	$query->execute(array(':audio_id' =>$audio_id));
+    	$audio=$query->fetch();
+    	if (!$audio) {
+    		echo  "File do not exist in database!";
+    		return;
+    	}
+		$target_dir = APP."audios/";
+		$target_file = $target_dir . basename($audio->url);
+		$ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+ 		if (file_exists ($target_file)) {
+			switch(strtolower($ext)){  
+				case "mp3": 
+					header("Content-type: audio/mp3");  
+					readfile($target_file);
+				break;  
+
+			};
+		} else{
+			echo "File do not exist in server!";
+		}
+	}
 
 }
