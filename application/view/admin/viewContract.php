@@ -101,7 +101,25 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6 ">
+                                                <div class="table-responsive table-sales">
+                                                    <table class="table">
+                                                        <tbody class="doc-container">
+                                                            <tr>
+                                                                <td>
+                                                                    No documents!
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
 
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="contract_id" id="contract_id" value="<?=$contract->contract_id;?>">
                                         <button type="submit" class="btn btn-info pull-right">Save Contract</button>
                                         <div class="clearfix"></div>
                                     </form>
@@ -113,7 +131,7 @@
             </div>
 
             <!-- Preview collection of uploaded documents -->
-            <div class="preview-container">
+            <div class="preview-container" style="display: none">
                 <div class="header">
                     <span>Uploaded Files</span> 
                     <i id="controller" class="material-icons">keyboard_arrow_down</i>
@@ -131,13 +149,11 @@
                         </div>
 
                         <div class="secondary-content actions">
-                            <a href="#!" data-dz-remove class="btn-floating ph red white-text waves-effect waves-light"><i class="material-icons white-text">clear</i></i></a>
+                            <a href="#" data-dz-remove class="btn-floating ph red white-text waves-effect waves-light"><i class="material-icons white-text">clear</i></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
-
 
             <script type="text/javascript">
                 $('.contractsNav').addClass('active');
@@ -150,7 +166,6 @@
                     previewNode.id = "";
                     var previewTemplate = previewNode.parentNode.innerHTML;
                     previewNode.parentNode.removeChild(previewNode);
-
 
                     var zdrop = new Dropzone(target, {
                         url: "<?=URL.$_SESSION['role']?>/uploadDocuments",
@@ -184,26 +199,44 @@
                     zdrop.on('drop', function () {
                         $('.fileuploader').removeClass("active");   
                     });
-                    
-                    var toggle = true;
-                    /* Preview controller of hide / show */
-                    $('#controller').click(function() {
-                        if(toggle){
-                            $('#previews').css('visibility', 'hidden');
-                            $('#controller').html("keyboard_arrow_up");
-                            $('#previews').css('height', '0px');
-                            toggle = false;
-                        }else{
-                            $('#previews').css('visibility', 'visible');
-                            $('#controller').html("keyboard_arrow_down");
-                            $('#previews').css('height', 'initial');
-                            toggle = true;
-                        }
+
+                    zdrop.on('sending', function(file, xhr, formData){
+                        formData.append('contract_id', $('#contract_id').val());
+                    });
+                    zdrop.on("success", function(file, responseText) {
+                        loadDoc();
                     });
                 }
-
+                
+                loadDoc()
             });
 
+
+
+                function loadDoc() {
+
+                    $.ajax({
+                        url: "<?=URL.$_SESSION['role']?>/getDocuments/"+$('#contract_id').val(),
+                        type: 'GET',
+                        dataType: 'JSON',
+                    })
+                    .done(function(data) {
+                        if (data.length>0) {
+                            $('.doc-container').html('');
+                            $.each(data, function (i) {
+                                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td></tr>');
+                            });
+                        }else {
+                            $('.doc-container').html('<tr><td>No documents!</td></tr>');
+                        }
+                    })
+                    .fail(function() {
+                          console.log("error");
+                    })         
+                }
+
+
+                   
                 
             </script>
 

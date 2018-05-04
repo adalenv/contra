@@ -87,7 +87,7 @@ class Model
         $sql='SELECT * FROM contracts WHERE contract_id=:contract_id ';
         $query = $this->db->prepare($sql);
         $query->execute(array(':contract_id'=>$contract_id));
-        return $query->fetchAll();
+        return $query->fetch();
     }
 
     public function getContracts(){
@@ -170,26 +170,73 @@ class Model
         return $query->fetchAll();
     }
 
-    public function uploadDocuments()
-    {	
-    	print_r($_FILES);
-    	echo 'test';
-		$target_dir = "uploads/";
-		$target_file = $target_dir . basename($_FILES["file"]["name"]);
-		$uploadOk = 1;
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		// Check if image file is a actual image or fake image
-		if(isset($_POST["submit"])) {
-		    $check = getimagesize($_FILES["file"]["tmp_name"]);
-		    if($check !== false) {
-		        echo "File is an image - " . $check["mime"] . ".";
-		        $uploadOk = 1;
-		    } else {
-		        echo "File is not an image.";
-		        $uploadOk = 0;
-		    }
+    public function uploadDocuments(){
+
+    	$contract_id=$_POST['contract_id'];
+		$target_dir = APP."documents/";
+		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+		$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+
+			$sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+			$query=$this->db->prepare($sql);
+			$query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+
+		 	echo "success";
+		}else{
+			echo "fail";
 		}
     }
+
+    public function getDocuments($contract_id){
+
+    	$sql="SELECT * FROM documents WHERE contract_id =:contract_id";
+    	$query=$this->db->prepare($sql);
+    	$query->execute(array(':contract_id' =>$contract_id));
+    	$documents=$query->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Content-type: application/json');
+        echo json_encode($documents);
+
+    }
+
+    public function getDocument($document_id){
+    	
+    	$sql="SELECT * FROM documents WHERE document_id = :document_id";
+    	$query=$this->db->prepare($sql);
+    	$query->execute(array(':document_id' =>$document_id));
+    	$document=$query->fetch();
+
+		$target_dir = APP."documents/";
+		$target_file = $target_dir . basename($document->url);
+		$ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+ 
+		switch(strtolower($ext)){  
+			case "txt": 
+				 $contents = file($target_file);  
+				 header("Content-type: plain/txt");  
+				 echo readfile($target_file);
+			break;  
+			case "jpg": 
+				 $contents = file($target_file);  
+				 header("Content-type: image/jpg");  
+				 echo readfile($target_file);
+			break;  
+			case "png": 				 
+				header("content-type: image/png");
+				readfile($target_file);
+			break;  
+			case "pdf": 				 
+				header("content-type: application/pdf");
+				echo readfile($target_file);
+			break; 
+			case 'docx':
+				echo "not suppoted yet";
+			break;
+
+		};
+
+	}
 
 
 }

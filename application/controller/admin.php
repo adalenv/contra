@@ -28,23 +28,29 @@ class admin extends Controller
         require APP . 'view/admin/footer.php';
     }
     public function editContract($contract_id){ 
-    	$contracts=$this->model->getContractById($contract_id);
+    	$contract=$this->model->getContractById($contract_id);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/editContract.php';
         require APP . 'view/admin/footer.php';
     }
     public function viewContract($contract_id){ 
-    	$contracts=$this->model->getContractById($contract_id);
+    	$contract=$this->model->getContractById($contract_id);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/viewContract.php';
         require APP . 'view/admin/footer.php';
     }
+
+    //////////-documents-//////////////
     public function uploadDocuments(){ 
-    	$contracts=$this->model->uploadDocuments();
-        // require APP . 'view/admin/header.php';
-        // require APP . 'view/admin/viewContract.php';
-        // require APP . 'view/admin/footer.php';
+    	$this->model->uploadDocuments();
     }
+    public function getDocuments($contract_id){ 
+    	$this->model->getDocuments($contract_id);
+    }
+    public function getDocument($document_id){ 
+    	$this->model->getDocument($document_id);
+    }
+	/////////////////////////////////
 
     public function users(){ 
         $users=$this->model->getUsers();

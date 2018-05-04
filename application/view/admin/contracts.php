@@ -75,10 +75,12 @@
                                     </div>
                                         <input class="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
                                     <div class="col-md-3">
+                                        <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" class="btn btn-info submit_btn">
                                                 <a href="#" class="btn reset_btn">Reset</a>
                                             <span class="material-input"></span></div>
+                                        </center>
                                     </div>
                                 </div>
                             </ul>
@@ -134,7 +136,7 @@
 
                                                     $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.(explode(' ',$contract->date)[0]).'</td>
-                                                                <td>'.$contract->first_name.' '.$contract->last_name.'</td>
+                                                                <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>
                                                                 <td>'.$contract->address.'</td>
                                                                 <td>'.$contract->location.'</td>';
                                                                     $operator=$this->model->getUser($contract->operator);
