@@ -185,12 +185,13 @@ class Model
     }
 
     public function getDocuments($contract_id){
-    	$sql="SELECT DISTINCT `url`, `contract_id` `document_id` FROM documents WHERE `contract_id`=:contract_id";
+    	$sql="SELECT DISTINCT * FROM documents WHERE `contract_id`=:contract_id";
     	$query=$this->db->prepare($sql);
     	$query->execute(array(':contract_id' =>$contract_id));
     	$documents=$query->fetchAll(PDO::FETCH_ASSOC);
         header('Content-type: application/json');
         echo json_encode($documents);
+        //print_r($documents);
     }
 
     public function getDocument($document_id){
@@ -203,7 +204,9 @@ class Model
     		return;
     	}
 		$target_dir = APP."documents/";
+      //  print_r($document);
 		$target_file = $target_dir . basename($document->url);
+        //print_r($target_file);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);   
  		if (file_exists ($target_file)) {
 			switch(strtolower($ext)){  
@@ -226,6 +229,11 @@ class Model
 				case 'docx':
 					echo "not suppoted yet";
 				break;
+                case 'csv':
+                    header("Content-type: text/csv");
+                    header('Content-disposition: attachment; filename="'.$document->url.'"');
+                    readfile($target_file);
+                break;
 			};
 		} else{
 			echo "File do not exist in server!";
