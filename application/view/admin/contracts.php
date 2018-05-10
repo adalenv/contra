@@ -142,8 +142,13 @@
                                                                 <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>
                                                                 <td>'.$contract->address.'</td>
                                                                 <td>'.$contract->location.'</td>';
-                                                                    $operator=$this->model->getUser($contract->operator);
-                                                                    if (isset($operator->user_id)) {
+                                                                    foreach($users as $user) {
+                                                                        if ($contract->operator == $user->user_id) {
+                                                                            $operator = $user;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    if (isset($operator)) {
                                                                         $output.='<td>'.$operator->first_name.' '.$operator->last_name.'</td>';
                                                                     } else {
                                                                         $output.= '<td></td>';

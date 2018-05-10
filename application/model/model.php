@@ -238,7 +238,10 @@ class Model
 					readfile($target_file);
 				break; 
 				case 'docx':
-					echo "not suppoted yet";
+					//echo "not suppoted yet";
+                    header('Content-Type: application/octet-stream');
+                    header("Content-Disposition: attachment; filename=\"".$document->url."\"");
+                    readfile($target_file);
 				break;
                 case 'csv':
                     header("Content-type: text/csv");
