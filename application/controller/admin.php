@@ -24,6 +24,8 @@ class admin extends Controller
     }
     
     public function createContract(){ 
+        $supervisors =  $this->model->getUsersByRole('supervisor');
+        $operators   =  $this->model->getUsersByRole('operator');
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/createContract.php';
         require APP . 'view/admin/footer.php';

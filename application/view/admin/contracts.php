@@ -11,6 +11,7 @@
                                                 <option value="%">All</option>
                                                 <option value=gas>Gas</option>
                                                 <option value="electricity">Electricity</option>
+                                                <option value="dual">Dual</option>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
@@ -131,6 +132,8 @@
                                                                     $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
                                                                 }elseif ($contract->contract_type=='electricity') {
                                                                     $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
+                                                                }elseif ($contract->contract_type=='dual') {
+                                                                    $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
                                                                 }
                                                                 
 

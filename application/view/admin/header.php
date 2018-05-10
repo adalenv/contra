@@ -16,8 +16,8 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="<?php echo URL; ?>assets/css/demo.css" rel="stylesheet" />
     <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <link href="<?php echo URL; ?>assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo URL; ?>assets/css/material-icons.css" rel="stylesheet" />
     <!--   Core JS Files   -->
     <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>

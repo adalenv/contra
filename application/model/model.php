@@ -26,6 +26,13 @@ class Model
         return $query->fetchAll();
     }
 
+    public function getUsersByRole($role){
+        $sql="SELECT * FROM users where role = :role";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':role' =>$role));
+        return $query->fetchAll();
+    }
+
     public function createUser(){
         $sql="INSERT INTO users(username,password,first_name,last_name,role) VALUES (:username,:password,:first_name,:last_name,:role)";
         $query = $this->db->prepare($sql);
@@ -171,7 +178,13 @@ class Model
     public function uploadDocuments(){
     	$contract_id=$_POST['contract_id'];
 		$target_dir = APP."documents/";
-		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt');
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        if (!in_array($ext,$allow_ext)) { 
+            echo "ext_error";
+            return;
+        }
 		if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
 			$sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
 			$query=$this->db->prepare($sql);
@@ -242,7 +255,12 @@ class Model
         $contract_id=$_POST['contract_id'];
         $target_dir = APP."audios/";
         $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
-        echo $target_file;
+        $allow_ext = array('mp3','wav','gsm','gsw');
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        if (!in_array($ext,$allow_ext)) { 
+            echo "ext_error";
+            return;
+        }
         if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
             $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);

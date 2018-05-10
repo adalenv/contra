@@ -2,7 +2,6 @@
 
 <title>Admin Login | Next</title>
  <style type="text/css">
-   @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 * {
   box-sizing: border-box;
   margin: 0;
@@ -41,9 +40,7 @@ body :-ms-input-placeholder {
   font-weight: 300;
 }
 .wrapper {
-  background: #1f6590;
-  background: linear-gradient(top left,#1f65900%,#1f6590100%);
-  background: linear-gradient(to bottom right,#1f65900%,#1f6590100%);
+  background: #00a5bb;
   position: absolute;
   top: 50%;
   left: 0;
@@ -53,7 +50,7 @@ body :-ms-input-placeholder {
   overflow: hidden;
 }
 .wrapper.form-success .container h1 {
-          transform: translateY(85px);
+    transform: translateY(85px);
 }
 .container {
   max-width: 600px;
@@ -209,7 +206,6 @@ form button:hover {
             transform: translateY(-700px) rotate(600deg);
   }
 }
-@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100'
 
 .text {
   font-weight: 100;
@@ -235,11 +231,18 @@ form button:hover {
       	<input type="password"  name='password' placeholder="Password" id='admin-pass' required="required" class="input-txt" />
     	<button type="submit" id="login-button">Login</button>
     </form>
-     <?php
+
+<?php
  if (isset($_GET['status'])) {
- 	echo "<div style='color:red'>Login Failed!</div>";
+  switch ($_GET['status']) {
+    case 'fail':
+        echo "<div style='color:red'>Login Failed!</div>";
+    break;
+    default:
+    break;
+  }
  }
-  ?>
+?>
 
   </div>
 
