@@ -183,8 +183,6 @@ class api extends Controller
     }
 
     public function s(){
-        $_SESSION['username']='test';
-        $_SESSION['role']='admin';
         print_r($_SESSION);
     }
 

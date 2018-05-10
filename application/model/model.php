@@ -157,14 +157,13 @@ class Model
         $query->bindParam(':pager', $pager, PDO::PARAM_INT);
         $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
         $query->bindParam(':contract_type', $contract_type);
-        $query->bindParam(':operator', $operator, PDO::PARAM_INT);
+        $query->bindParam(':operator', $operator);
         $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
         $query->bindParam(':date1', $date1);
         $query->bindParam(':date2', $date2);
       	$query->bindParam(':first_name', $first_name);
         $query->bindParam(':last_name', $last_name);
         $query->bindParam(':status', $status);
-
         $query->execute();
         return $query->fetchAll();
     }
@@ -173,7 +172,6 @@ class Model
     	$contract_id=$_POST['contract_id'];
 		$target_dir = APP."documents/";
 		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
-		$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
 			$sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
 			$query=$this->db->prepare($sql);
@@ -185,7 +183,7 @@ class Model
     }
 
     public function getDocuments($contract_id){
-    	$sql="SELECT DISTINCT * FROM documents WHERE `contract_id`=:contract_id";
+    	$sql="SELECT * FROM documents WHERE `contract_id`=:contract_id ORDER BY document_id DESC";
     	$query=$this->db->prepare($sql);
     	$query->execute(array(':contract_id' =>$contract_id));
     	$documents=$query->fetchAll(PDO::FETCH_ASSOC);
@@ -211,7 +209,7 @@ class Model
  		if (file_exists ($target_file)) {
 			switch(strtolower($ext)){  
 				case "txt": 
-					header("Content-type: plain/txt");  
+					header("Content-type: text/plain");  
 					readfile($target_file);
 				break;  
 				case "jpg": 
@@ -241,29 +239,22 @@ class Model
 	}
 
     public function uploadAudios(){
-    	$contract_id=$_POST['contract_id'];
-		$target_dir = APP."audios/";
-		$target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
-		$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		$sql="SELECT * FROM audios WHERE url = :url";
-		$query=$this->db->prepare($sql);
-		$query->execute(array(':url' =>$contract_id.'-'.$_FILES["file"]["name"]));
-		if ($result->fetchColumn()>0) {
-			if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
-				$sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
-				$query=$this->db->prepare($sql);
-				$query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
-			 	echo "success";
-			}else{
-				echo "fail";
-			}
-		}else {
-			echo 'fail';
-		}
+        $contract_id=$_POST['contract_id'];
+        $target_dir = APP."audios/";
+        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        echo $target_file;
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+            $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            echo "success";
+        }else{
+            echo "fail";
+        }
     }
 
     public function getAudios($contract_id){
-    	$sql="SELECT * FROM audios WHERE `contract_id`=:contract_id";
+    	$sql="SELECT * FROM audios WHERE `contract_id`=:contract_id ORDER BY audio_id DESC";
     	$query=$this->db->prepare($sql);
     	$query->execute(array(':contract_id' =>$contract_id));
     	$audios=$query->fetchAll(PDO::FETCH_ASSOC);

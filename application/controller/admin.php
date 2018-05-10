@@ -1,5 +1,5 @@
 <?php
-
+if(!isset($_SESSION['username'])){ header('Location:'.URL); return; };
 /**
  * //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit(); debug sql
  */
@@ -8,10 +8,11 @@ class admin extends Controller
 
 
     public function index(){ 
-        require APP . 'view/admin/header.php';
-        //require APP . 'view/admin/index.php';
-        echo ' admin main page';
-        require APP . 'view/admin/footer.php';
+        // require APP . 'view/admin/header.php';
+        // //require APP . 'view/admin/index.php';
+        // echo ' admin main page';
+        // require APP . 'view/admin/footer.php';
+        header('Location:'.URL.$_SESSION['role'].'/contracts');
     }
 
     function contracts()

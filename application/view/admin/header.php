@@ -104,7 +104,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#" class="btn-info">Logout</a>
+                                        <a href="<?=URL.'home/logout';?>" class="btn-info">Logout</a>
                                     </li>
                                 </ul>
                             </li>

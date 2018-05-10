@@ -209,7 +209,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio>');
+                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td></tr>');
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');
@@ -249,7 +249,7 @@ function initDocUploader(target) {
         formData.append('contract_id', $('#contract_id').val());
     });
     zdrop.on("success", function(file, responseText) {
-        loadDoc();
+        loadDocAndAudio();
     });
 } 
 function initAudioUploader(target) {

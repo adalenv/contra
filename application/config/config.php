@@ -53,7 +53,7 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'opusdb');
+define('DB_NAME', 'opus');
 define('DB_USER', 'root');
-define('DB_PASS', 'admini');
+define('DB_PASS', 'vladi');
 define('DB_CHARSET', 'utf8');
