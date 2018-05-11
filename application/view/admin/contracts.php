@@ -149,7 +149,7 @@
                                                                         }
                                                                     }
                                                                     if (isset($operator)) {
-                                                                        $output.='<td>'.$operator->first_name.' '.$operator->last_name.'</td>';
+                                                                        $output.='<td><a href="viewUser/'.$operator->user_id.'">'.$operator->first_name.' '.$operator->last_name.'</td>';
                                                                     } else {
                                                                         $output.= '<td></td>';
                                                                     }

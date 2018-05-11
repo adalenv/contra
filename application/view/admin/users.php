@@ -10,6 +10,12 @@
                                           Create User
                                       </a>
                                   </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="workhours" role="tablist">
+                                          <i class="material-icons">access_time</i>
+                                          Show Workhours
+                                      </a>
+                                  </li>
                               </ul>
                         </div>
                         <div class="col-md-3 ml-auto mr-auto text-center"></div> 
