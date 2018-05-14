@@ -77,12 +77,19 @@ class admin extends Controller
     }
 	/////////////////////////////////
 
-    public function users(){ 
+    public function users($showHours=false){
+        if ($showHours=='workhours') {
+            $users=$this->model->getUsers();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/workhours.php';
+            require APP . 'view/admin/footer.php';
+            return;
+        }elseif(!$showHours){ 
         $users=$this->model->getUsers();
-        require APP . 'view/admin/header.php';
-        require APP . 'view/admin/users.php';
-        require APP . 'view/admin/footer.php';
-
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/users.php';
+            require APP . 'view/admin/footer.php';
+        }else header('location:'.APP);
     }
 
     public function viewUser($user_id){ 
