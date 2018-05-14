@@ -3591,7 +3591,7 @@ fieldset[disabled] .form-group.is-focused .checkbox label {
 }
 
 .checkbox input[type=checkbox]:checked+.checkbox-material .check {
-    background: #9c27b0;
+    background: #01adc2;
 }
 
 .checkbox input[type=checkbox]:checked+.checkbox-material .check:before {

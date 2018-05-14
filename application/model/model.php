@@ -100,24 +100,24 @@ class Model
     }
 
     public function getContracts(){
-        $page         = (int)(isset($_GET['page'])? $_GET['page']:0);
-        $contract_type= (isset($_GET['contract_type'])?$_GET['contract_type']:'%');
-        $operator     = (isset($_GET['operator'])?$_GET['operator']:'%');
-        $date         = (isset($_GET['date'])?$_GET['date']:'');
-        $client_name  = (isset($_GET['client_name'])?$_GET['client_name']:'');
-        $status       = (isset($_GET['status'])?$_GET['status']:'%');
-        $location     = (isset($_GET['location'])?$_GET['location']:'%');
+        $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
+        $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
+        $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
+        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
+        $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
+        $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
+        $location     = (isset($_REQUEST['location'])?$_REQUEST['location']:'%');
         $limiter      = 30;
         $pager        = $limiter*$page;
        
         /////////////////////////if is set id////////////////////////////
-        if (isset($_GET['id'])) {
-        	if ($_GET['id']!='') {
-        		$_GET['client_name']='';
-        		$_GET['operator']='%';
-        		$_GET['status']='%';
-        		$_GET['date']='';
-        		$_GET['contract_type']='%';
+        if (isset($_REQUEST['id'])) {
+        	if ($_REQUEST['id']!='') {
+        		$_REQUEST['client_name']='';
+        		$_REQUEST['operator']='%';
+        		$_REQUEST['status']='%';
+        		$_REQUEST['date']='';
+        		$_REQUEST['contract_type']='%';
 		        $sql="SELECT * FROM contracts WHERE contract_id =:id";
 		        $query = $this->db->prepare($sql);
 		        $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -151,6 +151,7 @@ class Model
 				$first_name='%';
 				$last_name='%';
 		}
+        ///////////////////////////////////////////////////////////////////
         
 		//////////////////////////-location-////////////////////////////////
         if ($location==''){$location='%';};
@@ -197,12 +198,99 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
+    public function createContract(){
+        $sql="INSERT INTO contracts
+            (`date`,operator,ugm_cb,analisi_cb,iniziative_cb,
+tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,
+client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,birth_nation,birth_municipality,document_type,document_number,document_date,
+toponimo,address,civico,price,location,
+ubicazione_fornitura,domicillazione_documenti_fatture, contract_type,listino,
+richiede_gas_naturale,
+request_type,pdr,fornitore_uscente,consume_annuo,
+tipo_riscaldamento,tipo_cottura_acqua,
+fature_via_email,
+payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note
+            ) 
+            VALUES
+            (:date,:operator,:ugm_cb,:analisi_cb,:iniziative_cb,
+:tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
+:client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
+:toponimo,:address,:civico,:price,:location,
+:ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type,:listino,
+:richiede_gas_naturale,
+:request_type,:pdr,:fornitore_uscente,:consume_annuo,
+:tipo_riscaldamento,:tipo_cottura_acqua,
+:fature_via_email,
+:payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note
+            )";
+      //  print_r($sql);
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':date', $_POST['date']);
+        $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
+
+        $query->bindParam(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
+        $query->bindParam(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
+        $query->bindParam(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
+       
+        $query->bindParam(':tel_number', $_POST['tel_number']);
+        $query->bindParam(':alt_number', $_POST['alt_number']);
+        $query->bindParam(':cel_number', $_POST['cel_number']);
+        $query->bindParam(':cel_number2', $_POST['cel_number2']);
+        $query->bindParam(':cel_number3', $_POST['cel_number3']);
+        $query->bindParam(':email', $_POST['email']);
+        $query->bindParam(':alt_email', $_POST['alt_email']);
+
+        $query->bindParam(':client_type', $_POST['client_type']);
+        $query->bindParam(':gender', $_POST['gender']);
+        $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
+        $query->bindParam(':first_name', $_POST['first_name']);
+        $query->bindParam(':last_name', $_POST['last_name']);
+        $query->bindParam(':vat_number', $_POST['vat_number']);
+        $query->bindParam(':partita_iva', $_POST['partita_iva']);
+        $query->bindParam(':birth_date', $_POST['birth_date']);
+        $query->bindParam(':birth_nation', $_POST['birth_nation']);
+        $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
+        $query->bindParam(':document_type', $_POST['document_type']);
+        $query->bindParam(':document_number', $_POST['document_number']);
+        $query->bindParam(':document_date', $_POST['document_date']);
+
+        $query->bindParam(':toponimo', $_POST['toponimo']);
+        $query->bindParam(':address', $_POST['address']);
+        $query->bindParam(':civico', $_POST['civico']);
+        $query->bindParam(':price', $_POST['price']);
+        $query->bindParam(':location', $_POST['location']);
+        $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
+        $query->bindParam(':domicillazione_documenti_fatture', $_POST['domicillazione_documenti_fatture']);
+        $query->bindParam(':contract_type', $_POST['contract_type']);
+        $query->bindParam(':listino', $_POST['listino']);
+        $query->bindParam(':richiede_gas_naturale',(isset($_POST['richiede_gas_naturale'])?$_POST['richiede_gas_naturale']:'false'));
+        $query->bindParam(':request_type', $_POST['request_type']);
+        $query->bindParam(':pdr', $_POST['pdr']);
+        $query->bindParam(':fornitore_uscente', $_POST['fornitore_uscente']);
+        $query->bindParam(':consume_annuo', $_POST['consume_annuo']);
+
+        $query->bindParam(':tipo_riscaldamento',(isset($_POST['tipo_riscaldamento'])?$_POST['tipo_riscaldamento']:'false'));
+        $query->bindParam(':tipo_cottura_acqua',(isset($_POST['tipo_cottura_acqua'])?$_POST['tipo_cottura_acqua']:'false'));
+
+        $query->bindParam(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
+       
+        $query->bindParam(':payment_type', $_POST['payment_type']);
+        $query->bindParam(':iban_code', $_POST['iban_code']);
+        $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
+        $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
+        $query->bindParam(':note', $_POST['note']);
+        $query->execute();
+        //error handler
+        header('location: viewContract/'.$this->db->lastInsertId().'#success');
+
+
+    }
 
     public function uploadDocuments(){
     	$contract_id=$_POST['contract_id'];
 		$target_dir = APP."documents/";
         $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
-        $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt');
+        $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
@@ -251,7 +339,11 @@ class Model
 				case "jpg": 
 					header("Content-type: image/jpg");  
 					readfile($target_file);
-				break;  
+				break; 
+                case "jpeg": 
+                    header("Content-type: image/jpeg");  
+                    readfile($target_file);
+                break;  
 				case "png": 				 
 					header("content-type: image/png");
 					readfile($target_file);

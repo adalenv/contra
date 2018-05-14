@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Login | Next</title>
+<title>Login</title>
  <style type="text/css">
 * {
   box-sizing: border-box;

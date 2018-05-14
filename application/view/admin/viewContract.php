@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" id="docs">
                                             <div class="col-md-6 dz-parent">
                                                 <div id="zdrop" class="fileuploader">
                                                     <div id="upload-label" >

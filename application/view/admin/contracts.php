@@ -36,9 +36,9 @@
                                                 <option value='%'>All operators</option>
                                                 <?php
                                                     $output=''; 
-                                                    foreach ($users as $user) {
-                                                        if ($user->role=='operator') {
-                                                            $output.='<option value="'.$user->user_id.'" >'.$user->first_name.' '.$user->last_name.'</option>';
+                                                    foreach ($operators as $operator) {
+                                                        if ($operator->role=='operator') {
+                                                            $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                         }
                                                     }
                                                     echo $output;
@@ -142,7 +142,7 @@
                                                                 <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>
                                                                 <td>'.$contract->address.'</td>
                                                                 <td>'.$contract->location.'</td>';
-                                                                    foreach($users as $user) {
+                                                                    foreach($operators as $user) {
                                                                         if ($contract->operator == $user->user_id) {
                                                                             $operator = $user;
                                                                             break;

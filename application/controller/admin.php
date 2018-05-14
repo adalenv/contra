@@ -16,7 +16,7 @@ class admin extends Controller
     }
 
     function contracts()
-    {	$users=$this->model->getUsers();
+    {	$operators   =  $this->model->getUsersByRole('operator');
     	$contracts=$this->model->getContracts();
    		require APP . 'view/admin/header.php';
         require APP . 'view/admin/contracts.php';
@@ -24,18 +24,28 @@ class admin extends Controller
     }
     
     public function createContract(){ 
-        $supervisors =  $this->model->getUsersByRole('supervisor');
+        if(isset($_POST['create_contract'])){
+            $this->model->createContract();
+            return;
+        }
         $operators   =  $this->model->getUsersByRole('operator');
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/createContract.php';
         require APP . 'view/admin/footer.php';
     }
+
     public function editContract($contract_id){ 
-    	$contract=$this->model->getContractById($contract_id);
+        if(isset($_POST['edit_contract'])){
+            $this->model->editContract($contract_id);
+            return;
+        }
+        $operators   =  $this->model->getUsersByRole('operator');
+        $contract    =  $this->model->getContractById($contract_id);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/editContract.php';
         require APP . 'view/admin/footer.php';
     }
+
     public function viewContract($contract_id){ 
     	$contract=$this->model->getContractById($contract_id);
         require APP . 'view/admin/header.php';
