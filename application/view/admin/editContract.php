@@ -408,7 +408,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <input type="hidden" name="create_contract" value="true">
+                                        <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-warning pull-left">Cancel</a>
                                         <button type="submit" class="btn btn-info pull-right">Update</button>
                                         <div class="clearfix"></div>

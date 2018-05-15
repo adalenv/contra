@@ -198,39 +198,27 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
-    public function createContract(){
-        $sql="INSERT INTO contracts
-            (`date`,operator,ugm_cb,analisi_cb,iniziative_cb,
-tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,
-client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,birth_nation,birth_municipality,document_type,document_number,document_date,
-toponimo,address,civico,price,location,
-ubicazione_fornitura,domicillazione_documenti_fatture, contract_type,listino,
-richiede_gas_naturale,
-request_type,pdr,fornitore_uscente,consume_annuo,
-tipo_riscaldamento,tipo_cottura_acqua,
-fature_via_email,
-payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note
-            ) 
-            VALUES
-            (:date,:operator,:ugm_cb,:analisi_cb,:iniziative_cb,
-:tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
-:client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
-:toponimo,:address,:civico,:price,:location,
-:ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type,:listino,
-:richiede_gas_naturale,
-:request_type,:pdr,:fornitore_uscente,:consume_annuo,
-:tipo_riscaldamento,:tipo_cottura_acqua,
-:fature_via_email,
-:payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note
-            )";
+
+    public function editContract($contract_id){
+        $sql="UPDATE contracts SET `date`=:date,operator=:operator,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb,
+                tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,
+                client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,
+                birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,
+                toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,
+                ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,
+                richiede_gas_naturale=:richiede_gas_naturale,
+                request_type=:request_type,pdr=:pdr,fornitore_uscente=:fornitore_uscente,consume_annuo=:consume_annuo,
+                tipo_riscaldamento=:tipo_riscaldamento,tipo_cottura_acqua=:tipo_cottura_acqua,
+                fature_via_email=:fature_via_email,
+                payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note WHERE contract_id=:contract_id";
       //  print_r($sql);
         $query = $this->db->prepare($sql);
         $query->bindParam(':date', $_POST['date']);
         $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
 
-        $query->bindParam(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
-        $query->bindParam(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
-        $query->bindParam(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
+        $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
+        $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
+        $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
        
         $query->bindParam(':tel_number', $_POST['tel_number']);
         $query->bindParam(':alt_number', $_POST['alt_number']);
@@ -263,27 +251,30 @@ payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note
         $query->bindParam(':domicillazione_documenti_fatture', $_POST['domicillazione_documenti_fatture']);
         $query->bindParam(':contract_type', $_POST['contract_type']);
         $query->bindParam(':listino', $_POST['listino']);
-        $query->bindParam(':richiede_gas_naturale',(isset($_POST['richiede_gas_naturale'])?$_POST['richiede_gas_naturale']:'false'));
+        $query->bindValue(':richiede_gas_naturale',(isset($_POST['richiede_gas_naturale'])?$_POST['richiede_gas_naturale']:'false'));
         $query->bindParam(':request_type', $_POST['request_type']);
         $query->bindParam(':pdr', $_POST['pdr']);
         $query->bindParam(':fornitore_uscente', $_POST['fornitore_uscente']);
         $query->bindParam(':consume_annuo', $_POST['consume_annuo']);
 
-        $query->bindParam(':tipo_riscaldamento',(isset($_POST['tipo_riscaldamento'])?$_POST['tipo_riscaldamento']:'false'));
-        $query->bindParam(':tipo_cottura_acqua',(isset($_POST['tipo_cottura_acqua'])?$_POST['tipo_cottura_acqua']:'false'));
+        $query->bindValue(':tipo_riscaldamento',(isset($_POST['tipo_riscaldamento'])?$_POST['tipo_riscaldamento']:'false'));
+        $query->bindValue(':tipo_cottura_acqua',(isset($_POST['tipo_cottura_acqua'])?$_POST['tipo_cottura_acqua']:'false'));
 
-        $query->bindParam(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
+        $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
        
         $query->bindParam(':payment_type', $_POST['payment_type']);
         $query->bindParam(':iban_code', $_POST['iban_code']);
         $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
         $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
         $query->bindParam(':note', $_POST['note']);
-        $query->execute();
+
+        $query->bindParam(':contract_id',$contract_id,PDO::PARAM_INT);
         //error handler
-        header('location: viewContract/'.$this->db->lastInsertId().'#success');
-
-
+        if ($query->execute()) {
+            header('location: ../viewContract/'.$contract_id.'#success');     
+        } else {
+            echo "An error occurred!";
+        }
     }
 
     public function uploadDocuments(){

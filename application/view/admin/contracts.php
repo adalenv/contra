@@ -74,7 +74,7 @@
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
-                                        <input class="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
+                                        <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
                                     <div class="col-md-3">
                                         <center>
                                             <div class="form-group label-floating ">
@@ -178,6 +178,7 @@
                             $('#id').val('');
                             $('#Location').val('');
                             $('#client_name').val('');
+                            $('#page_val').val(0);
                             document.forms[0].submit();
                         });
 

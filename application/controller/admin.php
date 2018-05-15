@@ -47,6 +47,7 @@ class admin extends Controller
     }
 
     public function viewContract($contract_id){ 
+        $operators   =  $this->model->getUsersByRole('operator');
     	$contract=$this->model->getContractById($contract_id);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/viewContract.php';
