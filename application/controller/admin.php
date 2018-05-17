@@ -8,16 +8,13 @@ class admin extends Controller
 
 
     public function index(){ 
-        // require APP . 'view/admin/header.php';
-        // //require APP . 'view/admin/index.php';
-        // echo ' admin main page';
-        // require APP . 'view/admin/footer.php';
         header('Location:'.URL.$_SESSION['role'].'/contracts');
     }
 
     function contracts()
     {	$operators   =  $this->model->getUsersByRole('operator');
     	$contracts=$this->model->getContracts();
+        $statuses=$this->model->getStatuses();
    		require APP . 'view/admin/header.php';
         require APP . 'view/admin/contracts.php';
         require APP . 'view/admin/footer.php';
@@ -41,6 +38,7 @@ class admin extends Controller
         }
         $operators   =  $this->model->getUsersByRole('operator');
         $contract    =  $this->model->getContractById($contract_id);
+        $statuses=$this->model->getStatuses();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/editContract.php';
         require APP . 'view/admin/footer.php';
@@ -126,6 +124,46 @@ class admin extends Controller
             echo "No user found!";
         } else {
             require APP . 'view/admin/editUser.php'; 
+        }
+        require APP . 'view/admin/footer.php';
+    }
+
+    public function statuses(){
+            $statuses=$this->model->getStatuses();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/statuses.php';
+            require APP . 'view/admin/footer.php';
+    }
+
+    public function createStatus(){ 
+        if(isset($_POST['create_status'])){
+            $this->model->createStatus();
+            return;
+        }
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/createStatus.php';
+        require APP . 'view/admin/footer.php';
+    }
+
+    public function editStatus($status_id){ 
+        if ($status_id==1) {
+            header('Location: '.URL.$_SESSION['role'].'/statuses');
+            return;
+        }
+        if(isset($_POST['edit_status'])){
+            $this->model->editStatus($status_id);
+            return;
+        }
+        if (isset($_GET['deleteStatus'])) {
+             $this->model->deleteStatus($status_id);
+            return;
+        }
+        $status=$this->model->getStatus($status_id);
+        require APP . 'view/admin/header.php';
+        if(!isset($status->status_id)){
+            echo "No status found!";
+        } else {
+            require APP . 'view/admin/editStatus.php'; 
         }
         require APP . 'view/admin/footer.php';
     }

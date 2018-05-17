@@ -17,7 +17,6 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Operator</label>
                                                 <select class="form-control" required name="operator" id="operator">
-                                                    <option value=''></option>
                                                     <?php
                                                         $output=''; 
                                                         foreach ($operators as $operator) {
@@ -33,6 +32,23 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Status</label>
+                                                <select class="form-control" required name="status" id="status">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($statuses as $status) {
+                                                            if ($contract->status==$status->status_id) {
+                                                                $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali UGM  
@@ -349,14 +365,6 @@
                                             Richiede l`invio della fatura via mail
                                         </div>
                                     </h4> 
-                                </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Indirizio e-mail </label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

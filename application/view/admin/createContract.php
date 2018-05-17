@@ -347,14 +347,6 @@
                                         </div>
                                     </h4> 
                                 </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Indirizio e-mail </label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

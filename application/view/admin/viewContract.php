@@ -33,6 +33,12 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Status</label>
+                                                <select disabled="" class="form-control" required name="status" id="status">
+                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
+                                                </select>
+                                            </div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali UGM  
@@ -349,14 +355,6 @@
                                             Richiede l`invio della fatura via mail
                                         </div>
                                     </h4> 
-                                </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Indirizio e-mail </label>
-                                            <input disabled="" type="email" class="form-control">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

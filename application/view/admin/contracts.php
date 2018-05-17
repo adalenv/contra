@@ -26,6 +26,13 @@
                                             <label class="control-label">Status</label>
                                             <select class="form-control" name="status" id="status">
                                                 <option value='%'>All statuses</option>
+                                                <?php
+                                                    $output=''; 
+                                                    foreach ($statuses as $status) {
+                                                        $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                    }
+                                                    echo $output;
+                                                ?>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
@@ -37,9 +44,7 @@
                                                 <?php
                                                     $output=''; 
                                                     foreach ($operators as $operator) {
-                                                        if ($operator->role=='operator') {
-                                                            $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
-                                                        }
+                                                        $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                     }
                                                     echo $output;
                                                 ?>
@@ -119,7 +124,7 @@
                                             <th>ID</th>
                                             <th>Date</th>
                                             <th>Client Name</th>
-                                            <th>Adress</th>
+                                            <th>Address</th>
                                             <th>Location</th>
                                             <th>Operator</th>
                                         </thead>

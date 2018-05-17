@@ -50,7 +50,7 @@
         Tip 2: you can also add an image using data-image tag
     --> 
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="<?=URL;?>" class="simple-text">
                     OPUS
                 </a>
             </div>
@@ -72,6 +72,18 @@
                         <a href="<?=URL.$_SESSION['role'].'/users';?>">
                             <i class="material-icons">group</i>
                             <p>Users</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="<?=URL.$_SESSION['role'].'/users';?>">
+                            <i class="material-icons">event_note</i>
+                            <p>Campaigns</p>
+                        </a>
+                    </li>
+                    <li class="statusNav">
+                        <a href="<?=URL.$_SESSION['role'].'/statuses';?>">
+                            <i class="material-icons">category</i>
+                            <p>Statuses</p>
                         </a>
                     </li>
 
