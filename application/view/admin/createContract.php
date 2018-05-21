@@ -8,27 +8,13 @@
                                     <h4 class="title">Dati Contrattuali</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="row">
+                                    <div class="row"> 
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
                                                 <input type="date" id="contract_date" name="date" class="form-control">
                                             </div>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Operator</label>
-                                                <select class="form-control" required name="operator" id="operator">
-                                                    <option value=''></option>
-                                                    <?php
-                                                        $output=''; 
-                                                        foreach ($operators as $operator) {
-                                                            $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
-                                                        }
-                                                        echo $output;
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating"></div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input type="checkbox" class="cb" value="false" name="ugm_cb">Iniziative Promocionali UGM  
@@ -41,6 +27,41 @@
                                                 </label>  
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Supervisor</label>
+                                                <select class="form-control" onchange="getOperators(this.value)" required name="supervisor" id="supervisor">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($supervisors as $supervisor) {
+                                                            $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Operator</label>
+                                                <select class="form-control" required name="operator" id="operator">
+                                                </select>
+                                            </div>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Campaign</label>
+                                                <select class="form-control" required name="campaign" id="campaign">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($campaigns as $campaign) {
+                                                            $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -423,4 +444,23 @@
                     $(this).val($(this).val()=='false'?'true':'false');
                 });
 
+function getOperators(supervisor_id){
+    $.ajax({
+      url: '<?=URL;?>api/AdmingetUsersBySupervisor/'+supervisor_id,
+      type: 'GET',
+      dataType: 'json',
+    })
+    .done(function(data) {
+        dataa=data;
+        $('#operator').html('');
+        $('#operator').focus();
+        for (var i=0;i<data.length;i++) {
+           $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+        };
+
+    })
+    .fail(function(err) {
+        console.log(err);
+    })
+}
             </script>

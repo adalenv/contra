@@ -2,7 +2,6 @@
 class Home extends Controller{
 
     public function index(){
-        print_r($_SESSION);
         if (isset($_SESSION['username'])) {//if logged in
             header('location:'.URL.$_SESSION['role']);
         } else{//if not logged in
@@ -22,6 +21,7 @@ class Home extends Controller{
                       $num=$query->rowCount();
                     if($num > 0){ ///if login success
                         $_SESSION['username']=$row['username'];
+                        $_SESSION['user_id']=$row['user_id'];
                         $_SESSION['role']=$row['role'];
                         header('location:'.URL.$_SESSION['role']);
                     }else{//if error
@@ -34,6 +34,7 @@ class Home extends Controller{
       public function logout(){
             unset($_SESSION['username']);
             unset($_SESSION['role']);
+            unset($_SESSION['user_id']);
             unset($_SESSION);
             session_destroy();
             header('location:'.URL.'?status=logout');

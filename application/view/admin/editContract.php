@@ -15,24 +15,6 @@
                                                 <input type="date" value="<?=$contract->date;?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Operator</label>
-                                                <select class="form-control" required name="operator" id="operator">
-                                                    <?php
-                                                        $output=''; 
-                                                        foreach ($operators as $operator) {
-                                                            if ($contract->operator==$operator->user_id) {
-                                                                $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
-                                                            }else{
-                                                                $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
-                                                            }
-                                                        }
-                                                        echo $output;
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group label-floating">
                                                 <label class="control-label">Status</label>
                                                 <select class="form-control" required name="status" id="status">
                                                     <option value=''></option>
@@ -59,6 +41,45 @@
                                                 <label class="control-label">            
                                                     <input type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali Terze Parti 
                                                 </label>  
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating is-focused">
+                                                <label class="control-label">Supervisor</label>
+                                                <select class="form-control" onchange="getOperators(this.value)" required name="supervisor" id="supervisor">
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($supervisors as $supervisor) {
+                                                            if ($contract->supervisor==$supervisor->user_id) {
+                                                                $output.='<option selected="" value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label">Operator</label>
+                                                    <select class="form-control" required name="operator" id="operator">  
+                                                    </select>
+                                            </div>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Campaign</label>
+                                                <select class="form-control" required name="campaign" id="campaign">
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($campaigns as $campaign) {
+                                                            if ($contract->campaign==$campaign->campaign_id) {
+                                                                $output.='<option selected="" value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -283,7 +304,7 @@
                                             <label class="control-label">Tipologia contratto*</label>
                                             <select class="form-control" id="contract_type" name="contract_type">
                                                 <option value="dual">Dual</option>
-                                                <option value="electricity">Luce</option>
+                                                <option value="luce">Luce</option>
                                                 <option value="gas">Gas</option>
                                             </select>
                                         </div>
@@ -405,7 +426,68 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">
+                                            Documents / Audio`s
+                                    </h4> 
+                                </div>
+                                <div class="card-content">
+                                    <div class="row" id="docs">
+                                        <div class="col-sm-6 dz-parent">
+                                            <div id="zdrop" class="fileuploader">
+                                                <div id="upload-label" >
+                                                    <span class="title">Drag your Documents here</span>
+                                                    <span>Or click to select<span/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 dz-parent">
+                                            <div id="adrop" class="fileuploader">
+                                                <div id="upload-label2" >
+                                                    <span class="title">Drag your Audio files here</span>
+                                                    <span>Or click to select<span/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="col-sm-6" >
+                                        <div class="table-responsive table-sales"  style="
+                                                            border-bottom: 1px #5bc0de dashed;
+                                                            border-left: 1px #5bc0de dashed;
+                                                            border-right: 1px #5bc0de dashed;">
+                                            <table class="table">
+                                                <tbody class="doc-container">
+                                                    <tr>
+                                                        <td>
+                                                            No documents!
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" >
+                                        <div class="table-responsive table-sales"  style="
+                                                            border-bottom: 1px #5bc0de dashed;
+                                                            border-left: 1px #5bc0de dashed;
+                                                            border-right: 1px #5bc0de dashed;">
+                                            <table class="table">
+                                                <tbody class="audio-container">
+                                                    <tr>
+                                                        <td>
+                                                            No Audio!
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                          <div class="col-sm-12">
                             <div class="card">
                                  <div class="card-content">
@@ -417,8 +499,8 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
-                                        <a href="../" class="btn btn-warning pull-left">Cancel</a>
-                                        <button type="submit" class="btn btn-info pull-right">Update</button>
+                                        <a href="../" class="btn btn-info pull-left">Cancel</a>
+                                        <button type="submit" class="btn btn-warning  pull-right">Update</button>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
@@ -431,13 +513,14 @@
             </div>
             <script type="text/javascript">
 
-                $('.createContractNav').addClass('active');
+$(document).ready(function(){
+    initDocUploader("#zdrop");
+    initAudioUploader("#adrop");
+    loadDocAndAudio();
+    getOperators($('#supervisor').val());
+    $('.contractsNav').addClass('active');
+});
 
-                // $('#contract_date').val(new Date().toJSON().split('T')[0]);
-                // $('#birth_date').val(   new Date().toJSON().split('T')[0]);
-                // $('#document_date').val(new Date().toJSON().split('T')[0]);
-
-                //$('.cb').val('false')
                 $('.cb').on('click',function() {
                     $(this).val($(this).val()=='false'?'true':'false');
                 });
@@ -448,4 +531,245 @@
                 $('#listino').val('<?=$contract->listino;?>');
                 $('#request_type').val('<?=$contract->request_type;?>');
 
+
+function loadDocAndAudio() {
+    $.ajax({//doc
+        url: "<?=URL.$_SESSION['role']?>/getDocuments/<?=$contract->contract_id;?>",
+        type: 'GET',
+        dataType: 'JSON',
+    })
+    .done(function(data) {
+        if (data.length>0) {
+            $('.doc-container').html('');
+            $.each(data, function (i) {
+                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td></tr>');
+            });
+        }else {
+            $('.doc-container').html('<tr><td>No documents!</td></tr>');
+        }
+    })
+    .fail(function() {
+          console.log("error");
+    })  
+    $.ajax({//audio
+        url: "<?=URL.$_SESSION['role']?>/getAudios/<?=$contract->contract_id;?>",
+        type: 'GET',
+        dataType: 'JSON',
+    })
+    .done(function(data) {
+        if (data.length>0) {
+            $('.audio-container').html('');
+            console.log(data);
+            $.each(data, function (i) {
+                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td></tr>');
+            });
+        }else {
+            $('.audio-container').html('<tr><td>No Audio!</td></tr>');
+        }
+    })
+    .fail(function() {
+          console.log("error");
+    })        
+}
+
+function initAudioUploader(target) {
+    var previewNode = document.querySelector("#adrop-template");
+    previewNode.id = "";
+    var previewTemplate = previewNode.parentNode.innerHTML;
+    previewNode.parentNode.removeChild(previewNode);
+
+    var adrop = new Dropzone(target, {
+        url: "<?=URL.$_SESSION['role']?>/uploadAudios",
+        previewTemplate: previewTemplate,
+        autoQueue: true,
+        previewsContainer: "#previews",
+        clickable: "#upload-label2",
+        acceptedFiles:"audio/*"
+    });
+
+    adrop.on('dragenter', function () {
+        $('.fileuploader').addClass("active");
+    });
+
+    adrop.on('dragleave', function () {
+        $('.fileuploader').removeClass("active");           
+    });
+
+    adrop.on('drop', function () {
+        $('.fileuploader').removeClass("active");   
+    });
+
+    adrop.on('sending', function(file, xhr, formData){
+        formData.append('contract_id',"<?=$contract->contract_id;?>");
+    });
+    adrop.on("success", function(file, responseText) {
+       loadDocAndAudio();
+    });
+}
+function initDocUploader(target) {
+    var previewNode = document.querySelector("#zdrop-template");
+    previewNode.id = "";
+    var previewTemplate = previewNode.parentNode.innerHTML;
+    previewNode.parentNode.removeChild(previewNode);
+
+    var zdrop = new Dropzone(target, {
+        url: "<?=URL.$_SESSION['role']?>/uploadDocuments",
+        previewTemplate: previewTemplate,
+        autoQueue: true,
+        previewsContainer: "#previews",
+        clickable: "#upload-label"
+    });
+
+    zdrop.on('dragenter', function () {
+        $('.fileuploader').addClass("active");
+    });
+
+    zdrop.on('dragleave', function () {
+        $('.fileuploader').removeClass("active");           
+    });
+
+    zdrop.on('drop', function () {
+        $('.fileuploader').removeClass("active");   
+    });
+
+    zdrop.on('sending', function(file, xhr, formData){
+        formData.append('contract_id',"<?=$contract->contract_id;?>");
+    });
+    zdrop.on("success", function(file, responseText) {
+        loadDocAndAudio();
+    });
+} 
+
+
+function getOperators(supervisor_id){
+    $.ajax({
+      url: '<?=URL;?>api/AdmingetUsersBySupervisor/'+supervisor_id,
+      type: 'GET',
+      dataType: 'json',
+    })
+    .done(function(data) {
+        dataa=data;
+        $('#operator').html('');
+        for (var i=0;i<data.length;i++) {
+            if (data[i].user_id=="<?=$contract->operator?>") {
+                $('#operator').focus();
+                $('#operator').append('<option selected value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+            }else{
+                $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+            }
+           
+        };
+
+    })
+    .fail(function(err) {
+        console.log(err);
+    })
+}
+
             </script>
+
+
+<style type="text/css">
+    .fileuploader{
+      position: relative;
+      border: 1px #5bc0de dashed !important;
+      background: white;
+      width: 100%;
+      border: 1px solid #e9e9e9;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+    .fileuploader #upload-label{
+      position: inherit !important;
+      background: white;
+      color: grey;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      padding: 16px;
+      position: absolute;
+      top: 45%;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      min-width: 20%;
+      text-align: center;
+      padding-top: 40px;
+      transition: 0.8s all;
+      -webkit-transition: 0.8s all;
+      -moz-transition: 0.8s all;
+      cursor: pointer;
+    }
+.fileuploader #upload-label2{
+      position: inherit !important;
+      background: white;
+      color: grey;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      padding: 16px;
+      position: absolute;
+      top: 45%;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      min-width: 20%;
+      text-align: center;
+      padding-top: 40px;
+      transition: 0.8s all;
+      -webkit-transition: 0.8s all;
+      -moz-transition: 0.8s all;
+      cursor: pointer;
+    }
+    .fileuploader.active{
+      background: #2196F3;
+    }
+    .fileuploader.active #upload-label{
+      background: #fff;
+      color: #2196F3;
+    }
+    .fileuploader #upload-label span.title{
+      font-size: 1.1em;
+      font-weight: bold;
+      display: block;
+    }
+    .fileuploader.active #upload-label2{
+      background: #fff;
+      color: #2196F3;
+    }
+    .fileuploader #upload-label2 span.title{
+      font-size: 1.1em;
+      font-weight: bold;
+      display: block;
+    }
+
+</style>
+
+            <!-- Preview collection of uploaded documents -->
+            <div class="preview-container" style="display: none">
+                <div class="header">
+                    <span>Uploaded Files</span> 
+                    <i id="controller" class="material-icons">keyboard_arrow_down</i>
+                </div>
+                <div class="collection card" id="previews">
+                    <div class="collection-item clearhack valign-wrapper item-template" id="adrop-template"></div>
+                    <div class="collection-item clearhack valign-wrapper item-template" id="zdrop-template">
+                        <div class="left pv zdrop-info" data-dz-thumbnail>
+                            <div>
+                                <span data-dz-name></span> <span data-dz-size></span>
+                            </div>
+                            <div class="progress">
+                                <div class="determinate" style="width:0" data-dz-uploadprogress></div>
+                            </div>
+                            <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                        </div>
+
+                        <div class="secondary-content actions">
+                            <a href="#" data-dz-remove class="btn-floating ph red white-text waves-effect waves-light"><i class="material-icons white-text">clear</i></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>

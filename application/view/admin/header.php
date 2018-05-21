@@ -74,8 +74,8 @@
                             <p>Users</p>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="<?=URL.$_SESSION['role'].'/users';?>">
+                    <li class="campaignNav">
+                        <a href="<?=URL.$_SESSION['role'].'/campaigns';?>">
                             <i class="material-icons">event_note</i>
                             <p>Campaigns</p>
                         </a>
@@ -88,9 +88,9 @@
                     </li>
 
                     <li class="active-pro">
-                        <a href="upgrade.html">
+                        <a href="mailto:adalenvladi@gmail.com">
                             <i class="material-icons">unarchive</i>
-                            <p>Test</p>
+                            <p>Support</p>
                         </a>
                     </li>
                 </ul>

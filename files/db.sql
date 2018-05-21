@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2018 at 07:05 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Apr 21, 2010 at 10:45 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -40,10 +38,27 @@ CREATE TABLE `audios` (
 --
 
 INSERT INTO `audios` (`audio_id`, `contract_id`, `url`, `date`) VALUES
-(4, 1, '1-SampleAudio_0.4mb.mp3', '2018-05-04 17:31:22'),
-(5, 1, '1-SampleAudio_0.4mb.mp3', '2018-05-04 17:35:43'),
-(6, 2, '2-dfgdfgdfdfgdfg.mp3', '2010-04-20 23:27:29'),
-(7, 2, '2-file915.mp3', '2010-04-20 23:57:40');
+(8, 3, '3-file915.mp3', '2010-04-21 00:31:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaigns`
+--
+
+CREATE TABLE `campaigns` (
+  `campaign_id` int(11) NOT NULL,
+  `campaign_name` varchar(50) NOT NULL,
+  `campaign_description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `campaigns`
+--
+
+INSERT INTO `campaigns` (`campaign_id`, `campaign_name`, `campaign_description`) VALUES
+(1, 'NEW', 'Auto Created test'),
+(3, 'test cmp', 'terfsd fsdfsdf gfdgdfg');
 
 -- --------------------------------------------------------
 
@@ -53,7 +68,7 @@ INSERT INTO `audios` (`audio_id`, `contract_id`, `url`, `date`) VALUES
 
 CREATE TABLE `contracts` (
   `contract_id` int(11) NOT NULL,
-  `contract_type` enum('electricity','gas','dual') NOT NULL,
+  `contract_type` enum('luce','gas','dual') NOT NULL,
   `proposal_number` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `ugm_cb` enum('true','false') NOT NULL DEFAULT 'false',
@@ -103,29 +118,19 @@ CREATE TABLE `contracts` (
   `iban_accounthoder` varchar(50) NOT NULL,
   `iban_fiscal_code` varchar(50) NOT NULL,
   `payment_type` enum('postal','cc') NOT NULL,
-  `note` text NOT NULL
+  `note` text NOT NULL,
+  `campaign` int(11) NOT NULL COMMENT 'campaign_id',
+  `supervisor` int(11) NOT NULL COMMENT 'user_id'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contracts`
 --
 
-INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `date`, `ugm_cb`, `analisi_cb`, `iniziative_cb`, `toponimo`, `address`, `civico`, `price`, `location`, `ubicazione_fornitura`, `domicillazione_documenti_fatture`, `listino`, `richiede_gas_naturale`, `request_type`, `pdr`, `fornitore_uscente`, `consume_annuo`, `tipo_riscaldamento`, `tipo_cottura_acqua`, `fature_via_email`, `operator`, `status`, `cancellation_reason`, `gender`, `rag_sociale`, `first_name`, `last_name`, `bussines_name`, `client_type`, `tel_number`, `alt_number`, `cel_number`, `cel_number2`, `cel_number3`, `email`, `alt_email`, `birth_nation`, `vat_number`, `partita_iva`, `birth_date`, `birth_municipality`, `document_type`, `document_number`, `document_date`, `iban_code`, `iban_accounthoder`, `iban_fiscal_code`, `payment_type`, `note`) VALUES
-(16, 'dual', '', '2010-04-21', 'true', 'true', 'false', 'via', 'sfsf', '34', '', '3434', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', 'ertertert', 'ert', 'ert', '', 'personal', 'ert', '', 'er', '', '', 'tetertertertet@fsdf', '', 'e', 'ert', '', '2010-04-21', 'rte', 'id_card', 't', '2010-04-21', '', '0', '0', 'postal', ''),
-(17, 'dual', '', '2010-04-21', 'false', 'false', 'false', 'via', 'sdf', '45', '', '545', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 12, 1, '', 'female', 'wrewe', 'er', 'ewr', '', 'personal', 'wer', '', 'we', '', '', 'rwerwer@sdf', '', 'rw', 'e', '', '2010-04-21', 'er', 'passport', 'wer', '2010-04-21', '', '0', '0', 'postal', ''),
-(18, 'electricity', '', '2010-04-12', 'true', 'true', 'true', 'via', 'retger gdfgdfgdf ', '4545', 'ererwer', 'wer345345', 'non_resident', 'altro', 'FIX12 TS', 'true', 'SW1 - SWITCH', 'fer', '345', 'gdfgdfg', 'true', 'false', 'true', 12, 2, '', 'female', '1cfdf ', 'Adlan', 'Vlllaer', '', 'personal', '25142514141251', '52353', '5243', '53563', '636', 'ASDASD@ASDAS.ASD', 'ASDASD@ASDAS.ASD', 'albania', '2334sdfsdf3', '122', '1994-10-08', 'tirane', 'passport', '212313213fdgfd', '2010-04-23', 'fsdfsdf', 'sdfsdf', 'sdfsdf', 'cc', 'sf f sdf sf\r\nsdf\r\nsd\r\nf\r\nsd\r\nfs\r\ndf'),
-(19, 'dual', '', '2018-05-15', 'false', 'false', 'false', 'via', 'sdfs', '34', '', '3fgdfg', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', '', 'frwe', 'r', '', 'personal', 'wer', '', 'w', '', '', 'erwer@dfsdf', '', 'wer', 'wer', '', '2018-05-15', 'we', 'id_card', 'r', '2018-05-15', '', '', '', 'postal', ''),
-(20, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'dsf', '45', '', '45', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', '', 'sdf', 'sdf', '', 'personal', 'sd', '', 'f', '', '', 'sdfsdfsdfsdf@sdf', '', 'sd', 'sdf', '', '2018-05-16', 'fsdf', 'id_card', 'sdf', '2018-05-16', '', '', '', 'postal', ''),
-(21, 'dual', '', '2018-05-16', 'true', 'false', 'true', 'via', 'sdfsdf', '3434', 'sdf', 'sdf', 'non_resident', 'altro', 'FIX12 TS', 'true', 'SW1 - SWITCH', 'fs', 'sdfsd', 'fsdf', 'false', 'true', 'true', 12, 1, '', 'female', 'sdf', 'fedfdf', 'fdf', '', '', '324234234', 'dsf', 'frwer324', '34343423', 'sdfsdfsdfsdf', '34dfsdf@sdfdsf', 'sdfsdf@dasdasd.dfgdfg', 'df', 'fdf', 'ffdf', '2018-05-16', 'fdf', 'passport', 'sdfsdfsdfsdf', '2018-05-16', 'gdfgdfgdfgdfgdfg', 'dfgdf', 'dfg', 'cc', 'reterte'),
-(22, 'dual', '', '2018-05-16', 'true', 'false', 'true', 'via', 'asdasd', '3', '', '3', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 3, '', 'female', 'sdf', 'asd', 'asdas', '', 'personal', 'asd', '', 'asd', '', '', 'asdasdwwww@sdsdsdds', '', 'as', 'asd', '', '2018-05-16', 'da', 'id_card', 'sd', '2018-05-16', '', '', '', 'postal', ''),
-(23, 'dual', '', '2018-05-16', 'false', 'false', 'true', 'via', 'werw', '234', '', '23423', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', 'wer', 'rerwer', 'rer', '', 'personal', 'er', '', 'wer', '', '', 'werwerwer@rewrwer', '', 'wer', 'wer', '', '2018-05-16', 'wer', 'id_card', 'w', '2018-05-16', '', '', '', 'postal', ''),
-(24, 'dual', '', '2018-05-16', 'false', 'false', 'true', 'via', 'wer', '345', '', 'wrwer', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', 'sdf', 'sdf', 'sd', '', 'personal', 'sdf', '', 's', '', '', 'dfsdf@sdfsdf.sdffdf', '', 'sdf', 'f', '', '2018-05-16', 's', 'id_card', 'df', '2018-05-16', '', '', '', 'postal', ''),
-(25, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdfs', '45345', '', 'dfgdfgdfg', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', 'dfg', 'sdf', 'sdf', '', 'personal', 'f', '', 'sd', '', '', 'fdsfsdfsdf@dfsdf.sdfsdf', '', 's', 'sf', '', '2018-05-16', 'df', 'id_card', 'sd', '2018-05-16', '', '', '', 'postal', ''),
-(26, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdfs', '45345', '', 'dfgdfgdfg', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', 'dfg', 'sdf', 'sdf', '', 'personal', 'f', '', 'sd', '', '', 'fdsfsdfsdf@dfsdf.sdfsdf', '', 's', 'sf', '', '2018-05-16', 'df', 'id_card', 'sd', '2018-05-16', '', '', '', 'postal', ''),
-(27, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdfsd', '34', '', 'sdfsdf', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', '', 'sd', 'sd', '', 'personal', 's', '', 'df', '', '', 'sdfsdfsdf@sdfsdf', 'sdfsdfsdf@sdfsdf', 'sdf', 'f', '', '2018-05-16', 's', 'id_card', 'df', '2018-05-16', '', '', '', 'postal', ''),
-(28, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdfsd', '34', '', 'sdfsdf', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', '', 'sd', 'sd', '', 'personal', 's', '', 'df', '', '', 'sdfsdfsdf@sdfsdf', 'sdfsdfsdf@sdfsdf', 'sdf', 'f', '', '2018-05-16', 's', 'id_card', 'df', '2018-05-16', '', '', '', 'postal', ''),
-(29, 'dual', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdf', '34324', '', 'sdfsdf', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 12, 1, '', 'male', '', 'sdf', 'sdf', '', 'personal', 'f', '', 'sdf', '', '', 'sdfsdff@sdfsd.f', '', 'f', 'sd', '', '2018-05-16', 'sdf', 'id_card', 'sd', '2018-05-16', '', '', '', 'postal', ''),
-(30, 'electricity', '', '2018-05-16', 'false', 'false', 'false', 'via', 'sdf', '34324', '', 'sdfsdf', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 12, 3, '', 'male', '', 'sdf', 'sdf', '', 'personal', 'f', '', 'sdf', '', '', 'sdfsdff@sdfsd.f', '', 'f', 'sd', '', '2018-05-16', 'sdf', 'id_card', 'sd', '2018-05-16', '', '', '', 'postal', '');
+INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `date`, `ugm_cb`, `analisi_cb`, `iniziative_cb`, `toponimo`, `address`, `civico`, `price`, `location`, `ubicazione_fornitura`, `domicillazione_documenti_fatture`, `listino`, `richiede_gas_naturale`, `request_type`, `pdr`, `fornitore_uscente`, `consume_annuo`, `tipo_riscaldamento`, `tipo_cottura_acqua`, `fature_via_email`, `operator`, `status`, `cancellation_reason`, `gender`, `rag_sociale`, `first_name`, `last_name`, `bussines_name`, `client_type`, `tel_number`, `alt_number`, `cel_number`, `cel_number2`, `cel_number3`, `email`, `alt_email`, `birth_nation`, `vat_number`, `partita_iva`, `birth_date`, `birth_municipality`, `document_type`, `document_number`, `document_date`, `iban_code`, `iban_accounthoder`, `iban_fiscal_code`, `payment_type`, `note`, `campaign`, `supervisor`) VALUES
+(35, 'dual', '', '2010-04-21', 'false', 'true', 'true', 'via', 'fg', '56', '', '56', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', 'sdf', 'sd', 'f', '', 'personal', 'sdf', '', 'fdg', '', '', 'fdgfdg@dfg', '', 'sd', 'sdf', '', '2010-04-21', 'f', 'id_card', 'sdf', '2010-04-21', '', '', '', 'postal', '', 3, 12),
+(33, 'dual', '', '2010-04-21', 'false', 'false', 'false', 'via', 'f', '34', '', '3', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 6, 1, '', 'male', 'sda', 'sd', 'as', '', 'personal', 'asd', '', 'as', '', '', 'dasd@fds', '', 'as', 'd', '', '2010-04-21', 'd', 'id_card', 'asd', '2010-04-21', '', '', '', 'postal', '', 1, 12),
+(34, 'dual', '', '2010-04-21', 'false', 'false', 'false', 'via', 'ds', '34', '', 'w', 'resident', 'residenza', 'FIX12 TS', 'false', 'SW1 - SWITCH', '', '', '', 'false', 'false', 'false', 5, 1, '', 'male', 'asd', 'asd', 'as', '', 'personal', 'd', '', 'sad', '', '', 'asdsadasd@sf', '', 'as', 'd', '', '2010-04-21', 'd', 'id_card', 'as', '2010-04-21', '', '', '', 'postal', '', 3, 13);
 
 -- --------------------------------------------------------
 
@@ -145,20 +150,7 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`document_id`, `contract_id`, `url`, `date`) VALUES
-(14, 3, '3-44296-analyze-&-attack-ssh-protocol.pdf', '0000-00-00 00:00:00'),
-(15, 3, '3-crm.docx', '0000-00-00 00:00:00'),
-(16, 3, '3-1.PDF', '0000-00-00 00:00:00'),
-(17, 3, '3-1.PDF', '0000-00-00 00:00:00'),
-(18, 3, '3-1_7.doc', '0000-00-00 00:00:00'),
-(19, 3, '3-1.PDF', '0000-00-00 00:00:00'),
-(20, 3, '3-simplemaps-worldcities-basic.csv', '0000-00-00 00:00:00'),
-(21, 3, '3-simplemaps-worldcities-basic.csv', '0000-00-00 00:00:00'),
-(22, 3, '3-simplemaps-worldcities-basic.csv', '0000-00-00 00:00:00'),
-(23, 3, '3-states.txt', '0000-00-00 00:00:00'),
-(24, 2, '2-New Text Document.txt', '2010-04-20 23:25:27'),
-(25, 2, '2-3282.txt', '2010-04-20 23:32:29'),
-(26, 2, '2-aaaa.png', '2010-04-20 23:34:24'),
-(27, 2, '2-SM?RTP.exe', '2010-04-20 23:34:44');
+(28, 3, '3-wwww.jpg', '2010-04-21 00:31:18');
 
 -- --------------------------------------------------------
 
@@ -206,18 +198,42 @@ CREATE TABLE `users` (
   `password` text NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `role` enum('operator','supervisor','backoffice','admin') NOT NULL DEFAULT 'operator'
+  `role` enum('operator','supervisor','backoffice','admin') NOT NULL DEFAULT 'operator',
+  `supervisor` int(11) NOT NULL COMMENT 'user_id'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `role`) VALUES
-(1, 'admin', 'passw', 'Adalen', 'Test', 'admin'),
-(5, 'testadmin12', 'paswwordi', 'userssss', 'Test', 'operator'),
-(6, 'testadmin12', 'paswwordi', 'testgfgf', 'Test', 'operator'),
-(12, 'testuser', 'testuser', 'ssdf', 'Test', 'operator');
+INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `role`, `supervisor`) VALUES
+(1, 'admin', 'passw', 'Adalen', 'Test', 'admin', 3),
+(6, 'testadmin12', 'paswwordi', 'userssss', 'Test', 'operator', 13),
+(12, 'supervisor01', 'testuser', 'supervisor', '001', 'supervisor', 2),
+(13, 's2', 'sw', 's2', 'test', 'supervisor', 1),
+(14, 'adminasdasd', 'asdas', 'dfsd', 'asdasd', 'operator', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workhours`
+--
+
+CREATE TABLE `workhours` (
+  `workhours_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `hours` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `workhours`
+--
+
+INSERT INTO `workhours` (`workhours_id`, `user_id`, `hours`, `date`) VALUES
+(1, 1, 6, '2010-04-21'),
+(2, 6, 2, '2010-04-21'),
+(3, 6, 2, '2010-04-21');
 
 --
 -- Indexes for dumped tables
@@ -228,6 +244,12 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name
 --
 ALTER TABLE `audios`
   ADD PRIMARY KEY (`audio_id`);
+
+--
+-- Indexes for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  ADD PRIMARY KEY (`campaign_id`);
 
 --
 -- Indexes for table `contracts`
@@ -265,6 +287,12 @@ ALTER TABLE `users`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `workhours`
+--
+ALTER TABLE `workhours`
+  ADD PRIMARY KEY (`workhours_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -272,39 +300,42 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audios`
 --
 ALTER TABLE `audios`
-  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
+  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
   MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-COMMIT;
-
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `workhours`
+--
+ALTER TABLE `workhours`
+  MODIFY `workhours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

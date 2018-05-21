@@ -5,22 +5,22 @@
                         <div class="col-md-6 ml-auto mr-auto text-center">
                             <ul style="max-width: fit-content;" class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <li class="nav-item">
-                                      <a class="nav-link" href="../users" role="tablist">
+                                      <a class="nav-link" href="../../users" role="tablist">
                                           <i class="material-icons">person</i>
                                           Users
                                       </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../createUser" role="tablist">
+                                    <a class="nav-link" href="../../createUser" role="tablist">
                                         <i class="material-icons">person_add</i>
                                         Create User
                                     </a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="" role="tablist">
+                                    <a class="nav-link" role="tablist">
                                         <i class="material-icons">access_time</i>
                                         Show Workhours</br>
-                                        <input style="background: grey" type="month">
+                                        <input id="month" onchange="window.location.href=this.value;" name="month" style="background: white;color:grey;" type="month">
                                     </a>
                                 </li>
                             </ul>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Users</h4>
+                                    <h4 class="title">Workhours</h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -39,17 +39,18 @@
                                         <thead class="text-info">
                                             <th>Full Name</th>
                                             <th>Role</th>
+                                            <th>Hours</th>
                                             <th><center>Action</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $output='';
                                                 foreach ($users as $user) {
-                                                   
                                                     $output.='<tr>
-                                                                <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
-                                                                <td>'.$user->role.'</td>
-                                                                <td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
+                                                                <td><a class="user_name_l" href="../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
+                                                                <td>'.$user->role.'</td>';
+                                                    $output.='<td>'.$this->model->AdmingetWorkhours($user->user_id,$date).'</td>';
+                                                    $output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/addWorkhours/'.$user->user_id.'" ><i class="material-icons">access_time</i></a></center></td>
                                                             </tr>';
                                                 }
                                                 echo $output;
@@ -65,6 +66,12 @@
             <script type="text/javascript">
                 $('.usersNav').addClass('active');
                 <?php 
+                  if ($date) {
+                    echo "$('#month').val('".$date."')";
+                  }else{
+                    echo "$('#month').val('".date('Y-m')."');";
+                  }
+
                     if (isset($_SESSION['edit_user'])) {
                         if ($_SESSION['edit_user']=='success') { ?>//if edit success 
                             $.notify({

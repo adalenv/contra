@@ -6,11 +6,11 @@
                                 <div class="row" style="margin-left:5px;margin-right:5px">
                                     <div class="col-md-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Type</label>
+                                            <label class="control-label">Tipologia contratto</label>
                                             <select class="form-control" name="contract_type" id="contract_type">
                                                 <option value="%">All</option>
-                                                <option value=gas>Gas</option>
-                                                <option value="electricity">Electricity</option>
+                                                <option value="gas">Gas</option>
+                                                <option value="luce">Luce</option>
                                                 <option value="dual">Dual</option>
                                             </select>
                                         <span class="material-input"></span></div>
@@ -135,7 +135,7 @@
                                                     $output.='<tr>';
                                                                 if ($contract->contract_type=='gas') {
                                                                     $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
-                                                                }elseif ($contract->contract_type=='electricity') {
+                                                                }elseif ($contract->contract_type=='luce') {
                                                                     $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
                                                                 }elseif ($contract->contract_type=='dual') {
                                                                     $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';

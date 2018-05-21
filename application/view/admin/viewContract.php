@@ -15,6 +15,43 @@
                                                 <input disabled="" type="date" value="<?=$contract->date;?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
+                                                <label class="control-label">Status</label>
+                                                <select disabled="" class="form-control" required name="status" id="status">
+                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
+                                                </select>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label class="control-label">                                             
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali UGM  
+                                                </label>
+                                                <label class="control-label">
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->analisi_cb=='true')?'checked':'';?> value="<?=$contract->analisi_cb;?>" name="analisi_cb">Analisi di Mercato       
+                                                </label>                          
+                                                <label class="control-label">            
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali Terze Parti 
+                                                </label>  
+                                            </div>
+            
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Supervisor</label>
+                                                <select disabled="" class="form-control" required name="supervisor" id="supervisor">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($supervisors as $supervisor) {
+                                                            if ($contract->supervisor==$supervisor->user_id) {
+                                                                $output.='<option selected="" value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group label-floating">
                                                 <label class="control-label">Operator</label>
                                                 <select disabled="" class="form-control" required name="operator" id="operator">
                                                     <option value=''></option>
@@ -31,24 +68,22 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Status</label>
-                                                <select disabled="" class="form-control" required name="status" id="status">
-                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
+                                                <label class="control-label">Campaign</label>
+                                                <select disabled="" class="form-control" required name="campaign" id="campaign">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($campaigns as $campaign) {
+                                                            if ($contract->campaign==$campaign->campaign_id) {
+                                                                $output.='<option selected="" value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
                                                 </select>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali UGM  
-                                                </label>
-                                                <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->analisi_cb=='true')?'checked':'';?> value="<?=$contract->analisi_cb;?>" name="analisi_cb">Analisi di Mercato       
-                                                </label>                          
-                                                <label class="control-label">            
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali Terze Parti 
-                                                </label>  
                                             </div>
                                         </div>
                                     </div>
@@ -273,7 +308,7 @@
                                             <label class="control-label">Tipologia contratto*</label>
                                             <select disabled="" class="form-control" id="contract_type" name="contract_type">
                                                 <option value="dual">Dual</option>
-                                                <option value="electricity">Luce</option>
+                                                <option value="luce">Luce</option>
                                                 <option value="gas">Gas</option>
                                             </select>
                                         </div>
@@ -395,8 +430,50 @@
                                 </div>
                             </div>
                         </div>
-
-                         <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">
+                                            Documents / Audio`s
+                                    </h4> 
+                                </div>
+                                <div class="card-content">
+                                    <div class="col-sm-6" >
+                                        <div class="table-responsive table-sales"  style="
+                                                            border-bottom: 1px #5bc0de dashed;
+                                                            border-left: 1px #5bc0de dashed;
+                                                            border-right: 1px #5bc0de dashed;">
+                                            <table class="table">
+                                                <tbody class="doc-container">
+                                                    <tr>
+                                                        <td>
+                                                            No documents!
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" >
+                                        <div class="table-responsive table-sales"  style="
+                                                            border-bottom: 1px #5bc0de dashed;
+                                                            border-left: 1px #5bc0de dashed;
+                                                            border-right: 1px #5bc0de dashed;">
+                                            <table class="table">
+                                                <tbody class="audio-container">
+                                                    <tr>
+                                                        <td>
+                                                            No Audio!
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
                             <div class="card">
                                  <div class="card-content">
                                     <div class="col-sm-12">
@@ -420,6 +497,7 @@
             <script type="text/javascript">
 
                 $('.contractsNav').addClass('active');
+                loadDocAndAudio();
 
                 // $('#contract_date').val(new Date().toJSON().split('T')[0]);
                 // $('#birth_date').val(   new Date().toJSON().split('T')[0]);
@@ -435,5 +513,98 @@
                 $('#contract_type').val('<?=$contract->contract_type;?>');
                 $('#listino').val('<?=$contract->listino;?>');
                 $('#request_type').val('<?=$contract->request_type;?>');
+                <?php 
+                    if (isset($_SESSION['create_contract'])) {
+                        if ($_SESSION['create_contract']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "Contract Created!"
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php } 
+
+                        unset($_SESSION['create_contract']);
+                    } 
+
+                    if (isset($_SESSION['edit_contract'])) {
+                        if ($_SESSION['edit_contract']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "Contract Updated!"
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php } elseif($_SESSION['edit_user']=='fail') { ?> //if fail
+                            $.notify({
+                              icon: "error_outline",
+                              message: "An error occurred!"
+                            },{
+                              type: 'danger',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php }
+                        
+                        unset($_SESSION['edit_contract']);
+                    } 
+                ?>
+
+
+function loadDocAndAudio() {
+    $.ajax({//doc
+        url: "<?=URL.$_SESSION['role']?>/getDocuments/<?=$contract->contract_id;?>",
+        type: 'GET',
+        dataType: 'JSON',
+    })
+    .done(function(data) {
+        if (data.length>0) {
+            $('.doc-container').html('');
+            $.each(data, function (i) {
+                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td></tr>');
+            });
+        }else {
+            $('.doc-container').html('<tr><td>No documents!</td></tr>');
+        }
+    })
+    .fail(function() {
+          console.log("error");
+    })  
+    $.ajax({//audio
+        url: "<?=URL.$_SESSION['role']?>/getAudios/<?=$contract->contract_id;?>",
+        type: 'GET',
+        dataType: 'JSON',
+    })
+    .done(function(data) {
+        if (data.length>0) {
+            $('.audio-container').html('');
+            console.log(data);
+            $.each(data, function (i) {
+                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td></tr>');
+            });
+        }else {
+            $('.audio-container').html('<tr><td>No Audio!</td></tr>');
+        }
+    })
+    .fail(function() {
+          console.log("error");
+    })        
+}
 
             </script>

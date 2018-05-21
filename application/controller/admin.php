@@ -11,10 +11,16 @@ class admin extends Controller
         header('Location:'.URL.$_SESSION['role'].'/contracts');
     }
 
-    function contracts()
-    {	$operators   =  $this->model->getUsersByRole('operator');
-    	$contracts=$this->model->getContracts();
-        $statuses=$this->model->getStatuses();
+    function contracts(){	
+        if (isset($_GET['export'])){
+            if ($_GET['export']==true) {
+                $this->model->AdmingetContracts('export');
+                return;
+            }
+        }
+        $operators=$this->model->AdmingetUsersByRole('operator');
+    	$contracts=$this->model->AdmingetContracts();
+        $statuses=$this->model->AdmingetStatuses();
    		require APP . 'view/admin/header.php';
         require APP . 'view/admin/contracts.php';
         require APP . 'view/admin/footer.php';
@@ -22,10 +28,12 @@ class admin extends Controller
     
     public function createContract(){ 
         if(isset($_POST['create_contract'])){
-            $this->model->createContract();
+            $this->model->AdmincreateContract();
             return;
         }
-        $operators   =  $this->model->getUsersByRole('operator');
+        $operators   =  $this->model->AdmingetUsersByRole('operator');
+        $supervisors   =  $this->model->AdmingetUsersByRole('supervisor');
+        $campaigns=$this->model->AdmingetCampaigns();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/createContract.php';
         require APP . 'view/admin/footer.php';
@@ -33,20 +41,25 @@ class admin extends Controller
 
     public function editContract($contract_id){ 
         if(isset($_POST['edit_contract'])){
-            $this->model->editContract($contract_id);
+            $this->model->AdmineditContract($contract_id);
             return;
         }
-        $operators   =  $this->model->getUsersByRole('operator');
-        $contract    =  $this->model->getContractById($contract_id);
-        $statuses=$this->model->getStatuses();
+        $operators   =  $this->model->AdmingetUsersByRole('operator');
+        $supervisors =  $this->model->AdmingetUsersByRole('supervisor');
+        $contract    =  $this->model->AdmingetContractById($contract_id);
+        $statuses=$this->model->AdmingetStatuses();
+        $campaigns=$this->model->AdmingetCampaigns();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/editContract.php';
         require APP . 'view/admin/footer.php';
     }
 
     public function viewContract($contract_id){ 
-        $operators   =  $this->model->getUsersByRole('operator');
-    	$contract=$this->model->getContractById($contract_id);
+        $operators   =  $this->model->AdmingetUsersByRole('operator');
+        $supervisors =  $this->model->AdmingetUsersByRole('supervisor');
+        $contract    =  $this->model->AdmingetContractById($contract_id);
+        $statuses=$this->model->AdmingetStatuses();
+        $campaigns=$this->model->AdmingetCampaigns();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/viewContract.php';
         require APP . 'view/admin/footer.php';
@@ -54,37 +67,37 @@ class admin extends Controller
 
     //////////-documents-//////////////
     public function uploadDocuments(){ 
-    	$this->model->uploadDocuments();
+    	$this->model->AdminuploadDocuments();
     }
     public function getDocuments($contract_id){ 
-    	$this->model->getDocuments($contract_id);
+    	$this->model->AdmingetDocuments($contract_id);
     }
     public function getDocument($document_id){ 
-    	$this->model->getDocument($document_id);
+    	$this->model->AdmingetDocument($document_id);
     }
 	/////////////////////////////////
 
     //////////-audio-//////////////
     public function uploadAudios(){ 
-    	$this->model->uploadAudios();
+    	$this->model->AdminuploadAudios();
     }
     public function getAudios($contract_id){ 
-    	$this->model->getAudios($contract_id);
+    	$this->model->AdmingetAudios($contract_id);
     }
     public function getAudio($audio_id){ 
-    	$this->model->getAudio($audio_id);
+    	$this->model->AdmingetAudio($audio_id);
     }
 	/////////////////////////////////
 
-    public function users($showHours=false){
+    public function users($showHours=false,$date=null){
         if ($showHours=='workhours') {
-            $users=$this->model->getUsers();
+            $users=$this->model->AdmingetUsers();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/workhours.php';
             require APP . 'view/admin/footer.php';
             return;
         }elseif(!$showHours){ 
-        $users=$this->model->getUsers();
+            $users=$this->model->AdmingetUsers();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/users.php';
             require APP . 'view/admin/footer.php';
@@ -92,7 +105,7 @@ class admin extends Controller
     }
 
     public function viewUser($user_id){ 
-        $contracts=$this->model->getContractsByUser($user_id);
+        $contracts=$this->model->AdmingetContractsByUser($user_id);
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/viewUser.php';
         require APP . 'view/admin/footer.php';
@@ -101,7 +114,7 @@ class admin extends Controller
     
     public function createUser(){ 
         if(isset($_POST['create_user'])){
-            $this->model->createUser();
+            $this->model->AdmincreateUser();
             return;
         }
         require APP . 'view/admin/header.php';
@@ -111,14 +124,15 @@ class admin extends Controller
 
     public function editUser($user_id){ 
         if(isset($_POST['edit_user'])){
-            $this->model->editUser($user_id);
+            $this->model->AdmineditUser($user_id);
             return;
         }
         if (isset($_GET['deleteUser'])) {
-             $this->model->deleteUser($user_id);
+             $this->model->AdmindeleteUser($user_id);
             return;
         }
-        $user=$this->model->getUser($user_id);
+        $user=$this->model->AdmingetUser($user_id);
+        $supervisors   =  $this->model->AdmingetUsersByRole('supervisor');
         require APP . 'view/admin/header.php';
         if(!isset($user->user_id)){
             echo "No user found!";
@@ -127,9 +141,10 @@ class admin extends Controller
         }
         require APP . 'view/admin/footer.php';
     }
+////////////////////////////////////////////////////////
 
     public function statuses(){
-            $statuses=$this->model->getStatuses();
+            $statuses=$this->model->AdmingetStatuses();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/statuses.php';
             require APP . 'view/admin/footer.php';
@@ -137,7 +152,7 @@ class admin extends Controller
 
     public function createStatus(){ 
         if(isset($_POST['create_status'])){
-            $this->model->createStatus();
+            $this->model->AdmincreateStatus();
             return;
         }
         require APP . 'view/admin/header.php';
@@ -151,14 +166,14 @@ class admin extends Controller
             return;
         }
         if(isset($_POST['edit_status'])){
-            $this->model->editStatus($status_id);
+            $this->model->AdmineditStatus($status_id);
             return;
         }
         if (isset($_GET['deleteStatus'])) {
-             $this->model->deleteStatus($status_id);
+             $this->model->AdmindeleteStatus($status_id);
             return;
         }
-        $status=$this->model->getStatus($status_id);
+        $status=$this->model->AdmingetStatus($status_id);
         require APP . 'view/admin/header.php';
         if(!isset($status->status_id)){
             echo "No status found!";
@@ -167,4 +182,46 @@ class admin extends Controller
         }
         require APP . 'view/admin/footer.php';
     }
+//////////////////////////////////////////////////////////////
+
+    public function campaigns(){
+            $campaigns=$this->model->AdmingetCampaigns();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/campaigns.php';
+            require APP . 'view/admin/footer.php';
+    }
+
+    public function createCampaign(){ 
+        if(isset($_POST['create_campaign'])){
+            $this->model->AdmincreateCampaign();
+            return;
+        }
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/createCampaign.php';
+        require APP . 'view/admin/footer.php';
+    }
+
+    public function editCampaign($campaign_id){ 
+        if ($campaign_id==1) {
+            header('Location: '.URL.$_SESSION['role'].'/campaigns');
+            return;
+        }
+        if(isset($_POST['edit_campaign'])){
+            $this->model->AdmineditCampaign($campaign_id);
+            return;
+        }
+        if (isset($_GET['deleteCampaign'])) {
+             $this->model->AdmindeleteCampaign($campaign_id);
+            return;
+        }
+        $campaign=$this->model->AdmingetCampaign($campaign_id);
+        require APP . 'view/admin/header.php';
+        if(!isset($campaign->campaign_id)){
+            echo "No campaign found!";
+        } else {
+            require APP . 'view/admin/editCampaign.php'; 
+        }
+        require APP . 'view/admin/footer.php';
+    }
+//////////////////////////////////////////////////////////////
 }
