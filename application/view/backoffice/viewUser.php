@@ -63,4 +63,4 @@
             </div>
             <script type="text/javascript">
                 $('.usersNav').addClass('active');
-            </script>
+            </script

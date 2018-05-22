@@ -1622,6 +1622,718 @@ class Model
         return $query->fetchAll();
     }
 
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// backoffice
+/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function BackofficegetUser($user_id){
+        $sql="SELECT * FROM users WHERE user_id=:user_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+        return $query->fetch();
+    }
+
+    public function BackofficegetUsers(){
+        $sql="SELECT * FROM users  WHERE role <> 'admin' AND role <> 'backoffice' ORDER BY role DESC";
+        $query=$this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function BackofficegetUsersByRole($role){
+        $sql="SELECT * FROM users where role = :role";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':role' =>$role));
+        return $query->fetchAll();
+    }
+    public function BackofficegetUsersBySupervisor($supervisor){
+        $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':supervisor' =>$supervisor));
+        return $query->fetchAll();
+    }
+    public function BackofficegetSupervisorByOperator($user_id){
+        $sql="SELECT * FROM users where user_id= :user_id LIMIT 1";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':user_id' =>$user_id));
+        $supervisor=$query->fetch();
+        if ($supervisor) {
+            return $supervisor->first_name.' '.$supervisor->last_name;
+        }else{
+            return '';
+        }
+    }
+
+    public function BackofficecreateUser(){
+        $sql="INSERT INTO users(username,password,first_name,last_name,role) VALUES (:username,:password,:first_name,:last_name,:role)";
+        $query = $this->db->prepare($sql);
+        $parameters=array(':username' => $_POST['username'],
+                      ':password' => $_POST['password'],
+                      ':first_name' => $_POST['first_name'],
+                      ':last_name' => $_POST['last_name'],
+                      ':role' => $_POST['role'],
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['create_user']='success';
+        } else {
+            $_SESSION['create_user']='fail';
+        }
+        header("location:".URL.$_SESSION['role'].'/users');
+    }
+
+    public function BackofficeeditUser($user_id){
+        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id WHERE user_id=:user_id";
+        $query = $this->db->prepare($sql);
+        $parameters=array(':username' => $_POST['username'],
+                      ':password' => $_POST['password'],
+                      ':first_name' => $_POST['first_name'],
+                      ':last_name' => $_POST['last_name'],
+                      ':role' => $_POST['role'],
+                      ':supervisor_id' => $_POST['supervisor'],
+                      ':user_id' => $user_id
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['edit_user']='success';
+        } else {
+            $_SESSION['edit_user']='fail';
+        }
+        header("location:".URL.$_SESSION['role'].'/users');
+    }
+
+
+
+    public function BackofficegetContractsByUser($user_id ){
+        $page=(int)(isset($_GET['page'])? $_GET['page']:0);
+        $limiter=30;
+        $pager=$limiter*$page;
+        $sql='SELECT * FROM contracts WHERE operator=:user_id LIMIT :pager, :limiter ';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function BackofficegetContractsBySupervisor($supervisor_id){
+        $page=(int)(isset($_GET['page'])? $_GET['page']:0);
+        $limiter=30;
+        $pager=$limiter*$page;
+        $sql='SELECT * FROM contracts WHERE supervisor=:supervisor LIMIT :pager, :limiter ';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+        $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        $query->bindParam(':supervisor', $supervisor, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function BackofficegetContractById($contract_id ){
+        $sql='SELECT * FROM contracts INNER JOIN status ON contracts.status = status.status_id WHERE contract_id=:contract_id ';
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':contract_id'=>$contract_id));
+        return $query->fetch();
+    }
+///////////////////////////////////////////////////////////////////
+    public function BackofficegetStatuses(){
+        $sql='SELECT * FROM status';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function BackofficecreateStatus(){
+        if ($_POST['status_name']=='') {
+            $_SESSION['create_status']='fail';
+            header("location:".URL.$_SESSION['role'].'/statuses');
+            return;
+        }
+        $sql="INSERT INTO status(status_name,status_description) VALUES (:status_name,:status_description)";
+        $query = $this->db->prepare($sql);
+        $parameters=array(
+                      ':status_name' => $_POST['status_name'],
+                      ':status_description' => $_POST['status_description'],
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['create_status']='success';
+        } else {
+            $_SESSION['create_status']='fail';
+        }
+        header("location:".URL.$_SESSION['role'].'/statuses');
+    }
+
+    public function BackofficeeditStatus($status_id){
+        $sql="UPDATE status SET status_name=:status_name,status_description=:status_description WHERE status_id=:status_id";
+        $query = $this->db->prepare($sql);
+        $parameters=array(
+                      ':status_name' => $_POST['status_name'],
+                      ':status_description' => $_POST['status_description'],
+                      ':status_id' => $status_id
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['edit_status']='success';
+        } else {
+            $_SESSION['edit_status']='fail';
+        }
+        header("Location:".URL.$_SESSION['role'].'/statuses');
+    }
+
+    public function BackofficegetStatus($status_id){
+        $sql="SELECT * FROM status WHERE status_id=:status_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':status_id' => $status_id));
+        return $query->fetch();
+    } 
+
+
+
+//////////////////////////////////////////////////////////////////////
+    public function BackofficecreateCampaign(){
+        if ($_POST['campaign_name']=='') {
+            $_SESSION['campaign_status']='fail';
+            header("location:".URL.$_SESSION['role'].'/campaigns');
+            return;
+        }
+        $sql="INSERT INTO campaigns(campaign_name,campaign_description) VALUES (:campaign_name,:campaign_description)";
+        $query = $this->db->prepare($sql);
+        $parameters=array(
+                      ':campaign_name' => $_POST['campaign_name'],
+                      ':campaign_description' => $_POST['campaign_description'],
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['create_campaign']='success';
+        } else {
+            $_SESSION['create_campaign']='fail';
+        }
+        header("location:".URL.$_SESSION['role'].'/campaigns');
+    }
+
+    public function BackofficeeditCampaign($campaign_id){
+        $sql="UPDATE campaigns SET campaign_name=:campaign_name,campaign_description=:campaign_description WHERE campaign_id=:campaign_id";
+        $query = $this->db->prepare($sql);
+        $parameters=array(
+                      ':campaign_name' => $_POST['campaign_name'],
+                      ':campaign_description' => $_POST['campaign_description'],
+                      ':campaign_id' => $campaign_id
+                        );
+        if($query->execute($parameters)){
+            $_SESSION['edit_campaign']='success';
+        } else {
+            $_SESSION['edit_campaign']='fail';
+        }
+        header("Location:".URL.$_SESSION['role'].'/campaigns');
+    }
+
+    public function BackofficegetCampaign($campaign_id){
+        $sql="SELECT * FROM campaigns WHERE campaign_id=:campaign_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':campaign_id' => $campaign_id));
+        return $query->fetch();
+    } 
+
+
+    public function BackofficegetCampaigns(){
+        $sql='SELECT * FROM campaigns';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+////////////////////////////////////////////////////
+    public function BackofficegetWorkhours($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT SUM(hours) as totalhours FROM workhours where `workhours`.user_id='$user_id' and MONTH(`workhours`.`date`) =MONTH('$date') and YEAR(`workhours`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $workhours=$query->fetch();
+        $workhours=$workhours->totalhours;
+        if (!$workhours) {
+            $workhours=0;
+        }
+        return $workhours;
+    }
+
+    public function BackofficegetContracts($export=null){
+        $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
+        $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
+        $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
+        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
+        $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
+        $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
+        $location     = (isset($_REQUEST['location'])?$_REQUEST['location']:'%');
+        $limiter      = 30;
+        $pager        = $limiter*$page;
+       
+        /////////////////////////if is set id////////////////////////////
+        if (isset($_REQUEST['id'])) {
+            if ($_REQUEST['id']!='') {
+                $_REQUEST['client_name']='';
+                $_REQUEST['operator']='%';
+                $_REQUEST['location']='%';
+                $_REQUEST['status']='%';
+                $_REQUEST['date']='';
+                $_REQUEST['contract_type']='%';
+                $sql="SELECT * FROM contracts WHERE contract_id =:id";
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+                $query->execute();
+                return $query->fetchAll();
+            }
+        }
+        /////////////////////////////////////////////////////////////////
+
+        /////////////////////////////-date-////////////////////////////
+        if ($date!='') {
+            $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
+            $date1 = date("Y-m-d", strtotime($date[0]));
+            $date2 = date("Y-m-d", strtotime($date[1]));
+        } else {
+            $date1 ="1999-01-01";
+            $date2 ="2099-01-01";
+        }
+        ///////////////////////////////////////////////////////////////////
+
+        ///////////////-name-//////////////////////////////////////////////
+        if ($client_name!=''){
+            if (count(explode(' ',$client_name))>1) { ///if both
+                $first_name=explode(' ',$client_name)[0].'%';
+                $last_name=explode(' ',$client_name)[1].'%';
+            }else{                          // if one part
+                $first_name=$client_name.'%';
+                $last_name='%';
+            }   
+        } else {                        //if none
+                $first_name='%';
+                $last_name='%';
+        }
+        ///////////////////////////////////////////////////////////////////
+        
+        //////////////////////////-location-////////////////////////////////
+        if ($location==''){$location='%';};
+        ////////////////////////////////////////////////////////////////////
+
+        $sql="SELECT * FROM contracts 
+                WHERE contract_type LIKE :contract_type 
+                    AND  operator LIKE :operator 
+                    AND (   DATE(`date`) >= DATE(:date1) 
+                        AND 
+                            DATE(`date`) <= DATE(:date2)
+                        ) 
+                    AND ( 
+                            (first_name LIKE :first_name AND last_name LIKE :last_name) 
+                        OR
+                            (first_name LIKE :last_name AND last_name LIKE :first_name)
+                        ) 
+                    AND status LIKE :status  
+                    AND location LIKE :location
+                ORDER BY contract_id DESC ";
+
+        if (!$export) {
+            $sql.=" LIMIT :pager , :limiter";
+            $query = $this->db->prepare($sql);
+            $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+            $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
+        }else{
+            $query = $this->db->prepare($sql);
+        }
+
+        $query->bindParam(':contract_type', $contract_type);
+        $query->bindParam(':operator', $operator);
+        $query->bindParam(':date1', $date1);
+        $query->bindParam(':date2', $date2);
+        $query->bindParam(':first_name', $first_name);
+        $query->bindParam(':last_name', $last_name);
+        $query->bindParam(':status', $status);
+        $query->bindParam(':location', $location);
+        $query->execute();
+
+        if (!$export) {
+            return $query->fetchAll();
+        }else{
+            //header('Content-type: text/csv');
+            //header('Content-Disposition: attachment; filename=contracts_export_'.date('Y-m-d').'_'.substr(str_shuffle(str_repeat($x='0987654321poiuytrewqlkjhgfdsamnbvcxz',ceil(8/strlen($x)) )),1,8).'.csv');
+            $contracts=$query->fetchAll();
+            $statuses=$this->AdmingetStatuses();
+            $operators=$this->AdmingetUsersByRole('operator');
+            //set header
+            $header=array();
+            foreach ((array)$contracts[0] as $key => $value) {
+                array_push($header,$key);
+            }
+
+            //loop on contracts
+            $output=fopen("php://output","w");
+            fputcsv($output,$header);
+            //print_r($header);
+
+            foreach ($contracts as $contract) {
+                $row=array();
+                foreach ($contract as $key => $value) {
+                    switch ($key) {
+                        case 'status':
+                           foreach ($statuses as $status) {
+                                if ($value==$status->status_id) {
+                                    $value=$status->status_name;
+                                }
+                            }
+                            break;
+                        case 'operator':
+                            foreach ($operators as $operator) {
+                                if ($value==$operator->user_id) {
+                                    $value=$operator->first_name.' '.$operator->last_name;
+                                }
+                            }
+                            break;
+                        
+                        default:
+                            $value=($value=='true')?'Si':$value;
+                            $value=($value=='false')?'No':$value;
+                            break;
+                    } 
+
+                    if ($value!=null) {
+                        array_push($row,$value);
+                    }
+                }
+                fputcsv($output,$row);
+            }
+          // print_r($output);
+        }//export else end 
+    }
+
+        public function BackofficecreateContract(){
+                $sql="INSERT INTO contracts
+                                (`date`,operator,supervisor,campaign,ugm_cb,analisi_cb,iniziative_cb,
+                    tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,
+                    client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,birth_nation,birth_municipality,document_type,document_number,document_date,
+                    toponimo,address,civico,price,location,
+                    ubicazione_fornitura,domicillazione_documenti_fatture, contract_type,listino,
+                    richiede_gas_naturale,
+                    request_type,pdr,fornitore_uscente,consume_annuo,
+                    tipo_riscaldamento,tipo_cottura_acqua,
+                    fature_via_email,
+                    payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status
+                                ) 
+                                VALUES
+                                (:date,:operator,:supervisor,:campaign,:ugm_cb,:analisi_cb,:iniziative_cb,
+                    :tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
+                    :client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
+                    :toponimo,:address,:civico,:price,:location,
+                    :ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type,:listino,
+                    :richiede_gas_naturale,
+                    :request_type,:pdr,:fornitore_uscente,:consume_annuo,
+                    :tipo_riscaldamento,:tipo_cottura_acqua,
+                    :fature_via_email,
+                    :payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status
+                )";
+
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':date', $_POST['date']);
+                $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
+                $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
+                $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
+                $query->bindValue(':status','1',PDO::PARAM_INT);
+
+                $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
+                $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
+                $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
+               
+                $query->bindParam(':tel_number', $_POST['tel_number']);
+                $query->bindParam(':alt_number', $_POST['alt_number']);
+                $query->bindParam(':cel_number', $_POST['cel_number']);
+                $query->bindParam(':cel_number2', $_POST['cel_number2']);
+                $query->bindParam(':cel_number3', $_POST['cel_number3']);
+                $query->bindParam(':email', $_POST['email']);
+                $query->bindParam(':alt_email', $_POST['alt_email']);
+
+                $query->bindParam(':client_type', $_POST['client_type']);
+                $query->bindParam(':gender', $_POST['gender']);
+                $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
+                $query->bindParam(':first_name', $_POST['first_name']);
+                $query->bindParam(':last_name', $_POST['last_name']);
+                $query->bindParam(':vat_number', $_POST['vat_number']);
+                $query->bindParam(':partita_iva', $_POST['partita_iva']);
+                $query->bindParam(':birth_date', $_POST['birth_date']);
+                $query->bindParam(':birth_nation', $_POST['birth_nation']);
+                $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
+                $query->bindParam(':document_type', $_POST['document_type']);
+                $query->bindParam(':document_number', $_POST['document_number']);
+                $query->bindParam(':document_date', $_POST['document_date']);
+
+                $query->bindParam(':toponimo', $_POST['toponimo']);
+                $query->bindParam(':address', $_POST['address']);
+                $query->bindParam(':civico', $_POST['civico']);
+                $query->bindParam(':price', $_POST['price']);
+                $query->bindParam(':location', $_POST['location']);
+                $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
+                $query->bindParam(':domicillazione_documenti_fatture', $_POST['domicillazione_documenti_fatture']);
+                $query->bindParam(':contract_type', $_POST['contract_type']);
+                $query->bindParam(':listino', $_POST['listino']);
+                $query->bindValue(':richiede_gas_naturale',(isset($_POST['richiede_gas_naturale'])?$_POST['richiede_gas_naturale']:'false'));
+                $query->bindParam(':request_type', $_POST['request_type']);
+                $query->bindParam(':pdr', $_POST['pdr']);
+                $query->bindParam(':fornitore_uscente', $_POST['fornitore_uscente']);
+                $query->bindParam(':consume_annuo', $_POST['consume_annuo']);
+
+                $query->bindValue(':tipo_riscaldamento',(isset($_POST['tipo_riscaldamento'])?$_POST['tipo_riscaldamento']:'false'));
+                $query->bindValue(':tipo_cottura_acqua',(isset($_POST['tipo_cottura_acqua'])?$_POST['tipo_cottura_acqua']:'false'));
+
+                $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
+               
+                $query->bindParam(':payment_type', $_POST['payment_type']);
+                $query->bindParam(':iban_code', $_POST['iban_code']);
+                $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
+                $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
+                $query->bindParam(':note', $_POST['note']);
+
+                //error handler
+                if ($query->execute()) {
+                    header('location: viewContract/'.$this->db->lastInsertId());  
+                    $_SESSION['create_contract']='success';   
+                } else {
+                   // $_SESSION['create_contract']='fail';
+                    echo "An error occurred!";
+                }
+        }
+
+    public function BackofficeeditContract($contract_id){
+        $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb,
+                tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,
+                client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,
+                birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,
+                toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,
+                ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,
+                richiede_gas_naturale=:richiede_gas_naturale,
+                request_type=:request_type,pdr=:pdr,fornitore_uscente=:fornitore_uscente,consume_annuo=:consume_annuo,
+                tipo_riscaldamento=:tipo_riscaldamento,tipo_cottura_acqua=:tipo_cottura_acqua,
+                fature_via_email=:fature_via_email,
+                payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status WHERE contract_id=:contract_id";
+      //  print_r($sql);
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':date', $_POST['date']);
+        $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
+        $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
+        $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
+
+        $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
+        $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
+        $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
+       
+        $query->bindParam(':tel_number', $_POST['tel_number']);
+        $query->bindParam(':alt_number', $_POST['alt_number']);
+        $query->bindParam(':cel_number', $_POST['cel_number']);
+        $query->bindParam(':cel_number2', $_POST['cel_number2']);
+        $query->bindParam(':cel_number3', $_POST['cel_number3']);
+        $query->bindParam(':email', $_POST['email']);
+        $query->bindParam(':alt_email', $_POST['alt_email']);
+
+        $query->bindParam(':client_type', $_POST['client_type']);
+        $query->bindParam(':gender', $_POST['gender']);
+        $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
+        $query->bindParam(':first_name', $_POST['first_name']);
+        $query->bindParam(':last_name', $_POST['last_name']);
+        $query->bindParam(':vat_number', $_POST['vat_number']);
+        $query->bindParam(':partita_iva', $_POST['partita_iva']);
+        $query->bindParam(':birth_date', $_POST['birth_date']);
+        $query->bindParam(':birth_nation', $_POST['birth_nation']);
+        $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
+        $query->bindParam(':document_type', $_POST['document_type']);
+        $query->bindParam(':document_number', $_POST['document_number']);
+        $query->bindParam(':document_date', $_POST['document_date']);
+
+        $query->bindParam(':toponimo', $_POST['toponimo']);
+        $query->bindParam(':address', $_POST['address']);
+        $query->bindParam(':civico', $_POST['civico']);
+        $query->bindParam(':price', $_POST['price']);
+        $query->bindParam(':location', $_POST['location']);
+        $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
+        $query->bindParam(':domicillazione_documenti_fatture', $_POST['domicillazione_documenti_fatture']);
+        $query->bindParam(':contract_type', $_POST['contract_type']);
+        $query->bindParam(':listino', $_POST['listino']);
+        $query->bindValue(':richiede_gas_naturale',(isset($_POST['richiede_gas_naturale'])?$_POST['richiede_gas_naturale']:'false'));
+        $query->bindParam(':request_type', $_POST['request_type']);
+        $query->bindParam(':pdr', $_POST['pdr']);
+        $query->bindParam(':fornitore_uscente', $_POST['fornitore_uscente']);
+        $query->bindParam(':consume_annuo', $_POST['consume_annuo']);
+
+        $query->bindValue(':tipo_riscaldamento',(isset($_POST['tipo_riscaldamento'])?$_POST['tipo_riscaldamento']:'false'));
+        $query->bindValue(':tipo_cottura_acqua',(isset($_POST['tipo_cottura_acqua'])?$_POST['tipo_cottura_acqua']:'false'));
+
+        $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
+       
+        $query->bindParam(':payment_type', $_POST['payment_type']);
+        $query->bindParam(':iban_code', $_POST['iban_code']);
+        $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
+        $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
+        $query->bindParam(':note', $_POST['note']);
+
+        $query->bindParam(':contract_id',$contract_id,PDO::PARAM_INT);
+        $query->bindParam(':status',$_POST['status'],PDO::PARAM_INT);
+        //error handler
+        if ($query->execute()) {
+            header('location: ../viewContract/'.$contract_id); 
+            $_SESSION['edit_contract']='success';     
+        } else {
+            //$_SESSION['edit_contract']='success'; 
+            echo "An error occurred!";
+        }
+    }
+
+    public function BackofficeuploadDocuments(){
+        $contract_id=$_POST['contract_id'];
+        $target_dir = APP."documents/";
+        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        if (!in_array($ext,$allow_ext)) { 
+            echo "ext_error";
+            return;
+        }
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+            $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            echo "success";
+        }else{
+            echo "fail";
+        }
+    }
+
+    public function BackofficegetDocuments($contract_id){
+        $sql="SELECT * FROM documents WHERE `contract_id`=:contract_id ORDER BY document_id DESC";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':contract_id' =>$contract_id));
+        $documents=$query->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-type: application/json');
+        echo json_encode($documents);
+        //print_r($documents);
+    }
+
+    public function BackofficegetDocument($document_id){
+        $sql="SELECT *  FROM documents WHERE `document_id`=:document_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':document_id' =>$document_id));
+        $document=$query->fetch();
+        if (!$document) {
+            echo  "File do not exist in database!";
+            return;
+        }
+        $target_dir = APP."documents/";
+      //  print_r($document);
+        $target_file = $target_dir . basename($document->url);
+        //print_r($target_file);
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+        if (file_exists ($target_file)) {
+            switch(strtolower($ext)){  
+                case "txt": 
+                    header("Content-type: text/plain");  
+                    readfile($target_file);
+                break;  
+                case "jpg": 
+                    header("Content-type: image/jpg");  
+                    readfile($target_file);
+                break; 
+                case "jpeg": 
+                    header("Content-type: image/jpeg");  
+                    readfile($target_file);
+                break;  
+                case "png":                  
+                    header("content-type: image/png");
+                    readfile($target_file);
+                break;  
+                case "pdf":                  
+                    header("content-type: application/pdf");
+                    readfile($target_file);
+                break; 
+                case 'docx':
+                    //echo "not suppoted yet";
+                    header('Content-Type: application/octet-stream');
+                    header("Content-Disposition: attachment; filename=\"".$document->url."\"");
+                    readfile($target_file);
+                break;
+                case 'csv':
+                    header("Content-type: text/csv");
+                    header('Content-disposition: attachment; filename="'.$document->url.'"');
+                    readfile($target_file);
+                break;
+            };
+        } else{
+            echo "File do not exist in server!";
+        }
+    }
+
+    public function BackofficeuploadAudios(){
+        $contract_id=$_POST['contract_id'];
+        $target_dir = APP."audios/";
+        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $allow_ext = array('mp3','wav','gsm','gsw');
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        if (!in_array($ext,$allow_ext)) { 
+            echo "ext_error";
+            return;
+        }
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+            $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            echo "success";
+        }else{
+            echo "fail";
+        }
+    }
+
+    public function BackofficegetAudios($contract_id){
+        $sql="SELECT * FROM audios WHERE `contract_id`=:contract_id ORDER BY audio_id DESC";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':contract_id' =>$contract_id));
+        $audios=$query->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-type: application/json');
+        echo json_encode($audios);
+    }
+
+    public function BackofficegetAudio($audio_id){
+        $sql="SELECT *  FROM audios WHERE `audio_id`=:audio_id";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':audio_id' =>$audio_id));
+        $audio=$query->fetch();
+        if (!$audio) {
+            echo  "File do not exist in database!";
+            return;
+        }
+        $target_dir = APP."audios/";
+        $target_file = $target_dir . basename($audio->url);
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+        if (file_exists ($target_file)) {
+            switch(strtolower($ext)){  
+                case "mp3": 
+                    header("Content-type: audio/mp3");  
+                    readfile($target_file);
+                break;  
+
+            };
+        } else{
+            echo "File do not exist in server!";
+        }
+    }
 }
-
-

@@ -10,12 +10,6 @@
                                           Users
                                       </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../../createUser" role="tablist">
-                                        <i class="material-icons">person_add</i>
-                                        Create User
-                                    </a>
-                                </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" role="tablist">
                                         <i class="material-icons">access_time</i>
@@ -47,9 +41,9 @@
                                                 $output='';
                                                 foreach ($users as $user) {
                                                     $output.='<tr>
-                                                                <td><a class="user_name_l" href="../../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
+                                                                <td><a class="user_name_l" href="../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>';
-                                                    $output.='<td>'.$this->model->AdmingetWorkhours($user->user_id,$date).'</td>';
+                                                    $output.='<td>'.$this->model->SupervisorgetWorkhours($user->user_id,$date).'</td>';
                                                     $output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/addWorkhours/'.$user->user_id.'" ><i class="material-icons">access_time</i></a></center></td>
                                                             </tr>';
                                                 }

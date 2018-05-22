@@ -28,7 +28,7 @@
                                             <th>ID</th>
                                             <th>Date</th>
                                             <th>Client Name</th>
-                                            <th>Address</th>
+                                            <th>Adress</th>
                                             <th>Location</th>
                                         </thead>
                                         <tbody>
@@ -37,13 +37,12 @@
                                                 foreach ($contracts as $contract) {
                                                     $output.='<tr>';
                                                                 if ($contract->contract_type=='gas') {
-                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
-                                                                }elseif ($contract->contract_type=='luce') {
                                                                     $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
-                                                                }elseif ($contract->contract_type=='dual') {
-                                                                    $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
+                                                                }elseif ($contract->contract_type=='electricity') {
+                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
                                                                 }
                                                                 
+
                                                     $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.$contract->date.'</td>
                                                                 <td>'.$contract->first_name.' '.$contract->last_name.'</td>
