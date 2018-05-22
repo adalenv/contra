@@ -643,7 +643,7 @@ function initDocUploader(target) {
 
 function getOperators(supervisor_id){
     $.ajax({
-      url: '<?=URL;?>api/AdmingetUsersBySupervisor/'+supervisor_id,
+      url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
       type: 'GET',
       dataType: 'json',
     })
