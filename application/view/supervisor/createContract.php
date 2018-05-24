@@ -278,7 +278,7 @@
                                             <label class="control-label">Tipologia contratto*</label>
                                             <select class="form-control" name="contract_type">
                                                 <option value="dual">Dual</option>
-                                                <option value="electricity">Luce</option>
+                                                <option value="luce">Luce</option>
                                                 <option value="gas">Gas</option>
                                             </select>
                                         </div>

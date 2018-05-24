@@ -226,7 +226,7 @@
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="number" required class="form-control" name="civico">
+                                            <input type="text" required class="form-control" name="civico">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -253,9 +253,44 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="checkbox">                                         
-                                            <input type="radio" class="" value="resident" name="ubicazione_fornitura" id="" checked="">&nbsp; Residente  
+                                            <input type="radio"  value="resident" name="ubicazione_fornitura"  checked="">&nbsp; Residente  
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" class="" value="non_resident" name="ubicazione_fornitura" id="">&nbsp;Non Residente                           
+                                            <input type="radio" value="non_resident" name="ubicazione_fornitura" >&nbsp;Non Residente                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content" id="ubicazioneif" style="display:none">
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Toponimo*</label>
+                                            <select class="form-control" name="toponimo">
+                                                <option value="via">Via</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Indirizzo*</label>
+                                            <input type="text" required class="form-control" name="address">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Civico*</label>
+                                            <input type="text" required class="form-control" name="civico">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Preso</label>
+                                            <input type="text" class="form-control" name="price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Locallita*</label>
+                                            <input type="text" required class="form-control" name="location">
                                         </div>
                                     </div>
                                 </div>
@@ -278,13 +313,58 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-content" id="domicillazioneif" style="display:none">
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Toponimo*</label>
+                                            <select class="form-control" name="toponimo">
+                                                <option value="via">Via</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Indirizzo*</label>
+                                            <input type="text" required class="form-control" name="address">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Civico*</label>
+                                            <input type="text" required class="form-control" name="civico">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Preso</label>
+                                            <input type="text" class="form-control" name="price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Locallita*</label>
+                                            <input type="text" required class="form-control" name="location">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header row" data-background-color="blue">
+                                    <div class="col-sm-6">
+                                        <h4 class="title">Contratto</h4> 
+                                    </div>
+                                </div>
                                  <div class="card-content">
                                     <div class="col-sm-8">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia contratto*</label>
                                             <select class="form-control" name="contract_type">
                                                 <option value="dual">Dual</option>
-                                                <option value="electricity">Luce</option>
+                                                <option value="luce">Luce</option>
                                                 <option value="gas">Gas</option>
                                             </select>
                                         </div>
@@ -301,16 +381,17 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" id="gasif">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
-                                        <div class="checkbox">
+              <!--                           <div class="checkbox">
                                             <label class="control-label">                                             
                                                 <input type="checkbox" class="cb" value="false" name="richiede_gas_naturale">
                                             </label>
-                                            Richiede la fornitura di Gas Naturale
-                                        </div>
+                                            
+                                        </div> -->
+                                        Richiede la fornitura di Gas Naturale
                                     </h4> 
                                 </div>
                                  <div class="card-content">
@@ -350,6 +431,70 @@
                                             <label class="control-label">
                                                 <input type="checkbox" class="cb" value="false" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
                                             </label>                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12" id="luceif">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">
+                         <!--                <div class="checkbox">
+                                            <label class="control-label">                                             
+                                                <input type="checkbox" class="cb" value="false" name="richiede_gas_naturale">
+                                            </label>
+                                            
+                                        </div> -->
+                                        Richiede la fornitura di energia electtrica
+                                    </h4> 
+                                </div>
+                                 <div class="card-content">
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tipologia Richiesta</label>
+                                            <select class="form-control" name="request_type">
+                                                <option>A01 - ATTTIVAZIONE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">PDR</label>
+                                            <input type="text" class="form-control" name="pdr">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Fornitore Uscente</label>
+                                            <input type="text" class="form-control" name="fornitore_uscente">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Opzione Oraria*</label>
+                                            <select class="form-control" name="opzione_oraria">
+                                                <option>Opzione 1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Potenza</label>
+                                            <input type="text" class="form-control" name="potenza">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tensione</label>
+                                            <input type="text" class="form-control" name="tensione">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Consume Annuo</label>
+                                            <input type="text" class="form-control" name="consume_annuo">
                                         </div>
                                     </div>
                                 </div>
@@ -432,7 +577,37 @@
                 </div>
             </div>
             <script type="text/javascript">
-
+$(window).ready(function(){
+    $('[name="ubicazione_fornitura"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='resident') {
+            $('#ubicazioneif').hide();
+        }else {
+           $('#ubicazioneif').show(); 
+        }
+    })
+    $('[name="domicillazione_documenti_fatture"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='altro') {
+            $('#domicillazioneif').show();
+        }else {
+           $('#domicillazioneif').hide(); 
+        }
+    })
+    $('[name="contract_type"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='dual') {
+            $('#luceif').show();
+            $('#gasif').show();
+        }else if ($(this).val()=='luce') {
+            $('#luceif').show();
+            $('#gasif').hide();
+        }else if ($(this).val()=='gas') {
+            $('#luceif').hide();
+            $('#gasif').show();
+        }
+    })
+});
                 $('.createContractNav').addClass('active');
 
                 $('#contract_date').val(new Date().toJSON().split('T')[0]);

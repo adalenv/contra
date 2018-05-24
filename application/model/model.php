@@ -287,7 +287,8 @@ class Model
         $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
         $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
         $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
-        $location     = (isset($_REQUEST['location'])?$_REQUEST['location']:'%');
+        $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
+        $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $limiter      = 30;
         $pager        = $limiter*$page;
        
@@ -296,10 +297,11 @@ class Model
         	if ($_REQUEST['id']!='') {
         		$_REQUEST['client_name']='';
         		$_REQUEST['operator']='%';
-                $_REQUEST['location']='%';
+                $_REQUEST['phone']='%';
         		$_REQUEST['status']='%';
         		$_REQUEST['date']='';
         		$_REQUEST['contract_type']='%';
+                $_REQUEST['codice_fiscale']='%';
 		        $sql="SELECT * FROM contracts WHERE contract_id =:id";
 		        $query = $this->db->prepare($sql);
 		        $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -335,8 +337,9 @@ class Model
 		}
         ///////////////////////////////////////////////////////////////////
         
-		//////////////////////////-location-////////////////////////////////
-        if ($location==''){$location='%';};
+		//////////////////////////--////////////////////////////////
+        if ($codice_fiscale==''){$codice_fiscale='%';}else {$codice_fiscale.='%';};
+        if ($phone==''){$phone='%';};
         ////////////////////////////////////////////////////////////////////
 
         $sql="SELECT * FROM contracts 
@@ -352,7 +355,13 @@ class Model
                             (first_name LIKE :last_name AND last_name LIKE :first_name)
                         ) 
         			AND status LIKE :status  
-                    AND location LIKE :location
+                    AND (   (tel_number LIKE :phone)
+                        OR  (alt_number LIKE :phone)
+                        OR  (cel_number LIKE :phone)
+                        OR  (cel_number2 LIKE :phone)
+                        OR  (cel_number3 LIKE :phone)
+                        )
+                    AND vat_number LIKE :codice_fiscale
                 ORDER BY contract_id DESC ";
 
         if (!$export) {
@@ -371,7 +380,8 @@ class Model
       	$query->bindParam(':first_name', $first_name);
         $query->bindParam(':last_name', $last_name);
         $query->bindParam(':status', $status);
-        $query->bindParam(':location', $location);
+        $query->bindParam(':phone', $phone);
+        $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->execute();
 
         if (!$export) {
