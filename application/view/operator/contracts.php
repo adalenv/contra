@@ -44,28 +44,26 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-left:5px;margin-right:5px">
+                                    <div class="col-md-3">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">Codice Fiscale</label>
+                                            <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
+                                        <span class="material-input"></span></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">Phone</label>
+                                            <input type="text" class="form-control" name="phone" id="phone">
+                                        <span class="material-input"></span></div>
+                                    </div>
                                     <div class="col-md-2">
-                                        <div class="form-group label-floating ">
-                                            <label class="control-label">Cancellation Reason</label>
-                                            <select class="form-control" name="cancellation_reason" id="cancellation_reason">
-                                                <option value="%">All reasons</option>
-                                            </select>
-                                        <span class="material-input"></span></div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group label-floating ">
-                                            <label class="control-label">Location</label>
-                                            <input type="text" class="form-control" name="location" id="Location">
-                                        <span class="material-input"></span></div>
-                                    </div>
-                                    <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Date</label>
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" class="btn btn-info submit_btn">
@@ -103,14 +101,15 @@
                                     </div>
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table id="o" class="table table-hover">
+                                    <table class="table table-hover">
                                         <thead>
                                             <th>Type</th>
                                             <th>ID</th>
                                             <th>Date</th>
                                             <th>Client Name</th>
-                                            <th>Address</th>
+                                            <th>Status</th>
                                             <th>Location</th>
+                                            <th>Note</th>
                                         </thead>
                                         <tbody>
                                             <?php 
@@ -124,13 +123,20 @@
                                                                 }elseif ($contract->contract_type=='dual') {
                                                                     $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
                                                                 }
-                                                                
-
                                                     $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.(explode(' ',$contract->date)[0]).'</td>
-                                                                <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>
-                                                                <td>'.$contract->address.'</td>
-                                                                <td>'.$contract->location.'</td></tr>';
+                                                                <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
+                                                                foreach ($statuses as $key => $status) {
+                                                                    if ($status->status_id==$contract->status) {
+                                                                        $status=$status->status_name;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                    $output.='<td>'.$status.'</td>
+                                                                <td>'.$contract->location.'</td>';
+                                                    $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
+                                                    $output.='<td title="'.$contract->note.'">'.$note.'</td>';
+                                                    $output.='</tr>';
                                                 }
                                                 echo $output;
                                              ?>
@@ -151,23 +157,64 @@
                             $('#contract_type').val('%');
                             $('#operator').val('%');
                             $('#status').val('%');
-                            $('#cancellation_reason').val('%');
+                            $('#codice_fiscale').val('');
                             $('#id').val('');
-                            $('#Location').val('');
+                            $('#phone').val('');
                             $('#client_name').val('');
+                            $('#date').val('');
                             $('#page_val').val(0);
                             document.forms[0].submit();
                         });
+
+
+
+                        <?php 
+                            if (isset($_SESSION['contract_exist'])) {
+                                if ($_SESSION['contract_exist']=='true') { ?> //if fail
+                                    $.notify({
+                                      icon: "error_outline",
+                                      message: "Contract exist!"
+                                    },{
+                                      type: 'danger',
+                                      timer: 300,
+                                      placement: {
+                                          from: 'top',
+                                          align: 'right'
+                                      }
+                                    });
+                            <?php }
+                                  unset($_SESSION['contract_exist']);
+                            }
+                        ?>
+
+                        <?php 
+                            if (isset($_SESSION['create_contract'])) {
+                                if ($_SESSION['create_contract']=='fail') { ?> //if fail
+                                    $.notify({
+                                      icon: "error_outline",
+                                      message: "An error occurred!"
+                                    },{
+                                      type: 'danger',
+                                      timer: 300,
+                                      placement: {
+                                          from: 'top',
+                                          align: 'right'
+                                      }
+                                    });
+                            <?php }
+                                  unset($_SESSION['create_contract']);
+                            }
+                        ?>
 
                         $('.contractsNav').addClass('active');
 
                         var contract_type='<?=(isset($_GET['contract_type'])?$_GET['contract_type']:'%')?>';
                         var operator='<?=(isset($_GET['operator'])?$_GET['operator']:'%')?>';
                         var status='<?=(isset($_GET['status'])?$_GET['status']:'%')?>';
-                        var cancellation_reason='<?=(isset($_GET['cancellation_reason'])?$_GET['cancellation_reason']:'%')?>';
 
+                        var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
                         var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
-                        var Location='<?=(isset($_GET['location'])?$_GET['location']:'')?>';
+                        var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
 
@@ -175,20 +222,23 @@
 
                         $('#operator').val(operator);
                         $('#status').val(status);
-                        $('#cancellation_reason').val(cancellation_reason);
+                        
 
                         $('#id').val(id);
                         $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
 
-                        $('#Location').val(Location);
-                        $('#Location').val()!=''? $('#Location').parent().addClass('is-focused'):'';
+                        $('#phone').val(phone);
+                        $('#phone').val()!=''? $('#phone').parent().addClass('is-focused'):'';
 
                         $('#client_name').val(client_name);
                         $('#client_name').val()!=''? $('#client_name').parent().addClass('is-focused'):'';
 
+                        $('#codice_fiscale').val(codice_fiscale);
+                        $('#codice_fiscale').val()!=''? $('#codice_fiscale').parent().addClass('is-focused'):'';
+
                         $('.pagination_btn').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#cancellation_reason').val()!=cancellation_reason || $('#id').val()!=id || $('#Location').val()!=Location || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

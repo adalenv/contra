@@ -17,7 +17,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="users/workhours" role="tablist">
+                                    <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
                                         <i class="material-icons">access_time</i>
                                         Show Workhours
                                     </a>
@@ -70,6 +70,8 @@
                                                     <select name="role" class="form-control">
                                                         <option value="operator">Operator</option>
                                                         <option value="supervisor">Supervisor</option>
+                                                        <option value="backoffice">Backoffice</option>
+                                                        <option value="admin">Admin</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -21,6 +21,66 @@ class api extends Controller
         echo json_encode($query->fetchAll());
     }
 
+    public function getWorkhours(){
+      $user_id=$_POST['user_id'];
+      $date=$_POST['date'];
+      $output=array();
+      $sql = "SELECT * FROM workhours WHERE user_id='$user_id' and MONTH(`date`) = MONTH('$date') and YEAR(`date`) = YEAR('$date')  order by `workhours_id` desc";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+        while ($row=$query->fetch(PDO::FETCH_ASSOC)) {
+            array_push($output, $row);
+        }
+        header('Content-type: application/json');
+        echo json_encode($output); //echo data json 
+    }
 
+    public function addHours(){
+        //print_r($_POST);
+        $sql = "INSERT INTO workhours(user_id,hours,`date`) VALUES(:user_id,:hours,:date)";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':user_id', $_POST['user_id'],PDO::PARAM_INT);
+        $query->bindParam(':date', $_POST['date']);
+        $query->bindParam(':hours', $_POST['hours'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+        }else{
+            echo "error";
+        } 
+    }  
+    public function deleteHours(){
+        $sql = "DELETE FROM workhours WHERE workhours_id=:workhours_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':workhours_id', $_POST['workhours_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+        }else{
+            echo "error";
+        } 
+    }
+    public function deleteAudio(){
+        $file = APP."documents/".$_POST['url'];
+        $sql = "DELETE FROM audios WHERE audio_id=:audio_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':audio_id', $_POST['audio_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+           unlink($file);
+        }else{
+            echo "error";
+        } 
+    }
+    public function deleteDocument(){
+        $file = APP."documents/".$_POST['url'];
+        $sql = "DELETE FROM documents WHERE document_id=:document_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':document_id', $_POST['document_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+           unlink($file);
+        }else{
+            echo "error";
+        } 
+    }
 
 }

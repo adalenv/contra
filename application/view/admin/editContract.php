@@ -1,14 +1,14 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                    <form method="POST" action="">
+                    <form method="POST" id="form" action="">
                         <div class="col-sm-12">
                             <div class="card ">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">Dati Contrattuali</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="row">
+                                    <div class="row"> 
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
@@ -16,19 +16,8 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Status</label>
-                                                <select class="form-control" required name="status" id="status">
-                                                    <option value=''></option>
-                                                    <?php
-                                                        $output=''; 
-                                                        foreach ($statuses as $status) {
-                                                            if ($contract->status==$status->status_id) {
-                                                                $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                            }else{
-                                                                $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                            }
-                                                        }
-                                                        echo $output;
-                                                    ?>
+                                                <select   class="form-control" required name="status" id="status">
+                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
                                                 </select>
                                             </div>
                                             <div class="checkbox">
@@ -43,6 +32,7 @@
                                                 </label>  
                                             </div>
                                         </div>
+
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Supervisor</label>
@@ -60,10 +50,11 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group label-floating is-empty">
+                                            <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Operator</label>
-                                                    <select class="form-control" required name="operator" id="operator">  
-                                                    </select>
+                                                <select class="form-control" required name="operator" id="operator">
+                                                <option value="<?=$contract->operator;?>"></option>
+                                                </select>
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Campaign</label>
@@ -82,6 +73,7 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -98,10 +90,39 @@
                                                 <label class="control-label">Tipo Cliente</label>
                                                 <select class="form-control" id="client_type" name="client_type">
                                                     <option value="personal">Persona Fisica</option>
-                                                    <option>Other</option>
+                                                    <option value="intestario">Intestario</option>
+                                                    <option value="delega">Delega</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <?php if ($contract->client_type=='delega'){ ?>
+                                            <div class="col-sm-12" id="delegaif" style="border: 1px dotted #01bcd0;">
+                                                <div id="delegaifc">
+                                                     <div class="col-sm-4">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Nome*</label>
+                                                            <input type="text" value="<?=$contract->delega_first_name;?>" required name="delega_first_name" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Cognome*</label>
+                                                            <input type="text" value="<?=$contract->delega_last_name;?>" required name="delega_last_name" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Codice Fiscale*</label>
+                                                            <input type="text" value="<?=$contract->delega_vat_number;?>" required name="delega_vat_number" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="col-sm-12" id="delegaif" style="display:none;border: 1px dotted #01bcd0;">
+                                                <div id="delegaifc"></div>
+                                            </div>
+                                        <?php } ?>
                                         <div class="col-sm-6">
                                             <label>Sesso:</label>
                                             <div class="checkbox">                                         
@@ -246,7 +267,7 @@
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="number" value="<?=$contract->civico;?>" required class="form-control" name="civico">
+                                            <input type="text" value="<?=$contract->civico;?>" required class="form-control" name="civico">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -279,6 +300,47 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php if ($contract->ubicazione_fornitura=='non_resident') { ?>
+                                     <div class="card-content" id="ubicazioneif">
+                                          <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Toponimo*</label>
+                                                <select class="form-control" name="uf_toponimo">
+                                                    <option value="via">Via</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Indirizzo*</label>
+                                                <input type="text" value="<?=$contract->uf_address;?>"  class="form-control" name="uf_address">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Civico*</label>
+                                                <input type="text" value="<?=$contract->uf_civico;?>"  class="form-control" name="uf_civico">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Preso</label>
+                                                <input type="text" value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Locallita*</label>
+                                                <input type="text" value="<?=$contract->uf_location;?>"  class="form-control" name="uf_location">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } else{ ?>
+                                    <div class="card-content" id="ubicazioneif"  style="display:none;" >
+                                 
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -296,6 +358,55 @@
                                                     &nbsp;&nbsp;&nbsp;
                                             <input type="radio" <?=($contract->domicillazione_documenti_fatture=='altro')?'checked':'';?> value="altro" name="domicillazione_documenti_fatture" >&nbsp;Altro                       
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="card-content" id="domicillazioneif" >
+                                    <?php if ($contract->domicillazione_documenti_fatture=='altro'): ?>
+                                        <div class="card-content">
+                                          <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Toponimo*</label>
+                                                <select class="form-control" name="ddf_toponimo">
+                                                    <option value="via">Via</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Indirizzo*</label>
+                                                <input type="text" value="<?=$contract->ddf_address;?>"  class="form-control" name="ddf_address">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Civico*</label>
+                                                <input type="text" value="<?=$contract->ddf_civico;?>"  class="form-control" name="ddf_civico">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Preso</label>
+                                                <input type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Locallita*</label>
+                                                <input type="text" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header row" data-background-color="blue">
+                                    <div class="col-sm-6">
+                                        <h4 class="title">Contratto</h4> 
                                     </div>
                                 </div>
                                  <div class="card-content">
@@ -321,59 +432,268 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">
-                                        <div class="checkbox">
-                                            <label class="control-label">                                             
-                                                <input type="checkbox" class="cb" <?=($contract->richiede_gas_naturale=='true')?'checked':'';?> value="<?=$contract->richiede_gas_naturale;?>" name="richiede_gas_naturale">
-                                            </label>
-                                            Richiede la fornitura di Gas Naturale
+                        <?php if ($contract->contract_type=='dual'){ ?>
+                            <div class="col-sm-12"  id="gasif">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Gas Naturale
+                                        </h4> 
+                                    </div>
+                                     <div class="card-content"  id="gasifc">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="gas_request_type" name="gas_request_type">
+                                                    <option>SW1 - SWITCH</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </h4> 
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->gas_pdr;?>" class="form-control" name="gas_pdr">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->gas_fornitore_uscente;?>" class="form-control" name="gas_fornitore_uscente">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="gas_consume_annuo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Remi</label>
+                                                <input type="text" value="<?=$contract->gas_remi;?>" class="form-control" name="gas_remi">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Matricola</label>
+                                                <input type="text" value="<?=$contract->gas_matricola;?>" class="form-control" name="gas_matricola">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                Tipologia Uso*</br>
+                                                <label class="control-label">                                             
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
+                                                </label>
+                                                <label class="control-label">
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                </label>                           
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Tipologia Richiesta</label>
-                                            <select class="form-control" id="request_type" name="request_type">
-                                                <option>SW1 - SWITCH</option>
-                                            </select>
-                                        </div>
+                            </div> 
+                            <div class="col-sm-12"  id="luceif">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Energia Electrica
+                                        </h4> 
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" value="<?=$contract->pdr;?>" class="form-control" name="pdr">
+                                     <div class="card-content" id="luceifc">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="luce_request_type" name="luce_request_type">
+                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" value="<?=$contract->fornitore_uscente;?>" class="form-control" name="fornitore_uscente">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
-                                            <input type="text" value="<?=$contract->consume_annuo;?>" class="form-control" name="consume_annuo">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->luce_fornitore_uscente;?>" class="form-control" name="luce_fornitore_uscente">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="checkbox">
-                                            Tipologia Uso*</br>
-                                            <label class="control-label">                                             
-                                                <input type="checkbox" class="cb" <?=($contract->tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->tipo_riscaldamento;?>" name="tipo_riscaldamento">Riscaldamento
-                                            </label>
-                                            <label class="control-label">
-                                                <input type="checkbox" class="cb" <?=($contract->tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->tipo_cottura_acqua;?>" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                            </label>                           
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Opzione Oraria</label>
+                                                <input  type="text" value="<?=$contract->luce_opzione_oraria;?>" class="form-control" name="luce_opzione_oraria">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Potenza</label>
+                                                <input  type="text" value="<?=$contract->luce_potenza;?>" class="form-control" name="luce_potenza">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tenzione</label>
+                                                <input  type="text" value="<?=$contract->luce_tensione;?>" class="form-control" name="luce_tensione">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="luce_consume_annuo">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } elseif ($contract->contract_type=='gas') { ?>
+                            <div class="col-sm-12"  id="gasif">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Gas Naturale
+                                        </h4> 
+                                    </div>
+                                     <div class="card-content" id="gasifc">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="gas_request_type" name="gas_request_type">
+                                                    <option>SW1 - SWITCH</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->gas_pdr;?>" class="form-control" name="gas_pdr">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->gas_fornitore_uscente;?>" class="form-control" name="gas_fornitore_uscente">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="gas_consume_annuo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Remi</label>
+                                                <input type="text" value="<?=$contract->gas_remi;?>" class="form-control" name="gas_remi">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Matricola</label>
+                                                <input type="text" value="<?=$contract->gas_matricola;?>" class="form-control" name="gas_matricola">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                Tipologia Uso*</br>
+                                                <label class="control-label">                                             
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
+                                                </label>
+                                                <label class="control-label">
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                </label>                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12" id="luceif" style="display:none">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Energia Electrica
+                                        </h4> 
+                                    </div>
+                                     <div class="card-content"  id="luceifc">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } elseif ($contract->contract_type=='luce') { ?>
+                            <div class="col-sm-12" id="luceif">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Energia Electrica
+                                        </h4> 
+                                    </div>
+                                     <div class="card-content"  id="luceifc">
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="luce_request_type" name="luce_request_type">
+                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->luce_fornitore_uscente;?>" class="form-control" name="luce_fornitore_uscente">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Opzione Oraria</label>
+                                                <input  type="text" value="<?=$contract->luce_opzione_oraria;?>" class="form-control" name="luce_opzione_oraria">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Potenza</label>
+                                                <input  type="text" value="<?=$contract->luce_potenza;?>" class="form-control" name="luce_potenza">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tenzione</label>
+                                                <input  type="text" value="<?=$contract->luce_tensione;?>" class="form-control" name="luce_tensione">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="luce_consume_annuo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12" id="gasif" style="display:none">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="blue">
+                                        <h4 class="title">
+                                            <div class="checkbox">
+                                                Richiede la fornitura di Gas Naturale
+                                        </h4> 
+                                    </div>
+                                     <div class="card-content"  id="gasifc">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
 
                          <div class="col-sm-12">
                             <div class="card">
@@ -426,6 +746,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
@@ -494,13 +815,13 @@
                                     <div class="col-sm-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Note:</label>
-                                            <textarea class="form-control" name="note"><?=$contract->note;?></textarea>
+                                            <textarea disabled="" class="form-control" name="note"><?=$contract->note;?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Cancel</a>
-                                        <button type="submit" class="btn btn-warning  pull-right">Update</button>
+                                        <button type="submit" class="submit-btn btn btn-warning  pull-right">Update</button>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
@@ -511,7 +832,355 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[name="client_type"]').change(function(){
+        if ($(this).val()=='delega') {
+            $('#delegaif').show();
+            $('#delegaifc').html(`<div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nome*</label>
+                                            <input type="text" value="<?=$contract->delega_first_name;?>" required name="delega_first_name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cognome*</label>
+                                            <input type="text" value="<?=$contract->delega_last_name;?>" required name="delega_last_name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Codice Fiscale*</label>
+                                            <input type="text" value="<?=$contract->delega_vat_number;?>" required name="delega_vat_number" class="form-control">
+                                        </div>
+                                    </div>`);
+        }else{
+            $('#delegaif').hide();
+            $('#delegaifc').html('');
+        };
+
+    });
+
+    $('[name="ubicazione_fornitura"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='resident') {
+            $('#ubicazioneif').html('');
+            $('#ubicazioneif').hide()
+        }else {
+            $('#ubicazioneif').show();
+            $('#ubicazioneif').html(`<div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Toponimo*</label>
+                                            <select class="form-control" id="uf_toponimo" name="uf_toponimo">
+                                                <option value="via">Via</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Indirizzo*</label>
+                                            <input type="text" value="<?=$contract->uf_address;?>" required class="form-control" name="uf_address">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Civico*</label>
+                                            <input type="text" value="<?=$contract->uf_civico;?>" required class="form-control" name="uf_civico">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Preso</label>
+                                            <input type="text"value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Locallita*</label>
+                                            <input type="text" value="<?=$contract->uf_location;?>" required class="form-control" name="uf_location">
+                                        </div>
+                                    </div>`);
+            $('#uf_toponimo').val('<?=$contract->uf_toponimo;?>') 
+        }
+    })
+    $('[name="domicillazione_documenti_fatture"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='altro') {
+            $('#domicillazioneif').show();
+            $('#domicillazioneif').html(`  <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Toponimo*</label>
+                                            <select class="form-control" id="ddf_toponimo" name="ddf_toponimo">
+                                                <option value="via">Via</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Indirizzo*</label>
+                                            <input type="text" value="<?=$contract->ddf_address;?>" required class="form-control" name="ddf_address">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Civico*</label>
+                                            <input type="text" value="<?=$contract->ddf_civico;?>" required class="form-control" name="ddf_civico">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Preso</label>
+                                            <input type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Locallita*</label>
+                                            <input type="text" value="<?=$contract->ddf_location;?>" required class="form-control" name="ddf_location">
+                                        </div>
+                                    </div>`);
+            $('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>') 
+        }else {
+            $('#domicillazioneif').html('');
+            $('#domicillazioneif').hide();
+        }
+    })
+    $('[name="contract_type"]').change(function(){
+        console.log($(this).val());
+        if ($(this).val()=='dual') {
+            $('#luceif').show();
+            $('#luceifc').html(`<div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tipologia Richiesta</label>
+                                            <select class="form-control" id="luce_request_type" name="luce_request_type">
+                                                <option>A01 - ATTTIVAZIONE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">PDR</label>
+                                            <input type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Fornitore Uscente</label>
+                                            <input type="text" value="<?=$contract->luce_fornitore_uscente;?>" class="form-control" name="luce_fornitore_uscente">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Opzione Oraria*</label>
+                                            <select class="form-control"  id="luce_opzione_oraria" name="luce_opzione_oraria">
+                                                <option>Opzione 1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Potenza</label>
+                                            <input type="text" value="<?=$contract->luce_potenza;?>" class="form-control" name="luce_potenza">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tensione</label>
+                                            <input type="text" value="<?=$contract->luce_tensione;?>" class="form-control" name="luce_tensione">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Consume Annuo</label>
+                                            <input type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="luce_consume_annuo">
+                                        </div>
+                                    </div>`);
+            $('#gasif').show();
+            $('#gasifc').html(`<div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="gas_request_type" name="gas_request_type">
+                                                    <option>SW1 - SWITCH</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->gas_pdr;?>" class="form-control" name="gas_pdr">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->gas_fornitore_uscente;?>" class="form-control" name="gas_fornitore_uscente">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="gas_consume_annuo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Remi</label>
+                                                <input type="text" value="<?=$contract->gas_remi;?>" class="form-control" name="gas_remi">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Matricola</label>
+                                                <input type="text" value="<?=$contract->gas_matricola;?>" class="form-control" name="gas_matricola">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                Tipologia Uso*</br>
+                                                <label class="control-label">                                             
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
+                                                </label>
+                                                <label class="control-label">
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                </label>                           
+                                            </div>
+                                        </div>`);
+            $('#gas_request_type').val('<?=$contract->gas_request_type;?>');
+            $('#luce_request_type').val('<?=$contract->luce_request_type;?>');
+
+        }else if ($(this).val()=='luce') {
+            $('#luceif').show();
+            $('#luceifc').html(`<div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tipologia Richiesta</label>
+                                            <select class="form-control" id="luce_request_type" name="luce_request_type">
+                                                <option>A01 - ATTTIVAZIONE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">PDR</label>
+                                            <input type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Fornitore Uscente</label>
+                                            <input type="text" value="<?=$contract->luce_fornitore_uscente;?>" class="form-control" name="luce_fornitore_uscente">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Opzione Oraria*</label>
+                                            <select class="form-control"  id="luce_opzione_oraria" name="luce_opzione_oraria">
+                                                <option>Opzione 1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Potenza</label>
+                                            <input type="text" value="<?=$contract->luce_potenza;?>" class="form-control" name="luce_potenza">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Tensione</label>
+                                            <input type="text" value="<?=$contract->luce_tensione;?>" class="form-control" name="luce_tensione">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Consume Annuo</label>
+                                            <input type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="luce_consume_annuo">
+                                        </div>
+                                    </div>`);
+            $('#luce_request_type').val('<?=$contract->luce_request_type;?>');
+            $('#gasif').hide();
+            $('#gasifc').html('');
+        }else if ($(this).val()=='gas') {
+            $('#luceif').hide();
+            $('#luceifc').html('');
+            $('#gasif').show();
+            $('#gasifc').html(`<div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Tipologia Richiesta</label>
+                                                <select  class="form-control" id="gas_request_type" name="gas_request_type">
+                                                    <option>SW1 - SWITCH</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">PDR</label>
+                                                <input  type="text" value="<?=$contract->gas_pdr;?>" class="form-control" name="gas_pdr">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Fornitore Uscente</label>
+                                                <input  type="text" value="<?=$contract->gas_fornitore_uscente;?>" class="form-control" name="gas_fornitore_uscente">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Consume Annuo</label>
+                                                <input  type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="gas_consume_annuo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Remi</label>
+                                                <input type="text" value="<?=$contract->gas_remi;?>" class="form-control" name="gas_remi">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Matricola</label>
+                                                <input type="text" value="<?=$contract->gas_matricola;?>" class="form-control" name="gas_matricola">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                Tipologia Uso*</br>
+                                                <label class="control-label">                                             
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
+                                                </label>
+                                                <label class="control-label">
+                                                    <input  type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                </label>                           
+                                            </div>
+                                        </div>`);
+            $('#gas_request_type').val('<?=$contract->gas_request_type;?>');
+        }
+    })
+});
+
+
+function getOperators(supervisor_id){
+    $.ajax({
+      url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
+      type: 'GET',
+      dataType: 'json',
+    })
+    .done(function(data) {
+        dataa=data;
+        $('#operator').html('');
+        $('#operator').focus();
+        for (var i=0;i<data.length;i++) {
+           $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+        };
+
+    })
+    .fail(function(err) {
+        console.log(err);
+    })
+}
+
 
 $(document).ready(function(){
     initDocUploader("#zdrop");
@@ -519,17 +1188,35 @@ $(document).ready(function(){
     loadDocAndAudio();
     getOperators($('#supervisor').val());
     $('.contractsNav').addClass('active');
+
+    $('#form').on('submit',function(e){
+        if (!validate()) {
+            e.preventDefault();
+        };
+    });
 });
 
-                $('.cb').on('click',function() {
-                    $(this).val($(this).val()=='false'?'true':'false');
-                });
-                $('#client_type').val('<?=$contract->client_type;?>');
-                $('#document_type').val('<?=$contract->document_type;?>');
-                $('#toponimo').val('<?=$contract->toponimo;?>');
-                $('#contract_type').val('<?=$contract->contract_type;?>');
-                $('#listino').val('<?=$contract->listino;?>');
-                $('#request_type').val('<?=$contract->request_type;?>');
+
+$('#contract_date').val(new Date().toJSON().split('T')[0]);
+$('#birth_date').val(   new Date().toJSON().split('T')[0]);
+$('#document_date').val(new Date().toJSON().split('T')[0]);
+
+
+$('.cb').on('click',function() {
+    $(this).val($(this).val()=='false'?'true':'false');
+});
+
+$('#uf_toponimo').val('<?=$contract->uf_toponimo;?>') 
+$('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>') 
+
+$('#gas_request_type').val('<?=$contract->gas_request_type;?>');
+$('#luce_request_type').val('<?=$contract->luce_request_type;?>');
+
+$('#client_type').val('<?=$contract->client_type;?>');
+$('#document_type').val('<?=$contract->document_type;?>');
+$('#contract_type').val('<?=$contract->contract_type;?>');
+$('#listino').val('<?=$contract->listino;?>');
+
 
 
 function loadDocAndAudio() {
@@ -542,7 +1229,7 @@ function loadDocAndAudio() {
         if (data.length>0) {
             $('.doc-container').html('');
             $.each(data, function (i) {
-                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td></tr>');
+                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td><td><b onclick="deleteDocument('+data[i].document_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
             });
         }else {
             $('.doc-container').html('<tr><td>No documents!</td></tr>');
@@ -561,7 +1248,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td></tr>');
+                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td><td><b onclick="deleteAudio('+data[i].audio_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');
@@ -570,6 +1257,34 @@ function loadDocAndAudio() {
     .fail(function() {
           console.log("error");
     })        
+}
+
+function deleteAudio(audio_id,url){
+    $.ajax({//audio
+        url: "<?=URL;?>/api/deleteAudio",
+        type: 'POST',
+        data:{audio_id:audio_id,url:url},
+    })
+    .done(function(data) {
+        loadDocAndAudio();
+    })
+    .fail(function() {
+          console.log("error");
+    })    
+}
+
+function deleteDocument(document_id,url){
+    $.ajax({//decument
+        url: "<?=URL;?>/api/deleteDocument",
+        type: 'POST',
+        data:{document_id:document_id,url:url},
+    })
+    .done(function(data) {
+        loadDocAndAudio();
+    })
+    .fail(function() {
+          console.log("error");
+    })    
 }
 
 function initAudioUploader(target) {
@@ -666,7 +1381,105 @@ function getOperators(supervisor_id){
     })
 }
 
-            </script>
+function validate(){
+    var valid=true;
+    if (typeof($('[name="gas_pdr"]').val())!='undefined') {
+        if ($('[name="gas_pdr"]').val().length!=14) {
+            $.notify({
+              icon: "done",
+              message: "Gas PDR must have 14 characters!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="gas_pdr"]').focus();
+            valid=false;
+        };
+    };
+    if (typeof($('[name="luce_pdr"]').val())!='undefined') {
+        if ($('[name="luce_pdr"]').val().length!=14) {
+            $.notify({
+              icon: "done",
+              message: "Luce PDR must have 14 characters!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="luce_pdr"]').focus();
+            valid=false;
+        };
+    };
+
+    if (typeof($('[name="iban_code"]').val())!='undefined') {
+        if ($('[name="iban_code"]').val().length!=27) {
+            $.notify({
+              icon: "done",
+              message: "IBAN must have 27 characters!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="iban_code"]').focus();
+            valid=false;
+        };
+    };
+
+    if (typeof($('[name="cel_number"]').val())!='undefined') {
+        var a=Number($('[name="cel_number"]').val());
+        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
+            $.notify({
+              icon: "done",
+              message: "Invalid phone number!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="cel_number"]').focus();
+            valid=false;
+        };
+    };
+
+    if (typeof($('[name="tel_number"]').val())!='undefined') {
+        var a=Number($('[name="tel_number"]').val());
+        ee=a;
+        
+        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
+            $.notify({
+              icon: "done",
+              message: "Invalid phone number!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="tel_number"]').focus();
+            valid=false;
+        };
+    };
+
+    return valid;
+}
+
+</script>
 
 
 <style type="text/css">

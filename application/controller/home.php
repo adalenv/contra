@@ -21,8 +21,10 @@ class Home extends Controller{
                       $num=$query->rowCount();
                     if($num > 0){ ///if login success
                         $_SESSION['username']=$row['username'];
+                        $_SESSION['full_name']=$row['first_name'].' '.$row['last_name'];
                         $_SESSION['user_id']=$row['user_id'];
                         $_SESSION['role']=$row['role'];
+                        $_SESSION['supervisor']=$row['supervisor'];
                         header('location:'.URL.$_SESSION['role']);
                     }else{//if error
                         header('location:'.URL.'?status=fail');

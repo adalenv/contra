@@ -43,7 +43,29 @@ class Controller
      */
     public function loadModel()
     {
-        require APP . 'model/model.php';
+        if (isset($_SESSION['role'])) {
+            switch ($_SESSION['role']) {
+                case 'admin':
+                    require APP . 'model/admin.php';
+                    break;
+                case 'backoffice':
+                    require APP . 'model/backoffice.php';
+                    break;
+                case 'supervisor':
+                    require APP . 'model/supervisor.php';
+                    break;
+                case 'operator':
+                    require APP . 'model/operator.php';
+                    break;
+                default:
+                    require APP . 'model/model.php';
+                    break;
+            }
+        }else{
+            require APP . 'model/model.php';
+        }
+        
+
         // create new "model" (and pass the database connection)
         $this->model = new Model($this->db);
     }

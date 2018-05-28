@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION['username']) ){ header('Location:'.URL); return; };
+if(!isset($_SESSION['username'])){ header('Location:'.URL); return; };
 if($_SESSION['role']!='backoffice') { header('Location:'.URL); return; };
 /**
  * //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit(); debug sql
@@ -15,13 +15,13 @@ class backoffice extends Controller
     function contracts(){   
         if (isset($_GET['export'])){
             if ($_GET['export']==true) {
-                $this->model->BackofficegetContracts('export');
+                $this->model->getContracts('export');
                 return;
             }
         }
-        $operators=$this->model->BackofficegetUsersByRole('operator');
-        $contracts=$this->model->BackofficegetContracts();
-        $statuses=$this->model->BackofficegetStatuses();
+        $operators=$this->model->getUsersByRole('operator');
+        $contracts=$this->model->getContracts();
+        $statuses=$this->model->getStatuses();
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/contracts.php';
         require APP . 'view/backoffice/footer.php';
@@ -29,12 +29,12 @@ class backoffice extends Controller
     
     public function createContract(){ 
         if(isset($_POST['create_contract'])){
-            $this->model->BackofficecreateContract();
+            $this->model->createContract();
             return;
         }
-        $operators   =  $this->model->BackofficegetUsersByRole('operator');
-        $supervisors   =  $this->model->BackofficegetUsersByRole('supervisor');
-        $campaigns=$this->model->BackofficegetCampaigns();
+        $operators   =  $this->model->getUsersByRole('operator');
+        $supervisors   =  $this->model->getUsersByRole('supervisor');
+        $campaigns=$this->model->getCampaigns();
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/createContract.php';
         require APP . 'view/backoffice/footer.php';
@@ -42,25 +42,25 @@ class backoffice extends Controller
 
     public function editContract($contract_id){ 
         if(isset($_POST['edit_contract'])){
-            $this->model->BackofficeeditContract($contract_id);
+            $this->model->editContract($contract_id);
             return;
         }
-        $operators   =  $this->model->BackofficegetUsersByRole('operator');
-        $supervisors =  $this->model->BackofficegetUsersByRole('supervisor');
-        $contract    =  $this->model->BackofficegetContractById($contract_id);
-        $statuses=$this->model->BackofficegetStatuses();
-        $campaigns=$this->model->BackofficegetCampaigns();
+        $operators   =  $this->model->getUsersByRole('operator');
+        $supervisors =  $this->model->getUsersByRole('supervisor');
+        $contract    =  $this->model->getContractById($contract_id);
+        $statuses=$this->model->getStatuses();
+        $campaigns=$this->model->getCampaigns();
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/editContract.php';
         require APP . 'view/backoffice/footer.php';
     }
 
     public function viewContract($contract_id){ 
-        $operators   =  $this->model->BackofficegetUsersByRole('operator');
-        $supervisors =  $this->model->BackofficegetUsersByRole('supervisor');
-        $contract    =  $this->model->BackofficegetContractById($contract_id);
-        $statuses=$this->model->BackofficegetStatuses();
-        $campaigns=$this->model->BackofficegetCampaigns();
+        $operators   =  $this->model->getUsersByRole('operator');
+        $supervisors =  $this->model->getUsersByRole('supervisor');
+        $contract    =  $this->model->getContractById($contract_id);
+        $statuses=$this->model->getStatuses();
+        $campaigns=$this->model->getCampaigns();
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/viewContract.php';
         require APP . 'view/backoffice/footer.php';
@@ -68,37 +68,37 @@ class backoffice extends Controller
 
     //////////-documents-//////////////
     public function uploadDocuments(){ 
-        $this->model->BackofficeuploadDocuments();
+        $this->model->uploadDocuments();
     }
     public function getDocuments($contract_id){ 
-        $this->model->BackofficegetDocuments($contract_id);
+        $this->model->getDocuments($contract_id);
     }
     public function getDocument($document_id){ 
-        $this->model->BackofficegetDocument($document_id);
+        $this->model->getDocument($document_id);
     }
     /////////////////////////////////
 
     //////////-audio-//////////////
     public function uploadAudios(){ 
-        $this->model->BackofficeuploadAudios();
+        $this->model->uploadAudios();
     }
     public function getAudios($contract_id){ 
-        $this->model->BackofficegetAudios($contract_id);
+        $this->model->getAudios($contract_id);
     }
     public function getAudio($audio_id){ 
-        $this->model->BackofficegetAudio($audio_id);
+        $this->model->getAudio($audio_id);
     }
     /////////////////////////////////
 
     public function users($showHours=false,$date=null){
         if ($showHours=='workhours') {
-            $users=$this->model->BackofficegetUsers();
+            $users=$this->model->getUsers();
             require APP . 'view/backoffice/header.php';
             require APP . 'view/backoffice/workhours.php';
             require APP . 'view/backoffice/footer.php';
             return;
         }elseif(!$showHours){ 
-            $users=$this->model->BackofficegetUsers();
+            $users=$this->model->getUsers();
             require APP . 'view/backoffice/header.php';
             require APP . 'view/backoffice/users.php';
             require APP . 'view/backoffice/footer.php';
@@ -106,7 +106,7 @@ class backoffice extends Controller
     }
 
     public function viewUser($user_id){ 
-        $contracts=$this->model->BackofficegetContractsByUser($user_id);
+        $contracts=$this->model->getContractsByUser($user_id);
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/viewUser.php';
         require APP . 'view/backoffice/footer.php';
@@ -115,7 +115,7 @@ class backoffice extends Controller
     
     public function createUser(){ 
         if(isset($_POST['create_user'])){
-            $this->model->BackofficecreateUser();
+            $this->model->createUser();
             return;
         }
         require APP . 'view/backoffice/header.php';
@@ -125,11 +125,15 @@ class backoffice extends Controller
 
     public function editUser($user_id){ 
         if(isset($_POST['edit_user'])){
-            $this->model->BackofficeeditUser($user_id);
+            $this->model->editUser($user_id);
             return;
         }
-        $user=$this->model->BackofficegetUser($user_id);
-        $supervisors   =  $this->model->BackofficegetUsersByRole('supervisor');
+        if (isset($_GET['deleteUser'])) {
+             $this->model->deleteUser($user_id);
+            return;
+        }
+        $user=$this->model->getUser($user_id);
+        $supervisors   =  $this->model->getUsersByRole('supervisor');
         require APP . 'view/backoffice/header.php';
         if(!isset($user->user_id)){
             echo "No user found!";
@@ -141,7 +145,7 @@ class backoffice extends Controller
 ////////////////////////////////////////////////////////
 
     public function statuses(){
-            $statuses=$this->model->BackofficegetStatuses();
+            $statuses=$this->model->getStatuses();
             require APP . 'view/backoffice/header.php';
             require APP . 'view/backoffice/statuses.php';
             require APP . 'view/backoffice/footer.php';
@@ -149,7 +153,7 @@ class backoffice extends Controller
 
     public function createStatus(){ 
         if(isset($_POST['create_status'])){
-            $this->model->BackofficecreateStatus();
+            $this->model->createStatus();
             return;
         }
         require APP . 'view/backoffice/header.php';
@@ -163,10 +167,14 @@ class backoffice extends Controller
             return;
         }
         if(isset($_POST['edit_status'])){
-            $this->model->BackofficeeditStatus($status_id);
+            $this->model->editStatus($status_id);
             return;
         }
-        $status=$this->model->BackofficegetStatus($status_id);
+        if (isset($_GET['deleteStatus'])) {
+             $this->model->deleteStatus($status_id);
+            return;
+        }
+        $status=$this->model->getStatus($status_id);
         require APP . 'view/backoffice/header.php';
         if(!isset($status->status_id)){
             echo "No status found!";
@@ -178,7 +186,7 @@ class backoffice extends Controller
 //////////////////////////////////////////////////////////////
 
     public function campaigns(){
-            $campaigns=$this->model->BackofficegetCampaigns();
+            $campaigns=$this->model->getCampaigns();
             require APP . 'view/backoffice/header.php';
             require APP . 'view/backoffice/campaigns.php';
             require APP . 'view/backoffice/footer.php';
@@ -186,7 +194,7 @@ class backoffice extends Controller
 
     public function createCampaign(){ 
         if(isset($_POST['create_campaign'])){
-            $this->model->BackofficecreateCampaign();
+            $this->model->createCampaign();
             return;
         }
         require APP . 'view/backoffice/header.php';
@@ -200,10 +208,14 @@ class backoffice extends Controller
             return;
         }
         if(isset($_POST['edit_campaign'])){
-            $this->model->BackofficeeditCampaign($campaign_id);
+            $this->model->editCampaign($campaign_id);
             return;
         }
-        $campaign=$this->model->BackofficegetCampaign($campaign_id);
+        if (isset($_GET['deleteCampaign'])) {
+             $this->model->deleteCampaign($campaign_id);
+            return;
+        }
+        $campaign=$this->model->getCampaign($campaign_id);
         require APP . 'view/backoffice/header.php';
         if(!isset($campaign->campaign_id)){
             echo "No campaign found!";

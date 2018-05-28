@@ -6,31 +6,21 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?php echo URL; ?>assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Administrator</title>
+    <title>Backoffice</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="<?php echo URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!--  Material Dashboard CSS    -->
     <link href="<?php echo URL; ?>assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="<?php echo URL; ?>assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="<?php echo URL; ?>assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="<?php echo URL; ?>assets/css/material-icons.css" rel="stylesheet" />
-    <!--   Core JS Files   -->
     <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/material.min.js" type="text/javascript"></script>
-    <!--  Charts Plugin -->
     <script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>
-    <!--  Dynamic Elements plugin -->
     <script src="<?php echo URL; ?>assets/js/arrive.min.js"></script>
-    <!--  PerfectScrollbar Library -->
     <script src="<?php echo URL; ?>assets/js/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Notifications Plugin    -->
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
-    <!-- Material Dashboard javascript methods -->
     <script src="<?php echo URL; ?>assets/js/material-dashboard.js?v=1.2.0"></script>
     <script src="<?php echo URL; ?>assets/js/sweetalert.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/dropzone.js"></script>
@@ -62,7 +52,7 @@
                             <p>Contracts</p>
                         </a>
                     </li>
-                    <li class="createContractNav"> <!--class="active"-->
+                    <li class="createContractNav">
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>
                             <p>Create Contract</p>
@@ -110,6 +100,9 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown" style="padding-top: 15px;padding-bottom: 15px;">
+                                 <?=$_SESSION['full_name'];?>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">
                                     <i class="material-icons">person</i>

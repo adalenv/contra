@@ -17,7 +17,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="users/workhours" role="tablist">
+                                    <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
                                         <i class="material-icons">access_time</i>
                                         Show Workhours
                                     </a>

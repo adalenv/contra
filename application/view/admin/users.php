@@ -49,7 +49,7 @@
                                                     $output.='<tr>
                                                                 <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
-                                                                <td>'.$this->model->AdmingetSupervisorByOperator($user->supervisor).'</td>
+                                                                <td>'.$this->model->getSupervisorByOperator($user->supervisor).'</td>
                                                                 <td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
                                                             </tr>';
                                                 }

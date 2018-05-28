@@ -24,6 +24,7 @@
                                             </div>
                                         </div>
                                         <input type="hidden" name="edit_status">
+                   
                                         <button type="submit" class="btn btn-info pull-right">Save Changes</button>
                                         <div class="clearfix"></div>
                                     </form>
@@ -35,4 +36,5 @@
             </div>
             <script type="text/javascript">
                 $('.statusNav').addClass('active');
+
             </script>

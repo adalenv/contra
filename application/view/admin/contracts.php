@@ -100,7 +100,7 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contracts</h4>
-                                         <p class="category"></p>
+                                         <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Export</a></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
@@ -161,7 +161,8 @@
                                                                     } else {
                                                                         $output.= '<td></td>';
                                                                     }
-                                                    $output.='<td title="'.$contract->note.'">'.substr($contract->note, 0,20).'...</td>';
+                                                    $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
+                                                    $output.='<td title="'.$contract->note.'">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
@@ -175,7 +176,9 @@
                 </div>
             
             <script type="text/javascript">
-
+function exportContracts() {
+    window.location.href+='&export=true';
+}
 
                     $(function() {
 
@@ -191,6 +194,46 @@
                             $('#page_val').val(0);
                             document.forms[0].submit();
                         });
+
+
+
+                        <?php 
+                            if (isset($_SESSION['contract_exist'])) {
+                                if ($_SESSION['contract_exist']=='true') { ?> //if fail
+                                    $.notify({
+                                      icon: "error_outline",
+                                      message: "Contract exist!"
+                                    },{
+                                      type: 'danger',
+                                      timer: 300,
+                                      placement: {
+                                          from: 'top',
+                                          align: 'right'
+                                      }
+                                    });
+                            <?php }
+                                  unset($_SESSION['contract_exist']);
+                            }
+                        ?>
+
+                        <?php 
+                            if (isset($_SESSION['create_contract'])) {
+                                if ($_SESSION['create_contract']=='fail') { ?> //if fail
+                                    $.notify({
+                                      icon: "error_outline",
+                                      message: "An error occurred!"
+                                    },{
+                                      type: 'danger',
+                                      timer: 300,
+                                      placement: {
+                                          from: 'top',
+                                          align: 'right'
+                                      }
+                                    });
+                            <?php }
+                                  unset($_SESSION['create_contract']);
+                            }
+                        ?>
 
                         $('.contractsNav').addClass('active');
 

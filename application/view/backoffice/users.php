@@ -49,7 +49,7 @@
                                                     $output.='<tr>
                                                                 <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
-                                                                <td>'.$this->model->BackofficegetSupervisorByOperator($user->supervisor).'</td>
+                                                                <td>'.$this->model->getSupervisorByOperator($user->supervisor).'</td>
                                                                 <td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
                                                             </tr>';
                                                 }
@@ -96,6 +96,36 @@
                         unset($_SESSION['edit_user']);
                     }
 
+                    if (isset($_SESSION['delete_user'])) {
+                        if ($_SESSION['delete_user']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "User Deleted!"
+
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php } elseif($_SESSION['delete_user']=='fail') { ?> //if fail
+                            $.notify({
+                              icon: "error_outline",
+                              message: "User deletion failed!"
+                            },{
+                              type: 'danger',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+                        <?php }
+                        unset($_SESSION['delete_user']);
+                    }
 
                     if (isset($_SESSION['create_user'])) {
                         if ($_SESSION['create_user']=='success') { ?>//if edit success 

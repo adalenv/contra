@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?php echo URL; ?>assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Administrator</title>
+    <title>Operator</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -68,12 +68,6 @@
                             <p>Create Contract</p>
                         </a>
                     </li>
-                    <li class="usersNav">
-                        <a href="<?=URL.$_SESSION['role'].'/users';?>">
-                            <i class="material-icons">group</i>
-                            <p>Users</p>
-                        </a>
-                    </li>
                     <li class="active-pro">
                         <a href="mailto:adalenvladi@gmail.com">
                             <i class="material-icons">unarchive</i>
@@ -97,6 +91,9 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown" style="padding-top: 15px;padding-bottom: 15px;">
+                                 <?=$_SESSION['full_name'];?>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">
                                     <i class="material-icons">person</i>

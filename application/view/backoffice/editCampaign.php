@@ -35,4 +35,5 @@
             </div>
             <script type="text/javascript">
                 $('.campaignNav').addClass('active');
+
             </script>
