@@ -4,7 +4,7 @@
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <div class="row" style="margin-left:5px;margin-right:5px">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia contratto</label>
                                             <select class="form-control" name="contract_type" id="contract_type">
@@ -21,7 +21,7 @@
                                             <input type="text" class="form-control" name="client_name" id="client_name">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Status</label>
                                             <select class="form-control" name="status" id="status">
@@ -51,21 +51,45 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                </div>
-                                <div class="row" style="margin-left:5px;margin-right:5px">
-                                    <div class="col-md-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">ID</label>
-                                            <input type="text" class="form-control" name="id" id="id">
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">Supervisor</label>
+                                            <select class="form-control" name="supervisor" id="supervisor">
+                                                <option value='%'>All supervisors</option>
+                                                <?php
+                                                    $output=''; 
+                                                    foreach ($supervisors as $supervisor) {
+                                                        $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                    }
+                                                    echo $output;
+                                                ?>
+                                            </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                </div>
+                                <div class="row" style="margin-left:5px;margin-right:5px">
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">Campaigns</label>
+                                            <select class="form-control" name="campaign" id="campaign">
+                                                <option value='%'>All campaigns</option>
+                                                <?php
+                                                    $output=''; 
+                                                    foreach ($campaigns as $campaign) {
+                                                        $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                    }
+                                                    echo $output;
+                                                ?>
+                                            </select>
+                                        <span class="material-input"></span></div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Phone</label>
                                             <input type="text" class="form-control" name="phone" id="phone">
@@ -78,7 +102,7 @@
                                         <span class="material-input"></span></div>
                                     </div>
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" class="btn btn-info submit_btn">
@@ -100,6 +124,7 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contracts</h4>
+                                         <p class="category"></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
@@ -118,12 +143,11 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <th>Type</th>
-                                            <th>ID</th>
-                                            <th>Date</th>
                                             <th>Client Name</th>
                                             <th>Status</th>
-                                            <th>Location</th>
+                                            <th>Campaign</th>
                                             <th>Operator</th>
+                                            <th>Date</th>
                                             <th>Note</th>
                                         </thead>
                                         <tbody>
@@ -132,23 +156,33 @@
                                                 foreach ($contracts as $contract) {
                                                     $output.='<tr>';
                                                                 if ($contract->contract_type=='gas') {
-                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
+                                                                    $output.='<td>Gas</td>';
                                                                 }elseif ($contract->contract_type=='luce') {
-                                                                    $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
-                                                                }elseif ($contract->contract_type=='dual') {
-                                                                    $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
+                                                                    $output.='<td>Luce</td>';
+                                                                }else {
+                                                                    $output.='<td>Dual</td>';
                                                                 }
-                                                    $output.='<td>'.$contract->contract_id.'</td>
-                                                                <td>'.(explode(' ',$contract->date)[0]).'</td>
-                                                                <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
+                                                    $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
+                                                    
+                                                     $output.='<td><select onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
-                                                                        $status=$status->status_name;
-                                                                        break;
+                                                                        $output.='<option value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                    }else{
+                                                                         $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
                                                                 }
-                                                    $output.='<td>'.$status.'</td>
-                                                                <td>'.$contract->location.'</td>';
+                                                    $output.='</select></td>';
+                                                    $output.='<td><select   onchange="editContractCampaign('.$contract->contract_id.',Number(this.value))" id="campaign_select">';
+                                                                foreach ($campaigns as $key => $campaign) {
+                                                                    if ($campaign->campaign_id==$contract->campaign) {
+                                                                        $output.='<option value="'.$campaign->campaign_id.'" selected="">'.$campaign->campaign_name.'</option>';
+                                                                    }else{
+                                                                         $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                                    }
+                                                                }
+                                                    $output.='</select></td>';
+
                                                                     foreach($operators as $user) {
                                                                         if ($contract->operator == $user->user_id) {
                                                                             $operator = $user;
@@ -161,7 +195,8 @@
                                                                         $output.= '<td></td>';
                                                                     }
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
-                                                    $output.='<td title="'.$contract->note.'">'.$note.'</td>';
+                                                    $output.='<td>'.(explode(' ',$contract->date)[0]).'</td>
+                                                               <td title="'.$contract->note.'">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
@@ -175,8 +210,38 @@
                 </div>
             
             <script type="text/javascript">
-function exportContracts() {
-    window.location.href+='&export=true';
+
+function editContractStatus(contract_id,status_id){
+    console.log(contract_id,status_id);
+    $.ajax({
+        url: '<?=URL?>api/editContractStatus/',
+        type: 'POST',
+        data: {contract_id:contract_id,
+               status_id:status_id,
+              },
+      })
+      .done(function(data) {
+        //console.log(data.responseText);      
+      })
+      .fail(function(err) {
+        console.log(err);
+      });
+}
+function editContractCampaign(contract_id,campaign_id){
+    console.log(contract_id,campaign_id);
+    $.ajax({
+        url: '<?=URL?>api/editContractCampaign/',
+        type: 'POST',
+        data: {contract_id:contract_id,
+               campaign_id:campaign_id,
+              },
+      })
+      .done(function(data) {
+        //console.log(data.responseText);      
+      })
+      .fail(function(err) {
+        console.log(err);
+      });
 }
 
                     $(function() {
@@ -185,6 +250,8 @@ function exportContracts() {
                             $('#contract_type').val('%');
                             $('#operator').val('%');
                             $('#status').val('%');
+                            $('#campaign').val('%');
+                            $('#supervisor').val('%');
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -239,6 +306,8 @@ function exportContracts() {
                         var contract_type='<?=(isset($_GET['contract_type'])?$_GET['contract_type']:'%')?>';
                         var operator='<?=(isset($_GET['operator'])?$_GET['operator']:'%')?>';
                         var status='<?=(isset($_GET['status'])?$_GET['status']:'%')?>';
+                        var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
+                        var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
 
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
                         var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
@@ -250,6 +319,9 @@ function exportContracts() {
 
                         $('#operator').val(operator);
                         $('#status').val(status);
+
+                        $('#campaign').val(campaign);
+                        $('#supervisor').val(supervisor);
                         
 
                         $('#id').val(id);
@@ -266,7 +338,7 @@ function exportContracts() {
 
                         $('.pagination_btn').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

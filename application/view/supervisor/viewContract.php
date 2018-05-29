@@ -485,8 +485,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input disabled="" type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="pdr">
+                                                <label class="control-label">POD</label>
+                                                <input disabled="" type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="pdr">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -592,8 +592,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input disabled="" type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="pdr">
+                                                <label class="control-label">POD</label>
+                                                <input disabled="" type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="pdr">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">

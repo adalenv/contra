@@ -504,7 +504,7 @@ class Model
                     gas_matricola,
 
                     luce_request_type,
-                    luce_pdr,
+                    luce_pod,
                     luce_tensione,
                     luce_potenza,
                     luce_fornitore_uscente,
@@ -589,7 +589,7 @@ class Model
                     :gas_matricola,
 
                     :luce_request_type,
-                    :luce_pdr,
+                    :luce_pod,
                     :luce_tensione,
                     :luce_potenza,
                     :luce_fornitore_uscente,
@@ -685,7 +685,7 @@ class Model
                 if ($_POST['contract_type']=='dual') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
@@ -714,7 +714,7 @@ class Model
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
                     $query->bindValue(':luce_request_type','');
-                    $query->bindValue(':luce_pdr','');
+                    $query->bindValue(':luce_pod','');
                     $query->bindValue(':luce_fornitore_uscente','');
                     $query->bindValue(':luce_opzione_oraria', '');
                     $query->bindValue(':luce_potenza','');
@@ -724,7 +724,7 @@ class Model
                 }elseif ($_POST['contract_type']=='luce') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
@@ -826,7 +826,7 @@ gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,
 gas_remi=:gas_remi,
 gas_matricola=:gas_matricola,
 luce_request_type=:luce_request_type,
-luce_pdr=:luce_pdr,
+luce_pod=:luce_pod,
 luce_tensione=:luce_tensione,
 luce_potenza=:luce_potenza,
 luce_fornitore_uscente=:luce_fornitore_uscente,
@@ -918,7 +918,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
                 if ($_POST['contract_type']=='dual') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
@@ -947,7 +947,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
                     $query->bindValue(':luce_request_type','');
-                    $query->bindValue(':luce_pdr','');
+                    $query->bindValue(':luce_pod','');
                     $query->bindValue(':luce_fornitore_uscente','');
                     $query->bindValue(':luce_opzione_oraria', '');
                     $query->bindValue(':luce_potenza','');
@@ -957,7 +957,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
                 }elseif ($_POST['contract_type']=='luce') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);

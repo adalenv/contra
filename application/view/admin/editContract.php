@@ -17,7 +17,17 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Status</label>
                                                 <select   class="form-control" required name="status" id="status">
-                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($statuses as $status) {
+                                                            if ($contract->status==$status->status_id) {
+                                                                $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div class="checkbox">
@@ -513,8 +523,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input  type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                                <label class="control-label">POD</label>
+                                                <input  type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="luce_pod">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -644,8 +654,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input  type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                                <label class="control-label">POD</label>
+                                                <input  type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="luce_pod">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -815,7 +825,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Note:</label>
-                                            <textarea disabled="" class="form-control" name="note"><?=$contract->note;?></textarea>
+                                            <textarea class="form-control" name="note"><?=$contract->note;?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -962,8 +972,8 @@ $(document).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                            <label class="control-label">POD</label>
+                                            <input type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -1063,8 +1073,8 @@ $(document).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="luce_pdr">
+                                            <label class="control-label">POD</label>
+                                            <input type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -1387,7 +1397,7 @@ function validate(){
         if ($('[name="gas_pdr"]').val().length!=14) {
             $.notify({
               icon: "done",
-              message: "Gas PDR must have 14 characters!"
+              message: "PDR must have 14 characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -1400,11 +1410,11 @@ function validate(){
             valid=false;
         };
     };
-    if (typeof($('[name="luce_pdr"]').val())!='undefined') {
-        if ($('[name="luce_pdr"]').val().length!=14) {
+    if (typeof($('[name="luce_pod"]').val())!='undefined') {
+        if ($('[name="luce_pod"]').val().length!=14) {
             $.notify({
               icon: "done",
-              message: "Luce PDR must have 14 characters!"
+              message: "POD must have 14 characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -1413,7 +1423,7 @@ function validate(){
                   align: 'right'
               }
             });
-            $('[name="luce_pdr"]').focus();
+            $('[name="luce_pod"]').focus();
             valid=false;
         };
     };

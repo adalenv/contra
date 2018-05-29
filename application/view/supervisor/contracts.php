@@ -100,7 +100,7 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contracts</h4>
-                                         <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Export</a></p>
+                                         <p class="category"></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
@@ -133,22 +133,22 @@
                                                 foreach ($contracts as $contract) {
                                                     $output.='<tr>';
                                                                 if ($contract->contract_type=='gas') {
-                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
+                                                                    $output.='<td>Gas</td>';
                                                                 }elseif ($contract->contract_type=='luce') {
-                                                                    $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
+                                                                    $output.='<td>Luce</td>';
                                                                 }elseif ($contract->contract_type=='dual') {
-                                                                    $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
+                                                                    $output.='<td>Dual</td>';
                                                                 }
                                                     $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.(explode(' ',$contract->date)[0]).'</td>
                                                                 <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
-                                                                        $status=$status->status_name;
+                                                                        $status1=$status->status_name;
                                                                         break;
                                                                     }
                                                                 }
-                                                    $output.='<td>'.$status.'</td>
+                                                    $output.='<td>'.$status1.'</td>
                                                                 <td>'.$contract->location.'</td>';
                                                                     foreach($operators as $user) {
                                                                         if ($contract->operator == $user->user_id) {
@@ -176,9 +176,6 @@
                 </div>
             
             <script type="text/javascript">
-function exportContracts() {
-    window.location.href+='&export=true';
-}
 
                     $(function() {
 

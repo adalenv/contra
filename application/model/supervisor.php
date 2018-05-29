@@ -291,17 +291,17 @@ class Model
         public function createContract(){
             switch ($_POST['contract_type']) {
                 case 'dual':
-                    $sql="SELECT contract_id FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pdr=:luce_pdr OR gas_pdr=:luce_pdr OR luce_pdr=:gas_pdr";
+                    $sql="SELECT contract_id FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
                     $query = $this->db->prepare($sql);
-                    $query->execute(array(':gas_pdr' =>$_POST['gas_pdr'],':luce_pdr'=>$_POST['luce_pdr']));
+                    $query->execute(array(':gas_pdr' =>$_POST['gas_pdr'],':luce_pod'=>$_POST['luce_pod']));
                     break;
                 case 'luce':
-                    $sql="SELECT contract_id  FROM contracts WHERE luce_pdr=:luce_pdr OR gas_pdr=:luce_pdr";
+                    $sql="SELECT contract_id  FROM contracts WHERE luce_pod=:luce_pod OR gas_pdr=:luce_pod";
                     $query = $this->db->prepare($sql);
-                    $query->execute(array(':luce_pdr'=>$_POST['luce_pdr']));
+                    $query->execute(array(':luce_pod'=>$_POST['luce_pod']));
                     break;
                 case 'gas':
-                    $sql="SELECT contract_id  FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pdr=:gas_pdr";
+                    $sql="SELECT contract_id  FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:gas_pdr";
                     $query = $this->db->prepare($sql);
                     $query->execute(array(':gas_pdr' => $_POST['gas_pdr']));
                     break;
@@ -379,7 +379,7 @@ class Model
                     gas_matricola,
 
                     luce_request_type,
-                    luce_pdr,
+                    luce_pod,
                     luce_tensione,
                     luce_potenza,
                     luce_fornitore_uscente,
@@ -464,7 +464,7 @@ class Model
                     :gas_matricola,
 
                     :luce_request_type,
-                    :luce_pdr,
+                    :luce_pod,
                     :luce_tensione,
                     :luce_potenza,
                     :luce_fornitore_uscente,
@@ -560,7 +560,7 @@ class Model
                 if ($_POST['contract_type']=='dual') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
@@ -589,7 +589,7 @@ class Model
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
                     $query->bindValue(':luce_request_type','');
-                    $query->bindValue(':luce_pdr','');
+                    $query->bindValue(':luce_pod','');
                     $query->bindValue(':luce_fornitore_uscente','');
                     $query->bindValue(':luce_opzione_oraria', '');
                     $query->bindValue(':luce_potenza','');
@@ -599,7 +599,7 @@ class Model
                 }elseif ($_POST['contract_type']=='luce') {
 
                     $query->bindParam(':luce_request_type',$_POST['luce_request_type']);
-                    $query->bindParam(':luce_pdr',$_POST['luce_pdr']);
+                    $query->bindParam(':luce_pod',$_POST['luce_pod']);
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);

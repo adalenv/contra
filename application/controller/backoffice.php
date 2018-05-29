@@ -20,8 +20,13 @@ class backoffice extends Controller
             }
         }
         $operators=$this->model->getUsersByRole('operator');
+        $supervisors=$this->model->getUsersByRole('supervisor');
         $contracts=$this->model->getContracts();
+        $campaigns=$this->model->getCampaigns();
         $statuses=$this->model->getStatuses();
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/contracts.php';
+        require APP . 'view/admin/footer.php';
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/contracts.php';
         require APP . 'view/backoffice/footer.php';

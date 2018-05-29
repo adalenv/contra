@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2018 at 04:00 PM
+-- Generation Time: Apr 21, 2010 at 03:18 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -102,7 +102,7 @@ CREATE TABLE `contracts` (
   `gas_remi` varchar(50) NOT NULL,
   `gas_matricola` varchar(50) NOT NULL,
   `luce_request_type` varchar(50) NOT NULL,
-  `luce_pdr` varchar(50) NOT NULL,
+  `luce_pod` varchar(50) NOT NULL,
   `luce_fornitore_uscente` varchar(50) NOT NULL,
   `luce_opzione_oraria` varchar(50) NOT NULL,
   `luce_potenza` varchar(50) NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `contracts` (
 -- Dumping data for table `contracts`
 --
 
-INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `date`, `ugm_cb`, `analisi_cb`, `iniziative_cb`, `toponimo`, `address`, `civico`, `price`, `location`, `uf_toponimo`, `uf_address`, `uf_civico`, `uf_price`, `uf_location`, `ddf_toponimo`, `ddf_address`, `ddf_civico`, `ddf_price`, `ddf_location`, `ubicazione_fornitura`, `domicillazione_documenti_fatture`, `listino`, `gas_request_type`, `gas_pdr`, `gas_fornitore_uscente`, `gas_consume_annuo`, `gas_tipo_riscaldamento`, `gas_tipo_cottura_acqua`, `gas_remi`, `gas_matricola`, `luce_request_type`, `luce_pdr`, `luce_fornitore_uscente`, `luce_opzione_oraria`, `luce_potenza`, `luce_tensione`, `luce_consume_annuo`, `fature_via_email`, `operator`, `status`, `cancellation_reason`, `gender`, `rag_sociale`, `first_name`, `last_name`, `bussines_name`, `client_type`, `tel_number`, `alt_number`, `cel_number`, `cel_number2`, `cel_number3`, `email`, `alt_email`, `birth_nation`, `vat_number`, `partita_iva`, `birth_date`, `birth_municipality`, `delega_first_name`, `delega_last_name`, `delega_vat_number`, `document_type`, `document_number`, `document_date`, `iban_code`, `iban_accounthoder`, `iban_fiscal_code`, `payment_type`, `note`, `campaign`, `supervisor`) VALUES
+INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `date`, `ugm_cb`, `analisi_cb`, `iniziative_cb`, `toponimo`, `address`, `civico`, `price`, `location`, `uf_toponimo`, `uf_address`, `uf_civico`, `uf_price`, `uf_location`, `ddf_toponimo`, `ddf_address`, `ddf_civico`, `ddf_price`, `ddf_location`, `ubicazione_fornitura`, `domicillazione_documenti_fatture`, `listino`, `gas_request_type`, `gas_pdr`, `gas_fornitore_uscente`, `gas_consume_annuo`, `gas_tipo_riscaldamento`, `gas_tipo_cottura_acqua`, `gas_remi`, `gas_matricola`, `luce_request_type`, `luce_pod`, `luce_fornitore_uscente`, `luce_opzione_oraria`, `luce_potenza`, `luce_tensione`, `luce_consume_annuo`, `fature_via_email`, `operator`, `status`, `cancellation_reason`, `gender`, `rag_sociale`, `first_name`, `last_name`, `bussines_name`, `client_type`, `tel_number`, `alt_number`, `cel_number`, `cel_number2`, `cel_number3`, `email`, `alt_email`, `birth_nation`, `vat_number`, `partita_iva`, `birth_date`, `birth_municipality`, `delega_first_name`, `delega_last_name`, `delega_vat_number`, `document_type`, `document_number`, `document_date`, `iban_code`, `iban_accounthoder`, `iban_fiscal_code`, `payment_type`, `note`, `campaign`, `supervisor`) VALUES
 (35, 'dual', '', '2010-04-21', 'false', 'true', 'true', 'via', 'fg', '56', '', '56', 'via', '', '', '', '', 'via', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', 'sdf', 'sd', 'f', '', 'personal', 'sdf', '', 'fdg', '', '', 'fdgfdg@dfg', '', 'sd', 'sdf', '', '2010-04-21', 'f', '', '', '', 'id_card', 'sdf', '2010-04-21', '', '', '', 'postal', 'this is a test note ok?\r\na simple test one', 3, 13),
 (36, 'dual', '', '2010-04-21', 'false', 'false', 'false', 'via', 'ghj', 'ghj', '', 'ghj', 'via', '', '', '', '', 'via', '', '', '', '', 'non_resident', 'altro', 'FIX12 TS', 'A01 - ATTTIVAZIONE', 'test', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', '', 'lkl', 'kl', '', 'personal', 'ljk', '', 'klk;', '', '', 'ljkljklhfghghghgh@fgfg', '', 'jkl', 'jl', '', '2010-04-21', 'jkl', '', '', '', 'id_card', 'jk', '2010-04-21', '', '', '', 'postal', '', 1, 13),
 (37, 'luce', '', '2010-04-21', 'false', 'false', 'false', 'via', 'ghj', '4', '', 'ghj', 'via', '', '', '', '', 'via', '', '', '', '', 'non_resident', 'altro', 'FIX12 TS', '', '', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', '', 'lkl', 'kl', '', 'personal', 'ljk', '', 'klk;', '', '', 'ljkljklhfghghghgh@fgfg', '', 'jkl', 'jl', '', '2010-04-21', 'jkl', '', '', '', 'id_card', 'jk', '2010-04-21', '', '', '', 'postal', '', 1, 13),
@@ -160,10 +160,10 @@ INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `dat
 (40, 'gas', '', '2018-05-26', 'false', 'true', 'true', 'via', 'dfgfgfg', 'dfg', 'fg', 'dfgd', 'via', 'dfgdfg', 'fgdfg', '', 'dfgdfg', 'via', 'dfgdfg', 'dfg', '', 'dfg', 'non_resident', 'altro', 'FIX12 TS', '', '', '', '', '', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', 'fgd', 'dfg', 'dfg', '', 'delega', 'dfg', '', 'g', '', '', 'fg@dffsdf.fgh', '', 'dfgdf', 'dfg', '', '2018-05-26', 'g', 'dele', 'ooo', 'fis', 'id_card', 'dfg', '2018-05-26', '', '', '', 'postal', '1', 3, 13),
 (41, 'luce', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdfg', 'fdg', '', 'dfg', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'A01 - ATTTIVAZIONE', 'test', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', 'df', 'gdf', 'g', '', 'personal', 'dfg', '', 'dfg', '', '', 'sdasd@fsf', '', 'dfg', 'dfg', '', '2018-05-27', 'dfg', '', '', '', 'id_card', 'dfg', '2018-05-27', '', '', '', 'postal', '', 1, 13),
 (42, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasd', '', '', '', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', 'false', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678901234', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', '', '', 'fasdasd', '', 'personal', 'sfsdfsdfsdfs', '', 'dfasdasdasd', '', '', '', '', '', '', '', '2018-05-27', '', '', '', '', 'id_card', '', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 0, 13),
-(43, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasdasd', 'asdasd', '', 'asdasd', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678904000', '', 'Opzione 1', '', '12345678901234', '', 'false', 6, 1, '', 'male', '', 'j', 'sdf', '', 'personal', '1232133433', '', '1242343454', '', '', 'sdfsdfsdf@sdasd', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789012345678909234567', '', '', 'postal', '1', 3, 13),
-(44, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '55345678901234', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', 'asda', 'asd', 'asd', '', 'delega', '1234567899', '', '1234567888', '', '', 'asdasdasd@dfsdf', '', 'asd', 'asd', '', '2018-05-27', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'id_card', 'asd', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 3, 13),
-(45, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', '.sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678909876', '', '', 'false', 'false', 'dfg', '', '', '', '', '', '', '', '', 'false', 6, 1, '', 'male', '', 'df', 'gd', '', 'delega', '9876543210', '', '1234567890', '', '', 'bnj@sdf', '', 'dfg', 'fg', '', '2018-05-27', 'dfg', 'dfg', 'dfg', 'dfg', 'id_card', 'dfg', '2018-05-27', '1234567891234567891234567ee', '', '', 'postal', '', 3, 13),
-(46, 'dual', '', '2018-05-27', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789876543212365478900', '', '', 'postal', '1', 3, 13);
+(43, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasdasd', 'asdasd', '', 'asdasd', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678904000', '', 'Opzione 1', '', '12345678901234', '', 'false', 6, 0, '', 'male', '', 'j', 'sdf', '', 'personal', '1232133433', '', '1242343454', '', '', 'sdfsdfsdf@sdasd', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789012345678909234567', '', '', 'postal', '1', 1, 13),
+(44, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '55345678901234', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 3, '', 'male', 'asda', 'asd', 'asd', '', 'delega', '1234567899', '', '1234567888', '', '', 'asdasdasd@dfsdf', '', 'asd', 'asd', '', '2018-05-27', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'id_card', 'asd', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 3, 13),
+(45, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', '.sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678909876', '', '', 'false', 'false', 'dfg', '', '', '', '', '', '', '', '', 'false', 6, 3, '', 'male', '', 'df', 'gd', '', 'delega', '9876543210', '', '1234567890', '', '', 'bnj@sdf', '', 'dfg', 'fg', '', '2018-05-27', 'dfg', 'dfg', 'dfg', 'dfg', 'id_card', 'dfg', '2018-05-27', '1234567891234567891234567ee', '', '', 'postal', '', 3, 13),
+(46, 'dual', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 15, 3, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2010-04-21', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-21', '123456789876543212365478900', '', '', 'postal', '1hggh\r\n=', 3, 12);
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name
 (12, 'supervisor01', 'testuser', 'supervisor', '001', 'supervisor', 2),
 (13, 's2', 's2', 's2', 'test', 'supervisor', 0),
 (14, 'adminasdasd', 'asdas', 'dfsd', 'asdasd', 'admin', 12),
-(15, 'o1', 'o1', 'o1', 'o1', 'operator', 0),
+(15, 'o1', 'o1', 'o1', 'o1', 'operator', 12),
 (16, 'bo', 'bo', 'test', 'backoffice', 'backoffice', 12);
 
 -- --------------------------------------------------------
@@ -285,7 +285,8 @@ INSERT INTO `workhours` (`workhours_id`, `user_id`, `hours`, `date`) VALUES
 (28, 6, 3, '2018-05-27'),
 (29, 6, 3, '2018-05-27'),
 (30, 6, 3, '2018-05-27'),
-(31, 6, 3, '2018-05-27');
+(31, 6, 3, '2018-05-27'),
+(32, 6, 8, '2010-04-21');
 
 --
 -- Indexes for dumped tables
@@ -352,7 +353,7 @@ ALTER TABLE `workhours`
 -- AUTO_INCREMENT for table `audios`
 --
 ALTER TABLE `audios`
-  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `campaigns`
 --
@@ -367,7 +368,7 @@ ALTER TABLE `contracts`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `notes`
 --
@@ -387,7 +388,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `workhours`
 --
 ALTER TABLE `workhours`
-  MODIFY `workhours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `workhours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

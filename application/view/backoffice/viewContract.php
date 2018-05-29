@@ -502,8 +502,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input disabled="" type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="pdr">
+                                                <label class="control-label">POD</label>
+                                                <input disabled="" type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="pdr">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -609,8 +609,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">PDR</label>
-                                                <input disabled="" type="text" value="<?=$contract->luce_pdr;?>" class="form-control" name="pdr">
+                                                <label class="control-label">POD</label>
+                                                <input disabled="" type="text" value="<?=$contract->luce_pod;?>" class="form-control" name="pdr">
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
@@ -767,7 +767,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Note:</label>
-                                            <textarea class="form-control" name="note"><?=$contract->note;?></textarea>
+                                            <textarea disabled=""  class="form-control" name="note"><?=$contract->note;?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">

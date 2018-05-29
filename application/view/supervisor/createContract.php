@@ -396,8 +396,8 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="luce_pdr">
+                                            <label class="control-label">POD</label>
+                                            <input type="text" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -644,8 +644,8 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="luce_pdr">
+                                            <label class="control-label">POD</label>
+                                            <input type="text" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -743,8 +743,8 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="luce_pdr">
+                                            <label class="control-label">POD</label>
+                                            <input type="text" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -875,7 +875,7 @@ function validate(){
         if ($('[name="gas_pdr"]').val().length!=14) {
             $.notify({
               icon: "done",
-              message: "Gas PDR must have 14 characters!"
+              message: "PDR must have 14 characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -888,11 +888,11 @@ function validate(){
             valid=false;
         };
     };
-    if (typeof($('[name="luce_pdr"]').val())!='undefined') {
-        if ($('[name="luce_pdr"]').val().length!=14) {
+    if (typeof($('[name="luce_pod"]').val())!='undefined') {
+        if ($('[name="luce_pod"]').val().length!=14) {
             $.notify({
               icon: "done",
-              message: "Luce PDR must have 14 characters!"
+              message: "POD must have 14 characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -901,7 +901,7 @@ function validate(){
                   align: 'right'
               }
             });
-            $('[name="luce_pdr"]').focus();
+            $('[name="luce_pod"]').focus();
             valid=false;
         };
     };

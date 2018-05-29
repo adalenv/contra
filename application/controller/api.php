@@ -1,5 +1,6 @@
 <?php
 if(!isset($_SESSION['username'])){ header('Location:'.URL); return; };
+
 /**
  * //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit(); debug sql
  */
@@ -9,9 +10,7 @@ class api extends Controller
 
     public function index()
     { 
-
         echo "api v1";
-
     }
     
     public function ApigetUsersBySupervisor($supervisor){
@@ -49,6 +48,8 @@ class api extends Controller
         } 
     }  
     public function deleteHours(){
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+
         $sql = "DELETE FROM workhours WHERE workhours_id=:workhours_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':workhours_id', $_POST['workhours_id'],PDO::PARAM_INT);
@@ -59,6 +60,8 @@ class api extends Controller
         } 
     }
     public function deleteAudio(){
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+
         $file = APP."documents/".$_POST['url'];
         $sql = "DELETE FROM audios WHERE audio_id=:audio_id";
         $query = $this->db->prepare($sql);
@@ -71,6 +74,8 @@ class api extends Controller
         } 
     }
     public function deleteDocument(){
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+
         $file = APP."documents/".$_POST['url'];
         $sql = "DELETE FROM documents WHERE document_id=:document_id";
         $query = $this->db->prepare($sql);
@@ -82,5 +87,33 @@ class api extends Controller
             echo "error";
         } 
     }
+
+    public function editContractStatus(){
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+
+        $sql = "UPDATE contracts SET status=:status_id WHERE contract_id=:contract_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':status_id', $_POST['status_id'],PDO::PARAM_INT);
+        $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+        }else{
+            echo "error";
+        } 
+    } 
+
+    public function editContractCampaign(){
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+
+        $sql = "UPDATE contracts SET campaign=:campaign_id WHERE contract_id=:contract_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':campaign_id', $_POST['campaign_id'],PDO::PARAM_INT);
+        $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "sucess";
+        }else{
+            echo "error";
+        } 
+    }      
 
 }
