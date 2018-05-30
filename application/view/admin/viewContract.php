@@ -447,7 +447,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="gas_request_type" name="request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -496,7 +497,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="luce_request_type" name="request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -553,7 +555,9 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="gas_request_type" name="request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -603,7 +607,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="luce_request_type" name="request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>

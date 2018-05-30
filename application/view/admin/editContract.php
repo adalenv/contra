@@ -456,7 +456,9 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="gas_request_type" name="gas_request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -517,7 +519,9 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="luce_request_type" name="luce_request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -574,7 +578,9 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="gas_request_type" name="gas_request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -648,7 +654,9 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="luce_request_type" name="luce_request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -966,7 +974,9 @@ $(document).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="luce_request_type" name="luce_request_type">
-                                                <option>A01 - ATTTIVAZIONE</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -1013,7 +1023,8 @@ $(document).ready(function(){
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="gas_request_type" name="gas_request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1067,7 +1078,9 @@ $(document).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="luce_request_type" name="luce_request_type">
-                                                <option>A01 - ATTTIVAZIONE</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -1120,7 +1133,9 @@ $(document).ready(function(){
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select  class="form-control" id="gas_request_type" name="gas_request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -1276,31 +1291,55 @@ function loadDocAndAudio() {
 }
 
 function deleteAudio(audio_id,url){
-    $.ajax({//audio
-        url: "<?=URL;?>/api/deleteAudio",
-        type: 'POST',
-        data:{audio_id:audio_id,url:url},
-    })
-    .done(function(data) {
-        loadDocAndAudio();
-    })
-    .fail(function() {
-          console.log("error");
-    })    
+    swal({
+      title:'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#00bcd4',
+      confirmButtonColor: '#f44336',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.value) {
+            $.ajax({//document
+                url: "<?=URL;?>/api/deleteAudio",
+                type: 'POST',
+                data:{audio_id:audio_id,url:url},
+            })
+            .done(function(data) {
+                loadDocAndAudio();
+            })
+            .fail(function() {
+                  console.log("error");
+            }) 
+      }
+    })   
 }
 
 function deleteDocument(document_id,url){
-    $.ajax({//decument
-        url: "<?=URL;?>/api/deleteDocument",
-        type: 'POST',
-        data:{document_id:document_id,url:url},
+    swal({
+      title:'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#00bcd4',
+      confirmButtonColor: '#f44336',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.value) {
+            $.ajax({//document
+                url: "<?=URL;?>/api/deleteDocument",
+                type: 'POST',
+                data:{document_id:document_id,url:url},
+            })
+            .done(function(data) {
+                loadDocAndAudio();
+            })
+            .fail(function() {
+                  console.log("error");
+            }) 
+      }
     })
-    .done(function(data) {
-        loadDocAndAudio();
-    })
-    .fail(function() {
-          console.log("error");
-    })    
 }
 
 function initAudioUploader(target) {

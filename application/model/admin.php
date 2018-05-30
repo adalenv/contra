@@ -1114,7 +1114,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
         if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$ext));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$_FILES["file"]["name"]));
             echo "success";
         }else{
             echo "fail";
