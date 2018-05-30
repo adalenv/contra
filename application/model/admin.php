@@ -283,6 +283,38 @@ class Model
         return $workhours;
     }
 
+    public function getContractsNumber($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+    public function getContractsNumberOkPending($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=3) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
     public function getContracts($export=null){
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
@@ -671,7 +703,7 @@ class Model
                 )";
 
                 $query = $this->db->prepare($sql);
-                $query->bindParam(':date', $_POST['date']);
+                $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
                 $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
                 $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                 $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
@@ -696,12 +728,12 @@ class Model
                 $query->bindParam(':last_name', $_POST['last_name']);
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
-                $query->bindParam(':birth_date', $_POST['birth_date']);
+                $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
                 $query->bindParam(':birth_nation', $_POST['birth_nation']);
                 $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
-                $query->bindParam(':document_date', $_POST['document_date']);
+                $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
@@ -905,7 +937,7 @@ delega_last_name=:delega_last_name,
 delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
             
                 $query = $this->db->prepare($sql);
-                $query->bindParam(':date', $_POST['date']);
+                $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
                 $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
                 $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                 $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
@@ -930,12 +962,12 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
                 $query->bindParam(':last_name', $_POST['last_name']);
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
-                $query->bindParam(':birth_date', $_POST['birth_date']);
+                $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
                 $query->bindParam(':birth_nation', $_POST['birth_nation']);
                 $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
-                $query->bindParam(':document_date', $_POST['document_date']);
+                $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
@@ -1068,23 +1100,25 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
     }
 
     public function uploadDocuments(){
-    	$contract_id=$_POST['contract_id'];
-		$target_dir = APP."documents/";
-        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $contract_id=$_POST['contract_id'];
+        $client_name=$_POST['client_name'];
+        $target_dir = APP."documents/";
+        $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
         $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
         }
-		if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
-			$sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
-			$query=$this->db->prepare($sql);
-			$query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
-		 	echo "success";
-		}else{
-			echo "fail";
-		}
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
+            $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$ext));
+            echo "success";
+        }else{
+            echo "fail";
+        }
     }
 
     public function getDocuments($contract_id){
@@ -1152,18 +1186,20 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
 
     public function uploadAudios(){
         $contract_id=$_POST['contract_id'];
+        $client_name=$_POST['client_name'];
         $target_dir = APP."audios/";
-        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
         $allow_ext = array('mp3','wav','gsm','gsw');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
         }
-        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$ext));
             echo "success";
         }else{
             echo "fail";

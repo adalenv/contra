@@ -17,7 +17,7 @@
     <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/material.min.js" type="text/javascript"></script>
-    <script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>
+    <!-- <script src="<?php //echo URL; ?>assets/js/chartist.min.js"></script> -->
     <script src="<?php echo URL; ?>assets/js/arrive.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
@@ -28,6 +28,9 @@
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/moment.min.js"></script>
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/daterangepicker.css" />
+    <script type="text/javascript" src="<?php echo URL; ?>assets/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/bootstrap-datetimepicker.min.css" />
+
 
 </head>
 

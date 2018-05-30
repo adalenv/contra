@@ -39,17 +39,26 @@
                                         <thead class="text-info">
                                             <th>Full Name</th>
                                             <th>Role</th>
+                                            <th>Contracts</th>
+                                            <th>OK/Pending</th>
                                             <th>Hours</th>
+                                            <th>Performance</th>
                                             <th><center>Action</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $output='';
                                                 foreach ($users as $user) {
+                                                  $contractsNumber1= (int)$this->model->getContractsNumber($user->user_id,$date);
+                                                  $contractsNumberOkPending1= (int)$this->model->getContractsNumberOkPending($user->user_id,$date);
+                                                  $workhours1= (int)$this->model->getWorkhours($user->user_id,$date);
                                                     $output.='<tr>
                                                                 <td><a class="user_name_l" href="../../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>';
-                                                    $output.='<td>'.$this->model->getWorkhours($user->user_id,$date).'</td>';
+                                                    $output.='<td>'.$contractsNumber1.'</td>'; 
+                                                    $output.='<td>'.$contractsNumberOkPending1.'</td>';            
+                                                    $output.='<td>'.$workhours1.'</td>';
+                                                    $output.='<td>'.(round(@($contractsNumberOkPending1/$workhours1),3)).'</td>';
                                                     $output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" onclick="addHours('.$user->user_id.',\''.$user->first_name.' '.$user->last_name.'\')" ><i class="material-icons">access_time</i></a></center></td>
                                                             </tr>';
                                                 }

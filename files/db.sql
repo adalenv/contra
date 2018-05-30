@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2010 at 03:18 AM
+-- Generation Time: Apr 21, 2010 at 01:14 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -161,9 +161,10 @@ INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `dat
 (41, 'luce', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdfg', 'fdg', '', 'dfg', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'A01 - ATTTIVAZIONE', 'test', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', 'df', 'gdf', 'g', '', 'personal', 'dfg', '', 'dfg', '', '', 'sdasd@fsf', '', 'dfg', 'dfg', '', '2018-05-27', 'dfg', '', '', '', 'id_card', 'dfg', '2018-05-27', '', '', '', 'postal', '', 1, 13),
 (42, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasd', '', '', '', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', 'false', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678901234', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', '', '', 'fasdasd', '', 'personal', 'sfsdfsdfsdfs', '', 'dfasdasdasd', '', '', '', '', '', '', '', '2018-05-27', '', '', '', '', 'id_card', '', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 0, 13),
 (43, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasdasd', 'asdasd', '', 'asdasd', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678904000', '', 'Opzione 1', '', '12345678901234', '', 'false', 6, 0, '', 'male', '', 'j', 'sdf', '', 'personal', '1232133433', '', '1242343454', '', '', 'sdfsdfsdf@sdasd', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789012345678909234567', '', '', 'postal', '1', 1, 13),
-(44, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '55345678901234', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 3, '', 'male', 'asda', 'asd', 'asd', '', 'delega', '1234567899', '', '1234567888', '', '', 'asdasdasd@dfsdf', '', 'asd', 'asd', '', '2018-05-27', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'id_card', 'asd', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 3, 13),
+(44, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '55345678901234', '', '', 'false', 'false', '', '', '', '', '', '', '', '', '', 'false', 6, 2, '', 'male', 'asda', 'asd', 'asd', '', 'delega', '1234567899', '', '1234567888', '', '', 'asdasdasd@dfsdf', '', 'asd', 'asd', '', '2018-05-27', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'id_card', 'asd', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 3, 13),
 (45, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', '.sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678909876', '', '', 'false', 'false', 'dfg', '', '', '', '', '', '', '', '', 'false', 6, 3, '', 'male', '', 'df', 'gd', '', 'delega', '9876543210', '', '1234567890', '', '', 'bnj@sdf', '', 'dfg', 'fg', '', '2018-05-27', 'dfg', 'dfg', 'dfg', 'dfg', 'id_card', 'dfg', '2018-05-27', '1234567891234567891234567ee', '', '', 'postal', '', 3, 13),
-(46, 'dual', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 15, 3, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2010-04-21', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-21', '123456789876543212365478900', '', '', 'postal', '1hggh\r\n=', 3, 12);
+(46, 'dual', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'A01 - ATTTIVAZIONE', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 15, 3, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2010-04-21', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-21', '123456789876543212365478900', '', '', 'postal', '1hggh\r\n=', 3, 12),
+(47, 'luce', '', '2010-04-20', 'true', 'true', 'true', 'via', 'sdfsdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'A01 - ATTTIVAZIONE', '12324565456545', '', 'Opzione 1', '', '', '', 'false', 6, 3, '', 'male', '', 's', 'sdf', '', 'personal', '9876543211', '', '1234567899', '', '', 'sdasd2@sdfsdf.sdf', '', 'sdf', 'sdf', '', '2010-04-20', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-20', '123456789123456789111234567', '', '', 'postal', '', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,9 @@ CREATE TABLE `status` (
 
 INSERT INTO `status` (`status_id`, `status_name`, `status_description`) VALUES
 (1, 'NEW', 'Auto Created'),
-(3, 'test 3', 'terfsd fsdfsdf gfdgdfg');
+(2, 'Ok', ''),
+(3, 'Pending', ''),
+(4, 'Other', 'test');
 
 -- --------------------------------------------------------
 
@@ -363,7 +366,7 @@ ALTER TABLE `campaigns`
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `documents`
 --
@@ -378,7 +381,7 @@ ALTER TABLE `notes`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --

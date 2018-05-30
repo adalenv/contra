@@ -12,7 +12,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
-                                                <input type="date" id="contract_date" name="date" class="form-control">
+                                                <input type="text" autocomplete="off" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating"></div>
                                             <div class="checkbox">
@@ -97,49 +97,49 @@
                                         <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Ragione Sociale</label>
-                                                <input type="text" name="rag_sociale" class="form-control">
+                                                <input type="text" autocomplete="off" name="rag_sociale" class="form-control">
                                             </div> 
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Nome*</label>
-                                                <input type="text" required name="first_name" class="form-control">
+                                                <input type="text" autocomplete="off" required name="first_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cognome*</label>
-                                                <input type="text" required name="last_name" class="form-control">
+                                                <input type="text" autocomplete="off" required name="last_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Codice Fiscale*</label>
-                                                <input type="text" required name="vat_number" class="form-control">
+                                                <input type="text" autocomplete="off" required name="vat_number" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Partita Iva</label>
-                                                <input type="text" class="form-control" name="partita_iva">
+                                                <input type="text" autocomplete="off" class="form-control" name="partita_iva">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data di Nascita*</label>
-                                                <input type="date" required  id="birth_date" class="form-control" name="birth_date">
+                                                <input type="text" autocomplete="off" required  id="birth_date" class="form-control" name="birth_date">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Nazione di Nascita*</label>
-                                                <input type="text" required class="form-control" name="birth_nation">
+                                                <input type="text" autocomplete="off" required class="form-control" name="birth_nation">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Comune di Nascita*</label>
-                                                <input type="text" required class="form-control" name="birth_municipality">
+                                                <input type="text" autocomplete="off" required class="form-control" name="birth_municipality">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -154,13 +154,13 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Numero di Documento*</label>
-                                                <input type="text" required class="form-control" name="document_number">
+                                                <input type="text" autocomplete="off" required class="form-control" name="document_number">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
-                                                <input type="date" required id="document_date" class="form-control" name="document_date">
+                                                <input type="text" autocomplete="off" required id="document_date" class="form-control" name="document_date">
                                             </div>
                                         </div>
                                     </div>
@@ -176,23 +176,23 @@
                                 <div class="card-content">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Telefono*</label>
-                                        <input type="text" name="tel_number" required class="form-control">
+                                        <input type="text" autocomplete="off" name="tel_number" required class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Fax/Altro Numero</label>
-                                        <input type="text" name="alt_number" class="form-control">
+                                        <input type="text" autocomplete="off" name="alt_number" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Cellulare*</label>
-                                        <input type="text" name="cel_number" required class="form-control">
+                                        <input type="text" autocomplete="off" name="cel_number" required class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Cellulare 2</label>
-                                        <input type="text" name="cel_number2" class="form-control">
+                                        <input type="text" autocomplete="off" name="cel_number2" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Cellulare 3</label>
-                                        <input type="text" name="cel_number3" class="form-control">
+                                        <input type="text" autocomplete="off" name="cel_number3" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email*</label>
@@ -224,25 +224,25 @@
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Indirizzo*</label>
-                                            <input type="text" required class="form-control" name="address">
+                                            <input type="text" autocomplete="off" required class="form-control" name="address">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="text" required class="form-control" name="civico">
+                                            <input type="text" autocomplete="off" required class="form-control" name="civico">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="price">
+                                            <input type="text" autocomplete="off" class="form-control" name="price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
-                                            <input type="text" required class="form-control" name="location">
+                                            <input type="text" autocomplete="off" required class="form-control" name="location">
                                         </div>
                                     </div>
                                 </div>
@@ -341,31 +341,31 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -402,13 +402,13 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -422,19 +422,19 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>
                                 </div>
@@ -474,19 +474,19 @@
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Codice IBAN</label>
-                                            <input type="text" class="form-control" name="iban_code">
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_code">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Intestario IBAN</label>
-                                            <input type="text" class="form-control" name="iban_accounthoder">
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_accounthoder">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                            <input type="text" class="form-control" name="iban_fiscal_code">
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_fiscal_code">
                                         </div>
                                     </div>
                                 </div>
@@ -529,19 +529,19 @@ $(window).ready(function(){
             $('#delegaifc').html(`<div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Nome*</label>
-                                            <input type="text" required name="delega_first_name" class="form-control">
+                                            <input type="text" autocomplete="off" required name="delega_first_name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Cognome*</label>
-                                            <input type="text" required name="delega_last_name" class="form-control">
+                                            <input type="text" autocomplete="off" required name="delega_last_name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Codice Fiscale*</label>
-                                            <input type="text" required name="delega_vat_number" class="form-control">
+                                            <input type="text" autocomplete="off" required name="delega_vat_number" class="form-control">
                                         </div>
                                     </div>`);
         }else{
@@ -570,25 +570,25 @@ $(window).ready(function(){
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Indirizzo*</label>
-                                            <input type="text" required class="form-control" name="uf_address">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_address">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="text" required class="form-control" name="uf_civico">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_civico">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="uf_price">
+                                            <input type="text" autocomplete="off" class="form-control" name="uf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
-                                            <input type="text" required class="form-control" name="uf_location">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_location">
                                         </div>
                                     </div>`); 
         }
@@ -609,25 +609,25 @@ $(window).ready(function(){
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Indirizzo*</label>
-                                            <input type="text" required class="form-control" name="ddf_address">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_address">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="text" required class="form-control" name="ddf_civico">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_civico">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="ddf_price">
+                                            <input type="text" autocomplete="off" class="form-control" name="ddf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
-                                            <input type="text" required class="form-control" name="ddf_location">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_location">
                                         </div>
                                     </div>`);
         }else {
@@ -650,13 +650,13 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -670,19 +670,19 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
             $('#gasif').show();
@@ -698,31 +698,31 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -749,13 +749,13 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -769,19 +769,19 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
             $('#gasif').hide();
@@ -802,31 +802,31 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -845,9 +845,18 @@ $(window).ready(function(){
 });
                 $('.createContractNav').addClass('active');
 
-                $('#contract_date').val(new Date().toJSON().split('T')[0]);
-                $('#birth_date').val(   new Date().toJSON().split('T')[0]);
-                $('#document_date').val(new Date().toJSON().split('T')[0]);
+                $('#contract_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#birth_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
 
                 $('.cb').val('false')
                 $('.cb').on('click',function() {

@@ -283,6 +283,38 @@ class Model
         return $workhours;
     }
 
+    public function getContractsNumber($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+    public function getContractsNumberOkPending($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=3) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
     public function getContracts($export=null){
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');

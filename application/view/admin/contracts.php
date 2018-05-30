@@ -154,7 +154,8 @@
                                             <?php 
                                                 $output='';
                                                 foreach ($contracts as $contract) {
-                                                    $output.='<tr>';
+
+                                                    $output.='<tr class="tdColor'.$contract->status.'">';
                                                                 if ($contract->contract_type=='gas') {
                                                                     $output.='<td>Gas</td>';
                                                                 }elseif ($contract->contract_type=='luce') {
@@ -164,24 +165,22 @@
                                                                 }
                                                     $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
                                                     
-                                                     $output.='<td><select onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                     $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
-                                                                        $output.='<option value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                        $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
                                                                     }else{
                                                                          $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
                                                                 }
                                                     $output.='</select></td>';
-                                                    $output.='<td><select   onchange="editContractCampaign('.$contract->contract_id.',Number(this.value))" id="campaign_select">';
                                                                 foreach ($campaigns as $key => $campaign) {
                                                                     if ($campaign->campaign_id==$contract->campaign) {
-                                                                        $output.='<option value="'.$campaign->campaign_id.'" selected="">'.$campaign->campaign_name.'</option>';
-                                                                    }else{
-                                                                         $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
+                                                                        $campaign1=$campaign->campaign_name;
+                                                                        break;
                                                                     }
                                                                 }
-                                                    $output.='</select></td>';
+                                                    $output.='<td>'.$campaign1.'</td>';
 
                                                                     foreach($operators as $user) {
                                                                         if ($contract->operator == $user->user_id) {
@@ -195,7 +194,7 @@
                                                                         $output.= '<td></td>';
                                                                     }
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
-                                                    $output.='<td>'.(explode(' ',$contract->date)[0]).'</td>
+                                                    $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
                                                                <td title="'.$contract->note.'">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
@@ -214,37 +213,50 @@ function exportContracts() {
     window.location.href+='&export=true';
 }
 function editContractStatus(contract_id,status_id){
-    console.log(contract_id,status_id);
-    $.ajax({
-        url: '<?=URL?>api/editContractStatus/',
-        type: 'POST',
-        data: {contract_id:contract_id,
-               status_id:status_id,
-              },
-      })
-      .done(function(data) {
-        //console.log(data.responseText);      
-      })
-      .fail(function(err) {
-        console.log(err);
-      });
+    swal({
+      title: 'Are you sure?',
+      text: "",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#777',
+      confirmButtonColor: '#00bcd4',
+      confirmButtonText: 'Change'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+            url: '<?=URL?>api/editContractStatus/',
+            type: 'POST',
+            data: {contract_id:contract_id,
+                   status_id:status_id,
+                  },
+          })
+          .done(function(data) {
+            //console.log(data.responseText);      
+          })
+          .fail(function(err) {
+            console.log(err);
+          });
+      }else{
+        $($('.ss'+contract_id)).val($('.oldstatus'+contract_id).val());
+      }
+    })
 }
-function editContractCampaign(contract_id,campaign_id){
-    console.log(contract_id,campaign_id);
-    $.ajax({
-        url: '<?=URL?>api/editContractCampaign/',
-        type: 'POST',
-        data: {contract_id:contract_id,
-               campaign_id:campaign_id,
-              },
-      })
-      .done(function(data) {
-        //console.log(data.responseText);      
-      })
-      .fail(function(err) {
-        console.log(err);
-      });
-}
+// function editContractCampaign(contract_id,campaign_id){
+//     console.log(contract_id,campaign_id);
+//     $.ajax({
+//         url: '<?=URL?>api/editContractCampaign/',
+//         type: 'POST',
+//         data: {contract_id:contract_id,
+//                campaign_id:campaign_id,
+//               },
+//       })
+//       .done(function(data) {
+//         //console.log(data.responseText);      
+//       })
+//       .fail(function(err) {
+//         console.log(err);
+//       });
+// }
 
                     $(function() {
 
@@ -391,3 +403,62 @@ function editContractCampaign(contract_id,campaign_id){
                         }
                     });
             </script>
+<style>
+
+    .tdColor1{/*pending*/
+        border-left: 2px solid #ff9800;
+        border-right: 2px solid #ff9800;
+    }
+    .statusColor1{
+        border: 1px solid #ff9800;
+    }
+
+    .tdColor2{/*ok*/
+        border-left: 2px solid #4caf50;
+        border-right: 2px solid #4caf50;
+    }
+    .statusColor2{
+        border: 1px solid #4caf50;
+    }
+
+    .tdColor3{/*ko*/
+        border-left: 2px solid #f44336;
+        border-right: 2px solid #f44336;
+    }
+    .statusColor3{
+        border: 1px solid #f44336;
+    }
+    .tdColor4{/*inserito*/
+        border-left: 2px solid #337ab7;
+        border-right: 2px solid #337ab7;
+    }
+    .statusColor4{
+        border: 1px solid #337ab7;
+    }
+
+    .tdColor5{/*da contatare*/
+        border-left: 2px solid #8a6d3b;
+        border-right: 2px solid #8a6d3b;
+    }
+    .statusColor5{
+        border: 1px solid #8a6d3b;
+    }
+
+    .tdColor6{/*switch*/
+        border-left: 2px solid #9c27b0;
+        border-right: 2px solid #9c27b0;
+    }
+    .statusColor6{
+        border: 1px solid #9c27b0;
+    }
+
+    .tdColor7{/*storni*/
+        border-left: 2px solid #00bcd4;
+        border-right: 2px solid #00bcd4;
+    }
+    .statusColor7{
+        border: 1px solid #00bcd4;
+    }
+</style>
+
+

@@ -10,9 +10,9 @@
                                 <div class="card-content">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="form-group label-floating">
+                                            <div class="form-group label-floating bmd-form-group is-filled">
                                                 <label class="control-label">Data Stipula</label>
-                                                <input disabled="" type="date" value="<?=$contract->date;?>" id="contract_date" name="date" class="form-control">
+                                                <input  type="text" disabled="" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Status</label>
@@ -172,7 +172,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data di Nascita*</label>
-                                                <input disabled="" type="date" value="<?=$contract->birth_date;?>" required  id="birth_date" class="form-control" name="birth_date">
+                                                <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->birth_date))?>" required  id="birth_date" class="form-control" name="birth_date">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -205,7 +205,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
-                                                <input disabled="" type="date" value="<?=$contract->document_date;?>" required id="document_date" class="form-control" name="document_date">
+                                                <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->document_date))?>" required id="document_date" class="form-control" name="document_date">
                                             </div>
                                         </div>
                                     </div>
@@ -916,6 +916,7 @@ function initAudioUploader(target) {
 
     adrop.on('sending', function(file, xhr, formData){
         formData.append('contract_id',"<?=$contract->contract_id;?>");
+        formData.append('client_name',"<?=$contract->first_name.' '.$contract->last_name;?>");
     });
     adrop.on("success", function(file, responseText) {
        loadDocAndAudio();
@@ -949,6 +950,7 @@ function initDocUploader(target) {
 
     zdrop.on('sending', function(file, xhr, formData){
         formData.append('contract_id',"<?=$contract->contract_id;?>");
+        formData.append('client_name',"<?=$contract->first_name.' '.$contract->last_name;?>");
     });
     zdrop.on("success", function(file, responseText) {
         loadDocAndAudio();

@@ -36,7 +36,7 @@
                                                     $output.='<tr>
                                                                 <td>'.$status->status_name.'</td>
                                                                 <td>'.$status->status_description.'</td>';
-                                                    if ($status->status_name!='NEW') {
+                                                    if ($status->status_name!='NEW' && $status->status_name!='Ok' && $status->status_name!='Pending') {
                                                    		$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editStatus/'.$status->status_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
                                                     }else $output.='<td></td></tr>';
                                                 }
