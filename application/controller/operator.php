@@ -9,7 +9,7 @@ class operator extends Controller
 
 
     public function index(){ 
-        header('Location:'.URL.$_SESSION['role'].'/contracts');
+        header('Location:'.URL.$_SESSION['role'].'/createContract');
     }
 
     function contracts(){   
@@ -35,8 +35,11 @@ class operator extends Controller
 
 
     public function viewContract($contract_id){ 
-        
-        //$supervisors =  $this->model->getUsersByRole('supervisor');
+        if (!isset($_SESSION['can_view'])) {
+            header('Location:'.URL.$_SESSION['role'].'/createContract');
+            echo 'You dont have permissions!';
+            return;
+        }
         $contract = $this->model->getContractById($contract_id);
         if (!$contract) {
            header('Location: ../');
@@ -50,6 +53,7 @@ class operator extends Controller
         require APP . 'view/operator/header.php';
         require APP . 'view/operator/viewContract.php';
         require APP . 'view/operator/footer.php';
+        unset($_SESSION['can_view']);
     }
 
     //////////-documents-//////////////

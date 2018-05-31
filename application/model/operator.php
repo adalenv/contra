@@ -759,7 +759,8 @@ class Model
                 //error handler
                 if ($query->execute()) {
                     header('location: viewContract/'.$this->db->lastInsertId());  
-                    $_SESSION['create_contract']='success';   
+                    $_SESSION['create_contract']='success';
+                    $_SESSION['can_view']='true';   
                 } else {
                     $_SESSION['create_contract']='fail';
                     //header("location:".URL.$_SESSION['role'].'/contracts');
