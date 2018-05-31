@@ -11,12 +11,6 @@
                                       </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="createUser" role="tablist">
-                                        <i class="material-icons">person_add</i>
-                                        Create User
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
                                         <i class="material-icons">access_time</i>
                                         Show Workhours
@@ -39,7 +33,6 @@
                                             <th>Full Name</th>
                                             <th>Role</th>
                                             <th>Supervisor</th>
-                                            <th><center>Action</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 
@@ -50,7 +43,6 @@
                                                                 <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
                                                                 <td>'.$this->model->getSupervisorByOperator($user->supervisor).'</td>
-                                                                <td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editUser/'.$user->user_id.'" ><i class="material-icons">edit</i></a></center></td>
                                                             </tr>';
                                                 }
                                                 echo $output;

@@ -104,7 +104,6 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <th>Type</th>
-                                            <th>ID</th>
                                             <th>Date</th>
                                             <th>Client Name</th>
                                             <th>Status</th>
@@ -115,7 +114,7 @@
                                             <?php 
                                                 $output='';
                                                 foreach ($contracts as $contract) {
-                                                    $output.='<tr>';
+                                                    $output.='<tr class="tdColor'.$contract->status.'">';
                                                                 if ($contract->contract_type=='gas') {
                                                                     $output.='<td>Gas</td>';
                                                                 }elseif ($contract->contract_type=='luce') {
@@ -123,8 +122,7 @@
                                                                 }else {
                                                                     $output.='<td>Dual</td>';
                                                                 }
-                                                    $output.='<td>'.$contract->contract_id.'</td>
-                                                                <td>'.(explode(' ',$contract->date)[0]).'</td>
+                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
                                                                 <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
@@ -289,3 +287,62 @@
                         }
                     });
             </script>
+    <style>
+
+    .tdColor1{/*pending*/
+        border-left: 2px solid #ff9800;
+        border-right: 2px solid #ff9800;
+    }
+    .statusColor1{
+        border: 1px solid #ff9800;
+    }
+
+    .tdColor2{/*ok*/
+        border-left: 2px solid #4caf50;
+        border-right: 2px solid #4caf50;
+    }
+    .statusColor2{
+        border: 1px solid #4caf50;
+    }
+
+    .tdColor3{/*ko*/
+        border-left: 2px solid #f44336;
+        border-right: 2px solid #f44336;
+    }
+    .statusColor3{
+        border: 1px solid #f44336;
+    }
+    .tdColor4{/*inserito*/
+        border-left: 2px solid #337ab7;
+        border-right: 2px solid #337ab7;
+    }
+    .statusColor4{
+        border: 1px solid #337ab7;
+    }
+
+    .tdColor5{/*da contatare*/
+        border-left: 2px solid #8a6d3b;
+        border-right: 2px solid #8a6d3b;
+    }
+    .statusColor5{
+        border: 1px solid #8a6d3b;
+    }
+
+    .tdColor6{/*switch*/
+        border-left: 2px solid #9c27b0;
+        border-right: 2px solid #9c27b0;
+    }
+    .statusColor6{
+        border: 1px solid #9c27b0;
+    }
+
+    .tdColor7{/*storni*/
+        border-left: 2px solid #00bcd4;
+        border-right: 2px solid #00bcd4;
+    }
+    .statusColor7{
+        border: 1px solid #00bcd4;
+    }
+</style>
+
+

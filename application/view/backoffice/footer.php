@@ -1,30 +1,17 @@
- <footer class="footer">
-<!--                 <div class="container-fluid">
+<script type="text/javascript">
+    $(function(){   
+        $(document).keydown(function(objEvent) {        
+            if (objEvent.ctrlKey) {          
+                if (objEvent.keyCode == 65 || objEvent.keyCode == 97) {                         
 
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav> -->
+                    return false;
+                }            
+            }        
+        });
+    });   
+</script>
+<footer class="footer">
+
                     <p class="copyright pull-right">
                         &copy;
                         <script>

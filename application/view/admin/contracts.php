@@ -231,7 +231,7 @@ function editContractStatus(contract_id,status_id){
                   },
           })
           .done(function(data) {
-            //console.log(data.responseText);      
+            $('.ss'+contract_id).removeClass('statusColor'+$('.oldstatus'+contract_id).val()).addClass('statusColor'+status_id).parent().parent().removeClass('tdColor'+$('.oldstatus'+contract_id).val()).addClass('tdColor'+status_id);
           })
           .fail(function(err) {
             console.log(err);

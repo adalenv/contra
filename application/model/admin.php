@@ -304,7 +304,7 @@ class Model
            $date=date('Y-m');
         }
         $date.='-01';
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=3) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=1) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
@@ -1106,7 +1106,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
         $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
         $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
-        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
+        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"];
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
@@ -1114,7 +1114,7 @@ delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
         if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$_FILES["file"]["name"]));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
             echo "success";
         }else{
             echo "fail";

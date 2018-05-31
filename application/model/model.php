@@ -611,7 +611,7 @@ class Model
                 )";
 
                 $query = $this->db->prepare($sql);
-                $query->bindParam(':date', $_POST['date']);
+                $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
                 $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
                 $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                 $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
@@ -636,12 +636,12 @@ class Model
                 $query->bindParam(':last_name', $_POST['last_name']);
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
-                $query->bindParam(':birth_date', $_POST['birth_date']);
+                $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
                 $query->bindParam(':birth_nation', $_POST['birth_nation']);
                 $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
-                $query->bindParam(':document_date', $_POST['document_date']);
+                $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['document_date'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2018 at 06:16 PM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Apr 21, 2010 at 02:49 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -153,12 +151,12 @@ INSERT INTO `contracts` (`contract_id`, `contract_type`, `proposal_number`, `dat
 (39, 'luce', '', '2018-05-26', 'false', 'false', 'false', 'via', 'sdfsdf', 'sdfsdf', '', 'asd', 'via', 'hgjgh', 'ghjgh', 'jghjgh', 'jghj', '', '', '', '', '', 'non_resident', 'ubicazione_fornitura', 'FIX12 TS', '', '', '', '', '', '', '', '', 'Maggior Tutela', '', '', 'Opzione 1', '', '', '', 'false', 6, 7, '', 'male', '', 'sd', 'sd', '', 'delega', 'asd', '', 'as', '', '', 'dasdasd@dfdsf', '', 'sad', 'sd', '', '2018-05-26', 'as', 'dfg', 'ghfg', 'hfgh', 'id_card', 'dasd', '2018-05-26', '', '', '', 'postal', '1', 1, 13),
 (40, 'gas', '', '2018-05-26', 'false', 'true', 'true', 'via', 'dfgfgfg', 'dfg', 'fg', 'dfgd', 'via', 'dfgdfg', 'fgdfg', '', 'dfgdfg', 'via', 'dfgdfg', 'dfg', '', 'dfg', 'non_resident', 'altro', 'FIX12 TS', '', '', '', '', '', 'false', '', '', 'Maggior Tutela', '', '', '', '', '', '', 'false', 6, 1, '', 'male', 'fgd', 'dfg', 'dfg', '', 'delega', 'dfg', '', 'g', '', '', 'fg@dffsdf.fgh', '', 'dfgdf', 'dfg', '', '2018-05-26', 'g', 'dele', 'ooo', 'fis', 'id_card', 'dfg', '2018-05-26', '', '', '', 'postal', '1', 3, 13),
 (41, 'luce', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdfg', 'fdg', '', 'dfg', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'Maggior Tutela', 'test', '', 'Opzione 1', '', '', '', 'false', 6, 1, '', 'male', 'df', 'gdf', 'g', '', 'personal', 'dfg', '', 'dfg', '', '', 'sdasd@fsf', '', 'dfg', 'dfg', '', '2018-05-27', 'dfg', '', '', '', 'id_card', 'dfg', '2018-05-27', '', '', '', 'postal', '', 1, 13),
-(42, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasd', '', '', '', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', 'false', 'false', '', '', 'Maggior Tutela', '12345678901234', '', 'Opzione 1', '', '', '', 'false', 6, 6, '', 'male', '', '', 'fasdasd', '', 'personal', 'sfsdfsdfsdfs', '', 'dfasdasdasd', '', '', '', '', '', '', '', '2018-05-27', '', '', '', '', 'id_card', '', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 0, 13),
-(43, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasdasd', 'asdasd', '', 'asdasd', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', '', 'false', '', '', 'Maggior Tutela', '12345678904000', '', 'Opzione 1', '', '12345678901234', '', 'false', 6, 4, '', 'male', '', 'j', 'sdf', '', 'personal', '1232133433', '', '1242343454', '', '', 'sdfsdfsdf@sdasd', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789012345678909234567', '', '', 'postal', '1', 1, 13),
+(42, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasd', '', '', '', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', 'false', 'false', '', '', 'Maggior Tutela', '12345678901234', '', 'Opzione 1', '', '', '', 'false', 6, 2, '', 'male', '', '', 'fasdasd', '', 'personal', 'sfsdfsdfsdfs', '', 'dfasdasdasd', '', '', '', '', '', '', '', '2018-05-27', '', '', '', '', 'id_card', '', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 0, 13),
+(43, 'dual', '', '2018-05-27', 'false', 'false', 'false', 'via', 'asdasdasd', 'asdasd', '', 'asdasd', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678901234', '', '', '', 'false', '', '', 'Maggior Tutela', '12345678904000', '', 'Opzione 1', '', '12345678901234', '', 'false', 6, 1, '', 'male', '', 'j', 'sdf', '', 'personal', '1232133433', '', '1242343454', '', '', 'sdfsdfsdf@sdasd', '', 'sdf', 'sdf', '', '2018-05-27', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-27', '123456789012345678909234567', '', '', 'postal', '1', 1, 13),
 (44, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '55345678901234', '', '', 'false', 'false', '', '', 'Maggior Tutela', '', '', '', '', '', '', 'false', 6, 2, '', 'male', 'asda', 'asd', 'asd', '', 'delega', '1234567899', '', '1234567888', '', '', 'asdasdasd@dfsdf', '', 'asd', 'asd', '', '2018-05-27', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'id_card', 'asd', '2018-05-27', '123456789012345678901234567', '', '', 'postal', '', 3, 13),
-(45, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', '.sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678909876', '', '', '', 'false', 'dfg', '', 'Maggior Tutela', '', '', '', '', '', '', 'false', 6, 1, '', 'male', '', 'df', 'gd', '', 'delega', '9876543210', '', '1234567890', '', '', 'bnj@sdf', '', 'dfg', 'fg', '', '2018-05-27', 'dfg', 'dfg', 'dfg', 'dfg', 'id_card', 'dfg', '2018-02-06', '1234567891234567891234567ee', '', '', 'postal', '', 3, 13),
-(46, 'dual', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'Maggior Tutela', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 15, 3, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2010-04-21', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-21', '123456789876543212365478900', '', '', 'postal', '1hggh\r\n=', 3, 12),
-(47, 'luce', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdfsdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'Maggior Tutela', '12324565456545', '', 'Opzione 1', '', '', '', 'false', 6, 2, '', 'male', '', 's', 'sdf', '', 'personal', '9876543211', '', '1234567899', '', '', 'sdasd2@sdfsdf.sdf', '', 'sdf', 'sdf', '', '2018-05-30', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-30', '123456789123456789111234567', '', '', 'postal', '', 1, 13);
+(45, 'gas', '', '2018-05-27', 'false', 'false', 'false', 'via', 'sdf', 'sdf', '', '.sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', 'SW1 - SWITCH', '12345678909876', '', '', '', 'false', 'dfg', '', 'Maggior Tutela', '', '', '', '', '', '', 'false', 6, 3, '', 'male', '', 'df', 'gd', '', 'delega', '9876543210', '', '1234567890', '', '', 'bnj@sdf', '', 'dfg', 'fg', '', '2018-05-27', 'dfg', 'dfg', 'dfg', 'dfg', 'id_card', 'dfg', '2018-02-06', '1234567891234567891234567ee', '', '', 'postal', '', 3, 13),
+(46, 'dual', '', '2010-04-21', 'true', 'true', 'true', 'via', 'sdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '12345678908766', '', '', '', 'false', '', '', 'Maggior Tutela', '12345678908760', '', 'Opzione 1', '', '', '', 'false', 15, 4, '', 'male', 'sd', 'f', 'sdf', '', 'personal', '1234567890', '', '3215469787', '', '', 'sdfsdf@sdf', '', 'sdf', 'sdf', '', '2010-04-21', 'sdf', '', '', '', 'id_card', 'sdf', '2010-04-21', '123456789876543212365478900', '', '', 'postal', '1hggh\r\n=', 3, 12),
+(47, 'luce', '', '2010-04-22', 'true', 'true', 'true', 'via', 'sdfsdf', 'sdf', '', 'sdf', '', '', '', '', '', '', '', '', '', '', 'resident', 'residenza', 'FIX12 TS', '', '', '', '', '', '', '', '', 'Maggior Tutela', '12324565456545', '', 'Opzione 1', '', '', '', 'false', 6, 5, '', 'male', '', 's', 'sdf', '', 'personal', '9876543211', '', '1234567899', '', '', 'sdasd2@sdfsdf.sdf', '', 'sdf', 'sdf', '', '2018-05-30', 'sdf', '', '', '', 'id_card', 'sdf', '2018-05-30', '123456789123456789111234567', '', '', 'postal', '', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -353,51 +351,42 @@ ALTER TABLE `workhours`
 -- AUTO_INCREMENT for table `audios`
 --
 ALTER TABLE `audios`
-  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+  MODIFY `audio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
   MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
   MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
-
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
   MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
 -- AUTO_INCREMENT for table `workhours`
 --
 ALTER TABLE `workhours`
   MODIFY `workhours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

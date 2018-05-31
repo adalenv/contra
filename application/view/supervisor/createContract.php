@@ -12,7 +12,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
-                                                <input disabled="" type="date" id="contract_date" name="date" class="form-control">
+                                                <input disabled="" type="text" id="contract_date" name="date" class="form-control">
                                             </div>
                                         
                                             <div class="checkbox">
@@ -122,7 +122,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data di Nascita*</label>
-                                                <input type="date" required  id="birth_date" class="form-control" name="birth_date">
+                                                <input type="text" required  id="birth_date" class="form-control" name="birth_date">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -155,7 +155,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
-                                                <input type="date" required id="document_date" class="form-control" name="document_date">
+                                                <input type="text" required id="document_date" class="form-control" name="document_date">
                                             </div>
                                         </div>
                                     </div>
@@ -231,7 +231,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="price">
+                                            <input type="text" class="form-control" required name="price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -328,7 +328,8 @@
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="gas_request_type" name="gas_request_type">
-                                                <option>SW1 - SWITCH</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
 
                                             </select>
                                         </div>
@@ -336,31 +337,31 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -390,20 +391,21 @@
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" name="luce_request_type">
-                                                <option>A01 - ATTTIVAZIONE</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -417,19 +419,19 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>
                                 </div>
@@ -577,7 +579,7 @@ $(window).ready(function(){
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="uf_price">
+                                            <input type="text" class="form-control" required name="uf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -616,7 +618,7 @@ $(window).ready(function(){
                                     <div class="col-sm-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" class="form-control" name="ddf_price">
+                                            <input type="text" class="form-control" required name="ddf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -638,20 +640,21 @@ $(window).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" name="luce_request_type">
-                                                <option>A01 - ATTTIVAZIONE</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -665,19 +668,19 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
             $('#gasif').show();
@@ -685,39 +688,39 @@ $(window).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="gas_request_type" name="gas_request_type">
-                                                <option>SW1 - SWITCH</option>
-
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -737,20 +740,21 @@ $(window).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" name="luce_request_type">
-                                                <option>A01 - ATTTIVAZIONE</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="luce_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -764,19 +768,19 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Potenza</label>
-                                            <input type="text" class="form-control" name="luce_potenza">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_potenza">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tensione</label>
-                                            <input type="text" class="form-control" name="luce_tensione">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_tensione">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="luce_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
             $('#gasif').hide();
@@ -789,7 +793,8 @@ $(window).ready(function(){
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="gas_request_type" name="gas_request_type">
-                                                <option>SW1 - SWITCH</option>
+                                                <option>Mercato Libero</option>
+                                                <option>Maggior Tutela</option>
 
                                             </select>
                                         </div>
@@ -797,31 +802,31 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Fornitore Uscente</label>
-                                            <input type="text" class="form-control" name="gas_fornitore_uscente">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_fornitore_uscente">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Consume Annuo</label>
-                                            <input type="text" class="form-control" name="gas_consume_annuo">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Remi</label>
-                                            <input type="text" class="form-control" name="gas_remi">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_remi">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" class="form-control" name="gas_matricola">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -840,9 +845,18 @@ $(window).ready(function(){
 });
                 $('.createContractNav').addClass('active');
 
-                $('#contract_date').val(new Date().toJSON().split('T')[0]);
-                $('#birth_date').val(   new Date().toJSON().split('T')[0]);
-                $('#document_date').val(new Date().toJSON().split('T')[0]);
+                $('#contract_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#birth_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
 
                 $('.cb').val('false')
                 $('.cb').on('click',function() {

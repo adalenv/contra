@@ -10,12 +10,6 @@
                                           Users
                                       </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../../createUser" role="tablist">
-                                        <i class="material-icons">person_add</i>
-                                        Create User
-                                    </a>
-                                </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" role="tablist">
                                         <i class="material-icons">access_time</i>

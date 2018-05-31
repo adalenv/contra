@@ -665,6 +665,16 @@
                                         </div>
                                     </h4> 
                                 </div>
+                                <?php if ($contract->fature_via_email=='true'){ ?>
+                                    <div class="card-content">
+                                        <div class="col-sm-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Email</label>
+                                                <input disabled="" type="text" value="<?=$contract->email;?>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
 

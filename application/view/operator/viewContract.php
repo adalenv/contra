@@ -12,7 +12,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
-                                                <input disabled="" type="date" value="<?=$contract->date;?>" id="contract_date" name="date" class="form-control">
+                                                <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Status</label>
@@ -156,7 +156,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data di Nascita*</label>
-                                                <input disabled="" type="date" value="<?=$contract->birth_date;?>" required  id="birth_date" class="form-control" name="birth_date">
+                                                <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->birth_date))?>" required  id="birth_date" class="form-control" name="birth_date">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -189,7 +189,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
-                                                <input disabled="" type="date" value="<?=$contract->document_date;?>" required id="document_date" class="form-control" name="document_date">
+                                                <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->document_date))?>" required id="document_date" class="form-control" name="document_date">
                                             </div>
                                         </div>
                                     </div>
@@ -431,7 +431,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="gas_request_type" name="request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                     <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -480,7 +481,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="luce_request_type" name="request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -537,7 +539,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="gas_request_type" name="request_type">
-                                                    <option>SW1 - SWITCH</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -587,7 +590,8 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipologia Richiesta</label>
                                                 <select disabled="" class="form-control" id="luce_request_type" name="request_type">
-                                                    <option>A01 - ATTTIVAZIONE</option>
+                                                    <option>Mercato Libero</option>
+                                                    <option>Maggior Tutela</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -644,6 +648,16 @@
                                         </div>
                                     </h4> 
                                 </div>
+                                <?php if ($contract->fature_via_email=='true'){ ?>
+                                    <div class="card-content">
+                                        <div class="col-sm-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Email</label>
+                                                <input disabled="" type="text" value="<?=$contract->email;?>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -849,6 +863,7 @@ function initAudioUploader(target) {
 
     adrop.on('sending', function(file, xhr, formData){
         formData.append('contract_id',"<?=$contract->contract_id;?>");
+        formData.append('client_name',"<?=$contract->first_name.' '.$contract->last_name;?>");
     });
     adrop.on("success", function(file, responseText) {
        loadDocAndAudio();
@@ -882,6 +897,7 @@ function initDocUploader(target) {
 
     zdrop.on('sending', function(file, xhr, formData){
         formData.append('contract_id',"<?=$contract->contract_id;?>");
+        formData.append('client_name',"<?=$contract->first_name.' '.$contract->last_name;?>");
     });
     zdrop.on("success", function(file, responseText) {
         loadDocAndAudio();

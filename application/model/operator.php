@@ -261,22 +261,22 @@ class Model
     } 
     
 
-        
-
     public function uploadDocuments(){
         $contract_id=$_POST['contract_id'];
+        $client_name=$_POST['client_name'];
         $target_dir = APP."documents/";
-        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
         $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"];
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
         }
-        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
             echo "success";
         }else{
             echo "fail";
@@ -348,18 +348,20 @@ class Model
 
     public function uploadAudios(){
         $contract_id=$_POST['contract_id'];
+        $client_name=$_POST['client_name'];
         $target_dir = APP."audios/";
-        $target_file = $target_dir .$contract_id.'-'. basename($_FILES["file"]["name"]);
+        $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
         $allow_ext = array('mp3','wav','gsm','gsw');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
         }
-        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file)) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>$contract_id.'-'.$_FILES["file"]["name"]));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$ext));
             echo "success";
         }else{
             echo "fail";
@@ -407,7 +409,7 @@ class Model
         return $query->fetchAll();
     }
 
-        public function createContract(){
+    public function createContract(){
             switch ($_POST['contract_type']) {
                 case 'dual':
                     $sql="SELECT contract_id FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
@@ -625,17 +627,17 @@ class Model
 
                 $query->bindParam(':client_type', $_POST['client_type']);
                 $query->bindParam(':gender', $_POST['gender']);
-                $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
+                $query->bindParam(':rag_sociale', $_POST['rag_sociale']); 
                 $query->bindParam(':first_name', $_POST['first_name']);
                 $query->bindParam(':last_name', $_POST['last_name']);
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
-                $query->bindParam(':birth_date', $_POST['birth_date']);
+                $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
                 $query->bindParam(':birth_nation', $_POST['birth_nation']);
                 $query->bindParam(':birth_municipality', $_POST['birth_municipality']);
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
-                $query->bindParam(':document_date', $_POST['document_date']);
+                $query->bindValue(':document_date', date('Y-m-d',strtotime($_POST['document_date'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
