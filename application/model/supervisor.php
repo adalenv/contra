@@ -323,172 +323,30 @@ class Model
                                 analisi_cb,
                                 iniziative_cb,
 
-                    tel_number,
-                    alt_number,
-                    cel_number,
-                    cel_number2,
-                    cel_number3,
-                    email,
-                    alt_email,
-
-                    client_type,
-                    gender,
-                    rag_sociale,
-                    first_name,
-                    last_name,
-                    vat_number,
-                    partita_iva,
-                    birth_date,
-
-                    birth_nation,
-                    birth_municipality,
-                    document_type,
-                    document_number,
-                    document_date,
-
-                    toponimo,
-                    address,
-                    civico,
-                    price,
-                    location,
-                    cap,
-
-                    uf_toponimo,
-                    uf_address,
-                    uf_civico,
-                    uf_price,
-                    uf_location,
-                    uf_cap,
-
-                    ddf_toponimo,
-                    ddf_address,
-                    ddf_civico,
-                    ddf_price,
-                    ddf_location,
-                    ddf_cap,
-
-                    ubicazione_fornitura,
-                    domicillazione_documenti_fatture,
-                     contract_type,
-                     listino,
-
-                    gas_request_type,
-                    gas_pdr,
-                    gas_fornitore_uscente,
-                    gas_consume_annuo,
-                    gas_tipo_riscaldamento,
-                    gas_tipo_cottura_acqua,
-                    gas_remi,
-                    gas_matricola,
-
-                    luce_request_type,
-                    luce_pod,
-                    luce_tensione,
-                    luce_potenza,
-                    luce_fornitore_uscente,
-                    luce_opzione_oraria,
-                    luce_consume_annuo,
-
-                    fature_via_email,
-
-                    payment_type,
-                    iban_code,
-                    iban_accounthoder,
-                    iban_fiscal_code,
-                    note,
-                    status,
-
-                    delega_first_name,
-                    delega_last_name,
-                    delega_vat_number
-                                ) 
-                                VALUES
-                                (:date,
-                                    :operator,
-                                :supervisor,
-                                :campaign,
-                                :ugm_cb,
-                                :analisi_cb,
-                                :iniziative_cb,
-
-                    :tel_number,
-                    :alt_number,
-                    :cel_number,
-                    :cel_number2,
-                    :cel_number3,
-                    :email,
-                    :alt_email,
-
-                    :client_type,
-                    :gender,
-                    :rag_sociale,
-                    :first_name,
-                    :last_name,
-                    :vat_number,
-                    :partita_iva,
-
-                    :birth_date,
-                    :birth_nation,
-                    :birth_municipality,
-                    :document_type,
-                    :document_number,
-                    :document_date,
-
-                    :toponimo,
-                    :address,
-                    :civico,
-                    :price,
-                    :location,
-                    :cap,
-
-                    :uf_toponimo,
-                    :uf_address,
-                    :uf_civico,
-                    :uf_price,
-                    :uf_location,
-                    :uf_cap,
-
-                    :ddf_toponimo,
-                    :ddf_address,
-                    :ddf_civico,
-                    :ddf_price,
-                    :ddf_location,
-                    :ddf_cap,
-
-                    :ubicazione_fornitura,
-                    :domicillazione_documenti_fatture,
-                     :contract_type,
-                     :listino,
-
-                    :gas_request_type,
-                    :gas_pdr,
-                    :gas_fornitore_uscente,
-                    :gas_consume_annuo,
-                    :gas_tipo_riscaldamento,
-                    :gas_tipo_cottura_acqua,
-                    :gas_remi,
-                    :gas_matricola,
-
-                    :luce_request_type,
-                    :luce_pod,
-                    :luce_tensione,
-                    :luce_potenza,
-                    :luce_fornitore_uscente,
-                    :luce_opzione_oraria,
-                    :luce_consume_annuo,
-
-                    :fature_via_email,
-
-                    :payment_type,
-                    :iban_code,
-                    :iban_accounthoder,
-                    :iban_fiscal_code,
-                    :note,
-                    :status,
-
-                    :delega_first_name,
-                    :delega_last_name,
-                    :delega_vat_number
+                    tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,
+client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,
+birth_nation,birth_municipality,document_type,document_number,document_date,
+toponimo,address,civico,price,location,cap,
+uf_toponimo,uf_address,uf_civico,uf_price,uf_location,uf_cap,
+ddf_toponimo,ddf_address,ddf_civico,ddf_price,ddf_location,ddf_cap,
+ubicazione_fornitura,domicillazione_documenti_fatture, contract_type, listino,
+gas_request_type,gas_pdr,gas_fornitore_uscente,gas_consume_annuo,gas_tipo_riscaldamento,gas_tipo_cottura_acqua,gas_remi,gas_matricola,
+luce_request_type,luce_pod,luce_tensione,luce_potenza,luce_fornitore_uscente,luce_opzione_oraria,luce_consume_annuo,
+fature_via_email,
+payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status,
+delega_first_name,delega_last_name,delega_vat_number            )             VALUES            (:date,                :operator,            :supervisor,            :campaign,            :ugm_cb,            :analisi_cb,            :iniziative_cb,
+:tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
+:client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,
+:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
+:toponimo,:address,:civico,:price,:location,:cap,
+:uf_toponimo,:uf_address,:uf_civico,:uf_price,:uf_location,:uf_cap,
+:ddf_toponimo,:ddf_address,:ddf_civico,:ddf_price,:ddf_location,:ddf_cap,
+:ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type, :listino,
+:gas_request_type,:gas_pdr,:gas_fornitore_uscente,:gas_consume_annuo,:gas_tipo_riscaldamento,:gas_tipo_cottura_acqua,:gas_remi,:gas_matricola,
+:luce_request_type,:luce_pod,:luce_tensione,:luce_potenza,:luce_fornitore_uscente,:luce_opzione_oraria,:luce_consume_annuo,
+:fature_via_email,
+:payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status,
+:delega_first_name,:delega_last_name,:delega_vat_number
                 )";
 
                 $query = $this->db->prepare($sql);
@@ -529,6 +387,7 @@ class Model
                 $query->bindParam(':civico', $_POST['civico']);
                 $query->bindParam(':price', $_POST['price']);
                 $query->bindParam(':location', $_POST['location']);
+                $query->bindParam(':cap', $_POST['cap']);
 
                 if ($_POST['ubicazione_fornitura']=='non_resident') {
                     $query->bindParam(':uf_toponimo', $_POST['uf_toponimo']);

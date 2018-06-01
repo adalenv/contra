@@ -51,9 +51,10 @@
         Tip 2: you can also add an image using data-image tag
     --> 
             <div class="logo">
-                <a href="<?=URL;?>" class="simple-text">
+              <!--   <a href="<?=URL;?>" class="simple-text">
                     OPUS
-                </a>
+                </a> -->
+                <img style="width: 238px" src="<?php echo URL; ?>assets/img/jc.png"> 
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">

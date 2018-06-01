@@ -210,7 +210,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <input type="text" required class="form-control" name="toponimmo">
+                                            <input type="text" required class="form-control" name="toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -808,7 +808,7 @@ $(window).ready(function(){
             $('#luceif').hide();
             $('#luceifc').html('');
             $('#gasif').show();
-            $('#gasifc').html(`div class="col-sm-3">
+            $('#gasifc').html(`<div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia Richiesta</label>
                                             <select class="form-control" id="gas_request_type" name="gas_request_type">
