@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email*</label>
-                                        <input type="email" name="email" required class="form-control">
+                                        <input type="email" name="email"  class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email alternativa</label>
@@ -215,10 +215,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" required class="form-control" name="toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -233,16 +230,22 @@
                                             <input type="text" autocomplete="off" required class="form-control" name="civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
                                             <input type="text" autocomplete="off" required class="form-control" name="price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" autocomplete="off" required class="form-control" name="location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" required class="form-control" name="cap">
                                         </div>
                                     </div>
                                 </div>
@@ -366,7 +369,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Matricola</label>
-                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_matricola">
+                                            <input type="text" autocomplete="off" class="form-control" name="gas_matricola">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -472,26 +475,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice IBAN</label>
-                                            <input type="text" autocomplete="off" class="form-control" name="iban_code">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Intestario IBAN</label>
-                                            <input type="text" autocomplete="off" class="form-control" name="iban_accounthoder">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                            <input type="text" autocomplete="off" class="form-control" name="iban_fiscal_code">
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="paymentmodif"></div>
                             </div>
                         </div>
 
@@ -525,6 +509,34 @@ $(window).ready(function(){
             e.preventDefault();
         };
     });
+
+    $('[name="payment_type"]').change(function(){
+        if ($(this).val()=='cc') {
+            $('#paymentmodif').html(`<div class="card-content">
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Codice IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Intestario IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_accounthoder">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Codice ficsale Intestario IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_fiscal_code">
+                                        </div>
+                                    </div>
+                                </div>`);
+        } else{
+            $('#paymentmodif').html('');
+        }
+    });
+
     $('[name="client_type"]').change(function(){
         if ($(this).val()=='delega') {
             $('#delegaif').show();
@@ -563,34 +575,37 @@ $(window).ready(function(){
             $('#ubicazioneif').html(`<div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="uf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Indirizzo*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="uf_address">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_address">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="uf_civico">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" required="" autocomplete="off" class="form-control" name="uf_price">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="uf_location">
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" required class="form-control" name="uf_cap">
                                         </div>
                                     </div>`); 
         }
@@ -602,34 +617,37 @@ $(window).ready(function(){
             $('#domicillazioneif').html(`  <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="ddf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Indirizzo*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="ddf_address">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_address">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Civico*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="ddf_civico">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" required="" autocomplete="off" class="form-control" name="ddf_price">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
-                                            <input type="text" required="" autocomplete="off" required class="form-control" name="ddf_location">
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" required class="form-control" name="ddf_cap">
                                         </div>
                                     </div>`);
         }else {
@@ -909,6 +927,23 @@ function validate(){
         };
     };
     if (typeof($('[name="luce_pod"]').val())!='undefined') {
+        if ($('[name="luce_request_type"]').val()=='Maggior Tutela') {
+            if ($('[name="luce_pod"]').val().length!=15) {
+                $.notify({
+                  icon: "done",
+                  message: "POD must have 15 characters!"
+                },{
+                  type: 'danger',
+                  timer: 300,
+                  placement: {
+                      from: 'top',
+                      align: 'right'
+                  }
+                });
+                $('[name="luce_pod"]').focus();
+                valid=false;
+            };
+        } else{
         if ($('[name="luce_pod"]').val().length!=14) {
             $.notify({
               icon: "done",
@@ -924,6 +959,8 @@ function validate(){
             $('[name="luce_pod"]').focus();
             valid=false;
         };
+        }
+
     };
 
     if (typeof($('[name="iban_code"]').val())!='undefined') {
