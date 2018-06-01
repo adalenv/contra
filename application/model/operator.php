@@ -665,7 +665,7 @@ class Model
                     $query->bindValue(':uf_civico', '');
                     $query->bindValue(':uf_price', '');
                     $query->bindValue(':uf_location', '');
-                    $query->bindParam(':uf_cap', ''); 
+                    $query->bindValue(':uf_cap', ''); 
                 }
 
                 if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -681,7 +681,7 @@ class Model
                     $query->bindValue(':ddf_civico', '');
                     $query->bindValue(':ddf_price', '');
                     $query->bindValue(':ddf_location', ''); 
-                    $query->bindParam(':ddf_cap', '');
+                    $query->bindValue(':ddf_cap', '');
                 }
 
                 $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
