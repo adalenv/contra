@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email*</label>
-                                        <input disabled="" type="email" value="<?=$contract->email;?>" name="email" required class="form-control">
+                                        <input disabled="" type="email" value="<?=$contract->email;?>" name="email"  class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email alternativa</label>
@@ -244,10 +244,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select disabled="" class="form-control" id="toponimo" name="toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input disabled="" type="text" value="<?=$contract->address;?>" required class="form-control" name="toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -262,16 +259,22 @@
                                             <input disabled="" type="text" value="<?=$contract->civico;?>" required class="form-control" name="civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
                                             <input disabled="" type="text" value="<?=$contract->price;?>" class="form-control" name="price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input disabled="" type="text" value="<?=$contract->location;?>" required class="form-control" name="location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input disabled="" type="text" value="<?=$contract->cap;?>" required class="form-control" name="cap">
                                         </div>
                                     </div>
                                 </div>
@@ -297,10 +300,7 @@
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Toponimo*</label>
-                                                <select class="form-control" name="uf_toponimo">
-                                                    <option value="via">Via</option>
-                                                    <option>Other</option>
-                                                </select>
+                                                <<input disabled="" type="text" value="<?=$contract->address;?>" required class="form-control" name="uf_toponimo">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
@@ -315,16 +315,22 @@
                                                 <input type="text" value="<?=$contract->uf_civico;?>"  class="form-control" name="uf_civico">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Preso</label>
                                                 <input type="text" value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Locallita*</label>
                                                 <input type="text" value="<?=$contract->uf_location;?>"  class="form-control" name="uf_location">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cap*</label>
+                                                <input disabled="" type="text" value="<?=$contract->uf_cap;?>" required class="form-control" name="uf_cap">
                                             </div>
                                         </div>
                                     </div>
@@ -353,10 +359,7 @@
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Toponimo*</label>
-                                                <select class="form-control" name="ddf_toponimo">
-                                                    <option value="via">Via</option>
-                                                    <option>Other</option>
-                                                </select>
+                                                <input disabled="" type="text" value="<?=$contract->address;?>" required class="form-control" name="ddf_toponimo">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
@@ -371,16 +374,22 @@
                                                 <input type="text" value="<?=$contract->ddf_civico;?>"  class="form-control" name="ddf_civico">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Preso</label>
                                                 <input type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Locallita*</label>
                                                 <input type="text" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cap*</label>
+                                                <input disabled="" type="text" value="<?=$contract->ddf_cap;?>" required class="form-control" name="ddf_cap">
                                             </div>
                                         </div>
                                     </div>
@@ -662,7 +671,7 @@
                         </div>
 
                         <div class="col-sm-12">
-                            <div class="card">
+                            <div class="card"> 
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
                                         <h4 class="title">Modalita di pagamento</h4> 
@@ -675,6 +684,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            <?php if ($contract->payment_type=='cc') { ?>
                                  <div class="card-content">
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
@@ -695,6 +705,7 @@
                                         </div>
                                     </div>
                                 </div>
+                           <?php } ?>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -825,13 +836,13 @@
                 });
                 $('#client_type').val('<?=$contract->client_type;?>');
                 $('#document_type').val('<?=$contract->document_type;?>');
-                $('#toponimo').val('<?=$contract->toponimo;?>');
+                //$('#toponimo').val('<?=$contract->toponimo;?>');
                 $('#contract_type').val('<?=$contract->contract_type;?>');
                 $('#listino').val('<?=$contract->listino;?>');
                 $('#gas_request_type').val('<?=$contract->gas_request_type;?>');
                 $('#luce_request_type').val('<?=$contract->luce_request_type;?>');
-                $('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>')
-                $('#uf_toponimo').val('<?=$contract->uf_toponimo;?>')
+                //$('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>')
+                //$('#uf_toponimo').val('<?=$contract->uf_toponimo;?>')
                
 
 function initAudioUploader(target) {
