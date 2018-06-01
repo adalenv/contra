@@ -868,6 +868,23 @@ function validate(){
         };
     };
     if (typeof($('[name="luce_pod"]').val())!='undefined') {
+        if ($('[name="luce_request_type"]').val()=='Maggior Tutela') {
+            if ($('[name="luce_pod"]').val().length!=15) {
+                $.notify({
+                  icon: "done",
+                  message: "POD must have 15 characters!"
+                },{
+                  type: 'danger',
+                  timer: 300,
+                  placement: {
+                      from: 'top',
+                      align: 'right'
+                  }
+                });
+                $('[name="luce_pod"]').focus();
+                valid=false;
+            };
+        } else{
         if ($('[name="luce_pod"]').val().length!=14) {
             $.notify({
               icon: "done",
@@ -883,6 +900,8 @@ function validate(){
             $('[name="luce_pod"]').focus();
             valid=false;
         };
+        }
+
     };
 
     if (typeof($('[name="iban_code"]').val())!='undefined') {
