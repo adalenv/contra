@@ -472,18 +472,21 @@ class Model
                     civico,
                     price,
                     location,
+                    cap,
 
                     uf_toponimo,
                     uf_address,
                     uf_civico,
                     uf_price,
                     uf_location,
+                    uf_cap,
 
                     ddf_toponimo,
                     ddf_address,
                     ddf_civico,
                     ddf_price,
                     ddf_location,
+                    ddf_cap,
 
                     ubicazione_fornitura,
                     domicillazione_documenti_fatture,
@@ -557,18 +560,21 @@ class Model
                     :civico,
                     :price,
                     :location,
+                    :cap,
 
                     :uf_toponimo,
                     :uf_address,
                     :uf_civico,
                     :uf_price,
                     :uf_location,
+                    :uf_cap,
 
                     :ddf_toponimo,
                     :ddf_address,
                     :ddf_civico,
                     :ddf_price,
                     :ddf_location,
+                    :ddf_cap,
 
                     :ubicazione_fornitura,
                     :domicillazione_documenti_fatture,
@@ -609,7 +615,7 @@ class Model
                 $query = $this->db->prepare($sql);
                 $query->bindValue(':date', date('Y-m-d'));
                 $query->bindParam(':operator', $_SESSION['user_id'], PDO::PARAM_INT);
-                $query->bindParam(':supervisor', $_SESSION['supervisor'],PDO::PARAM_INT);
+                $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                 $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
                 $query->bindValue(':status','1',PDO::PARAM_INT);
 
@@ -644,6 +650,7 @@ class Model
                 $query->bindParam(':civico', $_POST['civico']);
                 $query->bindParam(':price', $_POST['price']);
                 $query->bindParam(':location', $_POST['location']);
+                $query->bindParam(':cap', $_POST['cap']);
 
                 if ($_POST['ubicazione_fornitura']=='non_resident') {
                     $query->bindParam(':uf_toponimo', $_POST['uf_toponimo']);
@@ -651,12 +658,14 @@ class Model
                     $query->bindParam(':uf_civico', $_POST['uf_civico']);
                     $query->bindParam(':uf_price', $_POST['uf_price']);
                     $query->bindParam(':uf_location', $_POST['uf_location']);
+                    $query->bindParam(':uf_cap', $_POST['uf_cap']);
                 }else{
                     $query->bindValue(':uf_toponimo','');
                     $query->bindValue(':uf_address', '');
                     $query->bindValue(':uf_civico', '');
                     $query->bindValue(':uf_price', '');
-                    $query->bindValue(':uf_location', ''); 
+                    $query->bindValue(':uf_location', '');
+                    $query->bindParam(':uf_cap', ''); 
                 }
 
                 if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -665,12 +674,14 @@ class Model
                     $query->bindParam(':ddf_civico', $_POST['ddf_civico']);
                     $query->bindParam(':ddf_price', $_POST['ddf_price']);
                     $query->bindParam(':ddf_location', $_POST['ddf_location']);
+                    $query->bindParam(':ddf_cap', $_POST['ddf_cap']);
                 }else{
                     $query->bindValue(':ddf_toponimo','');
                     $query->bindValue(':ddf_address', '');
                     $query->bindValue(':ddf_civico', '');
                     $query->bindValue(':ddf_price', '');
                     $query->bindValue(':ddf_location', ''); 
+                    $query->bindParam(':ddf_cap', '');
                 }
 
                 $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
@@ -751,9 +762,16 @@ class Model
                 $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
                
                 $query->bindParam(':payment_type', $_POST['payment_type']);
-                $query->bindParam(':iban_code', $_POST['iban_code']);
-                $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
-                $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
+                
+                if ($_POST['payment_type']=='cc') {
+                    $query->bindParam(':iban_code', $_POST['iban_code']);
+                    $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
+                    $query->bindParam(':iban_fiscal_code', $_POST['iban_fiscal_code']);
+                }else{
+                    $query->bindValue(':iban_code','');
+                    $query->bindValue(':iban_accounthoder', '');
+                    $query->bindValue(':iban_fiscal_code', '');
+                }
                 $query->bindParam(':note', $_POST['note']);
 
                 //error handler

@@ -29,6 +29,24 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Supervisor</label>
+                                                <select class="form-control" required name="supervisor" id="supervisor">
+                                                    <option value=''></option>
+                                                    <?php
+                                                        $output=''; 
+                                                        foreach ($supervisors as $supervisor) {
+                                                            if ($supervisor->user_id==$_SESSION['supervisor']) {
+                                                                $output.='<option selected value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';  
+                                                            }else{
+                                                                $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
+                                                            }
+                                                            
+                                                        }
+                                                        echo $output;
+                                                    ?>
+                                                </select>
+                                            </div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input type="checkbox" class="cb" value="false" name="ugm_cb">Iniziative Promocionali UGM  
@@ -144,7 +162,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="col-sm-4">
@@ -174,8 +192,8 @@
                                         <input type="text" name="cel_number3" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Email*</label>
-                                        <input type="email" name="email" required class="form-control">
+                                        <label class="control-label">Email</label>
+                                        <input type="email" name="email" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email alternativa</label>
@@ -194,10 +212,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" required class="form-control" name="toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -212,16 +227,22 @@
                                             <input type="text" required class="form-control" name="civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
                                             <input type="text" class="form-control" required name="price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" required class="form-control" name="location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" required class="form-control" name="cap">
                                         </div>
                                     </div>
                                 </div>
@@ -451,26 +472,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice IBAN</label>
-                                            <input type="text" class="form-control" name="iban_code">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Intestario IBAN</label>
-                                            <input type="text" class="form-control" name="iban_accounthoder">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                            <input type="text" class="form-control" name="iban_fiscal_code">
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="paymentmodif"></div>
                             </div>
                         </div>
 
@@ -504,6 +506,34 @@ $(window).ready(function(){
             e.preventDefault();
         };
     });
+
+    $('[name="payment_type"]').change(function(){
+        if ($(this).val()=='cc') {
+            $('#paymentmodif').html(`<div class="card-content">
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Codice IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Intestario IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_accounthoder">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Codice ficsale Intestario IBAN</label>
+                                            <input type="text" autocomplete="off" class="form-control" name="iban_fiscal_code">
+                                        </div>
+                                    </div>
+                                </div>`);
+        } else{
+            $('#paymentmodif').html('');
+        }
+    });
+
     $('[name="client_type"]').change(function(){
         if ($(this).val()=='delega') {
             $('#delegaif').show();
@@ -542,10 +572,7 @@ $(window).ready(function(){
             $('#ubicazioneif').html(`<div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="uf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" required class="form-control" name="uf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -560,16 +587,22 @@ $(window).ready(function(){
                                             <input type="text" required class="form-control" name="uf_civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
                                             <input type="text" class="form-control" required name="uf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" required class="form-control" name="uf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" required class="form-control" name="uf_cap">
                                         </div>
                                     </div>`); 
         }
@@ -581,10 +614,7 @@ $(window).ready(function(){
             $('#domicillazioneif').html(`  <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" name="ddf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" required class="form-control" name="ddf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -605,10 +635,16 @@ $(window).ready(function(){
                                             <input type="text" class="form-control" required name="ddf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" required class="form-control" name="ddf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" required class="form-control" name="ddf_cap">
                                         </div>
                                     </div>`);
         }else {

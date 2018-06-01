@@ -7,18 +7,16 @@ if($_SESSION['role']!='operator') { header('Location:'.URL); return; };
 class operator extends Controller
 {
 
-
     public function index(){ 
         header('Location:'.URL.$_SESSION['role'].'/createContract');
     }
-
-    function contracts(){   
-        $contracts=$this->model->getContracts();
-        $statuses=$this->model->getStatuses();
-        require APP . 'view/operator/header.php';
-        require APP . 'view/operator/contracts.php';
-        require APP . 'view/operator/footer.php';
-    }
+    // function contracts(){   
+    //     $contracts=$this->model->getContracts();
+    //     $statuses=$this->model->getStatuses();
+    //     require APP . 'view/operator/header.php';
+    //     require APP . 'view/operator/contracts.php';
+    //     require APP . 'view/operator/footer.php';
+    // }
     
     public function createContract(){ 
         if(isset($_POST['create_contract'])){
@@ -26,13 +24,12 @@ class operator extends Controller
             return;
         }
         //$operators   =  $this->model->getUsersByRole('operator');
-        //$supervisors   =  $this->model->getUsersByRole('supervisor');
+        $supervisors   =  $this->model->getUsersByRole('supervisor');
         $campaigns=$this->model->getCampaigns();
         require APP . 'view/operator/header.php';
         require APP . 'view/operator/createContract.php';
         require APP . 'view/operator/footer.php';
     }
-
 
     public function viewContract($contract_id){ 
         if (!isset($_SESSION['can_view'])) {
@@ -79,8 +76,6 @@ class operator extends Controller
         $this->model->getAudio($audio_id);
     }
     /////////////////////////////////
-
-
 
 ////////////////////////////////////////////////////////
 

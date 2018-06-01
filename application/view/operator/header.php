@@ -58,12 +58,12 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="contractsNav"> 
+<!--                     <li class="contractsNav"> 
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
                             <p>Contracts</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="createContractNav"> <!--class="active"-->
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>

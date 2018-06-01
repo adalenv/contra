@@ -243,7 +243,7 @@
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email*</label>
-                                        <input type="email" value="<?=$contract->email;?>" name="email" required class="form-control">
+                                        <input type="email" value="<?=$contract->email;?>" name="email"  class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email alternativa</label>
@@ -262,10 +262,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" id="toponimo" name="toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" value="<?=$contract->toponimo;?>" required class="form-control" name="toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -280,16 +277,22 @@
                                             <input type="text" autocomplete="off" value="<?=$contract->civico;?>" required class="form-control" name="civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" autocomplete="off" value="<?=$contract->price;?>" class="form-control" name="price">
+                                            <input type="text" autocomplete="off" value="<?=$contract->price;?>" required class="form-control" name="price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" autocomplete="off" value="<?=$contract->location;?>" required class="form-control" name="location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" value="<?=$contract->cap;?>" required class="form-control" name="cap">
                                         </div>
                                     </div>
                                 </div>
@@ -315,34 +318,37 @@
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Toponimo*</label>
-                                                <select class="form-control" name="uf_toponimo">
-                                                    <option value="via">Via</option>
-                                                    <option>Other</option>
-                                                </select>
+                                                <input type="text" autocomplete="off" required="" value="<?=$contract->uf_toponimo;?>" class="form-control" name="uf_toponimo">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Indirizzo*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->uf_address;?>"  class="form-control" name="uf_address">
+                                                <input type="text" autocomplete="off" value="<?=$contract->uf_address;?>" required=""   class="form-control" name="uf_address">
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Civico*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->uf_civico;?>"  class="form-control" name="uf_civico">
+                                                <input type="text" autocomplete="off" value="<?=$contract->uf_civico;?>" required=""  class="form-control" name="uf_civico">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Preso</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
+                                                <input type="text" autocomplete="off" value="<?=$contract->uf_price;?>" required=""  class="form-control" name="uf_price">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Locallita*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->uf_location;?>"  class="form-control" name="uf_location">
+                                                <input type="text" autocomplete="off" value="<?=$contract->uf_location;?>" required=""  class="form-control" name="uf_location">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cap*</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->uf_cap;?>" required=""  class="form-control" name="uf_cap">
                                             </div>
                                         </div>
                                     </div>
@@ -376,34 +382,37 @@
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Toponimo*</label>
-                                                <select class="form-control" name="ddf_toponimo">
-                                                    <option value="via">Via</option>
-                                                    <option>Other</option>
-                                                </select>
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_toponimo;?>" required class="form-control" name="ddf_toponimo">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Indirizzo*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_address;?>"  class="form-control" name="ddf_address">
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_address;?>" required class="form-control" name="ddf_address">
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Civico*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_civico;?>"  class="form-control" name="ddf_civico">
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_civico;?>" required class="form-control" name="ddf_civico">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Preso</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_price;?>" required class="form-control" name="ddf_price">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Locallita*</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_location;?>" required  class="form-control" name="ddf_location">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cap*</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->ddf_cap;?>" required  class="form-control" name="ddf_cap">
                                             </div>
                                         </div>
                                     </div>
@@ -742,26 +751,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="card-content">
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice IBAN</label>
-                                            <input type="text" autocomplete="off" value="<?=$contract->iban_code;?>" class="form-control" name="iban_code">
+                                <?php if ($contract->payment_type=='cc') {?>
+                                    <div class="card-content" id="paymentif">
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Codice IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_code;?>" class="form-control" name="iban_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Intestario IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Codice ficsale Intestario IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Intestario IBAN</label>
-                                            <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                            <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
-                                        </div>
-                                    </div>
-                                </div>
+                               <?php } else { ?>
+                                        <div class="card-content" id="paymentif">
+                               <?php } ?>
                             </div>
                         </div>
 
@@ -852,6 +865,30 @@
             </div>
 <script type="text/javascript">
 $(document).ready(function(){
+    $('[name="payment_type"]').change(function() {
+        if ($(this).val()=='cc') {
+            $('#paymentif').html(`<div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Codice IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_code;?>" class="form-control" name="iban_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Intestario IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Codice ficsale Intestario IBAN</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                            </div>
+                                        </div>`);
+        } else{
+            $('#paymentif').html('');
+        }
+    });
     $('[name="client_type"]').change(function(){
         if ($(this).val()=='delega') {
             $('#delegaif').show();
@@ -890,10 +927,7 @@ $(document).ready(function(){
             $('#ubicazioneif').html(`<div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" id="uf_toponimo" name="uf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" value="<?=$contract->uf_toponimo;?>" required class="form-control" name="uf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -908,16 +942,22 @@ $(document).ready(function(){
                                             <input type="text" autocomplete="off" value="<?=$contract->uf_civico;?>" required class="form-control" name="uf_civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" autocomplete="off"value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
+                                            <input type="text" autocomplete="off"value="<?=$contract->uf_price;?>" required class="form-control" name="uf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" autocomplete="off" value="<?=$contract->uf_location;?>" required class="form-control" name="uf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" value="<?=$contract->uf_cap;?>" required class="form-control" name="uf_cap">
                                         </div>
                                     </div>`);
             $('#uf_toponimo').val('<?=$contract->uf_toponimo;?>') 
@@ -930,10 +970,7 @@ $(document).ready(function(){
             $('#domicillazioneif').html(`  <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Toponimo*</label>
-                                            <select class="form-control" id="ddf_toponimo" name="ddf_toponimo">
-                                                <option value="via">Via</option>
-                                                <option>Other</option>
-                                            </select>
+                                            <input type="text" autocomplete="off" value="<?=$contract->ddf_toponimo;?>" required class="form-control" name="ddf_toponimo">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -948,16 +985,22 @@ $(document).ready(function(){
                                             <input type="text" autocomplete="off" value="<?=$contract->ddf_civico;?>" required class="form-control" name="ddf_civico">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Preso</label>
-                                            <input type="text" autocomplete="off" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
+                                            <input type="text" autocomplete="off" value="<?=$contract->ddf_price;?>" required class="form-control" name="ddf_price">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Locallita*</label>
                                             <input type="text" autocomplete="off" value="<?=$contract->ddf_location;?>" required class="form-control" name="ddf_location">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cap*</label>
+                                            <input type="text" autocomplete="off" value="<?=$contract->ddf_cap;?>" required class="form-control" name="ddf_cap">
                                         </div>
                                     </div>`);
             $('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>') 
