@@ -467,10 +467,10 @@
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
                                                 <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->tipo_riscaldamento;?>" name="tipo_riscaldamento">Riscaldamento
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->tipo_cottura_acqua;?>" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
                                                 </label>                           
                                             </div>
                                         </div>
@@ -575,10 +575,10 @@
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
                                                 <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->tipo_riscaldamento;?>" name="tipo_riscaldamento">Riscaldamento
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->tipo_cottura_acqua;?>" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
                                                 </label>                           
                                             </div>
                                         </div>

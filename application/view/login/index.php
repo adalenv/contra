@@ -335,9 +335,10 @@ class TextScramble {
 // ——————————————————————————————————————————————————
 
 const phrases = [
-  'Welcome',
-  'to',
-  'Opus'
+ // 'Welcome',
+ // 'to',
+  'Just Call',
+  'People First'
 
 ]
 

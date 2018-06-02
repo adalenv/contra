@@ -1048,20 +1048,25 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
                     header('Content-disposition: attachment; filename="'.$document->url.'"');
                     readfile($target_file);
                 break;
-			};
+			}; 
 		} else{
 			echo "File do not exist in server!";
 		}
 	}
-
+ 
     public function uploadAudios(){
+
         $contract_id=$_POST['contract_id'];
         $client_name=$_POST['client_name'];
+		$name=explode(' ',$client_name);
+		$first_name=$name[0];
+		$last_name=$name[1];
         $target_dir = APP."audios/";
-        $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["file"]["name"]);
+        $target_file = $target_dir.date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).basename($_FILES["file"]["name"]);
         $allow_ext = array('mp3','wav','gsm','gsw');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
-        $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
+		$target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
+       // $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
         if (!in_array($ext,$allow_ext)) { 
             echo "ext_error";
             return;
@@ -1069,7 +1074,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
         if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
             $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
             $query=$this->db->prepare($sql);
-            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'.'.$ext));
+            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext));
             echo "success";
         }else{
             echo "fail";
@@ -1101,6 +1106,10 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
 			switch(strtolower($ext)){  
 				case "mp3": 
 					header("Content-type: audio/mp3");  
+					readfile($target_file);
+				break;  
+				case "wav": 
+					header("Content-type: audio/wav");  
 					readfile($target_file);
 				break;  
 

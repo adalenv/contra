@@ -477,16 +477,16 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Consume Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
-                                            </div>
+                                            </div> 
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
                                                 <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->tipo_riscaldamento;?>" name="tipo_riscaldamento">Riscaldamento
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->tipo_cottura_acqua;?>" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
                                                 </label>                           
                                             </div>
                                         </div>
@@ -592,10 +592,10 @@
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
                                                 <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->tipo_riscaldamento;?>" name="tipo_riscaldamento">Riscaldamento
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->tipo_cottura_acqua;?>" name="tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
                                                 </label>                           
                                             </div>
                                         </div>
@@ -922,7 +922,7 @@ function initAudioUploader(target) {
     var adrop = new Dropzone(target, {
         url: "<?=URL.$_SESSION['role']?>/uploadAudios",
         previewTemplate: previewTemplate,
-        autoQueue: true,
+        autoQueue: false,
         previewsContainer: "#previews",
         clickable: "#upload-label2",
         acceptedFiles:"audio/*"

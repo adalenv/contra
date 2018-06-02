@@ -69,7 +69,7 @@ class api extends Controller
     public function deleteAudio(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
 
-        $file = APP."documents/".$_POST['url'];
+        $file = APP."audios/".$_POST['url'];
         $sql = "DELETE FROM audios WHERE audio_id=:audio_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':audio_id', $_POST['audio_id'],PDO::PARAM_INT);
