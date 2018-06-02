@@ -54,13 +54,33 @@ class Model
     }
 
     public function createUser(){
-        $sql="INSERT INTO users(username,password,first_name,last_name,role) VALUES (:username,:password,:first_name,:last_name,:role)";
+        if ($_POST['username']=='' || $_POST['password']=='' || $_POST['first_name']=='' || $_POST['last_name']=='') {
+            $_SESSION['create_user']='fail';
+            header("location:".URL.$_SESSION['role'].'/users');
+            return;
+        }
+        $sql="SELECT user_id  FROM users WHERE username=:username";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':username' => $_POST['username']));
+            
+        if ($query->rowCount()>0) {
+            $_SESSION['create_user']='fail';
+            header("location:".URL.$_SESSION['role'].'/users');
+            return;
+        }
+        if (!isset($_POST['supervisor'])) {
+            $supervisor=0;
+        }else{
+            $supervisor=$_POST['supervisor'];
+        }
+        $sql="INSERT INTO users(username,password,first_name,last_name,role,supervisor) VALUES (:username,:password,:first_name,:last_name,:role,:supervisor)";
         $query = $this->db->prepare($sql);
         $parameters=array(':username' => $_POST['username'],
                       ':password' => $_POST['password'],
                       ':first_name' => $_POST['first_name'],
                       ':last_name' => $_POST['last_name'],
                       ':role' => $_POST['role'],
+                      ':supervisor' => $supervisor,
                         );
         if($query->execute($parameters)){
             $_SESSION['create_user']='success';
@@ -71,6 +91,16 @@ class Model
     }
 
     public function editUser($user_id){
+        if ($_POST['username']=='' || $_POST['password']=='' || $_POST['first_name']=='' || $_POST['last_name']=='') {
+            $_SESSION['create_user']='fail';
+            header("location:".URL.$_SESSION['role'].'/users');
+            return;
+        }
+        if (!isset($_POST['supervisor'])) {
+            $supervisor=0;
+        }else{
+            $supervisor=$_POST['supervisor'];
+        }
         $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
         $parameters=array(':username' => $_POST['username'],
@@ -78,7 +108,7 @@ class Model
                       ':first_name' => $_POST['first_name'],
                       ':last_name' => $_POST['last_name'],
                       ':role' => $_POST['role'],
-                      ':supervisor_id' => $_POST['supervisor'],
+                      ':supervisor_id' => $supervisor,
                       ':user_id' => $user_id
                         );
         if($query->execute($parameters)){
@@ -140,6 +170,16 @@ class Model
     }
 
     public function createStatus(){
+        $sql="SELECT status_id  FROM status WHERE status_name=:status_name";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':status_name' => $_POST['status_name']));
+            
+        if ($query->rowCount()>0) {
+            $_SESSION['create_status']='fail';
+            header("location:".URL.$_SESSION['role'].'/statuses');
+            return;
+        }
+
         if ($_POST['status_name']=='') {
             $_SESSION['create_status']='fail';
             header("location:".URL.$_SESSION['role'].'/statuses');
@@ -201,6 +241,15 @@ class Model
 
 //////////////////////////////////////////////////////////////////////
     public function createCampaign(){
+        $sql="SELECT campaign_id  FROM campaigns WHERE campaign_name=:campaign_name";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':campaign_name' => $_POST['campaign_name']));
+            
+        if ($query->rowCount()>0) {
+            $_SESSION['campaign_status']='fail';
+            header("location:".URL.$_SESSION['role'].'/campaigns');
+            return;
+        }
         if ($_POST['campaign_name']=='') {
             $_SESSION['campaign_status']='fail';
             header("location:".URL.$_SESSION['role'].'/campaigns');

@@ -20,6 +20,13 @@ class api extends Controller
         echo json_encode($query->fetchAll());
     }
 
+    public function getSupervisors(){
+        $sql="SELECT CONCAT_WS(' ',first_name,last_name) AS full_name,user_id FROM users where role='supervisor' ";
+        $query=$this->db->prepare($sql);
+        $query->execute();
+        echo json_encode($query->fetchAll());
+    }
+
     public function getWorkhours(){
       $user_id=$_POST['user_id'];
       $date=$_POST['date'];
