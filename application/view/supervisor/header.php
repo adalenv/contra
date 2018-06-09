@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?php echo URL; ?>assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Supervisor</title>
+    <title>Supervisore</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -61,27 +61,27 @@
                     <li class="contractsNav"> 
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
-                            <p>Contracts</p>
+                            <p>Contratti</p>
                         </a>
                     </li>
                     <li class="createContractNav"> <!--class="active"-->
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>
-                            <p>Create Contract</p>
+                            <p>Inserisci Contrato</p>
                         </a>
                     </li>
                     <li class="usersNav">
                         <a href="<?=URL.$_SESSION['role'].'/users';?>">
                             <i class="material-icons">group</i>
-                            <p>Users</p>
+                            <p>Operatori</p>
                         </a>
                     </li>
-                    <li class="active-pro">
+<!--                     <li class="active-pro">
                         <a href="mailto:adalenvladi@gmail.com">
                             <i class="material-icons">unarchive</i>
                             <p>Support</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -108,7 +108,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?=URL.'home/logout';?>" class="btn-info">Logout</a>
+                                        <a href="<?=URL.'home/logout';?>" class="btn-info">Esci</a>
                                     </li>
                                 </ul>
                             </li>

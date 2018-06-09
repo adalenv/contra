@@ -7,13 +7,13 @@
                                 <li class="nav-item active">
                                       <a class="nav-link" href="" role="tablist">
                                           <i class="material-icons">person</i>
-                                          Users
+                                          Operatori
                                       </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
                                         <i class="material-icons">access_time</i>
-                                        Show Workhours
+                                        Ore di Lavoro
                                     </a>
                                 </li>
                             </ul>
@@ -24,14 +24,14 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Users</h4>
+                                    <h4 class="title">Operatori</h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
                                         <thead class="text-info">
-                                            <th>Full Name</th>
-                                            <th>Role</th>
+                                            <th>Nominativo</th>
+                                            <th>Ruolo</th>
                                         </thead>
                                         <tbody>
                                             <?php 

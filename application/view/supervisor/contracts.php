@@ -8,7 +8,7 @@
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia contratto</label>
                                             <select class="form-control" name="contract_type" id="contract_type">
-                                                <option value="%">All</option>
+                                                <option value="%">Tutti</option>
                                                 <option value="gas">Gas</option>
                                                 <option value="luce">Luce</option>
                                                 <option value="dual">Dual</option>
@@ -17,15 +17,15 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group label-floating ">
-                                            <label class="control-label">Client Name</label>
+                                            <label class="control-label">Nominativo</label>
                                             <input type="text" class="form-control" name="client_name" id="client_name">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group label-floating ">
-                                            <label class="control-label">Status</label>
+                                            <label class="control-label">Stato Pratica</label>
                                             <select class="form-control" name="status" id="status">
-                                                <option value='%'>All statuses</option>
+                                                <option value='%'>Tutti</option>
                                                 <?php
                                                     $output=''; 
                                                     foreach ($statuses as $status) {
@@ -38,9 +38,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group label-floating ">
-                                            <label class="control-label">Operator</label>
+                                            <label class="control-label">Operatore</label>
                                             <select class="form-control" name="operator" id="operator">
-                                                <option value='%'>All operators</option>
+                                                <option value='%'>Tutti</option>
                                                 <?php
                                                     $output=''; 
                                                     foreach ($operators as $operator) {
@@ -67,13 +67,13 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group label-floating ">
-                                            <label class="control-label">Phone</label>
+                                            <label class="control-label">Cellulare</label>
                                             <input type="text" class="form-control" name="phone" id="phone">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Date</label>
+                                            <label class="control-label">Data</label>
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
@@ -81,8 +81,8 @@
                                     <div class="col-md-3">
                                         <center>
                                             <div class="form-group label-floating ">
-                                                <input type="submit" name="" class="btn btn-info submit_btn">
-                                                <a href="#" class="btn reset_btn">Reset</a>
+                                                <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
+                                                <a href="#" class="btn reset_btn">Ripristina</a>
                                             <span class="material-input"></span></div>
                                         </center>
                                     </div>
@@ -99,17 +99,17 @@
                                         <div class="card-icon">
                                             <i class="material-icons">assignment</i>
                                           </div>
-                                        <h4 class="title">Contracts</h4>
+                                        <h4 class="title">Contratti</h4>
                                          <p class="category"></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
-                                                    <a onclick="$('.page_val').val(<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo ($_GET['page']-1); } } else {  } ?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >< Previous</a>
+                                                    <a onclick="$('.page_val').val(<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo ($_GET['page']-1); } } else {  } ?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >< Precedente</a>
                                                 </li>
                                                 <li class="paginate_button page-item last" id="datatables_last">
-                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Next ></a>                                
+                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>                                
                                                 </li>
                                             </ul>
                                         </div>
@@ -118,13 +118,13 @@
                                 <div class="card-content table-responsive">
                                     <table class="table table-hover">
                                         <thead>
-                                            <th>Type</th>
+                                            <th>Tipo</th>
                                             <th>ID</th>
-                                            <th>Date</th>
-                                            <th>Client Name</th>
-                                            <th>Status</th>
-                                            <th>Location</th>
-                                            <th>Operator</th>
+                                            <th>Data</th>
+                                            <th>Nominativo</th>
+                                            <th>Stato</th>
+                                            <th>Località</th>
+                                            <th>Operatore</th>
                                             <th>Note</th>
                                         </thead> 
                                         <tbody>

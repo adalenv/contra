@@ -1,7 +1,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                    <form method="POST" id="form" action="">
+                    <form method="POST" enctype="multipart/form-data" id="form" action="">
                         <div class="col-sm-12">
                             <div class="card ">
                                 <div class="card-header" data-background-color="blue">
@@ -17,20 +17,20 @@
                                         
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
-                                                    <input type="checkbox" class="cb" value="false" name="ugm_cb">Iniziative Promocionali UGM  
+                                                    <input type="checkbox" class="cb" value="false" name="ugm_cb">Iniziative Promocionali
                                                 </label>
                                                 <label class="control-label">
                                                     <input type="checkbox" class="cb" value="false" name="analisi_cb">Analisi di Mercato       
                                                 </label>                          
                                                 <label class="control-label">            
-                                                    <input type="checkbox" class="cb" value="false" name="iniziative_cb">Iniziative Promocionali Terze Parti 
+                                                    <input type="checkbox" class="cb" value="false" name="iniziative_cb">Iniziative Promocionali da terze parti 
                                                 </label>  
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Operator</label>
+                                                <label class="control-label">Operatore</label>
                                                 <select class="form-control"  required name="operator" id="operator">
                                                     <option value=''></option>
                                                     <?php
@@ -43,7 +43,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Campaign</label>
+                                                <label class="control-label">Campagna</label>
                                                 <select class="form-control" required name="campaign" id="campaign">
                                                     <option value=''></option>
                                                     <?php
@@ -70,9 +70,8 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Tipo Cliente</label>
+                                                <label class="control-label">Tipologia Cliente</label>
                                                 <select class="form-control" name="client_type">
-                                                    <option value="personal">Persona Fisica</option>
                                                     <option value="intestario">Intestario</option>
                                                     <option value="delega">Delega</option>
                                                 </select>
@@ -127,13 +126,13 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Nazione di Nascita*</label>
+                                                <label class="control-label">Luogo di Nascita*</label>
                                                 <input type="text" required class="form-control" name="birth_nation">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Comune di Nascita*</label>
+                                                <label class="control-label">Provincia di Nascita*</label>
                                                 <input type="text" required class="form-control" name="birth_municipality">
                                             </div>
                                         </div>
@@ -227,13 +226,13 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Preso</label>
+                                            <label class="control-label">Comune</label>
                                             <input type="text" class="form-control" required name="price">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Locallita*</label>
+                                            <label class="control-label">Provincia*</label>
                                             <input type="text" required class="form-control" name="location">
                                         </div>
                                     </div>
@@ -351,7 +350,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
@@ -433,7 +432,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>
@@ -464,13 +463,32 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="checkbox">                                         
-                                            <input type="radio" class="" value="postal" name="payment_type" id="" checked="">&nbsp; Bolletino postare
+                                            <input type="radio" class="" value="postal" name="payment_type" id="" checked="">&nbsp; Bolletino Postale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" class="" value="cc" name="payment_type" id="">&nbsp;Addebido su CC-payment                 
+                                            <input type="radio" class="" value="cc" name="payment_type" id="">&nbsp;Addebido su Conto Corrente                
                                         </div>
                                     </div>
                                 </div>
                                  <div id="paymentmodif"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">Audio</h4> 
+                                </div>
+                                <div class="card-content">
+                                    <!-- <input type='file' name="file" accept="audio/*" required /> -->
+                                
+                                  <div class="form-group file-area">
+                                    <input type="file" name="file" accept="audio/*" id="file" required="required"/>
+                                    <div class="file-dummy">
+                                      <div class="success">Great, your file is selected. Keep on.</div>
+                                      <div class="default">Please click to select audio file!</div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
 
@@ -485,7 +503,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <input type="hidden" name="create_contract" value="true">
-                                        <a href="../" class="btn btn-warning pull-left">Cancel</a>
+                                        <a href="../" class="btn btn-warning pull-left">Annulla</a>
                                         <button type="submit" class="submit-btn btn btn-info pull-right">Registra</button>
                                         <div class="clearfix"></div>
                                     </div>
@@ -587,13 +605,13 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Preso</label>
+                                            <label class="control-label">Comune</label>
                                             <input type="text" class="form-control" required name="uf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Locallita*</label>
+                                            <label class="control-label">Provincia*</label>
                                             <input type="text" required class="form-control" name="uf_location">
                                         </div>
                                     </div>
@@ -629,13 +647,13 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Preso</label>
+                                            <label class="control-label">Comune</label>
                                             <input type="text" class="form-control" required name="ddf_price">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Locallita*</label>
+                                            <label class="control-label">Provincia*</label>
                                             <input type="text" required class="form-control" name="ddf_location">
                                         </div>
                                     </div>
@@ -698,7 +716,7 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
@@ -726,7 +744,7 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
@@ -798,7 +816,7 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="luce_consume_annuo">
                                         </div>
                                     </div>`);
@@ -832,7 +850,7 @@ $(window).ready(function(){
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Consume Annuo</label>
+                                            <label class="control-label">Consumo Annuo</label>
                                             <input type="text" required="" autocomplete="off" class="form-control" name="gas_consume_annuo">
                                         </div>
                                     </div>
@@ -1017,3 +1035,49 @@ function validate(){
     return valid;
 }
 </script>
+<style type="text/css">
+    
+.file-area {
+  width: 100%;
+  position: relative;
+}
+.file-area input[type=file] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-area .file-dummy {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+}
+.file-area .file-dummy .success {
+  display: none;
+}
+.file-area:hover .file-dummy {
+  background: rgba(255, 255, 255, 0.1);
+}
+.file-area input[type=file]:focus + .file-dummy {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.file-area input[type=file]:valid + .file-dummy {
+  border-color: rgba(0, 255, 0, 0.4);
+  background-color: rgba(0, 255, 0, 0.3);
+}
+.file-area input[type=file]:valid + .file-dummy .success {
+  display: inline-block;
+}
+.file-area input[type=file]:valid + .file-dummy .default {
+  display: none;
+}
+</style>

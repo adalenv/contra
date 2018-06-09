@@ -7,19 +7,19 @@
                                 <li class="nav-item active">
                                       <a class="nav-link" href="" role="tablist">
                                           <i class="material-icons">person</i>
-                                          Users
+                                          Utenti
                                       </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="createUser" role="tablist">
                                         <i class="material-icons">person_add</i>
-                                        Create User
+                                        Creare un utente
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
                                         <i class="material-icons">access_time</i>
-                                        Show Workhours
+                                        Ore di Lavoro
                                     </a>
                                 </li>
                             </ul>
@@ -30,16 +30,16 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Users</h4>
+                                    <h4 class="title">Utenti</h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
                                         <thead class="text-info">
-                                            <th>Full Name</th>
-                                            <th>Role</th>
-                                            <th>Supervisor</th>
-                                            <th><center>Action</center></th>
+                                            <th>Nominativo</th>
+                                            <th>Ruolo</th>
+                                            <th>Supervisore</th>
+                                            <th><center>Azione</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 

@@ -350,17 +350,17 @@ class Model
 
         $contract_id=$_POST['contract_id'];
         $client_name=$_POST['client_name'];
-		$name=explode(' ',$client_name);
-		$first_name=$name[0];
-		$last_name=$name[1];
+        $name=explode(' ',$client_name);
+        $first_name=$name[0];
+        $last_name=$name[1];
+
         $target_dir = APP."audios/";
-        $target_file = $target_dir.date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).basename($_FILES["file"]["name"]);
         $allow_ext = array('mp3','wav','gsm','gsw');
-        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
-		$target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
-       // $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'.'.$ext;
+        $ext = pathinfo(basename($_FILES["file"]["name"]), PATHINFO_EXTENSION);
+        $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
         if (!in_array($ext,$allow_ext)) { 
-            echo "ext_error";
+            echo "ext_error: ";
+            echo $ext;
             return;
         }
         if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
@@ -612,6 +612,29 @@ class Model
 
                 //error handler
                 if ($query->execute()) {
+                    //audio upload
+                    $contract_id=$this->db->lastInsertId();
+                    $first_name=$_POST['first_name'];
+                    $last_name=$_POST['last_name'];
+
+                    $target_dir = APP."audios/";
+                    $allow_ext = array('mp3','wav','gsm','gsw');
+                    $ext = pathinfo(basename($_FILES["file"]["name"]), PATHINFO_EXTENSION);
+                    $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
+                    if (!in_array($ext,$allow_ext)) { 
+                        echo "ext_error: ";
+                        echo $ext;
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
+                        $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+                        $query=$this->db->prepare($sql);
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext));
+                        echo "success";
+                    }else{
+                        echo "fail";
+                    }
+                    
                     header('location: viewContract/'.$this->db->lastInsertId());  
                     $_SESSION['create_contract']='success';
                     $_SESSION['can_view']='true';   
