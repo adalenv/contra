@@ -4,15 +4,15 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Campaigns</h4>
+                                    <h4 class="title">Campagna</h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
                                         <thead class="text-info">
-                                            <th>Campaign</th>
-                                            <th>Description</th>
-                                            <th><center>Action</center></th>
+                                            <th>Campagna</th>
+                                            <th>Descrizione</th>
+                                            <th><center>Azione</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 

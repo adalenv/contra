@@ -7,7 +7,7 @@
                                 <li class="nav-item active">
                                       <a class="nav-link" href="users" role="tablist">
                                           <i class="material-icons">add</i>
-                                          Create Campaign
+                                          Crea Campagna
                                       </a>
                                 </li>
                             </ul>
@@ -18,8 +18,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Create Campaign</h4>
-                                    <p class="category">Creating new campaign</p>
+                                    <h4 class="title">Crea Campagna</h4>
                                 </div>
                                 <div class="card-content">
                                     <form action="" method="POST">

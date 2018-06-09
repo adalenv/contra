@@ -15,27 +15,27 @@
                                                 <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->date))?>" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Status</label>
+                                                <label class="control-label">Stato</label>
                                                 <select disabled="" class="form-control" required name="status" id="status">
                                                     <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
                                                 </select>
                                             </div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali UGM  
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali 
                                                 </label>
                                                 <label class="control-label">
                                                     <input disabled="" type="checkbox" class="cb" <?=($contract->analisi_cb=='true')?'checked':'';?> value="<?=$contract->analisi_cb;?>" name="analisi_cb">Analisi di Mercato       
                                                 </label>                          
                                                 <label class="control-label">            
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali Terze Parti 
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali da terze parti 
                                                 </label>  
                                             </div>
             
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Operator</label>
+                                                <label class="control-label">Operatore</label>
                                                 <select disabled="" class="form-control" required name="operator" id="operator">
                                                     <option value=''></option>
                                                     <?php
@@ -52,7 +52,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Campaign</label>
+                                                <label class="control-label">Campagna</label>
                                                 <select disabled="" class="form-control" required name="campaign" id="campaign">
                                                     <option value=''></option>
                                                     <?php
@@ -82,9 +82,8 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Tipo Cliente</label>
+                                                <label class="control-label">Tipologia Cliente</label>
                                                 <select disabled="" class="form-control" id="client_type" name="client_type">
-                                                    <option value="personal">Persona Fisica</option>
                                                     <option value="intestario">Intestario</option>
                                                     <option value="delega">Delega</option>
                                                 </select>
@@ -160,13 +159,13 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Nazione di Nascita*</label>
+                                                <label class="control-label">Luogo di Nascita*</label>
                                                 <input disabled="" type="text" value="<?=$contract->birth_nation;?>" required class="form-control" name="birth_nation">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Comune di Nascita*</label>
+                                                <label class="control-label">Provincia di Nascita*</label>
                                                 <input disabled="" type="text" value="<?=$contract->birth_municipality;?>" required  class="form-control" name="birth_municipality">
                                             </div>
                                         </div>
@@ -260,13 +259,13 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Preso</label>
+                                            <label class="control-label">Comune</label>
                                             <input disabled="" type="text" value="<?=$contract->price;?>" class="form-control" name="price">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Locallita*</label>
+                                            <label class="control-label">Provincia*</label>
                                             <input disabled="" type="text" value="<?=$contract->location;?>" required class="form-control" name="location">
                                         </div>
                                     </div>
@@ -316,13 +315,13 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Preso</label>
+                                                <label class="control-label">Comune</label>
                                                 <input type="text" value="<?=$contract->uf_price;?>" class="form-control" name="uf_price">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Locallita*</label>
+                                                <label class="control-label">Provincia*</label>
                                                 <input type="text" value="<?=$contract->uf_location;?>"  class="form-control" name="uf_location">
                                             </div>
                                         </div>
@@ -375,13 +374,13 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Preso</label>
+                                                <label class="control-label">Comune</label>
                                                 <input type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Locallita*</label>
+                                                <label class="control-label">Provincia*</label>
                                                 <input type="text" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
                                             </div>
                                         </div>
@@ -457,7 +456,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Consume Annuo</label>
+                                                <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
                                             </div>
                                         </div>
@@ -524,7 +523,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Consume Annuo</label>
+                                                <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="consume_annuo">
                                             </div>
                                         </div>
@@ -563,7 +562,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Consume Annuo</label>
+                                                <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
                                             </div>
                                         </div>
@@ -631,7 +630,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Consume Annuo</label>
+                                                <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->luce_consume_annuo;?>" class="form-control" name="consume_annuo">
                                             </div>
                                         </div>
@@ -673,9 +672,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="checkbox">                                         
-                                            <input disabled="" type="radio" <?=($contract->payment_type=='postal')?'checked':'';?> value="postal" name="payment_type">&nbsp; Bolletino postare
+                                            <input disabled="" type="radio" <?=($contract->payment_type=='postal')?'checked':'';?> value="postal" name="payment_type">&nbsp; Bolletino Postale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input disabled="" type="radio" <?=($contract->payment_type=='cc')?'checked':'';?> value="cc" name="payment_type">&nbsp;Addebido su CC-payment                 
+                                            <input disabled="" type="radio" <?=($contract->payment_type=='cc')?'checked':'';?> value="cc" name="payment_type">&nbsp;Addebido su Conto Corrento              
                                         </div>
                                     </div>
                                 </div>
@@ -989,7 +988,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append('<tr><td><audio controls><source src="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'"></audio></td><td>'+data[i].url+'</td></tr>');
+                $('.audio-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'">'+data[i].url+'</a></td></tr>');
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');

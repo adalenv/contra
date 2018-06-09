@@ -7,13 +7,13 @@
                                 <li class="nav-item">
                                       <a class="nav-link" href="../../users" role="tablist">
                                           <i class="material-icons">person</i>
-                                          Users
+                                          Operatore
                                       </a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" role="tablist">
                                         <i class="material-icons">access_time</i>
-                                        Show Workhours</br>
+                                        Ore di Lavoro</br>
                                         <input id="month" onchange="window.location.href=this.value;" name="month" style="background: white;color:grey;" type="month">
                                     </a>
                                 </li>
@@ -25,19 +25,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Workhours</h4>
+                                    <h4 class="title">Ore di Lavoro</h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
                                         <thead class="text-info">
-                                            <th>Full Name</th>
-                                            <th>Role</th>
-                                            <th>Contracts</th>
+                                            <th>Nominativo</th>
+                                            <th>Ruolo</th>
+                                            <th>Contratti</th>
                                             <th>OK/Pending</th>
-                                            <th>Hours</th>
-                                            <th>Performance</th>
-                                            <th><center>Action</center></th>
+                                            <th>Ore</th>
+                                            <th>Performanza</th>
+                                            <th><center>Azione</center></th>
                                         </thead>
                                         <tbody>
                                             <?php 
@@ -78,15 +78,15 @@
         </div>
         <div class="modal-body row">
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
-                <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="8"  placeholder="Enter Hours Number">
+                <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="8"  placeholder="Inserire il numero di ore">
                 <input type="hidden" id="h_user_id">
             </div>
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
-                <input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Enter Month">
+                <input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
             </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" onclick="addHoursM()" class="btn btn-info">Add Hours</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungere ore</button>
         </div>
             </br>
             <table style="width: 100%" class="table table-bordered table-responsive table-striped ">

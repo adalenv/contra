@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
@@ -17,7 +17,7 @@
     <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/material.min.js" type="text/javascript"></script>
-    <script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>
+    <!--<script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>-->
     <script src="<?php echo URL; ?>assets/js/arrive.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
@@ -52,40 +52,40 @@
                     <li class="contractsNav"> 
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
-                            <p>Contracts</p>
+                            <p>Contratti</p>
                         </a>
                     </li>
                     <li class="createContractNav">
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>
-                            <p>Create Contract</p>
+                            <p>Inserisci Contratto</p>
                         </a>
                     </li>
                     <li class="usersNav">
                         <a href="<?=URL.$_SESSION['role'].'/users';?>">
                             <i class="material-icons">group</i>
-                            <p>Users</p>
+                            <p>Operatori</p>
                         </a>
                     </li>
                     <li class="campaignNav">
                         <a href="<?=URL.$_SESSION['role'].'/campaigns';?>">
                             <i class="material-icons">event_note</i>
-                            <p>Campaigns</p>
+                            <p>Campagna</p>
                         </a>
                     </li>
                     <li class="statusNav">
                         <a href="<?=URL.$_SESSION['role'].'/statuses';?>">
                             <i class="material-icons">category</i>
-                            <p>Statuses</p>
+                            <p>Stato Pratica</p>
                         </a>
                     </li>
 
-                    <li class="active-pro">
+<!--                     <li class="active-pro">
                         <a href="mailto:adalenvladi@gmail.com">
                             <i class="material-icons">unarchive</i>
                             <p>Support</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -112,7 +112,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?=URL.'home/logout';?>" class="btn-info">Logout</a>
+                                        <a href="<?=URL.'home/logout';?>" class="btn-info">Esci</a>
                                     </li>
                                 </ul>
                             </li>
