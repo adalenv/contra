@@ -141,7 +141,7 @@
                                                                 }
                                                     $output.='<td>'.$contract->contract_id.'</td>
                                                                 <td>'.date('d-m-Y',strtotime($contract->date)).'</td>
-                                                                <td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
+                                                                <td>'.$contract->first_name.' '.$contract->last_name.'</td>';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
                                                                         $status1=$status->status_name;
