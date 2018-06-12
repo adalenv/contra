@@ -12,7 +12,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
-                                                <input type="text" autocomplete="off" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
+                                                <input type="text" disabled=""  autocomplete="off" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Stato</label>

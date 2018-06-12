@@ -21,35 +21,35 @@ class supervisor extends Controller
         require APP . 'view/supervisor/footer.php';
     }
     
-    public function createContract(){ 
-        if(isset($_POST['create_contract'])){
-            $this->model->createContract();
-            return;
-        }
-        $operators   =  $this->model->getUsersByRole('operator');
-        //$supervisors   =  $this->model->getUsersByRole('supervisor');
-        $campaigns=$this->model->getCampaigns();
-        require APP . 'view/supervisor/header.php';
-        require APP . 'view/supervisor/createContract.php';
-        require APP . 'view/supervisor/footer.php';
-    }
+    // public function createContract(){ 
+    //     if(isset($_POST['create_contract'])){
+    //         $this->model->createContract();
+    //         return;
+    //     }
+    //     $operators   =  $this->model->getUsersByRole('operator');
+    //     //$supervisors   =  $this->model->getUsersByRole('supervisor');
+    //     $campaigns=$this->model->getCampaigns();
+    //     require APP . 'view/supervisor/header.php';
+    //     require APP . 'view/supervisor/createContract.php';
+    //     require APP . 'view/supervisor/footer.php';
+    // }
 
 
-    public function viewContract($contract_id){ 
+    // public function viewContract($contract_id){ 
         
-        //$supervisors =  $this->model->getUsersByRole('supervisor');
-        $contract = $this->model->getContractById($contract_id);
-        if (!$contract) {
-           header('Location: ../');
-           return;
-        }
-        $operators  =  $this->model->getUsersByRole('operator');
-        $statuses=$this->model->getStatuses();
-        $campaigns=$this->model->getCampaigns();
-        require APP . 'view/supervisor/header.php';
-        require APP . 'view/supervisor/viewContract.php';
-        require APP . 'view/supervisor/footer.php';
-    }
+    //     //$supervisors =  $this->model->getUsersByRole('supervisor');
+    //     $contract = $this->model->getContractById($contract_id);
+    //     if (!$contract) {
+    //        header('Location: ../');
+    //        return;
+    //     }
+    //     $operators  =  $this->model->getUsersByRole('operator');
+    //     $statuses=$this->model->getStatuses();
+    //     $campaigns=$this->model->getCampaigns();
+    //     require APP . 'view/supervisor/header.php';
+    //     require APP . 'view/supervisor/viewContract.php';
+    //     require APP . 'view/supervisor/footer.php';
+    // }
 
     //////////-documents-//////////////
     public function uploadDocuments(){ 

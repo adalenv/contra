@@ -12,7 +12,7 @@
                                         <thead class="text-info">
                                             <th>Status</th>
                                             <th>Description</th>
-                                            <th><center>Action</center></th>
+                                            <!-- <th><center>Action</center></th> -->
                                         </thead>
                                         <tbody>
                                             <?php 
@@ -22,9 +22,9 @@
                                                     $output.='<tr>
                                                                 <td>'.$status->status_name.'</td>
                                                                 <td>'.$status->status_description.'</td>';
-                                                    if ($status->status_id>7) {
-                                                   		$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editStatus/'.$status->status_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
-                                                    }else $output.='<td></td></tr>';
+                                                    // if ($status->status_id>7) {
+                                                   	// 	$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editStatus/'.$status->status_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
+                                                    // }else $output.='<td></td></tr>';
                                                 }
                                                 echo $output;
                                              ?>

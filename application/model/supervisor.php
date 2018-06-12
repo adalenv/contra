@@ -535,7 +535,8 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
                     }else{
                         echo "fail";
                     }
-                    header('location: viewContract/'.$this->db->lastInsertId());  
+                    //header('location: viewContract/'.$this->db->lastInsertId());
+                    header("location:".URL.$_SESSION['role'].'/contracts');  
                     $_SESSION['create_contract']='success';   
                 } else {
                     $_SESSION['create_contract']='fail';

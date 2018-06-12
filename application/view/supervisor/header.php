@@ -64,12 +64,12 @@
                             <p>Contratti</p>
                         </a>
                     </li>
-                    <li class="createContractNav"> <!--class="active"-->
+<!--                     <li class="createContractNav"> 
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>
                             <p>Inserisci Contrato</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="usersNav">
                         <a href="<?=URL.$_SESSION['role'].'/users';?>">
                             <i class="material-icons">group</i>

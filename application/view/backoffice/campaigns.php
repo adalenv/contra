@@ -12,7 +12,7 @@
                                         <thead class="text-info">
                                             <th>Campagna</th>
                                             <th>Descrizione</th>
-                                            <th><center>Azione</center></th>
+                                           <!--  <th><center>Azione</center></th> -->
                                         </thead>
                                         <tbody>
                                             <?php 
@@ -22,9 +22,9 @@
                                                     $output.='<tr>
                                                                 <td>'.$campaign->campaign_name.'</td>
                                                                 <td>'.$campaign->campaign_description.'</td>';
-                                                    if ($campaign->campaign_name!='NEW') {
-                                                   	#	$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editCampaign/'.$campaign->campaign_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
-                                                    }else $output.='<td></td></tr>';
+                                                    // if ($campaign->campaign_name!='NEW') {
+                                                   	// 	$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editCampaign/'.$campaign->campaign_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
+                                                    // }else $output.='<td></td></tr>';
                                                 }
                                                 echo $output;
                                              ?>
