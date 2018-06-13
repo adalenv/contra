@@ -141,25 +141,32 @@
                                                 <input type="text" autocomplete="off" required class="form-control" name="birth_municipality">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipo di Documento*</label>
                                                 <select class="form-control" name="document_type">
                                                     <option value="id_card">Carta Identita</option>
-                                                    <option value="passport">Passport</option>
+                                                    <option value="passport">Passporto</option>
+                                                    <option value="patent">Patente</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Numero di Documento*</label>
                                                 <input type="text" autocomplete="off" required class="form-control" name="document_number">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
                                                 <input type="text" autocomplete="off" required id="document_date" class="form-control" name="document_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Data Scadenza Documento*</label>
+                                                <input type="text" autocomplete="off" required="" id="document_expiry" name="document_expiry" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -896,6 +903,10 @@ $(window).ready(function(){
                     defaultDate:new Date(),
                  });
                 $('#document_date').datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_expiry').datetimepicker({
                     format: 'DD-MM-YYYY',
                     defaultDate:new Date(),
                  });

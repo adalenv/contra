@@ -600,7 +600,7 @@ gas_request_type,gas_pdr,gas_fornitore_uscente,gas_consume_annuo,gas_tipo_riscal
 luce_request_type,luce_pod,luce_tensione,luce_potenza,luce_fornitore_uscente,luce_opzione_oraria,luce_consume_annuo,
 fature_via_email,
 payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status,
-delega_first_name,delega_last_name,delega_vat_number            )             VALUES            (:date,                :operator,            :supervisor,            :campaign,            :ugm_cb,            :analisi_cb,            :iniziative_cb,
+delega_first_name,delega_last_name,delega_vat_number,document_expiry            )             VALUES            (:date,                :operator,            :supervisor,            :campaign,            :ugm_cb,            :analisi_cb,            :iniziative_cb,
 :tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
 :client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,
 :birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
@@ -612,7 +612,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
 :luce_request_type,:luce_pod,:luce_tensione,:luce_potenza,:luce_fornitore_uscente,:luce_opzione_oraria,:luce_consume_annuo,
 :fature_via_email,
 :payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status,
-:delega_first_name,:delega_last_name,:delega_vat_number
+:delega_first_name,:delega_last_name,:delega_vat_number,:document_expiry
                 )";
 
                 $query = $this->db->prepare($sql);
@@ -647,6 +647,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
+                $query->bindValue(':document_expiry',date('Y-m-d',strtotime($_POST['document_expiry'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
@@ -812,7 +813,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
 
 
     public function editContract($contract_id){
-        $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number WHERE contract_id=:contract_id";
+        $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry WHERE contract_id=:contract_id";
 
                 $query = $this->db->prepare($sql);                
                 $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
@@ -847,6 +848,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
+                $query->bindValue(':document_expiry',date('Y-m-d',strtotime($_POST['document_expiry'])));
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);

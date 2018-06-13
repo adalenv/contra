@@ -141,7 +141,8 @@
                                                 <label class="control-label">Tipo di Documento*</label>
                                                 <select class="form-control" name="document_type">
                                                     <option value="id_card">Carta Identita</option>
-                                                    <option value="passport">Passport</option>
+                                                    <option value="passport">Passporto</option>
+                                                    <option value="patent">Patente</option>
                                                 </select>
                                             </div>
                                         </div>
