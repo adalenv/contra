@@ -123,4 +123,15 @@ class api extends Controller
         } 
     }      
 
+    public function deleteContract(){
+        if($_SESSION['role']!='admin') { header('Location:'.URL); return; };
+        $sql = "DELETE FROM contracts WHERE contract_id=:contract_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+           echo "success";
+        }else{
+            echo "error";
+        } 
+    }
 }

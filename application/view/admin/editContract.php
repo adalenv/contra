@@ -851,6 +851,7 @@
                                     <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
+                                        <a onclick="deleteContract(<?=$contract->contract_id;?>)" class="btn btn-danger pull-left">Delete</a>
                                         <button type="submit" class="submit-btn btn btn-warning  pull-right">Update</button>
                                         <div class="clearfix"></div>
                                     </div>
@@ -1227,7 +1228,35 @@ $(document).ready(function(){
     })
 });
 
-
+function deleteContract(contract_id) {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#00bcd4',
+      confirmButtonColor: '#f44336',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          url: '<?=URL;?>api/deleteContract/',
+          type: 'POST',
+          data:{contract_id:contract_id}
+        })
+        .done(function(data) {
+            
+            if (data=='success') {
+                window.location.href='<?=URL;?>';
+            }
+            console.log(data);
+        })
+        .fail(function(err) {
+            console.log(err);
+        })
+      } 
+    })
+}
 function getOperators(supervisor_id){
     $.ajax({
       url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
