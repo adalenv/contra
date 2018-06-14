@@ -1010,10 +1010,10 @@ function validate(){
         };    };
 
     if (typeof($('[name="luce_potenza"]').val())!='undefined') {
-        if ($('[name="luce_potenza"]').val().length!=27) {
+        if ($('[name="luce_potenza"]').val().length>3) {
             $.notify({
               icon: "done",
-              message: "Potenza must have 3 characters!"
+              message: "Potenza must have 3 or less characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -1028,10 +1028,10 @@ function validate(){
     };
 
     if (typeof($('[name="luce_tensione"]').val())!='undefined') {
-        if ($('[name="luce_tensione"]').val().length!=27) {
+        if ($('[name="luce_tensione"]').val().length>3) {
             $.notify({
               icon: "done",
-              message: "Tensione must have 3 characters!"
+              message: "Tensione must have 3 or less characters!"
             },{
               type: 'danger',
               timer: 300,
@@ -1043,7 +1043,7 @@ function validate(){
             $('[name="luce_tensione"]').focus();
             valid=false;
         };
-    };
+    }
 
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
