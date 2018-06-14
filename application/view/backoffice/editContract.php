@@ -1582,7 +1582,42 @@ function validate(){
             valid=false;
         };
     };
+    if (typeof($('[name="luce_potenza"]').val())!='undefined') {
+        if ($('[name="luce_potenza"]').val().length>3) {
+            $.notify({
+              icon: "done",
+              message: "Potenza must have 3 or less characters!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="luce_potenza"]').focus();
+            valid=false;
+        };
+    };
 
+    if (typeof($('[name="luce_tensione"]').val())!='undefined') {
+        if ($('[name="luce_tensione"]').val().length>3) {
+            $.notify({
+              icon: "done",
+              message: "Tensione must have 3 or less characters!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="luce_tensione"]').focus();
+            valid=false;
+        };
+    };
+            
     if (typeof($('[name="tel_number"]').val())!='undefined') {
         var a=Number($('[name="tel_number"]').val());
         ee=a;
