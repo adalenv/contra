@@ -155,7 +155,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
-                                            <div class="form-group label-floating">
+                                            <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Data Rilascio Documento*</label>
                                                 <input type="text" required id="document_date" class="form-control" name="document_date">
                                             </div>

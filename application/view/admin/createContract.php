@@ -152,7 +152,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
-                                            <div class="form-group label-floating">
+                                            <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Numero di Documento*</label>
                                                 <input type="text" autocomplete="off" required class="form-control" name="document_number">
                                             </div>
