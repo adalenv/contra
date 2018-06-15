@@ -39,13 +39,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Username</label>
-                                                    <input type="text" required name="username" class="form-control" >
+                                                    <input type="text" name="username" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Password</label>
-                                                    <input type="password" required name="password" class="form-control">
+                                                    <input type="password" name="password" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -53,32 +53,27 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Fist Name</label>
-                                                    <input type="text" required name="first_name" class="form-control">
+                                                    <input type="text" name="first_name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Last Name</label>
-                                                    <input type="text" required name="last_name" class="form-control">
+                                                    <input type="text" name="last_name" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Role</label>
-                                                    <select  onchange="getSupervisors(this.value)" required name="role" class="form-control">
-                                                        <option value=''></option>
+                                                    <select name="role" class="form-control">
                                                         <option value="operator">Operator</option>
                                                         <option value="supervisor">Supervisor</option>
-                                                        <option value="economist">Economist</option>
                                                         <option value="backoffice">Backoffice</option>
                                                         <option value="admin">Admin</option>
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6" id="supervisorif">
-                                                
                                             </div>
                                         </div>
                                         <input type="hidden" name="create_user">
@@ -93,35 +88,4 @@
             </div>
             <script type="text/javascript">
                 $('.usersNav').addClass('active');
-
-function getSupervisors(v){
-    if (v=='operator') {
-        $.ajax({
-          url: '<?=URL;?>api/getSupervisors/',
-          type: 'POST',
-          dataType: 'json',
-        })
-        .done(function(data) {
-            dataa=data;
-            $('#supervisorif').html(`<div class="form-group label-floating">
-                                                    <label class="control-label">Role</label>
-                                                    <select  id="supervisor" required name="supervisor" class="form-control">
-                                                        <option value=''></option>
-                                                    </select>
-                                                </div>`);
-            $('#supervisor').focus();
-            for (var i=0;i<data.length;i++) {
-               $('#supervisor').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
-            };
-            $('#supervisorif').show();
-        })
-        .fail(function(err) {
-            console.log(err);
-        })
-    }else{
-        $('#supervisorif').html('');
-        $('#supervisorif').hide();
-    }
-
-}
             </script>

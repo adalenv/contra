@@ -51,6 +51,9 @@ class Controller
                 case 'backoffice':
                     require APP . 'model/backoffice.php';
                     break;
+                case 'economist':
+                    require APP . 'model/economist.php';
+                    break;
                 case 'supervisor':
                     require APP . 'model/supervisor.php';
                     break;

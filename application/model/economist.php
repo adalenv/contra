@@ -12,7 +12,7 @@ class Model
         }
     }
 ////////////////////////////////////////////////////////////////////
-//                  administrator
+//                  economist
 //////////////////////////////////////////////////////////////////
 
     public function getUser($user_id){
@@ -23,7 +23,7 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users  WHERE role!='admin' AND role!='backoffice'  AND role!='economist' ORDER BY role DESC";
+        $sql="SELECT * FROM users   ORDER BY role DESC";
         $query=$this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
