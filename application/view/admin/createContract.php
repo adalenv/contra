@@ -1043,7 +1043,7 @@ function validate(){
             $('[name="luce_tensione"]').focus();
             valid=false;
         };
-    }
+    };
 
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
