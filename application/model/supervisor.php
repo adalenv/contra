@@ -63,6 +63,37 @@ class Model
         return $query->fetchAll();
     }
 
+    public function getContractsNumber($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+    public function getContractsNumberOkPending($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=1) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
     public function getContractById($contract_id ){
         $sql='SELECT * FROM contracts INNER JOIN status ON contracts.status = status.status_id WHERE contract_id=:contract_id AND supervisor=:supervisor_id ';
         $query = $this->db->prepare($sql);

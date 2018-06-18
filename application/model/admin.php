@@ -544,9 +544,9 @@ class Model
                             break;
                     } 
 
-                    if ($value!=null) {
+                   // if ($value!=null) {
                         array_push($row,$value);
-                    }
+                    //}
                 }
                 fputcsv($output,$row);
             }
