@@ -37,11 +37,11 @@
                                                 foreach ($contracts as $contract) {
                                                     $output.='<tr>';
                                                                 if ($contract->contract_type=='gas') {
-                                                                    $output.='<td><i style="color:#3885e8" class="material-icons">local_gas_station</i></td>';
+                                                                    $output.='<td>Gas</td>';
                                                                 }elseif ($contract->contract_type=='luce') {
-                                                                    $output.='<td><i style="color:#ded00f" class="material-icons">battery_charging_full</i></td>';
+                                                                    $output.='<td>Luce</td>';
                                                                 }elseif ($contract->contract_type=='dual') {
-                                                                    $output.='<td><i style="color:#e68013" class="material-icons">call_split</i></td>';
+                                                                    $output.='<td>Dual</td>';
                                                                 }
                                                                 
                                                     $output.='<td>'.$contract->contract_id.'</td>
