@@ -443,22 +443,34 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">PDR</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_pdr;?>" class="form-control" name="pdr">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Fornitore Uscente</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_fornitore_uscente;?>" class="form-control" name="fornitore_uscente">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
+                                            </div> 
+                                        </div>
+                                          <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Remi</label>
+                                                <input  disabled=""  type="text" autocomplete="off" value="<?=$contract->gas_remi;?>" class="form-control" name="gas_remi">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Matricola</label>
+                                                <input  disabled=""  type="text" autocomplete="off" value="<?=$contract->gas_matricola;?>" class="form-control" name="gas_matricola">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

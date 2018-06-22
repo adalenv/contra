@@ -322,7 +322,7 @@ function editContractStatus(contract_id,status_id){
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
 
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
-                        var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
+                        // var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
@@ -336,8 +336,8 @@ function editContractStatus(contract_id,status_id){
                         $('#supervisor').val(supervisor);
                         
 
-                        $('#id').val(id);
-                        $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
+                        // $('#id').val(id);
+                        // $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
 
                         $('#phone').val(phone);
                         $('#phone').val()!=''? $('#phone').parent().addClass('is-focused'):'';
@@ -350,7 +350,8 @@ function editContractStatus(contract_id,status_id){
 
                         $('.pagination_btn').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            //|| $('#id').val()!=id 
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
