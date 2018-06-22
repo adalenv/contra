@@ -375,7 +375,7 @@ class Model
         $supervisor     = (isset($_REQUEST['supervisor'])?$_REQUEST['supervisor']:'%');
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
-        $limiter      = 30;
+        $limiter      = 100;
         $pager        = $limiter*$page;
        
         /////////////////////////if is set id////////////////////////////
