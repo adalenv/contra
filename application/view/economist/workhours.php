@@ -77,19 +77,18 @@
           </button>
         </div>
         <div class="modal-body row">
-<!--             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
+            <div class="form-group col-sm-6" style="margin-bottom: 36px;">
                 <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="8"  placeholder="Inserire il numero di ore">
                 <input type="hidden" id="h_user_id">
             </div>
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
                 <input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
-            </div> -->
-<!--         <div class="modal-footer">
+            </div>
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
           <button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungere ore</button>
         </div>
-            </br> -->
-            <input type="hidden" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
+            </br>
             <table style="width: 100%" class="table table-bordered table-responsive table-striped ">
               <thead>
               </thead>
@@ -150,7 +149,7 @@
                         $('.whtable').append(`<tr><td><center>`+data[i].hours+`</center></td><td><center>`+data[i].date+`</center></td></tr>`)
                       }
                        
-              })
+              }) 
               .fail(function(err) {
                 console.log(err);
               });
@@ -167,9 +166,9 @@
             <script type="text/javascript">
                   $('.usersNav').addClass('active');
 
-                  // $('#addHours').on('hidden.bs.modal',function(){
-                  //   window.location.href='';
-                  // });
+                  $('#addHours').on('hidden.bs.modal',function(){
+                    window.location.href='';
+                  });
 
                 function deleteHours(workhours_id){
                   $.ajax({

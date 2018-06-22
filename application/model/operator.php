@@ -636,9 +636,11 @@ class Model
                         echo "fail";
                     }
                     
-                    header('location: viewContract/'.$this->db->lastInsertId());  
+                    //header('location: viewContract/'.$this->db->lastInsertId());  
+
                     $_SESSION['create_contract']='success';
-                    $_SESSION['can_view']='true';   
+                    $_SESSION['can_view']='true';  
+                    header('Location:'.URL.$_SESSION['role'].'/createContract'); 
                 } else {
                     $_SESSION['create_contract']='fail';
                     //header("location:".URL.$_SESSION['role'].'/contracts');

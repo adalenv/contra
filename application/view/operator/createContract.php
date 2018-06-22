@@ -1143,7 +1143,26 @@ function validate(){
                                       }
                                     });
                             <?php }
-                                  unset($_SESSION['create_contract']);
+                                  //unset($_SESSION['create_contract']);
                             }
                         ?>
+                 <?php 
+                 //print_r($_SESSION);
+                    if (isset($_SESSION['create_contract'])) {
+                        if ($_SESSION['create_contract']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "Contract Created!"
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align:'right'
+                              }
+                            });
+                        <?php } 
+                    }
+                    unset($_SESSION['create_contract']);
+                ?>
 </script>
