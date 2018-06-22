@@ -132,7 +132,7 @@ class Model
 
     public function getContractsByUser($user_id ){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
-        $limiter=30;
+        $limiter=100;
         $pager=$limiter*$page;
         $sql='SELECT * FROM contracts WHERE operator=:user_id LIMIT :pager, :limiter ';
         $query = $this->db->prepare($sql);
@@ -144,7 +144,7 @@ class Model
     }
     public function getContractsBySupervisor($supervisor_id){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
-        $limiter=30;
+        $limiter=100;
         $pager=$limiter*$page;
         $sql='SELECT * FROM contracts WHERE supervisor=:supervisor LIMIT :pager, :limiter ';
         $query = $this->db->prepare($sql);
