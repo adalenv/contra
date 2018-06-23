@@ -1,3 +1,8 @@
+<style type="text/css">
+    input[type="text"] {
+        text-transform:uppercase;
+    }
+</style>
             <div class="content"> 
                 <div class="container-fluid">
                     <div class="row">
@@ -501,6 +506,29 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">Documenti</h4> 
+                                </div>
+                                <div class="card-content">
+                                    <!-- <input type='file' name="file" accept="audio/*" required /> -->
+                                    <div class="col-sm-4">
+                                        <label for="doc1">Chose document</label>
+                                        <input type="file" name="doc1" class="form-control-file" id="doc1">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="doc2">Chose document</label>
+                                        <input type="file" name="doc2" class="form-control-file" id="doc2">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="doc3">Chose document</label>
+                                        <input type="file" name="doc3" class="form-control-file" id="doc3">
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                          <div class="col-sm-12">
                             <div class="card">
                                  <div class="card-content">

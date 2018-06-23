@@ -351,8 +351,8 @@ class Model
         $contract_id=$_POST['contract_id'];
         $client_name=$_POST['client_name'];
         $name=explode(' ',$client_name);
-        $first_name=$name[0];
-        $last_name=$name[1];
+        $first_name=strtolower($name[0]);
+        $last_name= strtolower($name[1]);
 
         $target_dir = APP."audios/";
         $allow_ext = array('mp3','wav','gsm','gsw');
@@ -615,8 +615,8 @@ class Model
                 if ($query->execute()) {
                     //audio upload
                     $contract_id=$this->db->lastInsertId();
-                    $first_name=$_POST['first_name'];
-                    $last_name=$_POST['last_name'];
+                    $first_name=strtolower($_POST['first_name']);
+                    $last_name=strtolower($_POST['last_name']);
 
                     $target_dir = APP."audios/";
                     $allow_ext = array('mp3','wav','gsm','gsw');
@@ -636,6 +636,66 @@ class Model
                         echo "fail";
                     }
                     
+
+                    //doc upload
+                    $contract_id=$this->db->lastInsertId();
+                    $client_name=strtolower($_POST['first_name'].$_POST['last_name']);
+                    $target_dir = APP."documents/";
+
+                    $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc1"]["name"]);
+                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
+                    $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+                    $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc1"]["name"];
+                    if (!in_array($ext,$allow_ext)) { 
+                        echo "ext_error";
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["doc1"]["tmp_name"],$target_file1)) {
+                        $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+                        $query=$this->db->prepare($sql);
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        echo "success";
+                    }else{
+                        echo "fail";
+                    }
+
+                    $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc2"]["name"]);
+                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
+                    $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+                    $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc2"]["name"];
+                    if (!in_array($ext,$allow_ext)) { 
+                        echo "ext_error";
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["doc2"]["tmp_name"],$target_file1)) {
+                        $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+                        $query=$this->db->prepare($sql);
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        echo "success";
+                    }else{
+                        echo "fail";
+                    }
+
+                    $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc3"]["name"]);
+                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
+                    $ext = pathinfo($target_file, PATHINFO_EXTENSION);
+                    $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc3"]["name"];
+                    if (!in_array($ext,$allow_ext)) { 
+                        echo "ext_error";
+                        return;
+                    }
+                    if (move_uploaded_file($_FILES["doc3"]["tmp_name"],$target_file1)) {
+                        $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
+                        $query=$this->db->prepare($sql);
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        echo "success";
+                    }else{
+                        echo "fail";
+                    }
+
+
+
+
                     //header('location: viewContract/'.$this->db->lastInsertId());  
 
                     $_SESSION['create_contract']='success';

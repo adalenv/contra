@@ -288,11 +288,19 @@ class Model
            $date=date('Y-m');
         }
         $date.='-01';
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
         $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
         if (!$contractsNumber) {
             $contractsNumber=0;
         }
@@ -734,8 +742,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry            
                 if ($query->execute()) {
                     //audio upload
                     $contract_id=$this->db->lastInsertId();
-                    $first_name=$_POST['first_name'];
-                    $last_name=$_POST['last_name'];
+                    $first_name=strtolower($_POST['first_name']);
+                    $last_name=strtolower($_POST['last_name']);
 
                     $target_dir = APP."audios/";
                     $allow_ext = array('mp3','wav','gsm','gsw');
@@ -1034,8 +1042,8 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
         $contract_id=$_POST['contract_id'];
         $client_name=$_POST['client_name'];
         $name=explode(' ',$client_name);
-        $first_name=$name[0];
-        $last_name=$name[1];
+        $first_name=strtolower($name[0]);
+        $last_name= strtolower($name[1]);
 
         $target_dir = APP."audios/";
         $allow_ext = array('mp3','wav','gsm','gsw');

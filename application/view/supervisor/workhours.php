@@ -7,7 +7,7 @@
                                 <li class="nav-item">
                                       <a class="nav-link" href="../../users" role="tablist">
                                           <i class="material-icons">person</i>
-                                          Operatori
+                                          Operatore
                                       </a>
                                 </li>
                                 <li class="nav-item active">
@@ -77,18 +77,19 @@
           </button>
         </div>
         <div class="modal-body row">
-            <div class="form-group col-sm-6" style="margin-bottom: 36px;">
+<!--             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
                 <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="8"  placeholder="Inserire il numero di ore">
                 <input type="hidden" id="h_user_id">
             </div>
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
                 <input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
-            </div>
-        <div class="modal-footer">
+            </div> -->
+<!--         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-          <button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungi ore</button>
+          <button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungere ore</button>
         </div>
-            </br>
+            </br> -->
+            <input type="hidden" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
             <table style="width: 100%" class="table table-bordered table-responsive table-striped ">
               <thead>
               </thead>
@@ -166,9 +167,9 @@
             <script type="text/javascript">
                   $('.usersNav').addClass('active');
 
-                  $('#addHours').on('hidden.bs.modal',function(){
-                    window.location.href='';
-                  });
+                  // $('#addHours').on('hidden.bs.modal',function(){
+                  //   window.location.href='';
+                  // });
 
                 function deleteHours(workhours_id){
                   $.ajax({

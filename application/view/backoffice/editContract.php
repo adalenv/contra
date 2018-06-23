@@ -1,3 +1,8 @@
+<style type="text/css">
+    input[type="text"] {
+        text-transform:uppercase;
+    }
+</style>
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -46,7 +51,8 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Supervisore</label>
-                                                <select class="form-control" onchange="getOperators(this.value)" required name="supervisor" id="supervisor">
+                                                <!-- onchange="getOperators(this.value)" -->
+                                                <select class="form-control"  required name="supervisor" id="supervisor">
                                                     <?php
                                                         $output=''; 
                                                         foreach ($supervisors as $supervisor) {
@@ -63,7 +69,17 @@
                                             <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Operatore</label>
                                                 <select class="form-control" required name="operator" id="operator">
-                                                <option value="<?=$contract->operator;?>"></option>
+                                                   <?php
+                                                        $output=''; 
+                                                        foreach ($operators as $operator) {
+                                                            if ($contract->operator==$operator->user_id) {
+                                                                $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                        ?>
                                                 </select>
                                             </div>
                                             <div class="form-group label-floating">
@@ -1235,32 +1251,32 @@ $(document).ready(function(){
 });
 
 
-function getOperators(supervisor_id){
-    $.ajax({
-      url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
-      type: 'GET',
-      dataType: 'json',
-    })
-    .done(function(data) {
-        dataa=data;
-        $('#operator').html('');
-        $('#operator').focus();
-        for (var i=0;i<data.length;i++) {
-           $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
-        };
+// function getOperators(supervisor_id){
+//     $.ajax({
+//       url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
+//       type: 'GET',
+//       dataType: 'json',
+//     })
+//     .done(function(data) {
+//         dataa=data;
+//         $('#operator').html('');
+//         $('#operator').focus();
+//         for (var i=0;i<data.length;i++) {
+//            $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+//         };
 
-    })
-    .fail(function(err) {
-        console.log(err);
-    })
-}
+//     })
+//     .fail(function(err) {
+//         console.log(err);
+//     })
+// }
 
 
 $(document).ready(function(){
     initDocUploader("#zdrop");
     initAudioUploader("#adrop");
     loadDocAndAudio();
-    getOperators($('#supervisor').val());
+    // getOperators($('#supervisor').val());
     $('.contractsNav').addClass('active');
 
     $('#form').on('submit',function(e){

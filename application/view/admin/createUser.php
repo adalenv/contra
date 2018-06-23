@@ -104,7 +104,7 @@ function getSupervisors(v){
         .done(function(data) {
             dataa=data;
             $('#supervisorif').html(`<div class="form-group label-floating">
-                                                    <label class="control-label">Role</label>
+                                                    <label class="control-label">Supervisor</label>
                                                     <select  id="supervisor" required name="supervisor" class="form-control">
                                                         <option value=''></option>
                                                     </select>

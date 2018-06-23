@@ -1,3 +1,8 @@
+<style type="text/css">
+    input[type="text"] {
+        text-transform:uppercase;
+    }
+</style>
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
