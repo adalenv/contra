@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `document_number` varchar(100) NOT NULL,
   `document_date` date NOT NULL,
   `document_expiry` date NOT NULL,
+  `document_issue_place` varchar(50) NOT NULL,
   `iban_code` varchar(50) NOT NULL,
   `iban_accounthoder` varchar(50) NOT NULL,
   `iban_fiscal_code` varchar(50) NOT NULL,
@@ -271,7 +272,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name
 CREATE TABLE IF NOT EXISTS `workhours` (
   `workhours_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `hours` int(11) NOT NULL,
+  `hours` float(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`workhours_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
