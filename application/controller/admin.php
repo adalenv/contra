@@ -35,7 +35,7 @@ class admin extends Controller
             return;
         }
         $operators   =  $this->model->getUsersByRole('operator');
-        $supervisors   =  $this->model->getUsersByRole('supervisor');
+        $supervisors =  $this->model->getUsersByRole('supervisor');
         $campaigns=$this->model->getCampaigns();
         require APP . 'view/admin/header.php';
         require APP . 'view/admin/createContract.php';

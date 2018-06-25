@@ -1,8 +1,3 @@
-<style type="text/css">
-    input[type="text"] {
-        text-transform:uppercase;
-    }
-</style>
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -161,6 +156,12 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Rilascio Documento*</label>
                                                 <input type="text" required id="document_date" class="form-control" name="document_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Luogo di rilascio*</label>
+                                                <input type="text" autocomplete="off" required=""  id="document_issue_place" name="document_issue_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1087,3 +1088,8 @@ function validate(){
   display: none;
 }
 </style>
+<script type="text/javascript">
+	$("input[type='text']").keyup(function () {
+    	this.value = this.value.toLocaleUpperCase();
+	});
+</script>

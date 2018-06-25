@@ -214,6 +214,12 @@
                                                 <input type="text" disabled="" value="<?=date('d-m-Y',strtotime($contract->document_expiry))?>" id="document_expiry" name="document_expiry" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Luogo di rilascio*</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->document_issue_place;?>"  id="document_issue_place" name="document_issue_place" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

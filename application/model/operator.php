@@ -444,8 +444,8 @@ class Model
             }
         
             $sql="INSERT INTO contracts
-                                (`date`,operator,supervisor,campaign,ugm_cb,analisi_cb,iniziative_cb,tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,birth_nation,birth_municipality,document_type,document_number,document_date,toponimo,address,civico,price,location,cap,uf_toponimo,uf_address,uf_civico,uf_price,uf_location,uf_cap,ddf_toponimo,ddf_address,ddf_civico,ddf_price,ddf_location,ddf_cap,ubicazione_fornitura,domicillazione_documenti_fatture, contract_type, listino,gas_request_type,gas_pdr,gas_fornitore_uscente,gas_consume_annuo,gas_tipo_riscaldamento,gas_tipo_cottura_acqua,gas_remi,gas_matricola,luce_request_type,luce_pod,luce_tensione,luce_potenza,luce_fornitore_uscente,luce_opzione_oraria,luce_consume_annuo,fature_via_email,payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status,delega_first_name,delega_last_name,delega_vat_number,document_expiry            )             
-                            VALUES (:date,:operator,:supervisor,:campaign,:ugm_cb,:analisi_cb,:iniziative_cb,:tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,:client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,:toponimo,:address,:civico,:price,:location,:cap,:uf_toponimo,:uf_address,:uf_civico,:uf_price,:uf_location,:uf_cap,:ddf_toponimo,:ddf_address,:ddf_civico,:ddf_price,:ddf_location,:ddf_cap,:ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type, :listino,:gas_request_type,:gas_pdr,:gas_fornitore_uscente,:gas_consume_annuo,:gas_tipo_riscaldamento,:gas_tipo_cottura_acqua,:gas_remi,:gas_matricola,:luce_request_type,:luce_pod,:luce_tensione,:luce_potenza,:luce_fornitore_uscente,:luce_opzione_oraria,:luce_consume_annuo,:fature_via_email,:payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status,:delega_first_name,:delega_last_name,:delega_vat_number,:document_expiry
+                                (`date`,operator,supervisor,campaign,ugm_cb,analisi_cb,iniziative_cb,tel_number,alt_number,cel_number,cel_number2,cel_number3,email,alt_email,client_type,gender,rag_sociale,first_name,last_name,vat_number,partita_iva,birth_date,birth_nation,birth_municipality,document_type,document_number,document_date,toponimo,address,civico,price,location,cap,uf_toponimo,uf_address,uf_civico,uf_price,uf_location,uf_cap,ddf_toponimo,ddf_address,ddf_civico,ddf_price,ddf_location,ddf_cap,ubicazione_fornitura,domicillazione_documenti_fatture, contract_type, listino,gas_request_type,gas_pdr,gas_fornitore_uscente,gas_consume_annuo,gas_tipo_riscaldamento,gas_tipo_cottura_acqua,gas_remi,gas_matricola,luce_request_type,luce_pod,luce_tensione,luce_potenza,luce_fornitore_uscente,luce_opzione_oraria,luce_consume_annuo,fature_via_email,payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status,delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_issue_place            )             
+                            VALUES (:date,:operator,:supervisor,:campaign,:ugm_cb,:analisi_cb,:iniziative_cb,:tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,:client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,:birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,:toponimo,:address,:civico,:price,:location,:cap,:uf_toponimo,:uf_address,:uf_civico,:uf_price,:uf_location,:uf_cap,:ddf_toponimo,:ddf_address,:ddf_civico,:ddf_price,:ddf_location,:ddf_cap,:ubicazione_fornitura,:domicillazione_documenti_fatture, :contract_type, :listino,:gas_request_type,:gas_pdr,:gas_fornitore_uscente,:gas_consume_annuo,:gas_tipo_riscaldamento,:gas_tipo_cottura_acqua,:gas_remi,:gas_matricola,:luce_request_type,:luce_pod,:luce_tensione,:luce_potenza,:luce_fornitore_uscente,:luce_opzione_oraria,:luce_consume_annuo,:fature_via_email,:payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status,:delega_first_name,:delega_last_name,:delega_vat_number,:document_expiry,:document_issue_place
                 )";
 
                 $query = $this->db->prepare($sql);
@@ -481,7 +481,8 @@ class Model
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date', date('Y-m-d',strtotime($_POST['document_date'])));
                 $query->bindValue(':document_expiry', date('Y-m-d',strtotime($_POST['document_expiry'])));
-                
+                $query->bindValue(':document_issue_place', $_POST['document_issue_place']);
+
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
                 $query->bindParam(':civico', $_POST['civico']);
@@ -638,56 +639,51 @@ class Model
                     
 
                     //doc upload
-                    $contract_id=$this->db->lastInsertId();
                     $client_name=strtolower($_POST['first_name'].$_POST['last_name']);
                     $target_dir = APP."documents/";
+                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
 
                     $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc1"]["name"]);
-                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
+                    
                     $ext = pathinfo($target_file, PATHINFO_EXTENSION);
                     $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc1"]["name"];
                     if (!in_array($ext,$allow_ext)) { 
                         echo "ext_error";
-                        return;
                     }
                     if (move_uploaded_file($_FILES["doc1"]["tmp_name"],$target_file1)) {
                         $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
                         $query=$this->db->prepare($sql);
-                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc1"]["name"]));
                         echo "success";
                     }else{
                         echo "fail";
                     }
 
                     $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc2"]["name"]);
-                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
                     $ext = pathinfo($target_file, PATHINFO_EXTENSION);
                     $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc2"]["name"];
                     if (!in_array($ext,$allow_ext)) { 
                         echo "ext_error";
-                        return;
                     }
                     if (move_uploaded_file($_FILES["doc2"]["tmp_name"],$target_file1)) {
                         $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
                         $query=$this->db->prepare($sql);
-                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc2"]["name"]));
                         echo "success";
                     }else{
                         echo "fail";
                     }
 
                     $target_file = $target_dir .date('d-m-Y').'_'.$client_name.'_'.basename($_FILES["doc3"]["name"]);
-                    $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
                     $ext = pathinfo($target_file, PATHINFO_EXTENSION);
                     $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc3"]["name"];
                     if (!in_array($ext,$allow_ext)) { 
                         echo "ext_error";
-                        return;
                     }
                     if (move_uploaded_file($_FILES["doc3"]["tmp_name"],$target_file1)) {
                         $sql="INSERT INTO documents(contract_id,url) VALUES(:contract_id,:url)";
                         $query=$this->db->prepare($sql);
-                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"]));
+                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('d-m-Y').'_'.$client_name.'_'.$_FILES["doc3"]["name"]));
                         echo "success";
                     }else{
                         echo "fail";

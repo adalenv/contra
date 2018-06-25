@@ -373,7 +373,7 @@ gas_request_type,gas_pdr,gas_fornitore_uscente,gas_consume_annuo,gas_tipo_riscal
 luce_request_type,luce_pod,luce_tensione,luce_potenza,luce_fornitore_uscente,luce_opzione_oraria,luce_consume_annuo,
 fature_via_email,
 payment_type,iban_code,iban_accounthoder,iban_fiscal_code,note,status,
-delega_first_name,delega_last_name,delega_vat_number            )             VALUES            (:date,                :operator,            :supervisor,            :campaign,            :ugm_cb,            :analisi_cb,            :iniziative_cb,
+delega_first_name,delega_last_name,delega_vat_number,document_issue_place            )             VALUES            (:date,                :operator,            :supervisor,            :campaign,            :ugm_cb,            :analisi_cb,            :iniziative_cb,
 :tel_number,:alt_number,:cel_number,:cel_number2,:cel_number3,:email,:alt_email,
 :client_type,:gender,:rag_sociale,:first_name,:last_name,:vat_number,:partita_iva,
 :birth_date,:birth_nation,:birth_municipality,:document_type,:document_number,:document_date,
@@ -385,7 +385,7 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
 :luce_request_type,:luce_pod,:luce_tensione,:luce_potenza,:luce_fornitore_uscente,:luce_opzione_oraria,:luce_consume_annuo,
 :fature_via_email,
 :payment_type,:iban_code,:iban_accounthoder,:iban_fiscal_code,:note,:status,
-:delega_first_name,:delega_last_name,:delega_vat_number
+:delega_first_name,:delega_last_name,:delega_vat_number,:document_issue_place
                 )";
 
                 $query = $this->db->prepare($sql);
@@ -420,7 +420,8 @@ delega_first_name,delega_last_name,delega_vat_number            )             VA
                 $query->bindParam(':document_type', $_POST['document_type']);
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date', date('Y-m-d',strtotime($_POST['document_date'])));
-
+                $query->bindParam(':document_issue_place', $_POST['document_issue_place']);
+                
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
                 $query->bindParam(':civico', $_POST['civico']);

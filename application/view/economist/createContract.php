@@ -174,6 +174,12 @@
                                                 <input type="text" autocomplete="off" required="" id="document_expiry" name="document_expiry" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Luogo di rilascio*</label>
+                                                <input type="text" autocomplete="off" required=""  id="document_issue_place" name="document_issue_place" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

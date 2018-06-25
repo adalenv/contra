@@ -607,6 +607,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry            
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
                 $query->bindValue(':document_expiry',date('Y-m-d',strtotime($_POST['document_expiry'])));
+                $query->bindValue(':document_issue_place', $_POST['document_issue_place']);
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
