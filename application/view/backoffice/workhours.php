@@ -28,8 +28,14 @@
                                     <h4 class="title">Ore di Lavoro</h4>
                                     <p class="category"></p>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Filter</label>
+                                        <input type="text" id="inpu" onkeyup="filterTabl()" class="form-control">
+                                    <span class="material-input"></span></div>
+                                </div>
                                 <div class="card-content table-responsive">
-                                    <table class="table">
+                                    <table class="table" id="tabl">
                                         <thead class="text-info">
                                             <th>Nominativo</th>
                                             <th>Ruolo</th>
@@ -337,3 +343,22 @@
                     }
                 ?>
             </script>
+<script>
+function filterTabl() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("inpu");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tabl");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
