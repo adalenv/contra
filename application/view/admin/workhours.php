@@ -51,7 +51,7 @@
                                                 foreach ($users as $user) {
                                                   $contractsNumber1= (int)$this->model->getContractsNumber($user->user_id,$date);
                                                   $contractsNumberOkPending1= (int)$this->model->getContractsNumberOkPending($user->user_id,$date);
-                                                  $workhours1= (int)$this->model->getWorkhours($user->user_id,$date);
+                                                  $workhours1= (float)$this->model->getWorkhours($user->user_id,$date);
                                                     $output.='<tr>
                                                                 <td><a class="user_name_l" href="../../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>';
