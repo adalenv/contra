@@ -889,16 +889,20 @@ $(window).ready(function(){
 });
                 $('.createContractNav').addClass('active');
 
-                $('#contract_date').datetimepicker({
-                    format: 'DD-MM-YYYY',
+                $$('#contract_date').datetimepicker({
+                    format: 'DD/MM/YYYY',
                     defaultDate:new Date(),
                  });
                 $('#birth_date').datetimepicker({
-                    format: 'DD-MM-YYYY',
+                    format: 'DD/MM/YYYY',
                     defaultDate:new Date(),
                  });
                 $('#document_date').datetimepicker({
-                    format: 'DD-MM-YYYY',
+                    format: 'DD/MM/YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_expiry').datetimepicker({
+                    format: 'DD/MM/YYYY',
                     defaultDate:new Date(),
                  });
 

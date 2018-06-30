@@ -596,8 +596,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 $query->bindParam(':client_type', $_POST['client_type']);
                 $query->bindParam(':gender', $_POST['gender']);
                 $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
-                $query->bindParam(':first_name', $_POST['first_name']);
-                $query->bindParam(':last_name', $_POST['last_name']);
+                $query->bindParam(':first_name', trim($_POST['first_name']));
+                $query->bindParam(':last_name', trim($_POST['last_name']));
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
                 $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
@@ -743,8 +743,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 if ($query->execute()) {
                     //audio upload
                     $contract_id=$this->db->lastInsertId();
-                    $first_name=strtolower($_POST['first_name']);
-                    $last_name=strtolower($_POST['last_name']);
+                    $first_name=strtolower(trim($_POST['first_name']));
+                    $last_name=strtolower(trim($_POST['last_name']));
 
                     $target_dir = APP."audios/";
                     $allow_ext = array('mp3','wav','gsm','gsw');
@@ -798,8 +798,8 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                 $query->bindParam(':client_type', $_POST['client_type']);
                 $query->bindParam(':gender', $_POST['gender']);
                 $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
-                $query->bindParam(':first_name', $_POST['first_name']);
-                $query->bindParam(':last_name', $_POST['last_name']);
+                $query->bindParam(':first_name', trim($_POST['first_name']));
+                $query->bindParam(':last_name', trim($_POST['last_name']));
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
                 $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));

@@ -831,10 +831,22 @@
                 $('.contractsNav').addClass('active');
 
                
-
-                // $('#contract_date').val(new Date().toJSON().split('T')[0]);
-                // $('#birth_date').val(   new Date().toJSON().split('T')[0]);
-                // $('#document_date').val(new Date().toJSON().split('T')[0]);
+                $('#contract_date').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#birth_date').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_date').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    defaultDate:new Date(),
+                 });
+                $('#document_expiry').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    defaultDate:new Date(),
+                 });
 
                 //$('.cb').val('false')
                 $('.cb').on('click',function() {
