@@ -636,6 +636,31 @@ class Model
                     }else{
                         echo "fail";
                     }
+                    ///if audio 2
+                    if (isset($_FILES['file2'])) {
+                            //audio upload
+                            $contract_id=$this->db->lastInsertId();
+                            $first_name=strtolower(trim($_POST['first_name']));
+                            $last_name=strtolower(trim($_POST['last_name']));
+
+                            $target_dir = APP."audios/";
+                            $allow_ext = array('mp3','wav','gsm','gsw');
+                            $ext = pathinfo(basename($_FILES["file2"]["name"]), PATHINFO_EXTENSION);
+                            $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'_2.'.$ext;
+                            if (!in_array($ext,$allow_ext)) { 
+                                echo "ext_error: ";
+                                echo $ext;
+                                return;
+                            }
+                            if (move_uploaded_file($_FILES["file2"]["tmp_name"],$target_file1)) {
+                                $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+                                $query=$this->db->prepare($sql);
+                                $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'_2.'.$ext));
+                                echo "success";
+                            }else{
+                                echo "fail";
+                            }
+                    }
                     
 
                     //doc upload

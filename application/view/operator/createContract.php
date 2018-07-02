@@ -506,6 +506,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">Audio 2</h4> 
+                                </div>
+                                <div class="card-content col-sm-12">
+                                    <input type="file" name="file2" accept="audio/*" id="file2" />
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-sm-12">
                             <div class="card">
