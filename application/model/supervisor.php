@@ -87,12 +87,12 @@ class Model
         return $contractsNumber;
     }
 
-    public function getContractsNumberOkPending($user_id,$date=null){
+    public function getContractsNumberOkInserito($user_id,$date=null){
         if (!$date) {
            $date=date('Y-m');
         }
         $date.='-01';
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=1) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=4) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
@@ -190,6 +190,7 @@ class Model
             if (count(explode(' ',$client_name))>1) { ///if both
                 $first_name=explode(' ',$client_name)[0].'%';
                 $last_name=explode(' ',$client_name)[1].'%';
+                $last2=explode(' ',$client_name)[0].' '.explode(' ',$client_name)[1];
             }else{                          // if one part
                 $first_name=$client_name.'%';
                 $last_name='%';
@@ -216,7 +217,9 @@ class Model
                             (first_name LIKE :first_name AND last_name LIKE :last_name) 
                         OR
                             (first_name LIKE :last_name AND last_name LIKE :first_name)
-                        ) 
+                        OR
+                            (first_name LIKE :last2 OR last_name LIKE :last2)
+                        )
                     AND status LIKE :status  
                     AND (   (tel_number LIKE :phone)
                         OR  (alt_number LIKE :phone)
@@ -236,6 +239,11 @@ class Model
         }else{
             $query = $this->db->prepare($sql);
         }
+
+        if (!isset($last2)) {
+            $last2='1111111';
+        }
+        $query->bindParam(':last2', $last2);
         $query->bindParam(':supervisor_id', $_SESSION['user_id']);
         $query->bindParam(':contract_type', $contract_type);
         $query->bindParam(':operator', $operator);

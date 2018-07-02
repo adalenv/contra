@@ -1043,6 +1043,9 @@ function validate(){
         };
     };
 
+    $('input[type=text]').val (function () {
+        return this.value.toUpperCase();
+    });
     return valid;
 }
 </script>
