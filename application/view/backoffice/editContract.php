@@ -1290,16 +1290,16 @@ $(document).ready(function(){
 
 
     $('#contract_date').datetimepicker({
-        format: 'DD/MM/YYYY',
+        format: 'DD-MM-YYYY',
      });
     $('#birth_date').datetimepicker({
-        format: 'DD/MM/YYYY',
+        format: 'DD-MM-YYYY',
      });
     $('#document_date').datetimepicker({
-        format: 'DD/MM/YYYY',
+        format: 'DD-MM-YYYY',
      });
     $('#document_expiry').datetimepicker({
-        format: 'DD/MM/YYYY',
+        format: 'DD-MM-YYYY',
      });
 
 $('.cb').on('click',function() {
