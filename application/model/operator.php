@@ -626,7 +626,7 @@ class Model
                     if (!in_array($ext,$allow_ext)) { 
                         echo "ext_error: ";
                         echo $ext;
-                        return;
+                        
                     }
                     if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
                         $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
