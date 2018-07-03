@@ -170,7 +170,7 @@
                                                     </li>
                                                 <?php } ?>
                                               </ul>
-                                              Total: <?=$pages;?>
+                                              Total: <?=($pages==0?1:$pages);?>
                                         </div>
                                     </div>
                                 </div>
