@@ -22,6 +22,8 @@ class admin extends Controller
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
     	$contracts=$this->model->getContracts();
+        $pages=ceil(count($contracts)/100);
+       // echo $pages;
         $campaigns=$this->model->getCampaigns();
         $statuses=$this->model->getStatuses();
    		require APP . 'view/admin/header.php';

@@ -361,17 +361,74 @@ class Model
            $date=date('Y-m');
         }
         $date.='-01';
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.operator='$user_id' and (`contracts`.status=2 OR `contracts`.status=4) and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+
+       $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
         $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
         if (!$contractsNumber) {
             $contractsNumber=0;
         }
         return $contractsNumber;
     }
 
+    public function getContractsNumberSupervisor($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.supervisor='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.supervisor='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+    public function getContractsNumberOkInseritoSupervisor($user_id,$date=null){
+        if (!$date) {
+           $date=date('Y-m');
+        }
+        $date.='-01';
+
+       $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.supervisor='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.supervisor='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
     public function getContracts($export=null){
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
