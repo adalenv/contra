@@ -147,8 +147,8 @@
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
                                             </script>   
-                                            
-                                              <ul class="pagination">
+
+                                              <ul class="pagination" style="cursor:pointer;">
                                                 <?php if ($page>1) { ?>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page-1)" aria-label="Precedentes">
@@ -159,7 +159,7 @@
                                                     <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1;?></a></li>
                                                 <?php } ?>
                                                 <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page ;?></a></li>
-                                                <?php if ($page<$pages) { ?>
+                                                <?php if ($page<$pages-1) { ?>
                                                     <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1;?></a></li>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page+1)" aria-label="Successivo">

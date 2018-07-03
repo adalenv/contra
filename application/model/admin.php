@@ -536,12 +536,11 @@ class Model
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
             $query->execute();
-            
-            $allpages=$query->fetchColumn();  
+
+            $allpages=$query->rowCount();  
             $output=array();
             array_push($output,$allpages); 
              
-
         if (!$export) {
             $sql.=" LIMIT :pager , :limiter";
             $query = $this->db->prepare($sql);
