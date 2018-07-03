@@ -137,7 +137,6 @@
                                                 </li>
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
-                                                $pages=$_GET['page'];
                                                 $page=(int)$_GET['page'];
                                                 if ($page==0) {
                                                     $page=1;
@@ -147,8 +146,8 @@
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
-                                            </script>
-
+                                            </script>   
+                                            
                                               <ul class="pagination">
                                                 <?php if ($page>1) { ?>
                                                     <li class="page-item">
