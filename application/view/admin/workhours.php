@@ -396,8 +396,6 @@ function exportTableToCSV(filename) {
     downloadCSV(csv.join("\n"), filename);
 }
 
-            </script>
-<script>
 function filterTabl() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("inpu");

@@ -21,7 +21,9 @@ class economist extends Controller
         }
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
-        $contracts=$this->model->getContracts();
+        $output=$this->model->getContracts();
+        $contracts=$output[1];
+        $pages=ceil($output[0]/100);
         $campaigns=$this->model->getCampaigns();
         $statuses=$this->model->getStatuses();
         require APP . 'view/economist/header.php';

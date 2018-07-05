@@ -785,13 +785,13 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
                                             </div>
                                         </div>
                                     </div>
@@ -899,13 +899,13 @@ $(document).ready(function(){
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
                                             </div>
                                         </div>`);
         } else{

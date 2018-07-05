@@ -124,18 +124,52 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contratti</h4>
-                                         <p class="category"></p>
+                                         <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Esporta in Excel</a></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
-                                            <ul class="pagination">
+<!--                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
                                                     <a onclick="$('.page_val').val(<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo ($_GET['page']-1); } } else {  } ?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >< Precedente</a>
                                                 </li>
                                                 <li class="paginate_button page-item last" id="datatables_last">
                                                     <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>                                
                                                 </li>
-                                            </ul>
+                                            </ul> -->
+                                            <?php if (isset($_GET['page'])) {
+                                                $page=(int)$_GET['page'];
+                                                if ($page==0) {
+                                                    $page=1;
+                                                }
+                                            }else{
+                                                $page=1;
+                                            } ?>
+                                            <script type="text/javascript">
+                                                $page=<?=$page?>;
+                                            </script>   
+
+                                              <ul class="pagination" style="cursor:pointer;">
+                                                <?php if ($page>1) { ?>
+                                                    <li class="page-item">
+                                                      <a class="page-link" onclick="$('.page_val').val($page-1)" aria-label="Precedentes">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                        <span class="sr-only">Precedente</span>
+                                                      </a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1;?></a></li>
+                                                <?php } ?>
+                                                <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page ;?></a></li>
+                                                <?php if ($page<$pages-1) { ?>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1;?></a></li>
+                                                    <li class="page-item">
+                                                      <a class="page-link" onclick="$('.page_val').val($page+1)" aria-label="Successivo">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span class="sr-only"></span>
+                                                      </a>
+                                                    </li>
+                                                <?php } ?>
+                                              </ul>
+                                              Totale: <?=($pages==0?1:$pages);?>
                                         </div>
                                     </div>
                                 </div>
@@ -210,6 +244,9 @@
             
             <script type="text/javascript">
 
+function exportContracts() {
+    window.location.href+='&export=true';
+}
 // function editContractStatus(contract_id,status_id){
 //     swal({
 //       title: 'Are you sure?',
@@ -348,7 +385,7 @@
                         $('#codice_fiscale').val(codice_fiscale);
                         $('#codice_fiscale').val()!=''? $('#codice_fiscale').parent().addClass('is-focused'):'';
 
-                        $('.pagination_btn').on('click',function(e) {
+                        $('.page-item').on('click',function(e) {
                             e.preventDefault();
                             //|| $('#id').val()!=id 
                             if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {

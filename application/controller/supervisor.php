@@ -14,7 +14,9 @@ class supervisor extends Controller
 
     function contracts(){   
         $operators=$this->model->getUsersByRole('operator');
-        $contracts=$this->model->getContracts();
+        $output=$this->model->getContracts();
+        $contracts=$output[1];
+        $pages=ceil($output[0]/100);
         $statuses=$this->model->getStatuses();
         require APP . 'view/supervisor/header.php';
         require APP . 'view/supervisor/contracts.php';

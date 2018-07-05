@@ -474,6 +474,25 @@ class Model
                     AND supervisor LIKE :supervisor
                 ORDER BY contract_id DESC ";
 
+            $query = $this->db->prepare($sql);
+            $query->bindParam(':last2', $last2);
+            $query->bindParam(':contract_type', $contract_type);
+            $query->bindParam(':operator', $operator);
+            $query->bindParam(':date1', $date1);
+            $query->bindParam(':date2', $date2);
+            $query->bindParam(':first_name', $first_name);
+            $query->bindParam(':last_name', $last_name);
+            $query->bindParam(':status', $status);
+            $query->bindParam(':phone', $phone);
+            $query->bindParam(':codice_fiscale', $codice_fiscale);
+            $query->bindParam(':campaign', $campaign);
+            $query->bindParam(':supervisor', $supervisor);
+            $query->execute();
+
+            $allpages=$query->rowCount();  
+            $output=array();
+            array_push($output,$allpages); 
+
         if (!$export) {
             $sql.=" LIMIT :pager , :limiter";
             $query = $this->db->prepare($sql);
@@ -501,7 +520,8 @@ class Model
         $query->execute();
 
         if (!$export) {
-            return $query->fetchAll();
+            array_push($output,$query->fetchAll()); 
+            return $output;
         }else{
             header('Content-type: text/csv');
             header('Content-Disposition: attachment; filename=contracts_export_'.date('Y-m-d').'_'.substr(str_shuffle(str_repeat($x='0987654321poiuytrewqlkjhgfdsamnbvcxz',ceil(8/strlen($x)) )),1,8).'.csv');
