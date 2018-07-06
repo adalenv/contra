@@ -252,7 +252,7 @@ class Model
             $query->bindParam(':phone', $phone);
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->bindParam(':campaign', $campaign);
-            $query->bindParam(':supervisor', $supervisor);
+            $query->bindParam(':supervisor',$_SESSION['user_id']);
             $query->execute();
 
             $allpages=$query->rowCount();  

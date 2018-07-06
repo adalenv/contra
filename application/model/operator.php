@@ -628,14 +628,27 @@ class Model
                         echo $ext;
                         
                     }
-                    if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
-                        $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
-                        $query=$this->db->prepare($sql);
-                        $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext));
-                        echo "success";
-                    }else{
-                        echo "fail";
+                    if (!file_exists($target_file1)) {
+                        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
+                            $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+                            $query=$this->db->prepare($sql);
+                            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext));
+                            echo "success";
+                        }else{
+                            echo "fail";
+                        }
+                    } else{
+                        $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'_01.'.$ext;
+                        if (move_uploaded_file($_FILES["file"]["tmp_name"],$target_file1)) {
+                            $sql="INSERT INTO audios(contract_id,url) VALUES(:contract_id,:url)";
+                            $query=$this->db->prepare($sql);
+                            $query->execute(array(':contract_id' =>(int)$contract_id,':url'=>date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'_01.'.$ext));
+                            echo "success";
+                        }else{
+                            echo "fail";
+                        }
                     }
+
                     ///if audio 2
                     if (isset($_FILES['file2'])) {
                             //audio upload
