@@ -29,7 +29,12 @@ class Model
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
-
+    public function getAllUsers(){
+        $sql="SELECT * FROM users  ORDER BY role DESC";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
+        return $query->fetchAll();
+    }
     public function getUsersByRole($role){
         $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id";
         $query=$this->db->prepare($sql);
@@ -242,6 +247,7 @@ class Model
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
+            $query->bindParam(':supervisor_id', $_SESSION['user_id']);
             $query->bindParam(':contract_type', $contract_type);
             $query->bindParam(':operator', $operator);
             $query->bindParam(':date1', $date1);
@@ -251,8 +257,6 @@ class Model
             $query->bindParam(':status', $status);
             $query->bindParam(':phone', $phone);
             $query->bindParam(':codice_fiscale', $codice_fiscale);
-            $query->bindParam(':campaign', $campaign);
-            $query->bindParam(':supervisor',$_SESSION['user_id']);
             $query->execute();
 
             $allpages=$query->rowCount();  

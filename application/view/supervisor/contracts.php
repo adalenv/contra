@@ -184,7 +184,7 @@
                                                                 }
                                                     $output.='<td>'.$status1.'</td>
                                                                 <td>'.$contract->location.'</td>';
-                                                                    foreach($operators as $user) {
+                                                                    foreach($allUsers as $user) {
                                                                         if ($contract->operator == $user->user_id) {
                                                                             $operator = $user;
                                                                             break;
