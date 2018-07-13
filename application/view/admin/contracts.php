@@ -181,6 +181,7 @@
                                             <th>Stato</th>
                                             <th>Campagna</th>
                                             <th>Operatore</th>
+                                            <th>Supervisore</th>
                                             <th>Data</th>
                                             <th>Note</th>
                                         </thead>
@@ -216,17 +217,30 @@
                                                                 }
                                                     $output.='<td>'.$campaign1.'</td>';
 
-                                                                    foreach($operators as $user) {
-                                                                        if ($contract->operator == $user->user_id) {
-                                                                            $operator = $user;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                    if (isset($operator)) {
-                                                                        $output.='<td><a href="viewUser/'.$operator->user_id.'">'.$operator->first_name.' '.$operator->last_name.'</td>';
-                                                                    } else {
-                                                                        $output.= '<td></td>';
-                                                                    }
+                                                    foreach($operators as $user) {
+                                                        if ($contract->operator == $user->user_id) {
+                                                            $operator = $user;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (isset($operator)) {
+                                                        $output.='<td><a href="viewUser/'.$operator->user_id.'">'.$operator->first_name.' '.$operator->last_name.'</td>';
+                                                    } else {
+                                                        $output.= '<td></td>';
+                                                    }
+
+                                                    foreach($supervisors as $user) {
+                                                        if ($contract->supervisor == $user->user_id) {
+                                                            $supervisor = $user;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (isset($supervisor)) {
+                                                        $output.='<td>'.$supervisor->first_name.' '.$supervisor->last_name.'</td>';
+                                                    } else {
+                                                        $output.= '<td></td>';
+                                                    }
+
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
                                                                <td title="'.$contract->note.'">'.$note.'</td>';
