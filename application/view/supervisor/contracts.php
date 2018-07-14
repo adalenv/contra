@@ -48,6 +48,7 @@
                                                     }
                                                     echo $output;
                                                 ?>
+                                                <option value="others">Altri</option>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>

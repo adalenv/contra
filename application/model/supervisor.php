@@ -219,7 +219,12 @@ class Model
         if ($codice_fiscale==''){$codice_fiscale='%';}else {$codice_fiscale.='%';};
         if ($phone==''){$phone='%';};
         ////////////////////////////////////////////////////////////////////
-
+        $op_others=false;
+        if ($operator=='others') {
+            $operator='%';
+            $op_others=true;
+        }
+        /////////////////////////////////////////////////
         $sql="SELECT * FROM contracts 
                 WHERE contract_type LIKE :contract_type 
                     AND  operator LIKE :operator 
@@ -288,85 +293,30 @@ class Model
         $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->execute();
 
-        if (!$export) {
-            array_push($output,$query->fetchAll()); 
+        $cnts=$query->fetchAll();
+
+        if ($op_others) {
+            //-------users------
+            $uid=array();
+            $ops=$this->getUsers();
+            foreach ($ops as $op) {
+                array_push($uid,$op->user_id);
+            }
+
+            $outcnts=array();
+            foreach ($cnts as $cnt) {
+                if (in_array($cnt->operator,$uid)) {
+                }else{
+                    array_push($outcnts,$cnt);
+                }
+            }
+            array_push($output,$outcnts); 
             return $output;
-        }else{
-            header('Content-type: text/csv');
-            header('Content-Disposition: attachment; filename=contracts_export_'.date('Y-m-d').'_'.substr(str_shuffle(str_repeat($x='0987654321poiuytrewqlkjhgfdsamnbvcxz',ceil(8/strlen($x)) )),1,8).'.csv');
-            $contracts=$query->fetchAll();
-            $statuses=$this->getStatuses();
-            $operators=$this->getUsersByRole('operator');
-            $supervisors=$this->getUsersByRole('supervisor');
-            $campaigns=$this->getCampaigns();
-            //set header
-            $header=array();
-            foreach ((array)$contracts[0] as $key => $value) {
-                array_push($header,$key);
-            }
+        }
 
-            //loop on contracts
-            $output=fopen("php://output","w");
-            fputcsv($output,$header);
-            //print_r($header);
-            if (isset($_REQUEST['id'])) {
-                if ($_REQUEST['id']!='') {
-                    $sql="SELECT * FROM contracts WHERE contract_id =:id";
-                    $query = $this->db->prepare($sql);
-                    $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
-                    $query->execute();
-                    $contracts=$query->fetchAll();
-                }
-            }
-            foreach ($contracts as $contract) {
-                $row=array();
-                foreach ($contract as $key => $value) {
-                    switch ($key) {
-                        case 'status':
-                           foreach ($statuses as $status) {
-                                if ($value==$status->status_id) {
-                                    $value=$status->status_name;
-                                }
-                            }
-                            break;
-                        case 'operator':
-                            foreach ($operators as $operator) {
-                                if ($value==$operator->user_id) {
-                                    $value=$operator->first_name.' '.$operator->last_name;
-                                }
-                            }
-                            break;
-                        case 'supervisor':
-                            foreach ($supervisors as $supervisor) {
-                                if ($value==$supervisor->user_id) {
-                                    $value=$supervisor->first_name.' '.$supervisor->last_name;
-                                }
-                            }
-                            break;
-                        case 'campaign':
-                            foreach ($campaigns as $campaign) {
-                                if ($value==$campaign->campaign_id) {
-                                    $value=$campaign->campaign_name;
-                                }
-                            }
-                            break;
-                        
-                        default:
-                            $value=($value=='true')?'Si':$value;
-                            $value=($value=='false')?'No':$value;
-                            break;
-                    } 
-
-                    if ($value!=null) {
-                        array_push($row,$value);
-                    }
-                }
-                fputcsv($output,$row);
-            }
-          // print_r($output);
-        }//export else end 
+        array_push($output,$cnts); 
+        return $output;
     }
-
 
         public function createContract(){
             switch ($_POST['contract_type']) {
@@ -451,8 +401,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                 $query->bindParam(':client_type', $_POST['client_type']);
                 $query->bindParam(':gender', $_POST['gender']);
                 $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
-                $query->bindParam(':first_name', $_POST['first_name']);
-                $query->bindParam(':last_name', $_POST['last_name']);
+                $query->bindValue(':first_name', trim($_POST['first_name']));
+                $query->bindValue(':last_name', trim($_POST['last_name']));
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
                 $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
