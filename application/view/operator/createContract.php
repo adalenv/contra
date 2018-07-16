@@ -956,7 +956,7 @@ function validate(){
     if (typeof($('[name="gas_pdr"]').val())!='undefined') {
         if ($('[name="gas_pdr"]').val().length!=14) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "PDR must have 14 characters!"
             },{
               type: 'danger',
@@ -974,7 +974,7 @@ function validate(){
         if ($('[name="luce_request_type"]').val()=='Maggior Tutela') {
             if ($('[name="luce_pod"]').val().length!=15) {
                 $.notify({
-                  icon: "done",
+                  icon: "warning",
                   message: "POD must have 15 characters!"
                 },{
                   type: 'danger',
@@ -990,7 +990,7 @@ function validate(){
         } else{
         if ($('[name="luce_pod"]').val().length!=14) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "POD must have 14 characters!"
             },{
               type: 'danger',
@@ -1010,7 +1010,7 @@ function validate(){
     if (typeof($('[name="iban_code"]').val())!='undefined') {
         if ($('[name="iban_code"]').val().length!=27) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "IBAN must have 27 characters!"
             },{
               type: 'danger',
@@ -1027,7 +1027,7 @@ function validate(){
     if (typeof($('[name="luce_potenza"]').val())!='undefined') {
         if ($('[name="luce_potenza"]').val().length>3) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "Potenza must have 3 or less characters!"
             },{
               type: 'danger',
@@ -1045,7 +1045,7 @@ function validate(){
     if (typeof($('[name="luce_tensione"]').val())!='undefined') {
         if ($('[name="luce_tensione"]').val().length>3) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "Tensione must have 3 or less characters!"
             },{
               type: 'danger',
@@ -1064,7 +1064,7 @@ function validate(){
         var a=Number($('[name="cel_number"]').val());
         if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "Invalid phone number!"
             },{
               type: 'danger',
@@ -1083,7 +1083,7 @@ function validate(){
         var a=Number($('[name="tel_number"]').val());
         if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
-              icon: "done",
+              icon: "warning",
               message: "Invalid phone number!"
             },{
               type: 'danger',
@@ -1097,6 +1097,24 @@ function validate(){
             valid=false;
         };
     };
+
+    if ($('[name="fature_via_email"]').val()=='true') {
+        if ($('[name="email"]').val()=='') {    
+            $.notify({
+              icon: "warning",
+              message: "Invalid email!"
+            },{
+              type: 'danger',
+              timer: 300,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+            });
+            $('[name="email"]').focus();
+            valid=false;
+        }
+    }
 
     $('input[type=text]').val (function () {
         return this.value.toUpperCase();
@@ -1193,7 +1211,7 @@ function validate(){
                     if (isset($_SESSION['create_contract'])) {
                         if ($_SESSION['create_contract']=='success') { ?>//if edit success 
                             $.notify({
-                              icon: "done",
+                              icon: "warning",
                               message: "Contract Created!"
                             },{
                               type: 'success',
