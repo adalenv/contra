@@ -1211,7 +1211,7 @@ function validate(){
                     if (isset($_SESSION['create_contract'])) {
                         if ($_SESSION['create_contract']=='success') { ?>//if edit success 
                             $.notify({
-                              icon: "warning",
+                              icon: "done",
                               message: "Contract Created!"
                             },{
                               type: 'success',
