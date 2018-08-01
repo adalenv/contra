@@ -177,7 +177,7 @@
                                                     </li>
                                                 <?php } ?>
                                               </ul>
-                                              Totale: <?=($pages==0?1:$pages);?>
+                                              Totale: <?=($pages==0?1:$pages-1);?>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@ function editContractStatus(contract_id,status_id){
 //                campaign_id:campaign_id,
 //               },
 //       })
-//       .done(function(data) {
+//       .done(function(data) { 
 //         //console.log(data.responseText);      
 //       })
 //       .fail(function(err) {
@@ -383,7 +383,7 @@ function editContractStatus(contract_id,status_id){
                         var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
 
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
-                        // var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
+                        
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';

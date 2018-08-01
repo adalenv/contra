@@ -1,6 +1,6 @@
             <div class="content" style="margin-top: 20px">
-                <div class="container-fluid"> 
-                    <div class="row">   
+                <div class="container-fluid">
+                    <div class="row">  
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <div class="row" style="margin-left:5px;margin-right:5px">
@@ -83,7 +83,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
@@ -95,14 +95,22 @@
                                             <input type="text" class="form-control" name="phone" id="phone">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
-                                        <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">POD/PDR</label>
+                                            <input type="text" class="form-control" name="podpdr" id="podpdr">
+                                        <span class="material-input"></span></div>
+
+                                    </div>
+
+                                    <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
+                                    <div class="col-md-12">
                                         <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
@@ -241,7 +249,6 @@
                                                         $output.= '<td></td>';
                                                     }
 
-
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
                                                                <td title="'.$contract->note.'">'.$note.'</td>';
@@ -297,7 +304,7 @@ function editContractStatus(contract_id,status_id){
 //                campaign_id:campaign_id,
 //               },
 //       })
-//       .done(function(data) {
+//       .done(function(data) { 
 //         //console.log(data.responseText);      
 //       })
 //       .fail(function(err) {
@@ -318,6 +325,7 @@ function editContractStatus(contract_id,status_id){
                             $('#phone').val('');
                             $('#client_name').val('');
                             $('#date').val('');
+                            $('#podpdr').val('');
                             $('#page_val').val(0);
                             document.forms[0].submit();
                         });
@@ -370,8 +378,10 @@ function editContractStatus(contract_id,status_id){
                         var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
 
+                        var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
+
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
-                        // var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
+                        
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
@@ -391,16 +401,20 @@ function editContractStatus(contract_id,status_id){
                         $('#phone').val(phone);
                         $('#phone').val()!=''? $('#phone').parent().addClass('is-focused'):'';
 
+                        $('#podpdr').val(podpdr);
+                        $('#podpdr').val()!=''? $('#podpdr').parent().addClass('is-focused'):'';
+
+
                         $('#client_name').val(client_name);
                         $('#client_name').val()!=''? $('#client_name').parent().addClass('is-focused'):'';
 
                         $('#codice_fiscale').val(codice_fiscale);
                         $('#codice_fiscale').val()!=''? $('#codice_fiscale').parent().addClass('is-focused'):'';
 
-                        $('.page-item').on('click',function(e) {
+                        $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
                             //|| $('#id').val()!=id 
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr ) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

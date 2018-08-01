@@ -392,6 +392,7 @@ class Model
         $supervisor     = (isset($_REQUEST['supervisor'])?$_REQUEST['supervisor']:'%');
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
+        $podpdr        = (isset($_REQUEST['podpdr'])?$_REQUEST['podpdr']:'%');
         $limiter      = 100;
         $pager        = $limiter*$page;
        
@@ -407,6 +408,7 @@ class Model
                 $_REQUEST['date']='';
                 $_REQUEST['contract_type']='%';
                 $_REQUEST['codice_fiscale']='%';
+                $_REQUEST['podpdr']='%';
                 $sql="SELECT * FROM contracts WHERE contract_id =:id";
                 $query = $this->db->prepare($sql);
                 $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -447,6 +449,9 @@ class Model
         if ($codice_fiscale==''){$codice_fiscale='%';}else {$codice_fiscale.='%';};
         if ($phone==''){$phone='%';};
         ////////////////////////////////////////////////////////////////////
+        if ($podpdr=='') {
+            $podpdr='%';
+        }
 
         $sql="SELECT * FROM contracts 
                 WHERE contract_type LIKE :contract_type 
@@ -472,6 +477,11 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND campaign LIKE :campaign
                     AND supervisor LIKE :supervisor
+                    AND (
+                                (luce_pod LIKE :podpdr)
+                            OR 
+                                (gas_pdr LIKE :podpdr)
+                        )
                 ORDER BY contract_id DESC ";
 
             $query = $this->db->prepare($sql);
@@ -487,6 +497,7 @@ class Model
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
+            $query->bindParam(':podpdr', $podpdr);
             $query->execute();
 
             $allpages=$query->rowCount();  
@@ -517,6 +528,7 @@ class Model
         $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->bindParam(':campaign', $campaign);
         $query->bindParam(':supervisor', $supervisor);
+            $query->bindParam(':podpdr', $podpdr);
         $query->execute();
 
         if (!$export) {
