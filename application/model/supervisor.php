@@ -248,6 +248,7 @@ class Model
                         )
                     AND vat_number LIKE :codice_fiscale
                     AND supervisor=:supervisor_id
+                    AND  DATE(`date`) >= CURDATE() - INTERVAL 45 DAY
                 ORDER BY contract_id DESC ";
 
             $query = $this->db->prepare($sql);
