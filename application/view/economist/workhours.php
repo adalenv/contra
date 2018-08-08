@@ -90,7 +90,7 @@
         </div>
         <div class="modal-body row">
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
-                <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="8"  placeholder="Inserire il numero di ore">
+                <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="6"  placeholder="Inserire il numero di ore">
                 <input type="hidden" id="h_user_id">
             </div>
             <div class="form-group col-sm-6" style="margin-bottom: 36px;">
@@ -128,6 +128,11 @@
           $(this).val('');
       });
       function addHoursM(){
+        if(confirm("Are you sure?")){
+          //console.log('po');
+        } else {
+          return;
+        };
         if ($('#hoursToAdd').val()!='' ) {
           console.log('valid');
         } else {
