@@ -315,6 +315,14 @@ class Model
         return $query->fetchAll();
     }
 
+    public function getChangelog($contract_id){
+        $sql='SELECT * FROM log WHERE contract_id=:contract_id  ORDER BY id DESC';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contract_id', $contract_id);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 ////////////////////////////////////////////////////
     public function getWorkhours($user_id,$date=null){
         if (!$date) {
@@ -918,6 +926,12 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
     public function editContract($contract_id){
+
+        $sql="SELECT * FROM contracts WHERE `contract_id`=:contract_id LIMIT 1";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':contract_id' =>$contract_id));
+        $old_c=$query->fetch(PDO::FETCH_ASSOC);
+
         $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry,document_issue_place=:document_issue_place WHERE contract_id=:contract_id";
 
                 $query = $this->db->prepare($sql);                
@@ -944,8 +958,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 $query->bindParam(':gender', $_POST['gender']);
                 $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
                 $query->bindParam(':first_name', $_POST['first_name']);
-                $query->bindParam(':last_name', trim($_POST['last_name']));
-                $query->bindParam(':vat_number', trim($_POST['vat_number']));
+                $query->bindValue(':last_name', trim($_POST['last_name']));
+                $query->bindValue(':vat_number', trim($_POST['vat_number']));
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
                 $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
                 $query->bindParam(':birth_nation', $_POST['birth_nation']);
@@ -1091,6 +1105,28 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
         //error handler
         if ($query->execute()) {
+            //log changes
+            $sql="SELECT * FROM contracts WHERE `contract_id`=:contract_id LIMIT 1";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>$contract_id));
+            $new_c=$query->fetch(PDO::FETCH_ASSOC);
+
+            $old_a=array_diff($old_c,$new_c);
+            $new_a=array_diff($new_c,$old_c);
+            $diff="";
+            foreach ($old_a as $index=>$value) {
+                $diff.=$index."[".$value."=>".$new_a[$index]."]|";
+            }
+
+            if (!empty($diff)) {
+                $sql="INSERT INTO log(user_id,contract_id,diff) VALUES(:user_id,:contract_id,:diff)";
+                $query=$this->db->prepare($sql);
+                $query->bindValue(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
+                $query->bindValue(':contract_id',$contract_id,PDO::PARAM_INT);
+                $query->bindValue(':diff',$diff);
+                $query->execute();     
+            }
+
             header('location: ../viewContract/'.$contract_id); 
             $_SESSION['edit_contract']='success';     
         } else {

@@ -815,6 +815,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <a href="../" class="btn btn-info pull-left">Back</a>
+                                        <a onclick="openChangelog()" class="btn btn-info pull-left">Changelog</a>
                                         <a  href="../editContract/<?=$contract->contract_id;?>" class="btn btn-warning pull-right">Edit</a>
                                         <div class="clearfix"></div>
                                     </div>
@@ -1038,3 +1039,46 @@ function loadDocAndAudio() {
 
 </style>
 
+  <div class="modal fade" id="open_log" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" style=" width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;" role="document">
+      <div class="modal-content" style=" height: auto;
+  min-height: 100%;
+  border-radius: 0;">
+        <div class="modal-header">
+          <h5 class="modal-title" style="float: left;" >Changes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body row">
+            <table class="table table-striped table-bordered table-responsive">
+              <?php
+                $output=''; 
+                foreach ($changelog as $log) {
+                        $useri= $this->model->getUser($log['user_id']);
+                        $useri=$useri->first_name." ".$useri->last_name;
+                        $output.="<tr>";
+                            $output.="<td>".$log['date']."</td><td>".$useri."</td>";
+                            $output.="<td>";
+                            $diff=explode("|",$log['diff']);
+                            foreach ($diff as $d) {
+                                $output.=$d."</br>";
+                            }
+                            $output.="</td>";
+                        $output.="</tr>";
+                    }
+                echo $output;
+            ?>
+        </table>
+        </div>
+      </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function openChangelog(){
+        $('#open_log').modal();
+    }
+</script>
