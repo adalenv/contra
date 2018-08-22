@@ -1115,7 +1115,23 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $new_a=array_diff($new_c,$old_c);
             $diff="";
             foreach ($old_a as $index=>$value) {
-                $diff.=$index."[".$value."=>".$new_a[$index]."]|";
+                if ($index=='status') {//old status name
+                    $sql='SELECT status_name FROM status where status_id=:status_id';
+                    $query = $this->db->prepare($sql);
+                    $query->bindParam(':status_id', $value,PDO::PARAM_INT);
+                    $query->execute();
+                    $oldstatus=$query->fetch();
+                    //new status name
+                    $sql='SELECT status_name FROM status where status_id=:status_id';
+                    $query = $this->db->prepare($sql);
+                    $query->bindParam(':status_id', $new_a[$index],PDO::PARAM_INT);
+                    $query->execute();
+                    $newstatus=$query->fetch();
+                    //log status names
+                    $diff.=$index."[".$oldstatus->status_name."=>".$newstatus->status_name."]|";
+                }else{
+                    $diff.=$index."[".$value."=>".$new_a[$index]."]|";
+                }    
             }
 
             if (!empty($diff)) {
@@ -1130,7 +1146,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             header('location: ../viewContract/'.$contract_id); 
             $_SESSION['edit_contract']='success';     
         } else {
-            //$_SESSION['edit_contract']='success'; 
+            //$_SESSION['edit_contract']='fail'; 
             echo "An error occurred!";
         }
     }

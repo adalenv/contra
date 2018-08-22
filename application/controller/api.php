@@ -49,32 +49,30 @@ class api extends Controller
         $query->bindParam(':date', $_POST['date']);
         $query->bindParam(':hours', $_POST['hours'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+           echo "success";
         }else{
             echo "error";
         } 
     }  
     public function deleteHours(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
-
         $sql = "DELETE FROM workhours WHERE workhours_id=:workhours_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':workhours_id', $_POST['workhours_id'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+           echo "success";
         }else{
             echo "error";
         } 
     }
     public function deleteAudio(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
-
         $file = APP."audios/".$_POST['url'];
         $sql = "DELETE FROM audios WHERE audio_id=:audio_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':audio_id', $_POST['audio_id'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+           echo "success";
            unlink($file);
         }else{
             echo "error";
@@ -82,13 +80,12 @@ class api extends Controller
     }
     public function deleteDocument(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
-
         $file = APP."documents/".$_POST['url'];
         $sql = "DELETE FROM documents WHERE document_id=:document_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':document_id', $_POST['document_id'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+           echo "success";
            unlink($file);
         }else{
             echo "error";
@@ -96,14 +93,34 @@ class api extends Controller
     }
 
     public function editContractStatus(){
+    	//get old status
+		$sql='SELECT s.status_name FROM contracts  inner join status s ON s.status_id=contracts.status  WHERE contract_id=:contract_id LIMIT 1';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contract_id',$_POST['contract_id'],PDO::PARAM_INT);
+        $query->execute();
+        $oldstatus=$query->fetch();
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
-
         $sql = "UPDATE contracts SET status=:status_id WHERE contract_id=:contract_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':status_id', $_POST['status_id'],PDO::PARAM_INT);
         $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+            echo "success";
+            	//new status name
+                $sql='SELECT status_name FROM status where status_id=:status_id';
+		        $query = $this->db->prepare($sql);
+		        $query->bindParam(':status_id', $_POST['status_id'],PDO::PARAM_INT);
+		        $query->execute();
+		        $newstatus=$query->fetch();
+
+		        //log cheanges
+                $sql="INSERT INTO log(user_id,contract_id,diff) VALUES(:user_id,:contract_id,:diff)";
+                $query=$this->db->prepare($sql);
+                $query->bindParam(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
+                $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);;
+                $query->bindValue(':diff',"status[".$oldstatus->status_name."=>".$newstatus->status_name."]");
+                $query->execute();
+
         }else{
             echo "error";
         } 
@@ -111,13 +128,12 @@ class api extends Controller
 
     public function editContractCampaign(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
-
         $sql = "UPDATE contracts SET campaign=:campaign_id WHERE contract_id=:contract_id";
         $query = $this->db->prepare($sql);
         $query->bindParam(':campaign_id', $_POST['campaign_id'],PDO::PARAM_INT);
         $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
         if ($query->execute()) {
-           echo "sucess";
+           echo "success";
         }else{
             echo "error";
         } 
