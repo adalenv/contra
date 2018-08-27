@@ -72,12 +72,12 @@
                                             <input type="text" class="form-control" name="phone" id="phone">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+<!--                                     <div class="col-md-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
-                                    </div>
+                                    </div> -->
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
                                     <div class="col-md-3">
                                         <center>
