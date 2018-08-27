@@ -251,7 +251,11 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND supervisor=:supervisor_id
                     AND (
-                            MONTH(`date`) = MONTH(CURRENT_DATE())
+                            (
+                                MONTH(`date`) = MONTH(CURRENT_DATE())
+                            OR
+                                MONTH(`date`) = MONTH(CURRENT_DATE())-1
+                            )
                         AND 
                            YEAR(`date`) = YEAR(CURRENT_DATE())
                         )
