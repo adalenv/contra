@@ -225,13 +225,15 @@ class Model
             $op_others=true;
         }
         /////////////////////////////////////////////////
+
+        //            -- AND (   DATE(`date`) >= DATE(:date1) 
+        //            --     AND 
+        //            --         DATE(`date`) <= DATE(:date2)
+        //            --     ) 
         $sql="SELECT * FROM contracts 
                 WHERE contract_type LIKE :contract_type 
                     AND  operator LIKE :operator 
-                    AND (   DATE(`date`) >= DATE(:date1) 
-                        AND 
-                            DATE(`date`) <= DATE(:date2)
-                        ) 
+
                     AND ( 
                             (first_name LIKE :first_name AND last_name LIKE :last_name) 
                         OR
@@ -248,7 +250,11 @@ class Model
                         )
                     AND vat_number LIKE :codice_fiscale
                     AND supervisor=:supervisor_id
-                    AND  DATE(`date`) >= CURDATE() - INTERVAL 45 DAY
+                    AND (
+                            MONTH(`date`) = MONTH(CURRENT_DATE())
+                        AND 
+                           YEAR(`date`) = YEAR(CURRENT_DATE())
+                        )
                 ORDER BY contract_id DESC ";
 
             $query = $this->db->prepare($sql);
@@ -256,8 +262,8 @@ class Model
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
             $query->bindParam(':contract_type', $contract_type);
             $query->bindParam(':operator', $operator);
-            $query->bindParam(':date1', $date1);
-            $query->bindParam(':date2', $date2);
+            //$query->bindParam(':date1', $date1);
+            //$query->bindParam(':date2', $date2);
             $query->bindParam(':first_name', $first_name);
             $query->bindParam(':last_name', $last_name);
             $query->bindParam(':status', $status);
