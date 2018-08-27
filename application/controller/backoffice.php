@@ -63,6 +63,7 @@ class backoffice extends Controller
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
+        $changelog   =  $this->model->getChangelog($contract_id);
         $statuses=$this->model->getStatuses();
         $campaigns=$this->model->getCampaigns();
         require APP . 'view/backoffice/header.php';
