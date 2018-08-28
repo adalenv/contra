@@ -9,8 +9,8 @@
                     </p>
                 </div>
                 <!-- start orangechat code -->
-                <link type="text/css" rel="stylesheet" media="all" href="http://192.168.1.222/orangechat/orangechat/orangecss.php" />
-                <script type="text/javascript" src="http://192.168.1.222/orangechat/orangechat/orangejs.php"></script>
+               <!--  <link type="text/css" rel="stylesheet" media="all" href="http://192.168.1.222/orangechat/orangechat/orangecss.php" />
+                <script type="text/javascript" src="http://192.168.1.222/orangechat/orangechat/orangejs.php"></script> -->
                 <!-- end orangechat code -->
             </footer>
         </div>
