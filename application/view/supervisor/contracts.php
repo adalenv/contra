@@ -276,7 +276,7 @@
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
                         var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
-                        var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
+                        //var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
 
                         $('#contract_type').val(contract_type);
@@ -299,7 +299,7 @@
 
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
