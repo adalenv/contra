@@ -8,7 +8,7 @@ class operator extends Controller
 {
 
     public function index(){ 
-        header('Location:'.URL.$_SESSION['role'].'/createContract');
+        header('Location:'.URL.'operator/createContract');
     }
     // function contracts(){   
     //     $contracts=$this->model->getContracts();
@@ -25,7 +25,7 @@ class operator extends Controller
         }
         //$operators   =  $this->model->getUsersByRole('operator');
         $supervisors   =  $this->model->getUsersByRole('supervisor');
-        $campaigns=$this->model->getCampaigns();
+        $campaigns     =  $this->model->getCampaigns();
         require APP . 'view/operator/header.php';
         require APP . 'view/operator/createContract.php';
         require APP . 'view/operator/footer.php';
@@ -37,7 +37,7 @@ class operator extends Controller
             echo 'You dont have permissions!';
             return;
         }
-        $contract = $this->model->getContractById($contract_id);
+        $contract   =   $this->model->getContractById($contract_id);
         if (!$contract) {
            header('Location: ../');
            return;
@@ -45,8 +45,8 @@ class operator extends Controller
 
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
-        $statuses=$this->model->getStatuses();
-        $campaigns=$this->model->getCampaigns();
+        $statuses    =  $this->model->getStatuses();
+        $campaigns   =  $this->model->getCampaigns();
         require APP . 'view/operator/header.php';
         require APP . 'view/operator/viewContract.php';
         require APP . 'view/operator/footer.php';
