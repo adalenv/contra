@@ -486,7 +486,7 @@ class Model
 		///////////////////////////////////////////////////////////////////
 
 		///////////////-name-//////////////////////////////////////////////
-		if ($client_name!=''){
+		if ($client_name!='' || $client_name!='%'){
 			if (count(explode(' ',$client_name))>1) { ///if both
 				$first_name=explode(' ',$client_name)[0].'%';
 				$last_name=explode(' ',$client_name)[1].'%';
