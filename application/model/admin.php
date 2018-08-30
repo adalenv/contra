@@ -494,12 +494,10 @@ class Model
 			}else{                          // if one part
 				$first_name=$client_name.'%';
 				$last_name='%';
-                $last2='%';
 			}	
 		} else {						//if none
 				$first_name='%';
 				$last_name='%';
-                $last2='%';
 		}
         ///////////////////////////////////////////////////////////////////
         
