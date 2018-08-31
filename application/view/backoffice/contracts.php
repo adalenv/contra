@@ -134,7 +134,7 @@
                                         <h4 class="title">Contratti</h4>
                                          <p class="category"></p>
                                      </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4"><?=$cnt_nr;?>
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
 <!--                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
