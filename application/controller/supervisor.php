@@ -18,7 +18,7 @@ class supervisor extends Controller
         $output=$this->model->getContracts();
         $contracts=$output[1];
         $pages=ceil($output[0]/100);
-        $cnt_nr=$output[0];
+        $cnt_nr=$output[2];
         $statuses=$this->model->getStatuses();
         require APP . 'view/supervisor/header.php';
         require APP . 'view/supervisor/contracts.php';

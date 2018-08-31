@@ -305,7 +305,15 @@ class Model
         $query->execute();
 
         $cnts=$query->fetchAll();
-
+            $c_nr=0;
+            foreach ($cnts as $contract) {
+                if ($contract->contract_type=='dual') {
+                    $c_nr=$c_nr+2;
+                } else{
+                    $c_nr=$c_nr+1;
+                }
+            }
+            
         if ($op_others) {
             //-------users------
             $uid=array();
@@ -322,10 +330,12 @@ class Model
                 }
             }
             array_push($output,$outcnts); 
+            array_push($output,$c_nr);
             return $output;
         }
 
-        array_push($output,$cnts); 
+        array_push($output,$cnts);
+        array_push($output,$c_nr); 
         return $output;
     }
 

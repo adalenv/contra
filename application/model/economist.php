@@ -520,7 +520,17 @@ class Model
         $query->execute();
 
         if (!$export) {
-            array_push($output,$query->fetchAll()); 
+            $contracts=$query->fetchAll();
+            $c_nr=0;
+            foreach ($contracts as $contract) {
+                if ($contract->contract_type=='dual') {
+                    $c_nr=$c_nr+2;
+                } else{
+                    $c_nr=$c_nr+1;
+                }
+            }
+            array_push($output,$contracts); 
+            array_push($output,$c_nr);
             return $output;
         }else{
             header('Content-type: text/csv');
