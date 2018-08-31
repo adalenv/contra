@@ -123,7 +123,7 @@
                                         <div class="card-icon">
                                             <i class="material-icons">assignment</i>
                                           </div>
-                                        <h4 class="title">Contratti</h4>
+                                        <h4 class="title">Contratti</h4><?=$cnt_nr;?>
                                          <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Esporta in Excel</a></p>
                                      </div>
                                     <div class="col-md-4">
