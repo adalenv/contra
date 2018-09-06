@@ -309,45 +309,45 @@
                             $('.page_val').val(0);
                             document.forms[0].submit();
                         }); 
-                        if (date!='') {
-                            var start =date.split('-')[0]; 
-                            var end = date.split('-')[1]; 
-                            $('#date').daterangepicker({
-                                startDate: start,
-                                endDate: end,
-                                locale: {
-                                  format: 'YYYY/MM/DD'
-                                },
-                                ranges: {
-                                   'Today': [moment(), moment()],
-                                   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                   'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                                   'This Year': [moment().startOf('year'), moment().endOf('year')],
-                                   'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
-                                   'All Time': ['1999/01/01',moment()]
-                                }
-                            });
-                        }else{
-                            $('#date').daterangepicker({
-                                locale: {
-                                    format: 'YYYY/MM/DD'
-                                },
-                                ranges: {
-                                   'Today': [moment(), moment()],
-                                   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                   'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                                   'This Year': [moment().startOf('year'), moment().endOf('year')],
-                                   'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
-                                   'All Time': ['1999/01/01',moment()]
-                                }
-                            }).val('');
-                        }
+                        // if (date!='') {
+                        //     var start =date.split('-')[0]; 
+                        //     var end = date.split('-')[1]; 
+                        //     $('#date').daterangepicker({
+                        //         startDate: start,
+                        //         endDate: end,
+                        //         locale: {
+                        //           format: 'YYYY/MM/DD'
+                        //         },
+                        //         ranges: {
+                        //            'Today': [moment(), moment()],
+                        //            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        //            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        //            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        //            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        //            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                        //            'This Year': [moment().startOf('year'), moment().endOf('year')],
+                        //            'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+                        //            'All Time': ['1999/01/01',moment()]
+                        //         }
+                        //     });
+                        // }else{
+                        //     $('#date').daterangepicker({
+                        //         locale: {
+                        //             format: 'YYYY/MM/DD'
+                        //         },
+                        //         ranges: {
+                        //            'Today': [moment(), moment()],
+                        //            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        //            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        //            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        //            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        //            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                        //            'This Year': [moment().startOf('year'), moment().endOf('year')],
+                        //            'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+                        //            'All Time': ['1999/01/01',moment()]
+                        //         }
+                        //     }).val('');
+                        // }
                     });
             </script>
 
