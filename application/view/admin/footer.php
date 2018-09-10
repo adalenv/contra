@@ -8,10 +8,10 @@
                         <a style="margin-right:15px" href="#">Adalen VLADI</a> <!-- , made with love for a better web -->
                     </p>
                 </div>
-                <!-- start orangechat code -->
-               <!--  <link type="text/css" rel="stylesheet" media="all" href="http://192.168.1.222/orangechat/orangechat/orangecss.php" />
-                <script type="text/javascript" src="http://192.168.1.222/orangechat/orangechat/orangejs.php"></script> -->
-                <!-- end orangechat code -->
+                <!-- start o_chat code -->
+<link  href="http://<?=$_SERVER['HTTP_HOST'];?>:333/o_chatcss.php?me=<?=$_SESSION['user_id'];?>&role=<?=$_SESSION['role'];?>" media="all" rel="stylesheet" />
+<script src="http://<?=$_SERVER['HTTP_HOST'];?>:333/o_chatjs.php?me=<?=$_SESSION['user_id'];?>&role=<?=$_SESSION['role'];?>" type="text/javascript"  type="text/css" ></script>
+<!-- end o_chat code -->
             </footer>
         </div>
     </div>
