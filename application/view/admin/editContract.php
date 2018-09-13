@@ -1377,7 +1377,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append('<tr><td><a target="_blank" href="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'">'+data[i].url+'</a></td><td><b onclick="deleteAudio('+data[i].audio_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
+                $('.audio-container').append('<tr><td><a target="_blank" href="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'">'+data[i].url+'</a></td><td><b onclick="deleteAudio('+data[i].audio_id+',\"'+data[i].url+'\")" style="color:red;cursor:pointer;">X</b></td></tr>');
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');
