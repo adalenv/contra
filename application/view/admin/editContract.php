@@ -1358,7 +1358,7 @@ function loadDocAndAudio() {
         if (data.length>0) {
             $('.doc-container').html('');
             $.each(data, function (i) {
-                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td><td><b onclick="deleteDocument('+data[i].document_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
+                $('.doc-container').append(`<tr><td><a href=\'<?=URL.$_SESSION['role']?>/getDocument/${data[i].document_id}">${data[i].url}</a></td><td><b onclick=\'deleteDocument(${data[i].document_id},\"${data[i].url.replace(/\'/g, '__')}\") \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
             });
         }else {
             $('.doc-container').html('<tr><td>No documents!</td></tr>');
@@ -1428,7 +1428,7 @@ function deleteDocument(document_id,url){
             $.ajax({//document
                 url: "<?=URL;?>/api/deleteDocument",
                 type: 'POST',
-                data:{document_id:document_id,url:url},
+                data:{document_id:document_id,url:url.replace(/__/g, '\'')},
             })
             .done(function(data) {
                 loadDocAndAudio();
