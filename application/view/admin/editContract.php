@@ -1377,7 +1377,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append(`<tr><td><a target=\'_blank\' href=\'<?=URL.$_SESSION['role']?>/getAudio/${data[i].audio_id}\'>${data[i].url}</a></td><td><b onclick=\'deleteAudio(${data[i].audio_id},${data[i].url}) \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
+                $('.audio-container').append(`<tr><td><a target=\'_blank\' href=\'<?=URL.$_SESSION['role']?>/getAudio/${data[i].audio_id}\'>${data[i].url}</a></td><td><b onclick=\'deleteAudio(${data[i].audio_id},${data[i].url.replace(/\'/g, '__')}) \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');
@@ -1402,7 +1402,7 @@ function deleteAudio(audio_id,url){
             $.ajax({//document
                 url: "<?=URL;?>/api/deleteAudio",
                 type: 'POST',
-                data:{audio_id:audio_id,url:url},
+                data:{audio_id:audio_id,url:url.replace(/__/g, '\'')},
             })
             .done(function(data) {
                 loadDocAndAudio();
