@@ -387,31 +387,31 @@
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Toponimo*</label>
-                                                <input type="text" value="<?=$contract->ddf_toponimo;?>"  class="form-control" name="ddf_toponimo">
+                                                <input disabled="" type="text" value="<?=$contract->ddf_toponimo;?>"  class="form-control" name="ddf_toponimo">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Indirizzo*</label>
-                                                <input type="text" value="<?=$contract->ddf_address;?>"  class="form-control" name="ddf_address">
+                                                <input disabled="" type="text" value="<?=$contract->ddf_address;?>"  class="form-control" name="ddf_address">
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Civico*</label>
-                                                <input type="text" value="<?=$contract->ddf_civico;?>"  class="form-control" name="ddf_civico">
+                                                <input disabled="" type="text" value="<?=$contract->ddf_civico;?>"  class="form-control" name="ddf_civico">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Comune</label>
-                                                <input type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
+                                                <input disabled="" type="text" value="<?=$contract->ddf_price;?>" class="form-control" name="ddf_price">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Provincia*</label>
-                                                <input type="text" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
+                                                <input disabled="" type="text" value="<?=$contract->ddf_location;?>"  class="form-control" name="ddf_location">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
