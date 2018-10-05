@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 class Home extends Controller{
 
     public function index(){
@@ -25,7 +26,13 @@ class Home extends Controller{
                         $_SESSION['user_id']=$row['user_id'];
                         $_SESSION['role']=$row['role'];
                         $_SESSION['supervisor']=$row['supervisor'];
-                        header('location:'.URL.$_SESSION['role']);
+
+                        if (isset($_POST['external_url'])) {
+                            echo 'success'; //echo success on external login
+                        }else {
+                            header('location:'.URL.$_SESSION['role']);
+                        }
+                        
                     }else{//if error
                         if (isset($_POST['external_url'])) {//go back if its external login
                            echo '<script>javascript:history.back();</script>'; 
