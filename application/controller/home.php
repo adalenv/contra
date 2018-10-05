@@ -27,7 +27,12 @@ class Home extends Controller{
                         $_SESSION['supervisor']=$row['supervisor'];
                         header('location:'.URL.$_SESSION['role']);
                     }else{//if error
-                        header('location:'.URL.'?status=fail');
+                        if (isset($_POST['external_url'])) {//go back if its external login
+                           echo '<script>javascript:history.back();</script>'; 
+                        }else{
+                           header('location:'.URL.'?status=fail'); 
+                        }
+                        
                     }
             } else echo "Please set all parameters!";//if parameters are not set
     }
