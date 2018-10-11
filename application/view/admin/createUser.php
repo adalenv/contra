@@ -71,6 +71,7 @@
                                                         <option value=''></option>
                                                         <option value="operator">Operator</option>
                                                         <option value="supervisor">Supervisor</option>
+                                                        <option value="floor_manager">Floor Manager</option>
                                                         <option value="economist">Economist</option>
                                                         <option value="backoffice">Backoffice</option>
                                                         <option value="admin">Admin</option>

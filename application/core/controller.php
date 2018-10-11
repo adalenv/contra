@@ -54,6 +54,9 @@ class Controller
                 case 'economist':
                     require APP . 'model/economist.php';
                     break;
+                case 'floor_manager':
+                    require APP . 'model/floor_manager.php';
+                    break;
                 case 'supervisor':
                     require APP . 'model/supervisor.php';
                     break;

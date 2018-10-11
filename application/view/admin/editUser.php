@@ -44,6 +44,7 @@
                                                     <select onchange="getSupervisors(this.value)" required  name="role" class="form-control selectRole">
                                                         <option value="operator">Operator</option>
                                                         <option value="supervisor">Supervisor</option>
+                                                        <option value="floor_manager">Floor Manager</option>
                                                         <option value="economist">Economist</option>
                                                         <option value="backoffice">Backoffice</option>
                                                         <option value="admin">Admin</option>
@@ -114,11 +115,11 @@ function getSupervisors(v){
         .done(function(data) {
             dataa=data;
             $('#supervisorif').html(`<div class="form-group label-floating">
-                                                    <label class="control-label">Role</label>
-                                                    <select  id="supervisor" required name="supervisor" class="form-control">
-                                                        <option value=''></option>
-                                                    </select>
-                                                </div>`);
+                                        <label class="control-label">Supervisor</label>
+                                        <select  id="supervisor" required name="supervisor" class="form-control">
+                                            <option value=''></option>
+                                        </select>
+                                    </div>`);
             $('#supervisor').focus();
             for (var i=0;i<data.length;i++) {
                $('#supervisor').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
