@@ -26,6 +26,7 @@
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">Ore di Lavoro</h4>
+                                    <p class="category" style="cursor: pointer;" onclick="exportTableToCSV('Performanza_<?=$date;?>.csv')">Esporta</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
