@@ -1092,14 +1092,25 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $diff.=$index."[".$value."=>".$new_a[$index]."]|";
                 }  
             }
-             if (!empty($diff)) {
-                $sql="INSERT INTO log(user_id,contract_id,diff) VALUES(:user_id,:contract_id,:diff)";
+
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+
+            if (!empty($diff)) {
+                $sql="INSERT INTO log(user_id,contract_id,diff,ip) VALUES(:user_id,:contract_id,:diff,:ip)";
                 $query=$this->db->prepare($sql);
                 $query->bindValue(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
                 $query->bindValue(':contract_id',$contract_id,PDO::PARAM_INT);
                 $query->bindValue(':diff',$diff);
+                $query->bindValue(':ip',$ip);
                 $query->execute();     
             }
+            
             header('location: ../viewContract/'.$contract_id); 
             $_SESSION['edit_contract']='success';     
         } else {

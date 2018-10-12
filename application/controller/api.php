@@ -113,12 +113,21 @@ class api extends Controller
 		        $query->execute();
 		        $newstatus=$query->fetch();
 
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+
 		        //log cheanges
-                $sql="INSERT INTO log(user_id,contract_id,diff) VALUES(:user_id,:contract_id,:diff)";
+                $sql="INSERT INTO log(user_id,contract_id,diff,ip) VALUES(:user_id,:contract_id,:diff,:ip)";
                 $query=$this->db->prepare($sql);
                 $query->bindParam(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
-                $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);;
+                $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
                 $query->bindValue(':diff',"status[".$oldstatus->status_name."=>".$newstatus->status_name."]");
+                $query->bindParam(':ip', $ip);
                 $query->execute();
 
         }else{

@@ -1056,7 +1056,7 @@ function loadDocAndAudio() {
         <div class="modal-body row">
             <table class="table table-striped table-bordered table-responsive">
               <?php
-                $output=''; 
+                $output='<thead><td>Date</td><td>User</td><td>Changes</td><td>IP</td></thead>'; 
                 foreach ($changelog as $log) {
                         $useri= $this->model->getUser($log['user_id']);
                         $useri=$useri->first_name." ".$useri->last_name;
@@ -1068,6 +1068,7 @@ function loadDocAndAudio() {
                                 $output.=$d."</br>";
                             }
                             $output.="</td>";
+                         $output.="<td>".$log['ip']."</td>";
                         $output.="</tr>";
                     }
                 echo $output;
