@@ -1,5 +1,5 @@
 application/config/config.php
 application/audios/*
 !application/audios/README.md
-applicatiion/documents/*
+application/documents/*
 !application/documents/README.md
