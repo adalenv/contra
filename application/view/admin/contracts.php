@@ -146,29 +146,29 @@
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
                                                 $page=(int)$_GET['page'];
-                                                if ($page==0) {
-                                                    $page=1;
-                                                }
+                                               // if ($page==0) {
+                                                 //   $page=1;
+                                                //}
                                             }else{
-                                                $page=1;
+                                                $page=0;
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
                                             </script>   
 
                                               <ul class="pagination" style="cursor:pointer;">
-                                                <?php if ($page>1) { ?>
+                                                <?php if ($page>0) { ?>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page-1)" aria-label="Precedentes">
                                                         <span aria-hidden="true">&laquo;</span>
                                                         <span class="sr-only">Precedente</span>
                                                       </a>
                                                     </li>
-                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1;?></a></li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1+1;?></a></li>
                                                 <?php } ?>
-                                                <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page ;?></a></li>
+                                                <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page+1 ;?></a></li>
                                                 <?php if ($page<$pages-1) { ?>
-                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1;?></a></li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1+1;?></a></li>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page+1)" aria-label="Successivo">
                                                         <span aria-hidden="true">&raquo;</span>
