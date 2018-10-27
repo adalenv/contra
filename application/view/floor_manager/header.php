@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?php echo URL; ?>assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Flor Managment</title>
+    <title>Floor Managment</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link href="<?php echo URL; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
