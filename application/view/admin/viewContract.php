@@ -813,10 +813,18 @@
                                             <textarea disabled=""  class="form-control" name="note"><?=$contract->note;?></textarea>
                                         </div>
                                     </div>
+                                </div>
+                                 <div class="card-content">
                                     <div class="col-sm-12">
-                                        <a href="../" class="btn btn-info pull-left">Back</a>
-                                        <a onclick="openChangelog()" class="btn btn-info pull-left">Changelog</a>
-                                        <a  href="../editContract/<?=$contract->contract_id;?>" class="btn btn-warning pull-right">Edit</a>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">BO Note:</label>
+                                            <textarea disabled=""  class="form-control" name="note_super"><?=$contract->note_super;?></textarea>
+                                        </div>
+                                    </div>
+                                        <div class="col-sm-12">
+                                            <a href="../" class="btn btn-info pull-left">Back</a>
+                                            <a onclick="openChangelog()" class="btn btn-info pull-left">Changelog</a>
+                                            <a  href="../editContract/<?=$contract->contract_id;?>" class="btn btn-warning pull-right">Edit</a>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>

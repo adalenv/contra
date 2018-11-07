@@ -873,6 +873,12 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">BO Note:</label>
+                                            <textarea class="form-control" name="note_super"><?=$contract->note_super;?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
                                         <a onclick="deleteContract(<?=$contract->contract_id;?>)" class="btn btn-danger pull-left">Delete</a>
