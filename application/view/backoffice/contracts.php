@@ -249,9 +249,9 @@
                                                         $output.= '<td></td>';
                                                     }
 
-                                                    $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
+                                                    $note=(strlen($contract->note_super)>20)?substr($contract->note_super, 0,20).'...':$contract->note_super;
                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
-                                                               <td title="'.$contract->note.'">'.$note.'</td>';
+                                                               <td title="'.$contract->note_super.'">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
