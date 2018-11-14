@@ -881,10 +881,6 @@
                                     <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
-                                        <!-- onclink="convertCnt('gas','switch')" -->
-                                        <?php if ($contract->contract_type=='dual'): ?>
-                                            <a  data-toggle="modal" data-target="#convertCnt" class="btn btn-primary pull-left">Convert</a>
-                                        <?php endif ?>
                                         <button type="submit" class="submit-btn btn btn-warning  pull-right">Update</button>
                                         <div class="clearfix"></div>
                                     </div>
@@ -1297,37 +1293,18 @@ $(document).ready(function(){
     });
 });
 
-function convertCnt(toType,toStatus){
-    $.ajax({
-        url: "<?=URL;?>/api/convertCnt/"+toType+"/"+toStatus,
-        type: 'POST',
-        data: {contract: JSON.parse('<?php echo  json_encode($contract); ?>')},
-    })
-    .done(function() {
-        console.log("success");
-        window.location.href='../';
-    })
-    .fail(function() {
-        alert("An error ocurred!");
-    })
-    .always(function() {
-        console.log("complete");
-    });
-    console.log(toType+toStatus);
-}
-
-    $('#contract_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#birth_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#document_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#document_expiry').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
+$('#contract_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#birth_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#document_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#document_expiry').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
 
 $('.cb').on('click',function() {
     $(this).val($(this).val()=='false'?'true':'false');
@@ -1800,32 +1777,3 @@ function validate(){
     	this.value = this.value.toLocaleUpperCase();
 	});
 </script>
-
-
-<!-- Modal -->
-<div class="modal fade" id="convertCnt" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <center>
-            <select class="form-control" id="toType">
-                <option value="luce">Luce</option>
-                <option value="gas">Gas</option>
-            </select>
-        </center>
-      </div>
-      <div class="modal-footer">
-        <center>
-            <button type="button" class="btn btn-primary"   onclick="convertCnt($('#toType').val(),'switch')">Switch</button>
-            <button type="button" class="btn btn-secondary" onclick="convertCnt($('#toType').val(),'storni')">Storni</button>  
-        </center>
-      </div>
-    </div>
-  </div>
-</div>
