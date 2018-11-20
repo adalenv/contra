@@ -1097,6 +1097,9 @@ function validate(){
 </style>
 <script type="text/javascript">
 	$("input[type='text']").keyup(function () {
+        this.value=this.value.replace("\n"," ");
+        this.value=this.value.replace("\'","");
+        this.value=this.value.replace("\"","");
     	this.value = this.value.toLocaleUpperCase();
 	});
 </script>
