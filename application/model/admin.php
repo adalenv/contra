@@ -538,7 +538,7 @@ class Model
                             OR 
                                 (gas_pdr LIKE :podpdr)
                         )
-                ORDER BY contract_id DESC ";
+                ORDER BY DATE(`date`) DESC ";
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
