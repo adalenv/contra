@@ -36,7 +36,7 @@ class Model
         return $query->fetchAll();
     }
     public function getUsersByRole($role){
-        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id";
+        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
