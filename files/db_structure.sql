@@ -167,6 +167,7 @@ CREATE TABLE `contracts` (
   `note` text NOT NULL,
   `campaign` int(11) NOT NULL COMMENT 'campaign_id',
   `supervisor` int(11) NOT NULL COMMENT 'user_id',
+  `note_super` text NOT NULL,
   PRIMARY KEY (`contract_id`),
   UNIQUE KEY `contract_id_2` (`contract_id`),
   KEY `contract_id` (`contract_id`),
