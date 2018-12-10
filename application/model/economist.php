@@ -23,7 +23,7 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users   ORDER BY role DESC";
+        $sql="SELECT * FROM users  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
