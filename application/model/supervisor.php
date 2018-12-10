@@ -24,13 +24,13 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id ORDER BY role DESC";
+        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
     public function getAllUsers(){
-        $sql="SELECT * FROM users  ORDER BY role DESC";
+        $sql="SELECT * FROM users  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
