@@ -256,10 +256,11 @@ class Model
                             OR
                                 MONTH(`date`) = MONTH(CURRENT_DATE())-1
                             )
-                        AND 
-                           YEAR(`date`) = YEAR(CURRENT_DATE())
+                        
                         )
                 ORDER BY contract_id DESC ";
+	    //AND 
+                          // YEAR(`date`) = YEAR(CURRENT_DATE())
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
