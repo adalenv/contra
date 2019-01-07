@@ -251,7 +251,7 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND supervisor=:supervisor_id
                     AND (
-                            `date` >= last_day(now()) + interval 1 day - interval 2 month)
+                            `date` >= last_day(now()) + interval 1 day - interval 2 month
                         )
                 ORDER BY contract_id DESC ";
 	    			  
