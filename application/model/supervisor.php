@@ -254,13 +254,7 @@ class Model
                             `date` >= last_day(now()) + interval 1 day - interval 2 month)
                         )
                 ORDER BY contract_id DESC ";
-	    			    (
-                /* MONTH(`date`) = MONTH(CURRENT_DATE())
-                OR
-                MONTH(`date`) = MONTH(CURRENT_DATE())-1        
-	        AND 
-                YEAR(`date`) = YEAR(CURRENT_DATE())
-		*/
+	    			  
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
