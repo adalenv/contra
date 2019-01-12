@@ -4,7 +4,7 @@
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <div class="row" style="margin-left:5px;margin-right:5px">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Tipologia contratto</label>
                                             <select class="form-control" name="contract_type" id="contract_type">
@@ -15,13 +15,13 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Nominativo</label>
                                             <input type="text" class="form-control" name="client_name" id="client_name">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Stato Pratica</label>
                                             <select class="form-control" name="status" id="status">
@@ -30,6 +30,21 @@
                                                     $output=''; 
                                                     foreach ($statuses as $status) {
                                                         $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                    }
+                                                    echo $output;
+                                                ?>
+                                            </select>
+                                        <span class="material-input"></span></div>
+                                    </div>
+									<div class="col-md-2">
+                                        <div class="form-group label-floating ">
+                                            <label class="control-label">Campagna</label>
+                                            <select class="form-control" name="campaign" id="campaign">
+                                                <option value='%'>Tutti</option>
+                                                <?php
+                                                    $output=''; 
+                                                    foreach ($campaigns as $campaign) {
+                                                        $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
                                                     }
                                                     echo $output;
                                                 ?>
@@ -54,12 +69,6 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-left:5px;margin-right:5px">
-                                    <div class="col-md-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">ID</label>
-                                            <input type="text" class="form-control" name="id" id="id">
-                                        <span class="material-input"></span></div>
-                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
@@ -79,14 +88,14 @@
                                         <span class="material-input"></span></div>
                                     </div> -->
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
-                                    <div class="col-md-3">
+
                                         <center>
                                             <div class="form-group label-floating ">
                                                 <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
                                                 <a href="#" class="btn reset_btn">Ripristina</a>
                                             <span class="material-input"></span></div>
                                         </center>
-                                    </div>
+   
                                 </div>
                             </ul>
                         </form>
@@ -154,10 +163,10 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <th>Tipo</th>
-                                            <th>ID</th>
                                             <th>Data</th>
                                             <th>Nominativo</th>
                                             <th>Stato</th>
+											<th>Campagna</th>
                                             <th>Località</th>
                                             <th>Operatore</th>
                                             <th>Note</th>
@@ -174,8 +183,7 @@
                                                                 }elseif ($contract->contract_type=='dual') {
                                                                     $output.='<td>Dual</td>';
                                                                 }
-                                                    $output.='<td>'.$contract->contract_id.'</td>
-                                                                <td>'.date('d-m-Y',strtotime($contract->date)).'</td>
+                                                    $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
                                                                 <td>'.$contract->first_name.' '.$contract->last_name.'</td>';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
@@ -183,8 +191,15 @@
                                                                         break;
                                                                     }
                                                                 }
-                                                    $output.='<td>'.$status1.'</td>
-                                                                <td>'.$contract->location.'</td>';
+                                                    $output.='<td>'.$status1.'</td>';
+													foreach ($campaigns as $key => $campaign) {
+                                                                    if ($campaign->campaign_id==$contract->campaign) {
+                                                                        $campaign1=$campaign->campaign_name;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                    $output.='<td>'.$campaign1.'</td>';
+                                                    $output.='<td>'.$contract->location.'</td>';	
                                                                     foreach($allUsers as $user) {
                                                                         if ($contract->operator == $user->user_id) {
                                                                             $operator = $user;
@@ -278,6 +293,8 @@
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         //var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
+						var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
+						$('#campaign').val(campaign);
 
                         $('#contract_type').val(contract_type);
 
@@ -408,4 +425,3 @@
         border: 1px solid #00bcd4;
     }
 </style>
-

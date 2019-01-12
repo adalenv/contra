@@ -163,30 +163,13 @@ class Model
         $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
         $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
         $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
+		$campaign     = (isset($_REQUEST['campaign'])?$_REQUEST['campaign']:'%');
         $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $limiter      = 100;
         $pager        = $limiter*$page;
        
-        /////////////////////////if is set id////////////////////////////
-        if (isset($_REQUEST['id'])) {
-            if ($_REQUEST['id']!='') {
-                $_REQUEST['client_name']='';
-                $_REQUEST['operator']='%';
-                $_REQUEST['phone']='%';
-                $_REQUEST['status']='%';
-                $_REQUEST['date']='';
-                $_REQUEST['contract_type']='%';
-                $_REQUEST['codice_fiscale']='%';
-                $sql="SELECT * FROM contracts WHERE contract_id =:id";
-                $query = $this->db->prepare($sql);
-                $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
-                $query->execute();
-                return $query->fetchAll();
-            }
-        }
-        /////////////////////////////////////////////////////////////////
 
         /////////////////////////////-date-////////////////////////////
         if ($date!='') {
@@ -249,6 +232,7 @@ class Model
                         OR  (cel_number3 LIKE :phone)
                         )
                     AND vat_number LIKE :codice_fiscale
+					AND campaign LIKE :campaign
                     AND supervisor=:supervisor_id
                     AND (
                             `date` >= last_day(now()) + interval 1 day - interval 2 month
@@ -261,6 +245,7 @@ class Model
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
             $query->bindParam(':contract_type', $contract_type);
             $query->bindParam(':operator', $operator);
+			$query->bindParam(':campaign', $campaign);
             //$query->bindParam(':date1', $date1);
             //$query->bindParam(':date2', $date2);
             $query->bindParam(':first_name', $first_name);
@@ -296,6 +281,7 @@ class Model
         $query->bindParam(':last_name', $last_name);
         $query->bindParam(':status', $status);
         $query->bindParam(':phone', $phone);
+		$query->bindParam(':campaign', $campaign);
         $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->execute();
 

@@ -16,6 +16,7 @@ class supervisor extends Controller
         $operators=$this->model->getUsersByRole('operator');
         $allUsers=$this->model->getAllUsers();
         $output=$this->model->getContracts();
+		$campaigns=$this->model->getCampaigns();
         $contracts=$output[1];
         $pages=ceil($output[0]/100);
         $cnt_nr=$output[2];
