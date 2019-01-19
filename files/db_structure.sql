@@ -257,6 +257,7 @@ CREATE TABLE `users` (
   `last_name` varchar(50) NOT NULL,
   `role` enum('operator','supervisor','backoffice','admin','economist','floor_manager') NOT NULL DEFAULT 'operator',
   `supervisor` int(11) NOT NULL COMMENT 'user_id',
+  `active` ENUM(  'yes',  'no' ) NOT NULL DEFAULT  'yes',
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1;

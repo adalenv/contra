@@ -31,7 +31,7 @@
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">Utenti</h4>
-                                    <p class="category"><a href="../admin/inactiveUsers">Show inactive users</a></p>
+                                    <p class="category"><a href="../admin/inactiveUsers">Utenti non attivi</a></p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
