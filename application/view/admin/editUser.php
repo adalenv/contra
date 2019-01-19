@@ -36,6 +36,22 @@
                                                     <input type="text" required name="last_name" value="<?=$user->last_name;?>" class="form-control">
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Active</label>
+                                                    
+                                                    <select class="form-control" required name="active" id="active">
+                                                        <?php 
+                                                            if ($user->active=='yes') {?>
+                                                                <option selected value="yes">Yes</option>
+                                                                <option value="no">No</option>  
+                                                        <?php } else { ?>
+                                                                <option value="yes">Yes</option>
+                                                                <option selected value="no">No</option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">

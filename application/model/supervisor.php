@@ -24,19 +24,19 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id  order by first_name asc";
+        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id and active='yes'  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
     public function getAllUsers(){
-        $sql="SELECT * FROM users  order by first_name asc";
+        $sql="SELECT * FROM users and active='yes'  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
     public function getUsersByRole($role){
-        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id  order by first_name asc";
+        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id  and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();

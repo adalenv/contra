@@ -111,6 +111,20 @@ class admin extends Controller
         }else header('location:'.APP);
     }
 
+    public function inactiveUsers($showHours=false,$date=null){
+        if ($showHours=='workhours') {
+            $users=$this->model->getInactiveUsers();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/workhours.php';
+            require APP . 'view/admin/footer.php';
+            return;
+        }elseif(!$showHours){ 
+            $users=$this->model->getInactiveUsers();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/users.php';
+            require APP . 'view/admin/footer.php';
+        }else header('location:'.APP);
+    }
     public function viewUser($user_id){ 
         $contracts=$this->model->getContractsByUser($user_id);
         require APP . 'view/admin/header.php';

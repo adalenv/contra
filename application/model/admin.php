@@ -23,20 +23,27 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users  order by first_name asc";
+        $sql="SELECT * FROM users where active='yes' order by first_name asc";
+        $query=$this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function getInactiveUsers(){
+        $sql="SELECT * FROM users where active='no' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
 
     public function getUsersByRole($role){
-        $sql="SELECT * FROM users where role = :role order by first_name asc";
+        $sql="SELECT * FROM users where role = :role and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':role' =>$role));
         return $query->fetchAll();
     }
     public function getUsersBySupervisor($supervisor){
-        $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor order by first_name asc";
+        $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor' =>$supervisor));
         return $query->fetchAll();
@@ -101,7 +108,7 @@ class Model
         }else{
             $supervisor=$_POST['supervisor'];
         }
-        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id WHERE user_id=:user_id";
+        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id,active=:active WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
         $parameters=array(':username' => $_POST['username'],
                       ':password' => $_POST['password'],
@@ -109,6 +116,7 @@ class Model
                       ':last_name' => $_POST['last_name'],
                       ':role' => $_POST['role'],
                       ':supervisor_id' => $supervisor,
+                      ':active' => $_POST['active'],
                       ':user_id' => $user_id
                         );
         if($query->execute($parameters)){

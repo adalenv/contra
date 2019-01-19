@@ -23,7 +23,7 @@ class Model
     }
 
     public function getUsers(){
-        $sql="SELECT * FROM users  WHERE role!='admin' AND role!='backoffice'  AND role!='economist'  order by first_name asc";
+        $sql="SELECT * FROM users  WHERE role!='admin' AND role!='backoffice'  AND role!='economist' and active='yes'  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -36,13 +36,13 @@ class Model
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getUsersByRole($role){
-        $sql="SELECT * FROM users where role = :role  order by first_name asc";
+        $sql="SELECT * FROM users where role = :role and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':role' =>$role));
         return $query->fetchAll();
     }
     public function getUsersBySupervisor($supervisor){
-        $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor  order by first_name asc";
+        $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor  and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor' =>$supervisor));
         return $query->fetchAll();
