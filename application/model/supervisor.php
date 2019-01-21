@@ -30,7 +30,7 @@ class Model
         return $query->fetchAll();
     }
     public function getAllUsers(){
-        $sql="SELECT * FROM users and active='yes'  order by first_name asc";
+        $sql="SELECT * FROM users where active='yes'  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
