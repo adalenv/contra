@@ -143,7 +143,7 @@
                                                         <span class="sr-only">Precedente</span>
                                                       </a>
                                                     </li>
-                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1+1;?></a></li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page;?></a></li>
                                                 <?php } ?>
                                                 <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page+1 ;?></a></li>
                                                 <?php if ($page<$pages-1) { ?>
@@ -156,7 +156,7 @@
                                                     </li>
                                                 <?php } ?>
                                               </ul>
-                                              Totale: <?=($pages==0?1:$pages-1);?>
+                                              Totale: <?=($pages==0?1:$pages);?>
                                         </div>
                                     </div>
                                 </div>
