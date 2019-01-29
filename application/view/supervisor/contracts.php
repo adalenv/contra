@@ -304,8 +304,8 @@
                         $('#status').val(status);
                         
 
-                        $('#id').val(id);
-                        $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
+                        // $('#id').val(id);
+                        // $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
 
                         $('#phone').val(phone);
                         $('#phone').val()!=''? $('#phone').parent().addClass('is-focused'):'';
@@ -318,7 +318,7 @@
 
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#campaign').val()!=campaign  || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#campaign').val()!=campaign  || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
