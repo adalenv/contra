@@ -123,10 +123,10 @@
                                                 </li>
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
-                                                $page=(int)$_GET['page']+1;
-                                                //if ($page==0) {
-                                                //   $page=1;
-                                                //}
+                                                $page=(int)$_GET['page'];
+                                                if ($page==0) {
+                                                  $page=1;
+                                                }
                                             }else{
                                                 $page=1;
                                             } ?>
