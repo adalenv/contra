@@ -237,9 +237,11 @@ class Model
                     AND (
                             `date` >= last_day(now()) + interval 1 day - interval 2 month
                         )
-                ORDER BY contract_id DESC ";
+                ORDER BY contract_id DESC  LIMIT :pager , :limiter";
 	    			  
-
+            if (!isset($last2)) {
+                $last2='1111111';
+            }
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
@@ -253,37 +255,41 @@ class Model
             $query->bindParam(':status', $status);
             $query->bindParam(':phone', $phone);
             $query->bindParam(':codice_fiscale', $codice_fiscale);
+            $query->bindParam(':pager', $pager, PDO::PARAM_INT);
+            $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
             $query->execute();
 
-            $allpages=$query->rowCount();  
+           
+
+            // if (!$export) {
+            //$sql.=" ";
+            //$query = $this->db->prepare($sql);
+            
+
+             $allpages=$query->rowCount();  
             $output=array();
             array_push($output,$allpages); 
 
-        if (!$export) {
-            $sql.=" LIMIT :pager , :limiter";
-            $query = $this->db->prepare($sql);
-            $query->bindParam(':pager', $pager, PDO::PARAM_INT);
-            $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
-        }else{
-            $query = $this->db->prepare($sql);
-        }
+        // }else{
+        //     $query = $this->db->prepare($sql);
+        // }
 
-        if (!isset($last2)) {
-            $last2='1111111';
-        }
-        $query->bindParam(':last2', $last2);
-        $query->bindParam(':supervisor_id', $_SESSION['user_id']);
-        $query->bindParam(':contract_type', $contract_type);
-        $query->bindParam(':operator', $operator);
-        // $query->bindParam(':date1', $date1);
-        // $query->bindParam(':date2', $date2);
-        $query->bindParam(':first_name', $first_name);
-        $query->bindParam(':last_name', $last_name);
-        $query->bindParam(':status', $status);
-        $query->bindParam(':phone', $phone);
-		$query->bindParam(':campaign', $campaign);
-        $query->bindParam(':codice_fiscale', $codice_fiscale);
-        $query->execute();
+        // if (!isset($last2)) {
+        //     $last2='1111111';
+        // }
+  //       $query->bindParam(':last2', $last2);
+  //       $query->bindParam(':supervisor_id', $_SESSION['user_id']);
+  //       $query->bindParam(':contract_type', $contract_type);
+  //       $query->bindParam(':operator', $operator);
+  //       // $query->bindParam(':date1', $date1);
+  //       // $query->bindParam(':date2', $date2);
+  //       $query->bindParam(':first_name', $first_name);
+  //       $query->bindParam(':last_name', $last_name);
+  //       $query->bindParam(':status', $status);
+  //       $query->bindParam(':phone', $phone);
+		// $query->bindParam(':campaign', $campaign);
+  //       $query->bindParam(':codice_fiscale', $codice_fiscale);
+       // $query->execute();
 
         $cnts=$query->fetchAll();
             $c_nr=0;
