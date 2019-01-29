@@ -128,7 +128,7 @@
                                                 //   $page=1;
                                                 //}
                                             }else{
-                                                $page=0;
+                                                $page=1;
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
