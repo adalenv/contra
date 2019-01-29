@@ -136,7 +136,7 @@
                                             </script>   
 
                                               <ul class="pagination" style="cursor:pointer;">
-                                                <?php if ($page>1) { ?>
+                                                <?php if ($page>=0) { ?>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page-1)" aria-label="Precedentes">
                                                         <span aria-hidden="true">&laquo;</span>
