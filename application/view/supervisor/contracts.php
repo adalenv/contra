@@ -123,7 +123,7 @@
                                                 </li>
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
-                                                $page=(int)$_GET['page'];
+                                                $page=(int)$_GET['page']+1;
                                                 //if ($page==0) {
                                                 //   $page=1;
                                                 //}
@@ -131,7 +131,7 @@
                                                 $page=0;
                                             } ?>
                                             <script type="text/javascript">
-                                                $page=<?=$page+1?>;
+                                                $page=<?=$page?>;
                                                 console.log($page);
                                             </script>   
 
