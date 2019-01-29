@@ -132,6 +132,7 @@
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
+                                                console.log($page);
                                             </script>   
 
                                               <ul class="pagination" style="cursor:pointer;">

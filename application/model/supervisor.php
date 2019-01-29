@@ -161,7 +161,7 @@ class Model
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
         $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
-        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
+       // $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
         $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
 		$campaign     = (isset($_REQUEST['campaign'])?$_REQUEST['campaign']:'%');
         $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
@@ -172,14 +172,14 @@ class Model
        
 
         /////////////////////////////-date-////////////////////////////
-        if ($date!='') {
-            $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
-            $date1 = date("Y-m-d", strtotime($date[0]));
-            $date2 = date("Y-m-d", strtotime($date[1]));
-        } else {
-            $date1 ="1999-01-01";
-            $date2 ="2099-01-01";
-        }
+        // if ($date!='') {
+        //     $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
+        //     $date1 = date("Y-m-d", strtotime($date[0]));
+        //     $date2 = date("Y-m-d", strtotime($date[1]));
+        // } else {
+        //     $date1 ="1999-01-01";
+        //     $date2 ="2099-01-01";
+        // }
         ///////////////////////////////////////////////////////////////////
 
         ///////////////-name-//////////////////////////////////////////////
@@ -275,8 +275,8 @@ class Model
         $query->bindParam(':supervisor_id', $_SESSION['user_id']);
         $query->bindParam(':contract_type', $contract_type);
         $query->bindParam(':operator', $operator);
-        $query->bindParam(':date1', $date1);
-        $query->bindParam(':date2', $date2);
+        // $query->bindParam(':date1', $date1);
+        // $query->bindParam(':date2', $date2);
         $query->bindParam(':first_name', $first_name);
         $query->bindParam(':last_name', $last_name);
         $query->bindParam(':status', $status);
