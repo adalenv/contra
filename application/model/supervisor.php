@@ -208,7 +208,7 @@ class Model
             $op_others=true;
         }
         /////////////////////////////////////////////////
-
+        //
         //            -- AND (   DATE(`date`) >= DATE(:date1) 
         //            --     AND 
         //            --         DATE(`date`) <= DATE(:date2)
@@ -298,7 +298,7 @@ class Model
         if ($op_others) {
             //-------users------
             $uid=array();
-            $ops=$this->getUsers();
+            $ops=$this->getAllUsers();
             foreach ($ops as $op) {
                 array_push($uid,$op->user_id);
             }
