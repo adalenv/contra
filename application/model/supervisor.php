@@ -29,6 +29,12 @@ class Model
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
+    public function getUsers1(){
+        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id  order by first_name asc";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
+        return $query->fetchAll();
+    }
     public function getAllUsers(){
         $sql="SELECT * FROM users  order by first_name asc";
         $query=$this->db->prepare($sql);
@@ -298,7 +304,7 @@ class Model
         if ($op_others) {
             //-------users------
             $uid=array();
-            $ops=$this->getAllUsers();
+            $ops=$this->getUsers1();
             foreach ($ops as $op) {
                 array_push($uid,$op->user_id);
             }
