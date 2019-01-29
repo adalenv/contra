@@ -259,14 +259,14 @@ class Model
             $output=array();
             array_push($output,$allpages); 
 
-        //if (!$export) {
+        if (!$export) {
             $sql.=" LIMIT :pager , :limiter";
-            //$query = $this->db->prepare($sql);
+            $query = $this->db->prepare($sql);
             $query->bindParam(':pager', $pager, PDO::PARAM_INT);
             $query->bindParam(':limiter', $limiter, PDO::PARAM_INT);
-        //}else{
+        }else{
             $query = $this->db->prepare($sql);
-       // }
+        }
 
         if (!isset($last2)) {
             $last2='1111111';
