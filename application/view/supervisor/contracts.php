@@ -131,7 +131,7 @@
                                                 $page=0;
                                             } ?>
                                             <script type="text/javascript">
-                                                $page=<?=$page?>;
+                                                $page=<?=$page+1?>;
                                                 console.log($page);
                                             </script>   
 
@@ -143,11 +143,11 @@
                                                         <span class="sr-only">Precedente</span>
                                                       </a>
                                                     </li>
-                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page;?></a></li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page-1)"><?=$page-1;?></a></li>
                                                 <?php } ?>
-                                                <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page+1 ;?></a></li>
+                                                <li class="page-item active"><a class="page-link" onclick="$('.page_val').val($page)"><?=$page ;?></a></li>
                                                 <?php if ($page<$pages-1) { ?>
-                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1+1;?></a></li>
+                                                    <li class="page-item"><a class="page-link" onclick="$('.page_val').val($page+1)"><?=$page+1;?></a></li>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page+1)" aria-label="Successivo">
                                                         <span aria-hidden="true">&raquo;</span>
