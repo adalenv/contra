@@ -235,6 +235,7 @@
                             $('#operator').val('%');
                             $('#status').val('%');
                             $('#codice_fiscale').val('');
+                            $('#campaign').val('%');
                             $('#id').val('');
                             $('#phone').val('');
                             $('#client_name').val('');
@@ -317,7 +318,7 @@
 
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#campaign').val()!=campaign  || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
