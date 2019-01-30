@@ -47,7 +47,12 @@ class Model
         $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
-
+    public function getUsersByRoleAll($role){
+        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id  order by first_name asc";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
+        return $query->fetchAll();
+    }
 
     public function getContractsByUser($user_id ){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);

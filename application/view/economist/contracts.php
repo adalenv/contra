@@ -217,7 +217,7 @@
                                                                 }
                                                     $output.='<td>'.$campaign1.'</td>';
 
-                                                    foreach($operators as $user) {
+                                                    foreach($operatorsAll as $user) {
                                                         if ($contract->operator == $user->user_id) {
                                                             $operator = $user;
                                                             break;

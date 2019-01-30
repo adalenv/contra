@@ -19,6 +19,7 @@ class floor_manager extends Controller
                 return;
             }
         }
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
         $output=$this->model->getContracts();
@@ -61,6 +62,7 @@ class floor_manager extends Controller
     // }
 
     public function viewContract($contract_id){ 
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);

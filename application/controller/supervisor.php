@@ -13,6 +13,7 @@ class supervisor extends Controller
     }
 
     function contracts(){   
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $allUsers=$this->model->getAllUsers();
         $output=$this->model->getContracts();
