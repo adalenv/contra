@@ -42,6 +42,12 @@ class Model
         $query->execute(array(':role' =>$role));
         return $query->fetchAll();
     }
+    public function getUsersByRoleAll($role){
+        $sql="SELECT * FROM users where role = :role  order by first_name asc";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':role' =>$role));
+        return $query->fetchAll();
+    }
     public function getUsersBySupervisor($supervisor){
         $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);

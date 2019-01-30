@@ -19,6 +19,7 @@ class admin extends Controller
                 return;
             }
         }
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
     	$output=$this->model->getContracts();
@@ -50,6 +51,7 @@ class admin extends Controller
             $this->model->editContract($contract_id);
             return;
         }
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
@@ -61,6 +63,7 @@ class admin extends Controller
     }
 
     public function viewContract($contract_id){ 
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
