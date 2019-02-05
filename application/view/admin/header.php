@@ -30,7 +30,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/daterangepicker.css" />
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/bootstrap-datetimepicker.min.css" />
-
+    <style type="text/css">
+        .sidebar-background{
+            background-size: auto !important;
+        }
+    </style>
 </head>
 
 <body>
