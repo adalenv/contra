@@ -87,6 +87,19 @@
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div> -->
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Data</label>
+                                            <!-- <input type="text" class="form-control" name="date" id="date"> -->
+                                            <select class="form-control" name="date" id="date">
+                                                <option value="%">Tutti</option>
+                                                <option value="thisweek">This Week</option>
+                                                <option value="lastweek">Last Week</option>
+                                                <option value="thismonth">This Month</option>
+                                            </select>
+                                        <span class="material-input"></span>
+                                        </div>
+                                    </div>
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
 
                                     
@@ -240,7 +253,7 @@
                             $('#id').val('');
                             $('#phone').val('');
                             $('#client_name').val('');
-                            $('#date').val('');
+                            $('#date').val('%');
                             $('#page_val').val(0);
                             document.forms[0].submit();
                         });
@@ -294,7 +307,7 @@
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
                         var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
-                        //var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
+                        var date='<?=(isset($_GET['date'])?$_GET['date']:'%')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
 						var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
 						$('#campaign').val(campaign);
@@ -303,6 +316,8 @@
 
                         $('#operator').val(operator);
                         $('#status').val(status);
+
+                        $('#date').val(date);
                         
 
                         // $('#id').val(id);
@@ -319,7 +334,7 @@
 
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#campaign').val()!=campaign  || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#campaign').val()!=campaign || $('#date').val()!=date || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

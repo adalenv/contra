@@ -172,7 +172,7 @@ class Model
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
         $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
-        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
+        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'%');
         $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
 		$campaign     = (isset($_REQUEST['campaign'])?$_REQUEST['campaign']:'%');
         $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
@@ -181,6 +181,34 @@ class Model
         $limiter      = 100;
         $pager        = $limiter*$page;
        
+        switch ($date) {
+            case '%':
+                $dateQuery='AND (
+                            `date` >= last_day(now()) + interval 1 day - interval 2 month
+                        )';
+                break;
+            case 'thisweek':
+                $dateQuery='AND (
+                            YEARWEEK(`date`, 1) = YEARWEEK(CURDATE(), 1)
+                        )';
+                break;
+            case 'lastweek':
+                $dateQuery='AND (
+                            `date` between date_sub(now(),INTERVAL 1 WEEK) and now()
+                        )';
+                break;
+            case 'thismonth':
+                $dateQuery='AND (
+                            MONTH(`date`) = MONTH(CURRENT_DATE()) AND YEAR(`date`) = YEAR(CURRENT_DATE())
+                        )';
+                break;
+            
+            default:
+                $dateQuery='AND (
+                            `date` >= last_day(now()) + interval 1 day - interval 2 month
+                        )';
+                break;
+        }
 
         /////////////////////////////-date-////////////////////////////
         // if ($date!='') {
@@ -235,6 +263,7 @@ class Model
                         OR
                             (first_name LIKE :last2 OR last_name LIKE :last2)
                         )
+                    
                     AND status LIKE :status  
                     AND (   (tel_number LIKE :phone)
                         OR  (alt_number LIKE :phone)
@@ -245,12 +274,10 @@ class Model
                     AND vat_number LIKE :codice_fiscale
 					AND campaign LIKE :campaign
                     AND supervisor=:supervisor_id
-                    AND (
-                            `date` >= last_day(now()) + interval 1 day - interval 2 month
-                        )
+                    ".$dateQuery."
                 ORDER BY contract_id DESC ";
 	    			  
-
+            print_r($sql);
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
