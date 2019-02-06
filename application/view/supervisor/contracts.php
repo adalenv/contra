@@ -89,12 +89,13 @@
                                     </div> -->
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
 
-                                        <center>
-                                            <div class="form-group label-floating ">
+                                    
+                                           <!--  <div class="form-group label-floating "> -->
                                                 <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
                                                 <a href="#" class="btn reset_btn">Ripristina</a>
-                                            <span class="material-input"></span></div>
-                                        </center>
+                                            <span class="material-input"></span>
+                                          <!--   </div>
+                                         -->
    
                                 </div>
                             </ul>
