@@ -202,6 +202,11 @@ class Model
                             MONTH(`date`) = MONTH(CURRENT_DATE()) AND YEAR(`date`) = YEAR(CURRENT_DATE())
                         )';
                 break;
+            case 'lastmonth':
+                $dateQuery='AND (
+                            YEAR(`date`) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) AND MONTH(`date`) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+                        )';
+                break;
             
             default:
                 $dateQuery='AND (

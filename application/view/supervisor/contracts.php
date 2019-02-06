@@ -96,6 +96,7 @@
                                                 <option value="thisweek">This Week</option>
                                                 <option value="lastweek">Last Week</option>
                                                 <option value="thismonth">This Month</option>
+                                                <option value="lastmonth">Last Month</option>
                                             </select>
                                         <span class="material-input"></span>
                                         </div>
