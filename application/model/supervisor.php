@@ -277,7 +277,7 @@ class Model
                     ".$dateQuery."
                 ORDER BY contract_id DESC ";
 	    			  
-            print_r($sql);
+        
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
