@@ -98,7 +98,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
-                                            <input type="text" class="form-control" name="date" id="date">
+                                            <input type="text" autocomplete="off" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">

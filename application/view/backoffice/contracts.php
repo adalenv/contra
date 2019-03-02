@@ -98,7 +98,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
-                                            <input type="text" class="form-control" name="date" id="date">
+                                            <input type="text" autocomplete='off' class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">
@@ -134,7 +134,19 @@
                                         <h4 class="title">Contratti</h4>
                                          <p class="category"></p>
                                      </div>
-                                    <div class="col-md-4"><?=$cnt_nr;?>
+                                    <div class="col-md-4">
+									<?php 
+									if(isset($_GET['supervisor'])){
+										if($_GET['supervisor']=='%'){
+											echo $cnt_nr;
+										}
+									}else{
+										//if($_GET['supervisor']!='%'){
+											echo $cnt_nr;
+										//}
+									}
+									
+														?>
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
 <!--                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
