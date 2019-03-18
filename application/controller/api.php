@@ -93,13 +93,19 @@ class api extends Controller
     }
 
     public function bulkUpdateStatuses(){
-        print_r($_SESSION);
+       //print_r($_SESSION);
         $sql = "UPDATE contracts SET status=status_temp WHERE status_temp!='' ";
         $query = $this->db->prepare($sql);
         if ($query->execute()) {
+
+            $last_status_update = date("d-m-Y H:i:s"); ;
+            $var_str = var_export($last_status_update, true);
+            $var = "<?php\n\n\$last_status_update = $var_str;\n\n?>";
+            file_put_contents('last_status_update.php', $var);
             //echo "success";
             $_SESSION['update_statuses']='success';
             header("location:".URL.$_SESSION['role'].'/statuses/');
+
         }else {
             $_SESSION['update_statuses']='false';
             header("location:".URL.$_SESSION['role'].'/statuses/');

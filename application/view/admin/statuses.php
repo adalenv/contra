@@ -18,7 +18,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Status<a href="<?=URL?>api/bulkUpdateStatuses/" class="title btn btn-primary" style="float:right;">Update Statuses</a></h4>
+                                    <h4 class="title"><a href="<?=URL?>api/bulkUpdateStatuses/" class="title btn btn-primary" >Update Statuses </br><font style="color: black;"><?php include 'last_status_update.php'; echo $last_status_update; ?></font></a><div style="float: right;">Status</div></h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
