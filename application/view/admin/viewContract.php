@@ -14,12 +14,21 @@
                                                 <label class="control-label">Data Stipula</label>
                                                 <input  type="text" disabled="" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
                                             </div>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Stato</label>
-                                                <select disabled="" class="form-control" required name="status" id="status">
-                                                    <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
-                                                </select>
-                                            </div>
+                                            <?php //if ($contract->status_temp!='') { ?>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Stato</label>
+                                                    <select disabled="" class="form-control" required name="status_temp" id="status">
+                                                        <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
+                                                    </select>
+                                                </div>
+                                            <?php //} else {?>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Stato Temp</label>
+                                                    <select disabled="" class="form-control" required name="status" id="status">
+                                                        <option selected="" value='<?=$contract->status_id;?>'><?=$status_name_temp;?></option>
+                                                    </select>
+                                                </div>
+                                            <?php //} ?>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali  

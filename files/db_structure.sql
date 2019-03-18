@@ -134,6 +134,7 @@ CREATE TABLE `contracts` (
   `operator` int(11) NOT NULL COMMENT 'user id',
   `status` int(11) NOT NULL DEFAULT '1' COMMENT 'status id',
   `cancellation_reason` varchar(100) NOT NULL,
+  `status_temp` VARCHAR( 50 ) NOT NULL ;
   `gender` enum('male','female') NOT NULL,
   `rag_sociale` text NOT NULL,
   `first_name` varchar(50) NOT NULL,

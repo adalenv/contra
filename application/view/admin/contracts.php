@@ -207,8 +207,18 @@
                                                                     $output.='<td>Dual</td>';
                                                                 }
                                                     $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
-                                                    
-                                                     $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                    //status its temp
+                                                    if ($contract->status_temp!='') {
+                                                        $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status_temp.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                                foreach ($statuses as $key => $status) {
+                                                                    if ($status->status_id==$contract->status_temp) {
+                                                                        $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                    }else{
+                                                                         $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
+                                                                    }
+                                                                }
+                                                    }else{ //status isnt temp
+                                                        $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
                                                                         $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
@@ -216,6 +226,9 @@
                                                                          $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
                                                                 }
+                                                    }
+
+
                                                     $output.='</select></td>';
                                                                 foreach ($campaigns as $key => $campaign) {
                                                                     if ($campaign->campaign_id==$contract->campaign) {
@@ -280,7 +293,7 @@ function editContractStatus(contract_id,status_id){
     }).then((result) => {
       if (result.value) {
         $.ajax({
-            url: '<?=URL?>api/editContractStatus/',
+            url: '<?=URL?>api/editContractStatusTemp/',
             type: 'POST',
             data: {contract_id:contract_id,
                    status_id:status_id,

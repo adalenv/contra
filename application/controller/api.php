@@ -92,6 +92,22 @@ class api extends Controller
         } 
     }
 
+    public function bulkUpdateStatuses(){
+        print_r($_SESSION);
+        $sql = "UPDATE contracts SET status=status_temp WHERE status_temp!='' ";
+        $query = $this->db->prepare($sql);
+        if ($query->execute()) {
+            //echo "success";
+            $_SESSION['update_statuses']='success';
+            header("location:".URL.$_SESSION['role'].'/statuses/');
+        }else {
+            $_SESSION['update_statuses']='false';
+            header("location:".URL.$_SESSION['role'].'/statuses/');
+        }
+         //print_r($_SESSION);
+
+    }
+
     public function editContractStatus(){
     	//get old status
 		$sql='SELECT s.status_name FROM contracts  inner join status s ON s.status_id=contracts.status  WHERE contract_id=:contract_id LIMIT 1';
@@ -134,6 +150,48 @@ class api extends Controller
             echo "error";
         } 
     } 
+    public function editContractStatusTemp(){
+        //get old status
+        $sql='SELECT s.status_name FROM contracts  inner join status s ON s.status_id=contracts.status  WHERE contract_id=:contract_id LIMIT 1';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contract_id',$_POST['contract_id'],PDO::PARAM_INT);
+        $query->execute();
+        $oldstatus=$query->fetch();
+        //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
+        $sql = "UPDATE contracts SET status_temp=:status_id WHERE contract_id=:contract_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':status_id', $_POST['status_id'],PDO::PARAM_INT);
+        $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
+        if ($query->execute()) {
+            echo "success";
+                //new status name
+                $sql='SELECT status_name FROM status where status_id=:status_id';
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':status_id', $_POST['status_id'],PDO::PARAM_INT);
+                $query->execute();
+                $newstatus=$query->fetch();
+
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+
+                //log cheanges
+                $sql="INSERT INTO log(user_id,contract_id,diff,ip) VALUES(:user_id,:contract_id,:diff,:ip)";
+                $query=$this->db->prepare($sql);
+                $query->bindParam(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
+                $query->bindParam(':contract_id', $_POST['contract_id'],PDO::PARAM_INT);
+                $query->bindValue(':diff',"status[".$oldstatus->status_name."=>".$newstatus->status_name."]");
+                $query->bindParam(':ip', $ip);
+                $query->execute();
+
+        }else{
+            echo "error";
+        } 
+    }
 
     public function editContractCampaign(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };

@@ -30,6 +30,25 @@
                                                     ?>
                                                 </select>
                                             </div>
+                                            <!-- <?php //if ($contract->status_temp!='') { ?> -->
+                                                <div class="form-group label-floating is-focused is-empty">
+                                                    <label class="control-label">Temp Stato</label>
+                                                    <select   class="form-control" required name="status_temp" id="status">
+                                                        <?php
+                                                            $output='<option selected="" value="" >No Temp</option>';
+                                                            foreach ($statuses as $status) {
+                                                                if ($contract->status_temp==$status->status_id) {
+                                                                    $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                                }else{
+                                                                    $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
+                                                                }
+                                                            }
+                                                            echo $output;
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            <!-- <?php //} ?> -->
+
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali  

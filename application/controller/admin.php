@@ -63,11 +63,18 @@ class admin extends Controller
     }
 
     public function viewContract($contract_id){ 
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
+        $operatorsAll=  $this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
         $changelog   =  $this->model->getChangelog($contract_id);
+        if ($contract->status_temp!='') {
+            $status_temp=   $this->model->getStatusById($contract->status_temp);       
+            $status_name_temp=  $status_temp[0]->status_name; 
+        }else{
+            $status_name_temp="No Temp";
+        }
+        
         $statuses=$this->model->getStatuses();
         $campaigns=$this->model->getCampaigns();
         require APP . 'view/admin/header.php';

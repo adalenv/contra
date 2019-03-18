@@ -18,7 +18,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Users</h4>
+                                    <h4 class="title">Status<a href="<?=URL?>api/bulkUpdateStatuses/" class="title btn btn-primary" style="float:right;">Update Statuses</a></h4>
                                     <p class="category"></p>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -144,5 +144,39 @@
                         <?php }
                         unset($_SESSION['create_status']);
                     }
+
+
+
+                    if (isset($_SESSION['update_statuses'])) {
+                        if ($_SESSION['update_statuses']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "Status Updated!"
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php } elseif($_SESSION['update_statuses']=='fail'){ ?> //if fail
+                            $.notify({
+                              icon: "error_outline",
+                              message: "Staus update failed!"
+
+                            },{
+                              type: 'danger',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+                        <?php }
+                        unset($_SESSION['update_statuses']);
+                    }
+
                 ?>
             </script>
