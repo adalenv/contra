@@ -97,6 +97,9 @@ class api extends Controller
         $sql = "UPDATE contracts SET status=status_temp WHERE status_temp!='' ";
         $query = $this->db->prepare($sql);
         if ($query->execute()) {
+                $sql2 = "UPDATE contracts SET status_temp='' WHERE status_temp!='' ";
+                $query2 = $this->db->prepare($sql2);
+                $query2->execute();
 
             $last_status_update = date("d-m-Y H:i:s"); ;
             $var_str = var_export($last_status_update, true);
