@@ -33,7 +33,7 @@
                                             <!-- <?php //if ($contract->status_temp!='') { ?> -->
                                                 <div class="form-group label-floating is-focused is-empty">
                                                     <label class="control-label">Temp Stato</label>
-                                                    <select   class="form-control" required name="status_temp" id="status">
+                                                    <select   class="form-control"  name="status_temp" id="status">
                                                         <?php
                                                             $output='<option selected="" value="" >No Temp</option>';
                                                             foreach ($statuses as $status) {
