@@ -3,3 +3,4 @@ application/audios/*
 !application/audios/README.md
 application/documents/*
 !application/documents/README.md
+public/last_status_update.php
