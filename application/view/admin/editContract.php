@@ -898,6 +898,12 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Temp Note:</label>
+                                            <textarea class="form-control" name="note_temp"><?=$contract->note_temp;?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
                                         <?php if ($contract->contract_type=='dual'): ?>

@@ -101,6 +101,15 @@ class api extends Controller
                 $query2 = $this->db->prepare($sql2);
                 $query2->execute();
 
+            $sqlnote = "UPDATE contracts SET note=note_temp WHERE note_temp!='' ";
+            $querynote = $this->db->prepare($sqlnote);
+            if ($querynote->execute()) {
+                $sqlnote2 = "UPDATE contracts SET note_temp='' WHERE note_temp!='' ";
+                $querynote2 = $this->db->prepare($sqlnote2);
+                $querynote2->execute();
+            }
+
+
             $last_status_update = date("d-m-Y H:i:s"); ;
             $var_str = var_export($last_status_update, true);
             $var = "<?php\n\n\$last_status_update = $var_str;\n\n?>";
