@@ -354,7 +354,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -416,7 +416,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -731,7 +731,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -779,7 +779,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -831,7 +831,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -884,7 +884,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="number" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
