@@ -114,7 +114,7 @@ class Model
         }else{
             $supervisor=$_POST['supervisor'];
         }
-        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id,active=:active WHERE user_id=:user_id";
+        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id,active=:active,ip=:ip WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
         $parameters=array(':username' => $_POST['username'],
                       ':password' => $_POST['password'],
@@ -123,6 +123,7 @@ class Model
                       ':role' => $_POST['role'],
                       ':supervisor_id' => $supervisor,
                       ':active' => $_POST['active'],
+                      ':ip' => $_POST['ip'],
                       ':user_id' => $user_id
                         );
         if($query->execute($parameters)){
