@@ -470,6 +470,9 @@ class Model
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $podpdr        = (isset($_REQUEST['podpdr'])?$_REQUEST['podpdr']:'%');
+        $payment_type        = (isset($_REQUEST['payment_type'])?$_REQUEST['payment_type']:'%');
+
+
         $limiter      = 100;
         $pager        = $limiter*$page;
        
@@ -486,6 +489,7 @@ class Model
         		$_REQUEST['contract_type']='%';
                 $_REQUEST['codice_fiscale']='%';
                 $_REQUEST['podpdr']='%';
+                $_REQUEST['payment_type']='%';
 		        $sql="SELECT * FROM contracts WHERE contract_id =:id";
 		        $query = $this->db->prepare($sql);
 		        $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -554,6 +558,7 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND campaign LIKE :campaign
                     AND supervisor LIKE :supervisor
+                    AND payment_type like :payment_type
                     AND (
                                 (luce_pod LIKE :podpdr)
                             OR 
@@ -575,6 +580,8 @@ class Model
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
             $query->bindParam(':podpdr', $podpdr);
+            $query->bindParam(':payment_type', $payment_type);
+
             $query->execute();
 
             $allpages=$query->rowCount();  
@@ -606,6 +613,8 @@ class Model
         $query->bindParam(':campaign', $campaign);
         $query->bindParam(':supervisor', $supervisor);
         $query->bindParam(':podpdr', $podpdr);
+        $query->bindParam(':payment_type', $payment_type);
+
         $query->execute();
 
         if (!$export) {

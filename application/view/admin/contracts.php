@@ -83,7 +83,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
@@ -95,7 +95,7 @@
                                             <input type="text" class="form-control" name="phone" id="phone">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
                                             <input type="text" autocomplete="off" class="form-control" name="date" id="date">
@@ -107,6 +107,16 @@
                                             <input type="text" class="form-control" name="podpdr" id="podpdr">
                                         <span class="material-input"></span></div>
 
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Modalita di pagamento</label>
+                                            <select class="form-control" name="payment_type" id="payment_type">
+                                                <option value="%">Tutti</option>
+                                                <option value="postal">Carta di credito</option>
+                                                <option value="cc">Addebido su Conto Corrente</option>
+                                            </select>
+                                        <span class="material-input"></span></div>
                                     </div>
 
                                     <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
@@ -335,6 +345,7 @@ function editContractStatus(contract_id,status_id){
                             $('#status').val('%');
                             $('#campaign').val('%');
                             $('#supervisor').val('%');
+                            $('#payment_type').val('%');
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -392,6 +403,7 @@ function editContractStatus(contract_id,status_id){
                         var status='<?=(isset($_GET['status'])?$_GET['status']:'%')?>';
                         var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
+                        var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
 
                         var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
 
@@ -408,6 +420,7 @@ function editContractStatus(contract_id,status_id){
 
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
+                        $('#payment_type').val(payment_type);
                         
 
                         // $('#id').val(id);
@@ -429,7 +442,7 @@ function editContractStatus(contract_id,status_id){
                         $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
                             //|| $('#id').val()!=id 
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr ) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
