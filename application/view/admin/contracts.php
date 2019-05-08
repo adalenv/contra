@@ -113,7 +113,7 @@
                                             <label class="control-label">Modalita di pagamento</label>
                                             <select class="form-control" name="payment_type" id="payment_type">
                                                 <option value="%">Tutti</option>
-                                                <option value="postal">Carta di credito</option>
+                                                <option value="postal">Bolletino Postale</option>
                                                 <option value="cc">Addebido su Conto Corrente</option>
                                             </select>
                                         <span class="material-input"></span></div>
