@@ -39,7 +39,7 @@
                                                 foreach ($users as $user) {
                                                    
                                                     $output.='<tr>
-                                                                <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
+                                                                <td><a class="user_name_l" href="contracts/?operator='.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
                                                             </tr>';
                                                 }
