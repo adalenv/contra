@@ -1232,5 +1232,6 @@ function validate(){
         this.value=this.value.replace("\'","");
         this.value=this.value.replace("\"","");
     	this.value = this.value.toLocaleUpperCase();
+        this.value = this.value.trim();
 	});
 </script>
