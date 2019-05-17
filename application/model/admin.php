@@ -620,20 +620,16 @@ class Model
         if (!$export) {
             $contracts=$query->fetchAll();
             $c_nr=0;
-            if ($payment_type=="%") {
-                foreach ($contracts as $contract) {
-                    if ($contract->contract_type=='dual') {
-                        $c_nr=$c_nr+2;
-                    } else{
-                        $c_nr=$c_nr+1;
-                    }
-                }
-            }else{
-                foreach ($contracts as $contract) {
+            foreach ($contracts as $contract) {
+                if ($contract->contract_type=='dual') {
+                    $c_nr=$c_nr+2;
+                } else{
                     $c_nr=$c_nr+1;
                 }
             }
-
+            if ($payment_type!="%") {
+                $c_nr=count($contracts);
+            }
             array_push($output,$contracts); 
             array_push($output,$c_nr);
             return $output;
