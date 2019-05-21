@@ -5,4 +5,4 @@ rsync --ignore-existing  /var/www/html/application/documents/* /backup/documents
 /usr/bin/find  /backup/database/ -type f  -mmin +$((60*24))  -print | xargs rm -f ;
 
 echo 'Backup success!';
-/sbin/poweroff
+/sbin/shutdown now
