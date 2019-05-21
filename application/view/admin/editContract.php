@@ -1700,7 +1700,7 @@ function validate(){
     };
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
-        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
+        if ($('[name="cel_number"]').val().length< 9 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
@@ -1721,7 +1721,7 @@ function validate(){
         var a=Number($('[name="tel_number"]').val());
         ee=a;
         
-        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
+        if ($('[name="tel_number"]').val().length< 9 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
