@@ -1062,7 +1062,7 @@ function validate(){
             
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
-        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
+        if ($('[name="cel_number"]').val().length< 9 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "warning",
               message: "Invalid phone number!"
@@ -1081,7 +1081,7 @@ function validate(){
 
     if (typeof($('[name="tel_number"]').val())!='undefined') {
         var a=Number($('[name="tel_number"]').val());
-        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
+        if ($('[name="tel_number"]').val().length< 9 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "warning",
               message: "Invalid phone number!"
