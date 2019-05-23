@@ -277,10 +277,10 @@ class Model
                         OR  (cel_number3 LIKE :phone)
                         )
                     AND vat_number LIKE :codice_fiscale
-					AND campaign LIKE :campaign
+		    AND campaign LIKE :campaign
                     AND supervisor=:supervisor_id
                     ".$dateQuery."
-                ORDER BY contract_id DESC ";
+                ORDER BY DATE(`date`) DESC ";
 	    			  
         
             $query = $this->db->prepare($sql);
