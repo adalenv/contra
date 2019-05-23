@@ -398,6 +398,7 @@ class Model
         $supervisor     = (isset($_REQUEST['supervisor'])?$_REQUEST['supervisor']:'%');
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
+        $payment_type        = (isset($_REQUEST['payment_type'])?$_REQUEST['payment_type']:'%');
         $limiter      = 100;
         $pager        = $limiter*$page;
        
@@ -413,6 +414,7 @@ class Model
                 $_REQUEST['date']='';
                 $_REQUEST['contract_type']='%';
                 $_REQUEST['codice_fiscale']='%';
+                $_REQUEST['payment_type']='%';
                 $sql="SELECT * FROM contracts WHERE contract_id =:id";
                 $query = $this->db->prepare($sql);
                 $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -478,6 +480,7 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND campaign LIKE :campaign
                     AND supervisor LIKE :supervisor
+                    AND payment_type like :payment_type
                 ORDER BY contract_id DESC ";
 
             $query = $this->db->prepare($sql);
@@ -493,6 +496,7 @@ class Model
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
+            $query->bindParam(':payment_type', $payment_type);
             $query->execute();
 
             $allpages=$query->rowCount();  
@@ -523,6 +527,7 @@ class Model
         $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->bindParam(':campaign', $campaign);
         $query->bindParam(':supervisor', $supervisor);
+        $query->bindParam(':payment_type', $payment_type);
         $query->execute();
 
         if (!$export) {
@@ -534,6 +539,9 @@ class Model
                 } else{
                     $c_nr=$c_nr+1;
                 }
+            }
+            if ($payment_type!="%") {
+                $c_nr=count($contracts);
             }
             array_push($output,$contracts); 
             array_push($output,$c_nr);

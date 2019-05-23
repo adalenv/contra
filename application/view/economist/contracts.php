@@ -15,7 +15,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Nominativo</label>
                                             <input type="text" class="form-control" name="client_name" id="client_name">
@@ -36,7 +36,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Operatore</label>
                                             <select class="form-control" name="operator" id="operator">
@@ -80,6 +80,16 @@
                                                     }
                                                     echo $output;
                                                 ?>
+                                            </select>
+                                        <span class="material-input"></span></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Modalita di pagamento</label>
+                                            <select class="form-control" name="payment_type" id="payment_type">
+                                                <option value="%">Tutti</option>
+                                                <option value="postal">Bolletino Postale</option>
+                                                <option value="cc">Addebido su Conto Corrente</option>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
@@ -315,6 +325,7 @@ function exportContracts() {
                             $('#status').val('%');
                             $('#campaign').val('%');
                             $('#supervisor').val('%');
+                            $('#payment_type').val('%');
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -377,6 +388,8 @@ function exportContracts() {
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
+                        var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
+
 
                         $('#contract_type').val(contract_type);
 
@@ -385,6 +398,7 @@ function exportContracts() {
 
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
+                        $('#payment_type').val(payment_type);
                         
 
                         // $('#id').val(id);
@@ -402,7 +416,7 @@ function exportContracts() {
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
                             //|| $('#id').val()!=id 
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#payment_type').val()!=payment_type) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
