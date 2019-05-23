@@ -134,7 +134,7 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contratti</h4><?=$cnt_nr;?>
-                                         <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Esporta in Excel</a></p>
+                                         <p class="category"></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
@@ -268,9 +268,7 @@
             
             <script type="text/javascript">
 
-function exportContracts() {
-    window.location.href+='&export=true';
-}
+
 // function editContractStatus(contract_id,status_id){
 //     swal({
 //       title: 'Are you sure?',
