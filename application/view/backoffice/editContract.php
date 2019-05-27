@@ -1659,8 +1659,12 @@ function validate(){
             valid=false;
         };
     };
-    $('input[type=text]').val (function () {
-        return this.value.toUpperCase();
+    $("input[type='text']").keyup(function () {
+        this.value=this.value.replace("\n"," ");
+        this.value=this.value.replace("\'","");
+        this.value=this.value.replace("\"","");
+        this.value = this.value.toLocaleUpperCase();
+        this.value = this.value.trim();
     });
     return valid;
 }
