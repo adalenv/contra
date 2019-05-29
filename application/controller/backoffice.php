@@ -57,6 +57,11 @@ class backoffice extends Controller
         $contract    =  $this->model->getContractById($contract_id);
         $statuses=$this->model->getStatuses();
         $campaigns=$this->model->getCampaigns();
+
+        if ($contract->status_id==2) {
+            echo 'Not permited!';
+            return; 
+        }
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/editContract.php';
         require APP . 'view/backoffice/footer.php';
