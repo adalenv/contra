@@ -219,8 +219,8 @@
                                                                     $output.='<td>Dual</td>';
                                                                 }
                                                     $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
-                                                    
-                                                     $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                    if ($contract->status!=2) {
+                                                      $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
                                                                         $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
@@ -228,13 +228,18 @@
                                                                          $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
                                                                 }
-                                                    $output.='</select></td>';
+                                                         $output.='</select></td>';  
+                                                    }else{
+                                                        $output.='<td>'.$status->status_name.'</td>';
+                                                    }
+                                                     
                                                                 foreach ($campaigns as $key => $campaign) {
                                                                     if ($campaign->campaign_id==$contract->campaign) {
                                                                         $campaign1=$campaign->campaign_name;
                                                                         break;
                                                                     }
                                                                 }
+                                                    }
                                                     $output.='<td>'.$campaign1.'</td>';
 
                                                     foreach($operatorsAll as $user) {
