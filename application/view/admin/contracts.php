@@ -83,13 +83,13 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Cellulare</label>
                                             <input type="text" class="form-control" name="phone" id="phone">
