@@ -491,6 +491,13 @@ function editContractStatus(contract_id,status_id){
                             }).val('');
                         }
                     });
+                  $("input[type='text']").keyup(function () {
+                    this.value=this.value.replace("\n"," ");
+                    this.value=this.value.replace("\'","");
+                    this.value=this.value.replace("\"","");
+                        this.value = this.value.toLocaleUpperCase();
+                        this.value = this.value.trim();
+                  });
             </script>
 <style>
 
