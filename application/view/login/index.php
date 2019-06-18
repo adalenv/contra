@@ -335,11 +335,9 @@ class TextScramble {
 // ——————————————————————————————————————————————————
 
 const phrases = [
- // 'Welcome',
- // 'to',
-  'Just Call',
-  'People First'
-
+  'Welcome',
+  'to',
+  'LGN Albania'
 ]
 
 const el = document.querySelector('.text')
