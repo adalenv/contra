@@ -68,7 +68,10 @@ class backoffice extends Controller
     }
 
     public function viewContract($contract_id){ 
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
+        //if (!isset($_SESSION['edit_contract'])) {
+            $this->model->countOpenContract($contract_id);
+        //}
+        $operatorsAll=  $this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);

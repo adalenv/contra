@@ -66,6 +66,45 @@ class Model
         }
     }
 
+    public function getStats($user_id,$date){
+        //print_r($date);
+        $sql='SELECT count(stat_id) as stat FROM stats WHERE user_id=:user_id and Date(`date`)=Date(:date) ';
+        $query = $this->db->prepare($sql);
+        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->bindParam(':date', $date);
+        $query->execute();
+        $dat = $query->fetch();
+        //print_r($dat);
+        return $dat->stat;
+    }
+
+
+    public function getStatsOk($user_id,$date){
+        //print_r($date);select * from log where user_id =16 and diff like "%status[Switch=>KO]%"
+        $sql='SELECT count(*) as stat FROM log where user_id =:user_id and diff like "%=>OK]%" and Date(`date`)=Date(:date) ';
+        $query = $this->db->prepare($sql);
+        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->bindParam(':date', $date);
+        $query->execute();
+        $dat = $query->fetch();
+        //print_r($dat);
+        return $dat->stat;
+    }
+    public function getStatsKo($user_id,$date){
+        //print_r($date);select * from log where user_id =16 and diff like "%status[Switch=>KO]%"
+        $sql='SELECT count(*) as stat FROM log where user_id =:user_id and diff like "%=>KO]%" and Date(`date`)=Date(:date) ';
+        $query = $this->db->prepare($sql);
+        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->bindParam(':date', $date);
+        $query->execute();
+        $dat = $query->fetch();
+        //print_r($dat);
+        return $dat->stat;
+    }
+
     public function createUser(){
         if ($_POST['username']=='' || $_POST['password']=='' || $_POST['first_name']=='' || $_POST['last_name']=='') {
             $_SESSION['create_user']='fail';

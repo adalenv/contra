@@ -83,6 +83,12 @@
                             <p>Stato Pratica</p>
                         </a>
                     </li>
+                    <li class="statsNav">
+                        <a href="<?=URL.$_SESSION['role'].'/stats';?>">
+                            <i class="material-icons">timeline</i>
+                            <p>Stats</p>
+                        </a>
+                    </li>
 
 <!--                     <li class="active-pro">
                         <a href="mailto:adalenvladi@gmail.com">

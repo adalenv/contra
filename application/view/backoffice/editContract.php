@@ -16,14 +16,12 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Stato</label>
-                                                <select   class="form-control" required name="status" id="status">
+                                                <select  class="form-control" required name="status" id="status">
                                                     <?php
                                                         $output=''; 
                                                         foreach ($statuses as $status) {
                                                             if ($contract->status==$status->status_id) {
                                                                 $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                            }else{
-                                                                $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
                                                             }
                                                         }
                                                         echo $output;

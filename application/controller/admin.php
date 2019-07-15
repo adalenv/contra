@@ -106,6 +106,13 @@ class admin extends Controller
     }
 	/////////////////////////////////
 
+    public function stats(){
+        $users=$this->model->getUsersByRole('backoffice');
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/stats.php';
+        require APP . 'view/admin/footer.php';
+    }
+
     public function users($showHours=false,$date=null){
         if ($showHours=='workhours') {
             $users=$this->model->getUsers();

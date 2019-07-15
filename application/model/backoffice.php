@@ -112,6 +112,27 @@ class Model
         header("location:".URL.$_SESSION['role'].'/users');
     }
 
+    public function countOpenContract($contract_id){
+        $sql='SELECT stat_id FROM stats WHERE contract_id=:contract_id and user_id=:user_id and `date`=Date(Now()) ';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
+        $query->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $query->execute();
+        $dat = $query->rowCount();
+        if ((int)$dat>0) {
+            //echo 'dat';
+        }else{
+            $sql='INSERT INTO stats (contract_id,user_id,`date`) VALUES (:contract_id ,:user_id ,Date(Now()) ) ';
+            $query = $this->db->prepare($sql);
+            $query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
+            $query->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $query->execute();
+            //echo 'inserted';
+        }
+        //print_r($dat);
+        //return 
+    }
+
     public function getContractsByUser($user_id ){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
         $limiter=100;
@@ -124,6 +145,7 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
+
     public function getContractsBySupervisor($supervisor_id){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
         $limiter=100;

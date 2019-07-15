@@ -222,7 +222,7 @@
                                                     
 
                                                     if ($contract->status!=2) {
-                                                        $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                        $output.='<td><select disabled class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                     foreach ($statuses as $key => $status) {
                                                                         if ($status->status_id==$contract->status) {
                                                                             $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';

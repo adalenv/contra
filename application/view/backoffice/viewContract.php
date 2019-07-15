@@ -15,10 +15,31 @@
                                                 <input  type="text" disabled="" value="<?=date('d-m-Y',strtotime($contract->date))?>" id="contract_date" name="date" class="form-control">
                                             </div>
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">Stato</label>
-                                                    <select disabled="" class="form-control" required name="status" id="status">
-                                                        <option selected="" value='<?=$contract->status_id;?>'><?=$contract->status_name;?></option>
-                                                    </select>
+                                                   <?php 
+                                                   $output='';
+                                                   if ($contract->status!=2) {
+                                                        $output.='<select  class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                                    foreach ($statuses as $key => $status) {
+                                                                        if ($status->status_id==$contract->status) {
+                                                                            $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                        }else{
+                                                                             $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
+                                                                        }
+                                                                    }
+                                                        $output.='</select>';   
+                                                    }else{
+                                                        $output.='<select disabled class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                                    foreach ($statuses as $key => $status) {
+                                                                        if ($status->status_id==$contract->status) {
+                                                                            $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                        }else{
+                                                                             $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
+                                                                        }
+                                                                    }
+                                                        $output.='</select>';  
+                                                    }
+                                                    echo $output;
+                                                    ?>
                                                 </div>
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
@@ -964,6 +985,37 @@ function loadDocAndAudio() {
     })        
 }
 
+function editContractStatus(contract_id,status_id){
+    swal({
+      title: 'Are you sure?',
+      text: "",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#777',
+      confirmButtonColor: '#00bcd4',
+      confirmButtonText: 'Change'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+            url: '<?=URL?>api/editContractStatus/',
+            type: 'POST',
+            data: {contract_id:contract_id,
+                   status_id:status_id,
+                  },
+          })
+          .done(function(data) {
+            $('.ss'+contract_id).removeClass('statusColor'+$('.oldstatus'+contract_id).val()).addClass('statusColor'+status_id).parent().parent().removeClass('tdColor'+$('.oldstatus'+contract_id).val()).addClass('tdColor'+status_id);
+            window.location.href="";
+          })
+          .fail(function(err) {
+            console.log(err);
+          });
+      }else{
+        $($('.ss'+contract_id)).val($('.oldstatus'+contract_id).val());
+      }
+    })
+}
+
 </script>
 
 <style type="text/css">
@@ -1045,3 +1097,60 @@ function loadDocAndAudio() {
 
 </style>
 
+<style>
+
+    .tdColor1{/*pending*/
+        border-left: 2px solid #ff9800;
+        border-right: 2px solid #ff9800;
+    }
+    .statusColor1{
+        border: 1px solid #ff9800;
+    }
+
+    .tdColor2{/*ok*/
+        border-left: 2px solid #4caf50;
+        border-right: 2px solid #4caf50;
+    }
+    .statusColor2{
+        border: 1px solid #4caf50;
+    }
+
+    .tdColor3{/*ko*/
+        border-left: 2px solid #f44336;
+        border-right: 2px solid #f44336;
+    }
+    .statusColor3{
+        border: 1px solid #f44336;
+    }
+    .tdColor4{/*inserito*/
+        border-left: 2px solid #337ab7;
+        border-right: 2px solid #337ab7;
+    }
+    .statusColor4{
+        border: 1px solid #337ab7;
+    }
+
+    .tdColor5{/*da contatare*/
+        border-left: 2px solid #8a6d3b;
+        border-right: 2px solid #8a6d3b;
+    }
+    .statusColor5{
+        border: 1px solid #8a6d3b;
+    }
+
+    .tdColor6{/*switch*/
+        border-left: 2px solid #9c27b0;
+        border-right: 2px solid #9c27b0;
+    }
+    .statusColor6{
+        border: 1px solid #9c27b0;
+    }
+
+    .tdColor7{/*storni*/
+        border-left: 2px solid #00bcd4;
+        border-right: 2px solid #00bcd4;
+    }
+    .statusColor7{
+        border: 1px solid #00bcd4;
+    }
+</style>
