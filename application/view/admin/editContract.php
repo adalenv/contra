@@ -30,25 +30,6 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <!-- <?php //if ($contract->status_temp!='') { ?> -->
-                                                <div class="form-group label-floating is-focused is-empty">
-                                                    <label class="control-label">Temp Stato</label>
-                                                    <select   class="form-control"  name="status_temp" id="status">
-                                                        <?php
-                                                            $output='<option selected="" value="" >No Temp</option>';
-                                                            foreach ($statuses as $status) {
-                                                                if ($contract->status_temp==$status->status_id) {
-                                                                    $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                                }else{
-                                                                    $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                                }
-                                                            }
-                                                            echo $output;
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            <!-- <?php //} ?> -->
-
                                             <div class="checkbox">
                                                 <label class="control-label">                                             
                                                     <input type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali  
@@ -85,7 +66,7 @@
                                                 <select class="form-control" required name="operator" id="operator">
                                                    <?php
                                                         $output=''; 
-                                                        foreach ($operatorsAll as $operator) {
+                                                        foreach ($operators as $operator) {
                                                             if ($contract->operator==$operator->user_id) {
                                                                 $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                             }else{
@@ -898,12 +879,6 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Temp Note:</label>
-                                            <textarea class="form-control" name="note_temp"><?=$contract->note_temp;?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
                                         <?php if ($contract->contract_type=='dual'): ?>
@@ -1412,7 +1387,8 @@ function loadDocAndAudio() {
         if (data.length>0) {
             $('.doc-container').html('');
             $.each(data, function (i) {
-                $('.doc-container').append(`<tr><td><a href=\'<?=URL.$_SESSION['role']?>/getDocument/${data[i].document_id}">${data[i].url}</a></td><td><b onclick=\'deleteDocument(${data[i].document_id},\"${data[i].url.replace(/\'/g, '__')}\") \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
+                $('.doc-container').append(`<tr><td><a href=\'<?=URL.$_SESSION['role']?>/getDocument/${data[i].document_id}\'>${data[i].url}</a></td><td><b 
+onclick=\'deleteDocument(${data[i].document_id},\"${data[i].url.replace(/\'/g, '__')}\") \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
             });
         }else {
             $('.doc-container').html('<tr><td>No documents!</td></tr>');
@@ -1700,7 +1676,7 @@ function validate(){
     };
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
-        if ($('[name="cel_number"]').val().length< 9 || $('[name="cel_number"]').val().length>13 || !a) {
+        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
@@ -1721,7 +1697,7 @@ function validate(){
         var a=Number($('[name="tel_number"]').val());
         ee=a;
         
-        if ($('[name="tel_number"]').val().length< 9 || $('[name="tel_number"]').val().length>13 || !a) {
+        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
@@ -1737,16 +1713,11 @@ function validate(){
             valid=false;
         };
     };
-    $("input[type='text']").keyup(function () {
-        this.value=this.value.replace("\n"," ");
-        this.value=this.value.replace("\'","");
-        this.value=this.value.replace("\"","");
-        this.value = this.value.toLocaleUpperCase();
-        this.value = this.value.trim();
+    $('input[type=text]').val (function () {
+        return this.value.toUpperCase();
     });
     return valid;
 }
-
 </script>
 <style type="text/css">
     .fileuploader{

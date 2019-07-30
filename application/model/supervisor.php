@@ -29,14 +29,8 @@ class Model
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
-    public function getUsers1(){
-        $sql="SELECT * FROM users WHERE supervisor=:supervisor_id  order by first_name asc";
-        $query=$this->db->prepare($sql);
-        $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
-        return $query->fetchAll();
-    }
     public function getAllUsers(){
-        $sql="SELECT * FROM users  order by first_name asc";
+        $sql="SELECT * FROM users where active='yes'  order by first_name asc";
         $query=$this->db->prepare($sql);
         $query->execute(array(':supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
@@ -47,12 +41,7 @@ class Model
         $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
         return $query->fetchAll();
     }
-    public function getUsersByRoleAll($role){
-        $sql="SELECT * FROM users where role = :role AND supervisor=:supervisor_id  order by first_name asc";
-        $query=$this->db->prepare($sql);
-        $query->execute(array(':role' =>$role,'supervisor_id'=>$_SESSION['user_id']));
-        return $query->fetchAll();
-    }
+
 
     public function getContractsByUser($user_id ){
         $page=(int)(isset($_GET['page'])? $_GET['page']:0);
@@ -172,7 +161,7 @@ class Model
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
         $contract_type= (isset($_REQUEST['contract_type'])?$_REQUEST['contract_type']:'%');
         $operator     = (isset($_REQUEST['operator'])?$_REQUEST['operator']:'%');
-        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'%');
+        $date         = (isset($_REQUEST['date'])?$_REQUEST['date']:'');
         $client_name  = (isset($_REQUEST['client_name'])?$_REQUEST['client_name']:'');
 		$campaign     = (isset($_REQUEST['campaign'])?$_REQUEST['campaign']:'%');
         $status       = (isset($_REQUEST['status'])?$_REQUEST['status']:'%');
@@ -181,49 +170,16 @@ class Model
         $limiter      = 100;
         $pager        = $limiter*$page;
        
-        switch ($date) {
-            case '%':
-                $dateQuery='AND (
-                            `date` >= last_day(now()) + interval 1 day - interval 2 month
-                        )';
-                break;
-            case 'thisweek':
-                $dateQuery='AND (
-                            YEARWEEK(`date`, 1) = YEARWEEK(CURDATE(), 1)
-                        )';
-                break;
-            case 'lastweek':
-                $dateQuery='AND (
-                            `date` between date_sub(now(),INTERVAL 1 WEEK) and now()
-                        )';
-                break;
-            case 'thismonth':
-                $dateQuery='AND (
-                            MONTH(`date`) = MONTH(CURRENT_DATE()) AND YEAR(`date`) = YEAR(CURRENT_DATE())
-                        )';
-                break;
-            case 'lastmonth':
-                $dateQuery='AND (
-                            YEAR(`date`) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) AND MONTH(`date`) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
-                        )';
-                break;
-            
-            default:
-                $dateQuery='AND (
-                            `date` >= last_day(now()) + interval 1 day - interval 2 month
-                        )';
-                break;
-        }
 
         /////////////////////////////-date-////////////////////////////
-        // if ($date!='') {
-        //     $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
-        //     $date1 = date("Y-m-d", strtotime($date[0]));
-        //     $date2 = date("Y-m-d", strtotime($date[1]));
-        // } else {
-        //     $date1 ="1999-01-01";
-        //     $date2 ="2099-01-01";
-        // }
+        if ($date!='') {
+            $date =explode('-',(isset($_GET['date'])?$_GET['date']:''));
+            $date1 = date("Y-m-d", strtotime($date[0]));
+            $date2 = date("Y-m-d", strtotime($date[1]));
+        } else {
+            $date1 ="1999-01-01";
+            $date2 ="2099-01-01";
+        }
         ///////////////////////////////////////////////////////////////////
 
         ///////////////-name-//////////////////////////////////////////////
@@ -252,7 +208,7 @@ class Model
             $op_others=true;
         }
         /////////////////////////////////////////////////
-        //
+
         //            -- AND (   DATE(`date`) >= DATE(:date1) 
         //            --     AND 
         //            --         DATE(`date`) <= DATE(:date2)
@@ -268,7 +224,6 @@ class Model
                         OR
                             (first_name LIKE :last2 OR last_name LIKE :last2)
                         )
-                    
                     AND status LIKE :status  
                     AND (   (tel_number LIKE :phone)
                         OR  (alt_number LIKE :phone)
@@ -277,12 +232,14 @@ class Model
                         OR  (cel_number3 LIKE :phone)
                         )
                     AND vat_number LIKE :codice_fiscale
-		    AND campaign LIKE :campaign
+					AND campaign LIKE :campaign
                     AND supervisor=:supervisor_id
-                    ".$dateQuery."
-                ORDER BY DATE(`date`) DESC ";
+                    AND (
+                            `date` >= last_day(now()) + interval 1 day - interval 2 month
+                        )
+                ORDER BY contract_id DESC ";
 	    			  
-        
+
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
             $query->bindParam(':supervisor_id', $_SESSION['user_id']);
@@ -318,8 +275,8 @@ class Model
         $query->bindParam(':supervisor_id', $_SESSION['user_id']);
         $query->bindParam(':contract_type', $contract_type);
         $query->bindParam(':operator', $operator);
-        // $query->bindParam(':date1', $date1);
-        // $query->bindParam(':date2', $date2);
+        $query->bindParam(':date1', $date1);
+        $query->bindParam(':date2', $date2);
         $query->bindParam(':first_name', $first_name);
         $query->bindParam(':last_name', $last_name);
         $query->bindParam(':status', $status);
@@ -341,7 +298,7 @@ class Model
         if ($op_others) {
             //-------users------
             $uid=array();
-            $ops=$this->getUsers1();
+            $ops=$this->getUsers();
             foreach ($ops as $op) {
                 array_push($uid,$op->user_id);
             }

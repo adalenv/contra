@@ -15,7 +15,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Nominativo</label>
                                             <input type="text" class="form-control" name="client_name" id="client_name">
@@ -36,7 +36,7 @@
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Operatore</label>
                                             <select class="form-control" name="operator" id="operator">
@@ -84,16 +84,6 @@
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Modalita di pagamento</label>
-                                            <select class="form-control" name="payment_type" id="payment_type">
-                                                <option value="%">Tutti</option>
-                                                <option value="postal">Bolletino Postale</option>
-                                                <option value="cc">Addebido su Conto Corrente</option>
-                                            </select>
-                                        <span class="material-input"></span></div>
-                                    </div>
-                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Codice Fiscale</label>
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
@@ -134,7 +124,7 @@
                                             <i class="material-icons">assignment</i>
                                           </div>
                                         <h4 class="title">Contratti</h4><?=$cnt_nr;?>
-                                         <p class="category"></p>
+                                         <p class="category"><a style="cursor:pointer;" onclick="exportContracts()">Esporta in Excel</a></p>
                                      </div>
                                     <div class="col-md-4">
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
@@ -227,7 +217,7 @@
                                                                 }
                                                     $output.='<td>'.$campaign1.'</td>';
 
-                                                    foreach($operatorsAll as $user) {
+                                                    foreach($operators as $user) {
                                                         if ($contract->operator == $user->user_id) {
                                                             $operator = $user;
                                                             break;
@@ -268,7 +258,9 @@
             
             <script type="text/javascript">
 
-
+function exportContracts() {
+    window.location.href+='&export=true';
+}
 // function editContractStatus(contract_id,status_id){
 //     swal({
 //       title: 'Are you sure?',
@@ -323,7 +315,6 @@
                             $('#status').val('%');
                             $('#campaign').val('%');
                             $('#supervisor').val('%');
-                            $('#payment_type').val('%');
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -386,8 +377,6 @@
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
-                        var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
-
 
                         $('#contract_type').val(contract_type);
 
@@ -396,7 +385,6 @@
 
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
-                        $('#payment_type').val(payment_type);
                         
 
                         // $('#id').val(id);
@@ -414,7 +402,7 @@
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
                             //|| $('#id').val()!=id 
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#payment_type').val()!=payment_type) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

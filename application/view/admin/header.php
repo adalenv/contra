@@ -30,16 +30,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/daterangepicker.css" />
     <script type="text/javascript" src="<?php echo URL; ?>assets/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/bootstrap-datetimepicker.min.css" />
-    <style type="text/css">
-        .sidebar-background{
-            background-size: auto !important;
-        }
-    </style>
+
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-color="blue" data-image="<?php echo URL; ?>assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-color="blue" data-image="<?php echo URL; ?>assets/img/sidebar-1.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -81,12 +77,6 @@
                         <a href="<?=URL.$_SESSION['role'].'/statuses';?>">
                             <i class="material-icons">category</i>
                             <p>Stato Pratica</p>
-                        </a>
-                    </li>
-                    <li class="statsNav">
-                        <a href="<?=URL.$_SESSION['role'].'/stats';?>">
-                            <i class="material-icons">timeline</i>
-                            <p>Stats</p>
                         </a>
                     </li>
 

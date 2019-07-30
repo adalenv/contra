@@ -134,7 +134,6 @@ CREATE TABLE `contracts` (
   `operator` int(11) NOT NULL COMMENT 'user id',
   `status` int(11) NOT NULL DEFAULT '1' COMMENT 'status id',
   `cancellation_reason` varchar(100) NOT NULL,
-  `status_temp` VARCHAR( 50 ) NOT NULL ;
   `gender` enum('male','female') NOT NULL,
   `rag_sociale` text NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -259,7 +258,6 @@ CREATE TABLE `users` (
   `role` enum('operator','supervisor','backoffice','admin','economist','floor_manager') NOT NULL DEFAULT 'operator',
   `supervisor` int(11) NOT NULL COMMENT 'user_id',
   `active` ENUM(  'yes',  'no' ) NOT NULL DEFAULT  'yes',
-  `ip` TEXT NOT NULL ;
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1;

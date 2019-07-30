@@ -87,29 +87,14 @@
                                             <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div> -->
-                                    <div class="col-md-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Data</label>
-                                            <!-- <input type="text" class="form-control" name="date" id="date"> -->
-                                            <select class="form-control" name="date" id="date">
-                                                <option value="%">Tutti</option>
-                                                <option value="thisweek">This Week</option>
-                                                <option value="lastweek">Last Week</option>
-                                                <option value="thismonth">This Month</option>
-                                                <option value="lastmonth">Last Month</option>
-                                            </select>
-                                        <span class="material-input"></span>
-                                        </div>
-                                    </div>
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
 
-                                    
-                                           <!--  <div class="form-group label-floating "> -->
+                                        <center>
+                                            <div class="form-group label-floating ">
                                                 <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
                                                 <a href="#" class="btn reset_btn">Ripristina</a>
-                                            <span class="material-input"></span>
-                                          <!--   </div>
-                                         -->
+                                            <span class="material-input"></span></div>
+                                        </center>
    
                                 </div>
                             </ul>
@@ -139,19 +124,18 @@
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
                                                 $page=(int)$_GET['page'];
-                                                // if ($page==0) {
+                                                //if ($page==0) {
                                                 //   $page=1;
-                                                // }
+                                                //}
                                             }else{
                                                 $page=0;
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
-                                                console.log($page);
                                             </script>   
 
                                               <ul class="pagination" style="cursor:pointer;">
-                                                <?php if ($page>=1) { ?>
+                                                <?php if ($page>1) { ?>
                                                     <li class="page-item">
                                                       <a class="page-link" onclick="$('.page_val').val($page-1)" aria-label="Precedentes">
                                                         <span aria-hidden="true">&laquo;</span>
@@ -171,7 +155,7 @@
                                                     </li>
                                                 <?php } ?>
                                               </ul>
-                                              Totale: <?=($pages==0?1:$pages);?>
+                                              Totale: <?=($pages==0?1:$pages-1);?>
                                         </div>
                                     </div>
                                 </div>
@@ -250,11 +234,10 @@
                             $('#operator').val('%');
                             $('#status').val('%');
                             $('#codice_fiscale').val('');
-                            $('#campaign').val('%');
                             $('#id').val('');
                             $('#phone').val('');
                             $('#client_name').val('');
-                            $('#date').val('%');
+                            $('#date').val('');
                             $('#page_val').val(0);
                             document.forms[0].submit();
                         });
@@ -308,7 +291,7 @@
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
                         var id='<?=(isset($_GET['id'])?$_GET['id']:'')?>';
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
-                        var date='<?=(isset($_GET['date'])?$_GET['date']:'%')?>';
+                        //var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
 						var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
 						$('#campaign').val(campaign);
@@ -317,12 +300,10 @@
 
                         $('#operator').val(operator);
                         $('#status').val(status);
-
-                        $('#date').val(date);
                         
 
-                        // $('#id').val(id);
-                        // $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
+                        $('#id').val(id);
+                        $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
 
                         $('#phone').val(phone);
                         $('#phone').val()!=''? $('#phone').parent().addClass('is-focused'):'';
@@ -335,7 +316,7 @@
 
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#campaign').val()!=campaign || $('#date').val()!=date || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#id').val()!=id || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();

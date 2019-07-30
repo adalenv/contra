@@ -40,7 +40,7 @@
                                                     <option value=''></option>
                                                     <?php
                                                         $output=''; 
-                                                        foreach ($operatorsAll as $operator) {
+                                                        foreach ($operators as $operator) {
                                                             if ($contract->operator==$operator->user_id) {
                                                                 $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                             }else{

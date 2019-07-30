@@ -98,7 +98,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
-                                            <input type="text" autocomplete='off' class="form-control" name="date" id="date">
+                                            <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">
@@ -134,19 +134,7 @@
                                         <h4 class="title">Contratti</h4>
                                          <p class="category"></p>
                                      </div>
-                                    <div class="col-md-4">
-									<?php 
-									if(isset($_GET['supervisor'])){
-										if($_GET['supervisor']=='%'){
-											echo $cnt_nr;
-										}
-									}else{
-										//if($_GET['supervisor']!='%'){
-											echo $cnt_nr;
-										//}
-									}
-									
-														?>
+                                    <div class="col-md-4"><?=$cnt_nr;?>
                                         <div class="dataTables_paginate paging_full_numbers" style="float: right;" id="datatables_paginate">
 <!--                                             <ul class="pagination">
                                                 <li class="paginate_button page-item next" id="datatables_next">
@@ -220,39 +208,24 @@
                                                                 }
                                                     $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
                                                     
-
-                                                    if ($contract->status!=2) {
-                                                        $output.='<td><select disabled class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
-                                                                    foreach ($statuses as $key => $status) {
-                                                                        if ($status->status_id==$contract->status) {
-                                                                            $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
-                                                                        }else{
-                                                                             $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
-                                                                        }
+                                                     $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                                foreach ($statuses as $key => $status) {
+                                                                    if ($status->status_id==$contract->status) {
+                                                                        $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
+                                                                    }else{
+                                                                         $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
-                                                        $output.='</select></td>';   
-                                                    }else{
-                                                        $output.='<td><select disabled class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
-                                                                    foreach ($statuses as $key => $status) {
-                                                                        if ($status->status_id==$contract->status) {
-                                                                            $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
-                                                                        }else{
-                                                                             $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
-                                                                        }
+                                                                }
+                                                    $output.='</select></td>';
+                                                                foreach ($campaigns as $key => $campaign) {
+                                                                    if ($campaign->campaign_id==$contract->campaign) {
+                                                                        $campaign1=$campaign->campaign_name;
+                                                                        break;
                                                                     }
-                                                        $output.='</select></td>';  
-                                                    }
-                                                    
-
-                                                    foreach ($campaigns as $key => $campaign) {
-                                                        if ($campaign->campaign_id==$contract->campaign) {
-                                                            $campaign1=$campaign->campaign_name;
-                                                            break;
-                                                        }
-                                                    }
+                                                                }
                                                     $output.='<td>'.$campaign1.'</td>';
 
-                                                    foreach($operatorsAll as $user) {
+                                                    foreach($operators as $user) {
                                                         if ($contract->operator == $user->user_id) {
                                                             $operator = $user;
                                                             break;
@@ -491,13 +464,6 @@ function editContractStatus(contract_id,status_id){
                             }).val('');
                         }
                     });
-                  $("input[type='text']").keyup(function () {
-                    this.value=this.value.replace("\n"," ");
-                    this.value=this.value.replace("\'","");
-                    this.value=this.value.replace("\"","");
-                        this.value = this.value.toLocaleUpperCase();
-                        this.value = this.value.trim();
-                  });
             </script>
 <style>
 

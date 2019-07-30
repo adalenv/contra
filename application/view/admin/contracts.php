@@ -89,16 +89,16 @@
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Cellulare</label>
                                             <input type="text" class="form-control" name="phone" id="phone">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Data</label>
-                                            <input type="text" autocomplete="off" class="form-control" name="date" id="date">
+                                            <input type="text" class="form-control" name="date" id="date">
                                         <span class="material-input"></span></div>
                                     </div>
                                     <div class="col-md-2">
@@ -107,16 +107,6 @@
                                             <input type="text" class="form-control" name="podpdr" id="podpdr">
                                         <span class="material-input"></span></div>
 
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Modalita di pagamento</label>
-                                            <select class="form-control" name="payment_type" id="payment_type">
-                                                <option value="%">Tutti</option>
-                                                <option value="postal">Bolletino Postale</option>
-                                                <option value="cc">Addebido su Conto Corrente</option>
-                                            </select>
-                                        <span class="material-input"></span></div>
                                     </div>
 
                                     <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
@@ -217,18 +207,8 @@
                                                                     $output.='<td>Dual</td>';
                                                                 }
                                                     $output.='<td><a href="viewContract/'.$contract->contract_id.'">'.$contract->first_name.' '.$contract->last_name.'</a></td>';
-                                                    //status its temp
-                                                    if ($contract->status_temp!='') {
-                                                        $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status_temp.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
-                                                                foreach ($statuses as $key => $status) {
-                                                                    if ($status->status_id==$contract->status_temp) {
-                                                                        $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
-                                                                    }else{
-                                                                         $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
-                                                                    }
-                                                                }
-                                                    }else{ //status isnt temp
-                                                        $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
+                                                    
+                                                     $output.='<td><select class="ss'.$contract->contract_id.' statusColor'.$contract->status.'" onchange="editContractStatus('.$contract->contract_id.',Number(this.value))" id="status_select">';
                                                                 foreach ($statuses as $key => $status) {
                                                                     if ($status->status_id==$contract->status) {
                                                                         $output.='<option class="oldstatus'.$contract->contract_id.'" value="'.$status->status_id.'" selected="">'.$status->status_name.'</option>';
@@ -236,9 +216,6 @@
                                                                          $output.='<option value="'.$status->status_id.'">'.$status->status_name.'</option>';
                                                                     }
                                                                 }
-                                                    }
-
-
                                                     $output.='</select></td>';
                                                                 foreach ($campaigns as $key => $campaign) {
                                                                     if ($campaign->campaign_id==$contract->campaign) {
@@ -248,7 +225,7 @@
                                                                 }
                                                     $output.='<td>'.$campaign1.'</td>';
 
-                                                    foreach($operatorsAll as $user) {
+                                                    foreach($operators as $user) {
                                                         if ($contract->operator == $user->user_id) {
                                                             $operator = $user;
                                                             break;
@@ -303,7 +280,7 @@ function editContractStatus(contract_id,status_id){
     }).then((result) => {
       if (result.value) {
         $.ajax({
-            url: '<?=URL?>api/editContractStatusTemp/',
+            url: '<?=URL?>api/editContractStatus/',
             type: 'POST',
             data: {contract_id:contract_id,
                    status_id:status_id,
@@ -345,7 +322,6 @@ function editContractStatus(contract_id,status_id){
                             $('#status').val('%');
                             $('#campaign').val('%');
                             $('#supervisor').val('%');
-                            $('#payment_type').val('%');
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -403,7 +379,6 @@ function editContractStatus(contract_id,status_id){
                         var status='<?=(isset($_GET['status'])?$_GET['status']:'%')?>';
                         var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
-                        var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
 
                         var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
 
@@ -420,7 +395,6 @@ function editContractStatus(contract_id,status_id){
 
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
-                        $('#payment_type').val(payment_type);
                         
 
                         // $('#id').val(id);
@@ -442,7 +416,7 @@ function editContractStatus(contract_id,status_id){
                         $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
                             //|| $('#id').val()!=id 
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr ) {
                                 $('.page_val').val(0);   
                             }
                             document.forms[0].submit();
@@ -492,13 +466,32 @@ function editContractStatus(contract_id,status_id){
                             }).val('');
                         }
                     });
-                  $("input[type='text']").keyup(function () {
-                    this.value=this.value.replace("\n"," ");
-                    this.value=this.value.replace("\'","");
-                    this.value=this.value.replace("\"","");
-                        this.value = this.value.toLocaleUpperCase();
-                        this.value = this.value.trim();
-                  });
+
+
+
+
+                <?php 
+                    if (isset($_SESSION['create_contract'])) {
+                        if ($_SESSION['create_contract']=='success') { ?>//if edit success 
+                            $.notify({
+                              icon: "done",
+                              message: "Contract Created!"
+                            },{
+                              type: 'success',
+                              timer: 300,
+                              placement: {
+                                  from: 'top',
+                                  align: 'right'
+                              }
+                            });
+
+                        <?php } 
+
+                        unset($_SESSION['create_contract']);
+                    } 
+
+                ?>
+
             </script>
 <style>
 

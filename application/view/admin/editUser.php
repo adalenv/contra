@@ -38,12 +38,6 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">IP</label>
-                                                    <input type="text"  name="ip" value="<?=$user->ip;?>" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group label-floating">
                                                     <label class="control-label">Active</label>
                                                     
                                                     <select class="form-control" required name="active" id="active">

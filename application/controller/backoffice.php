@@ -19,7 +19,6 @@ class backoffice extends Controller
                 return;
             }
         }
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
         $output=$this->model->getContracts();
@@ -51,27 +50,17 @@ class backoffice extends Controller
             $this->model->editContract($contract_id);
             return;
         }
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
         $statuses=$this->model->getStatuses();
         $campaigns=$this->model->getCampaigns();
-
-        if ($contract->status_id==2) {
-            echo 'Not permited!';
-            return; 
-        }
         require APP . 'view/backoffice/header.php';
         require APP . 'view/backoffice/editContract.php';
         require APP . 'view/backoffice/footer.php';
     }
 
     public function viewContract($contract_id){ 
-        //if (!isset($_SESSION['edit_contract'])) {
-            $this->model->countOpenContract($contract_id);
-        //}
-        $operatorsAll=  $this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);

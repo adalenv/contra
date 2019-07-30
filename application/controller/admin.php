@@ -19,7 +19,6 @@ class admin extends Controller
                 return;
             }
         }
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
     	$output=$this->model->getContracts();
@@ -51,7 +50,6 @@ class admin extends Controller
             $this->model->editContract($contract_id);
             return;
         }
-        $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
@@ -63,18 +61,10 @@ class admin extends Controller
     }
 
     public function viewContract($contract_id){ 
-        $operatorsAll=  $this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
         $contract    =  $this->model->getContractById($contract_id);
         $changelog   =  $this->model->getChangelog($contract_id);
-        if ($contract->status_temp!='') {
-            $status_temp=   $this->model->getStatusById($contract->status_temp);       
-            $status_name_temp=  $status_temp[0]->status_name; 
-        }else{
-            $status_name_temp="No Temp";
-        }
-        
         $statuses=$this->model->getStatuses();
         $campaigns=$this->model->getCampaigns();
         require APP . 'view/admin/header.php';
@@ -105,13 +95,6 @@ class admin extends Controller
     	$this->model->getAudio($audio_id);
     }
 	/////////////////////////////////
-
-    public function stats(){
-        $users=$this->model->getUsersByRole('backoffice');
-        require APP . 'view/admin/header.php';
-        require APP . 'view/admin/stats.php';
-        require APP . 'view/admin/footer.php';
-    }
 
     public function users($showHours=false,$date=null){
         if ($showHours=='workhours') {

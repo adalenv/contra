@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+﻿<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Login</title>
  <style type="text/css">
@@ -335,9 +335,11 @@ class TextScramble {
 // ——————————————————————————————————————————————————
 
 const phrases = [
-  'Welcome',
-  'to',
-  'LGN Albania'
+ // 'Welcome',
+ // 'to',
+    'OPUS',
+  //'People First'
+
 ]
 
 const el = document.querySelector('.text')

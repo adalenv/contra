@@ -21,13 +21,6 @@ class Home extends Controller{
                       $row=$query->fetch(PDO::FETCH_ASSOC);
                       $num=$query->rowCount();
                     if($num > 0){ ///if login success
-                        if ($row['ip']!='') {
-                          if ($row['ip']!=$_SERVER['REMOTE_ADDR']) {
-                            echo 'This IP is not allowed!';
-                            return;
-                          }
-                        }
-
                         $_SESSION['username']=$row['username'];
                         $_SESSION['full_name']=$row['first_name'].' '.$row['last_name'];
                         $_SESSION['user_id']=$row['user_id'];

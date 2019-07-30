@@ -354,7 +354,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -416,7 +416,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -731,7 +731,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -779,7 +779,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -831,7 +831,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">POD</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="luce_pod">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="luce_pod">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -884,7 +884,7 @@ $(window).ready(function(){
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">PDR</label>
-                                            <input type="text" pattern="[a-zA-Z0-9-]+" required="" autocomplete="off" class="form-control" name="gas_pdr">
+                                            <input type="text" required="" autocomplete="off" class="form-control" name="gas_pdr">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -1062,7 +1062,7 @@ function validate(){
             
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
-        if ($('[name="cel_number"]').val().length< 9 || $('[name="cel_number"]').val().length>13 || !a) {
+        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "warning",
               message: "Invalid phone number!"
@@ -1081,7 +1081,7 @@ function validate(){
 
     if (typeof($('[name="tel_number"]').val())!='undefined') {
         var a=Number($('[name="tel_number"]').val());
-        if ($('[name="tel_number"]').val().length< 9 || $('[name="tel_number"]').val().length>13 || !a) {
+        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "warning",
               message: "Invalid phone number!"
@@ -1232,6 +1232,5 @@ function validate(){
         this.value=this.value.replace("\'","");
         this.value=this.value.replace("\"","");
     	this.value = this.value.toLocaleUpperCase();
-        this.value = this.value.trim();
 	});
 </script>

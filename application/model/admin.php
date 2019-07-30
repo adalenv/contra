@@ -42,12 +42,6 @@ class Model
         $query->execute(array(':role' =>$role));
         return $query->fetchAll();
     }
-    public function getUsersByRoleAll($role){
-        $sql="SELECT * FROM users where role = :role  order by first_name asc";
-        $query=$this->db->prepare($sql);
-        $query->execute(array(':role' =>$role));
-        return $query->fetchAll();
-    }
     public function getUsersBySupervisor($supervisor){
         $sql="SELECT * FROM users where role='operator' AND supervisor = :supervisor and active='yes' order by first_name asc";
         $query=$this->db->prepare($sql);
@@ -64,45 +58,6 @@ class Model
         }else{
             return '';
         }
-    }
-
-    public function getStats($user_id,$date){
-        //print_r($date);
-        $sql='SELECT count(stat_id) as stat FROM stats WHERE user_id=:user_id and Date(`date`)=Date(:date) ';
-        $query = $this->db->prepare($sql);
-        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
-        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $query->bindParam(':date', $date);
-        $query->execute();
-        $dat = $query->fetch();
-        //print_r($dat);
-        return $dat->stat;
-    }
-
-
-    public function getStatsOk($user_id,$date){
-        //print_r($date);select * from log where user_id =16 and diff like "%status[Switch=>KO]%"
-        $sql='SELECT count(*) as stat FROM log where user_id =:user_id and diff like "%=>OK]%" and Date(`date`)=Date(:date) ';
-        $query = $this->db->prepare($sql);
-        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
-        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $query->bindParam(':date', $date);
-        $query->execute();
-        $dat = $query->fetch();
-        //print_r($dat);
-        return $dat->stat;
-    }
-    public function getStatsKo($user_id,$date){
-        //print_r($date);select * from log where user_id =16 and diff like "%status[Switch=>KO]%"
-        $sql='SELECT count(*) as stat FROM log where user_id =:user_id and diff like "%=>KO]%" and Date(`date`)=Date(:date) ';
-        $query = $this->db->prepare($sql);
-        //$query->bindParam(':contract_id', $contract_id, PDO::PARAM_INT);
-        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $query->bindParam(':date', $date);
-        $query->execute();
-        $dat = $query->fetch();
-        //print_r($dat);
-        return $dat->stat;
     }
 
     public function createUser(){
@@ -153,7 +108,7 @@ class Model
         }else{
             $supervisor=$_POST['supervisor'];
         }
-        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id,active=:active,ip=:ip WHERE user_id=:user_id";
+        $sql="UPDATE users SET username=:username,password=:password,first_name=:first_name,last_name=:last_name,role=:role,supervisor=:supervisor_id,active=:active WHERE user_id=:user_id";
         $query = $this->db->prepare($sql);
         $parameters=array(':username' => $_POST['username'],
                       ':password' => $_POST['password'],
@@ -162,7 +117,6 @@ class Model
                       ':role' => $_POST['role'],
                       ':supervisor_id' => $supervisor,
                       ':active' => $_POST['active'],
-                      ':ip' => $_POST['ip'],
                       ':user_id' => $user_id
                         );
         if($query->execute($parameters)){
@@ -220,12 +174,6 @@ class Model
         $sql='SELECT * FROM status';
         $query = $this->db->prepare($sql);
         $query->execute();
-        return $query->fetchAll();
-    }
-    public function getStatusById($id){
-        $sql='SELECT * FROM status where status_id=:id limit 1';
-        $query = $this->db->prepare($sql);
-        $query->execute(array(':id'=>$id));
         return $query->fetchAll();
     }
 
@@ -509,9 +457,6 @@ class Model
         $phone        = (isset($_REQUEST['phone'])?$_REQUEST['phone']:'%');
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $podpdr        = (isset($_REQUEST['podpdr'])?$_REQUEST['podpdr']:'%');
-        $payment_type        = (isset($_REQUEST['payment_type'])?$_REQUEST['payment_type']:'%');
-
-
         $limiter      = 100;
         $pager        = $limiter*$page;
        
@@ -528,7 +473,6 @@ class Model
         		$_REQUEST['contract_type']='%';
                 $_REQUEST['codice_fiscale']='%';
                 $_REQUEST['podpdr']='%';
-                $_REQUEST['payment_type']='%';
 		        $sql="SELECT * FROM contracts WHERE contract_id =:id";
 		        $query = $this->db->prepare($sql);
 		        $query->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
@@ -597,7 +541,6 @@ class Model
                     AND vat_number LIKE :codice_fiscale
                     AND campaign LIKE :campaign
                     AND supervisor LIKE :supervisor
-                    AND payment_type like :payment_type
                     AND (
                                 (luce_pod LIKE :podpdr)
                             OR 
@@ -619,8 +562,6 @@ class Model
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
             $query->bindParam(':podpdr', $podpdr);
-            $query->bindParam(':payment_type', $payment_type);
-
             $query->execute();
 
             $allpages=$query->rowCount();  
@@ -652,8 +593,6 @@ class Model
         $query->bindParam(':campaign', $campaign);
         $query->bindParam(':supervisor', $supervisor);
         $query->bindParam(':podpdr', $podpdr);
-        $query->bindParam(':payment_type', $payment_type);
-
         $query->execute();
 
         if (!$export) {
@@ -665,9 +604,6 @@ class Model
                 } else{
                     $c_nr=$c_nr+1;
                 }
-            }
-            if ($payment_type!="%") {
-                $c_nr=count($contracts);
             }
             array_push($output,$contracts); 
             array_push($output,$c_nr);
@@ -998,8 +934,10 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                     }else{
                         echo "fail";
                     }
-                    header('location: viewContract/'.$this->db->lastInsertId());  
-                    $_SESSION['create_contract']='success';   
+                    //header('location: viewContract/'.$this->db->lastInsertId());
+		    $_SESSION['create_contract']='success';
+		    header("location:".URL.$_SESSION['role'].'/contracts');
+                       
                 } else {
                     $_SESSION['create_contract']='fail';
                     header("location:".URL.$_SESSION['role'].'/contracts');
@@ -1014,7 +952,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
         $query->execute(array(':contract_id' =>$contract_id));
         $old_c=$query->fetch(PDO::FETCH_ASSOC);
 
-        $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry,document_issue_place=:document_issue_place,note_super=:note_super,status_temp=:status_temp,note_temp=:note_temp WHERE contract_id=:contract_id";
+        $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry,document_issue_place=:document_issue_place,note_super=:note_super WHERE contract_id=:contract_id";
 
                 $query = $this->db->prepare($sql);                
                 $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
@@ -1182,8 +1120,6 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 }
 
                 $query->bindParam(':note', $_POST['note']);
-                $query->bindParam(':status_temp', $_POST['status_temp']);
-                $query->bindParam(':note_temp', $_POST['note_temp']);
 
 
         $query->bindParam(':contract_id',$contract_id,PDO::PARAM_INT);
