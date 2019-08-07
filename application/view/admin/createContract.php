@@ -207,7 +207,7 @@
                                         <input type="text" autocomplete="off" name="cel_number3" class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Email*</label>
+                                        <label class="control-label">Email</label>
                                         <input type="email" name="email"  class="form-control">
                                     </div>
                                     <div class="form-group label-floating">
