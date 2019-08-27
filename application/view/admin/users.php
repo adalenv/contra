@@ -1,7 +1,7 @@
             <div class="content" style="margin-top: 20px;">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-3 ml-auto mr-auto text-center"></div>    
+                        <div class="col-md-3 ml-auto mr-auto text-center"></div>
                         <div class="col-md-6 ml-auto mr-auto text-center">
                             <ul style="max-width: fit-content;" class="max-width: fit-content; card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <li class="nav-item active">
@@ -17,14 +17,14 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="users/workhours/<?=date('Y-m');?>" role="tablist">
+                                    <a class="nav-link" href="users/workhours/<?=date('Y-m');?>-1--<?=date('Y-m');?>-31" role="tablist">
                                         <i class="material-icons">access_time</i>
                                         Ore di Lavoro
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-3 ml-auto mr-auto text-center"></div> 
+                        <div class="col-md-3 ml-auto mr-auto text-center"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -48,10 +48,10 @@
                                             <th><center>Azione</center></th>
                                         </thead>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                                 $output='';
                                                 foreach ($users as $user) {
-                                                   
+
                                                     $output.='<tr>
                                                                 <td><a class="user_name_l" href="viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                                 <td>'.$user->role.'</td>
@@ -71,9 +71,9 @@
             </div>
             <script type="text/javascript">
                 $('.usersNav').addClass('active');
-                <?php 
+                <?php
                     if (isset($_SESSION['edit_user'])) {
-                        if ($_SESSION['edit_user']=='success') { ?>//if edit success 
+                        if ($_SESSION['edit_user']=='success') { ?>//if edit success
                             $.notify({
                               icon: "done",
                               message: "Changes saved!"
@@ -103,7 +103,7 @@
                     }
 
                     if (isset($_SESSION['delete_user'])) {
-                        if ($_SESSION['delete_user']=='success') { ?>//if edit success 
+                        if ($_SESSION['delete_user']=='success') { ?>//if edit success
                             $.notify({
                               icon: "done",
                               message: "User Deleted!"
@@ -134,7 +134,7 @@
                     }
 
                     if (isset($_SESSION['create_user'])) {
-                        if ($_SESSION['create_user']=='success') { ?>//if edit success 
+                        if ($_SESSION['create_user']=='success') { ?>//if edit success
                             $.notify({
                               icon: "done",
                               message: "New user created!"
@@ -178,7 +178,7 @@ function filterTabl() {
       } else {
         tr[i].style.display = "none";
       }
-    }       
+    }
   }
 }
             </script>
