@@ -21,17 +21,17 @@
                                                 </select>
                                             </div>
                                             <div class="checkbox">
-                                                <label class="control-label">                                             
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali  
+                                                <label class="control-label">
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->ugm_cb=='true')?'checked':'';?> value="<?=$contract->ugm_cb;?>" name="ugm_cb">Iniziative Promocionali
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->analisi_cb=='true')?'checked':'';?> value="<?=$contract->analisi_cb;?>" name="analisi_cb">Analisi di Mercato       
-                                                </label>                          
-                                                <label class="control-label">            
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali da terze parti 
-                                                </label>  
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->analisi_cb=='true')?'checked':'';?> value="<?=$contract->analisi_cb;?>" name="analisi_cb">Analisi di Mercato
+                                                </label>
+                                                <label class="control-label">
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->iniziative_cb=='true')?'checked':'';?> value="<?=$contract->iniziative_cb;?>" name="iniziative_cb">Iniziative Promocionali da terze parti
+                                                </label>
                                             </div>
-            
+
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
@@ -39,7 +39,7 @@
                                                 <select disabled="" class="form-control" required name="supervisor" id="supervisor">
                                                     <option value=''></option>
                                                     <?php
-                                                        $output=''; 
+                                                        $output='';
                                                         foreach ($supervisors as $supervisor) {
                                                             if ($contract->supervisor==$supervisor->user_id) {
                                                                 $output.='<option selected="" value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
@@ -56,7 +56,7 @@
                                                 <select disabled="" class="form-control" required name="operator" id="operator">
                                                     <option value=''></option>
                                                     <?php
-                                                        $output=''; 
+                                                        $output='';
                                                         foreach ($operators as $operator) {
                                                             if ($contract->operator==$operator->user_id) {
                                                                 $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
@@ -73,7 +73,7 @@
                                                 <select disabled="" class="form-control" required name="campaign" id="campaign">
                                                     <option value=''></option>
                                                     <?php
-                                                        $output=''; 
+                                                        $output='';
                                                         foreach ($campaigns as $campaign) {
                                                             if ($contract->campaign==$campaign->campaign_id) {
                                                                 $output.='<option selected="" value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                         <div class="col-sm-8">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
@@ -131,10 +131,10 @@
 
                                         <div class="col-sm-6">
                                             <label>Sesso:</label>
-                                            <div class="checkbox">                                         
-                                                <input disabled="" type="radio" class="gender_cb" <?=($contract->gender=='male')?'checked':'';?>  value="male" name="gender" id="uomo_cb" checked="">&nbsp;Uomo 
+                                            <div class="checkbox">
+                                                <input disabled="" type="radio" class="gender_cb" <?=($contract->gender=='male')?'checked':'';?>  value="male" name="gender" id="uomo_cb" checked="">&nbsp;Uomo
                                                     &nbsp;&nbsp;&nbsp;
-                                                <input disabled="" type="radio" class="gender_cb" <?=($contract->gender=='female')?'checked':'';?>  value="female" name="gender" id="donna_cb">&nbsp;Donna                           
+                                                <input disabled="" type="radio" class="gender_cb" <?=($contract->gender=='female')?'checked':'';?>  value="female" name="gender" id="donna_cb">&nbsp;Donna
                                             </div>
                                         </div>
 
@@ -142,7 +142,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Ragione Sociale</label>
                                                 <input disabled="" type="text" value="<?=$contract->rag_sociale;?>" name="rag_sociale" class="form-control">
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
@@ -168,7 +168,7 @@
                                                 <input disabled="" type="text" value="<?=$contract->partita_iva;?>" class="form-control" name="partita_iva">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <!-- <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data di Nascita*</label>
                                                 <input disabled="" type="text" value="<?=date('d-m-Y',strtotime($contract->birth_date))?>" required  id="birth_date" class="form-control" name="birth_date">
@@ -185,7 +185,7 @@
                                                 <label class="control-label">Provinca di Nascita*</label>
                                                 <input disabled="" type="text" value="<?=$contract->birth_municipality;?>" required  class="form-control" name="birth_municipality">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipo di Documento*</label>
@@ -313,13 +313,13 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-8">
-                                        <h4 class="title">Ubicazione Fornitura</h4> 
+                                        <h4 class="title">Ubicazione Fornitura</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="checkbox">                                         
-                                            <input disabled="" type="radio" <?=($contract->ubicazione_fornitura=='resident')?'checked':'';?>  value="resident" name="ubicazione_fornitura">&nbsp; Residente  
+                                        <div class="checkbox">
+                                            <input disabled="" type="radio" <?=($contract->ubicazione_fornitura=='resident')?'checked':'';?>  value="resident" name="ubicazione_fornitura">&nbsp; Residente
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input disabled="" type="radio" <?=($contract->ubicazione_fornitura=='non_resident')?'checked':'';?>  value="non_resident" name="ubicazione_fornitura">&nbsp;Non Residente                           
+                                            <input disabled="" type="radio" <?=($contract->ubicazione_fornitura=='non_resident')?'checked':'';?>  value="non_resident" name="ubicazione_fornitura">&nbsp;Non Residente
                                         </div>
                                     </div>
                                 </div>
@@ -370,15 +370,15 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Domicillazione documenti e fatture</h4> 
+                                        <h4 class="title">Domicillazione documenti e fatture</h4>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="checkbox">                                         
-                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='residenza')?'checked':'';?>  value="residenza" name="domicillazione_documenti_fatture" >&nbsp; Residenza/Sede Legale  
+                                        <div class="checkbox">
+                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='residenza')?'checked':'';?>  value="residenza" name="domicillazione_documenti_fatture" >&nbsp; Residenza/Sede Legale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='ubicazione_fornitura')?'checked':'';?> value="ubicazione_fornitura" name="domicillazione_documenti_fatture">&nbsp;Ubicazione fornitura   
+                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='ubicazione_fornitura')?'checked':'';?> value="ubicazione_fornitura" name="domicillazione_documenti_fatture">&nbsp;Ubicazione fornitura
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='altro')?'checked':'';?> value="altro" name="domicillazione_documenti_fatture" >&nbsp;Altro                       
+                                            <input disabled="" type="radio" <?=($contract->domicillazione_documenti_fatture=='altro')?'checked':'';?> value="altro" name="domicillazione_documenti_fatture" >&nbsp;Altro
                                         </div>
                                     </div>
                                 </div>
@@ -428,7 +428,7 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Contratto</h4> 
+                                        <h4 class="title">Contratto</h4>
                                     </div>
 
                                 </div>
@@ -461,7 +461,7 @@
                                         <h4 class="title">
                                             <div class="checkbox">
                                                 Richiede la fornitura di Gas Naturale
-                                        </h4> 
+                                        </h4>
                                     </div>
                                      <div class="card-content">
                                         <div class="col-sm-4">
@@ -489,7 +489,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
-                                            </div> 
+                                            </div>
                                         </div>
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
@@ -506,24 +506,24 @@
                                         <div class="col-sm-6">
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
-                                                <label class="control-label">                                             
+                                                <label class="control-label">
                                                     <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                                </label>                           
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="blue">
                                         <h4 class="title">
                                             <div class="checkbox">
                                                 Richiede la fornitura di Energia Electrica
-                                        </h4> 
+                                        </h4>
                                     </div>
                                      <div class="card-content">
                                         <div class="col-sm-3">
@@ -581,7 +581,7 @@
                                         <h4 class="title">
                                             <div class="checkbox">
                                                 Richiede la fornitura di Gas Naturale
-                                        </h4> 
+                                        </h4>
                                     </div>
                                      <div class="card-content">
                                         <div class="col-sm-4">
@@ -610,7 +610,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Consumo Annuo</label>
                                                 <input disabled="" type="text" value="<?=$contract->gas_consume_annuo;?>" class="form-control" name="consume_annuo">
-                                            </div> 
+                                            </div>
                                         </div>
                                           <div class="col-sm-3">
                                             <div class="form-group label-floating">
@@ -627,12 +627,12 @@
                                         <div class="col-sm-6">
                                             <div class="checkbox">
                                                 Tipologia Uso*</br>
-                                                <label class="control-label">                                             
+                                                <label class="control-label">
                                                     <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_riscaldamento=='true')?'checked':'';?> value="<?=$contract->gas_tipo_riscaldamento;?>" name="gas_tipo_riscaldamento">Riscaldamento
                                                 </label>
                                                 <label class="control-label">
-                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                                </label>                           
+                                                    <input disabled="" type="checkbox" class="cb" <?=($contract->gas_tipo_cottura_acqua=='true')?'checked':'';?> value="<?=$contract->gas_tipo_cottura_acqua;?>" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -645,7 +645,7 @@
                                         <h4 class="title">
                                             <div class="checkbox">
                                                 Richiede la fornitura di Energia Electrica
-                                        </h4> 
+                                        </h4>
                                     </div>
                                      <div class="card-content">
                                         <div class="col-sm-3">
@@ -703,12 +703,12 @@
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
                                         <div class="checkbox">
-                                            <label class="control-label">                                             
+                                            <label class="control-label">
                                                 <input disabled="" type="checkbox" class="cb" <?=($contract->fature_via_email=='true')?'checked':'';?> value="<?=$contract->fature_via_email;?>"  name="fature_via_email">
                                             </label>
                                             Richiede l`invio della fatura via mail
                                         </div>
-                                    </h4> 
+                                    </h4>
                                 </div>
                                 <?php if ($contract->fature_via_email=='true'){ ?>
                                     <div class="card-content">
@@ -727,13 +727,13 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Modalita di pagamento</h4> 
+                                        <h4 class="title">Modalita di pagamento</h4>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="checkbox">                                         
+                                        <div class="checkbox">
                                             <input disabled="" type="radio" <?=($contract->payment_type=='postal')?'checked':'';?> value="postal" name="payment_type">&nbsp; Bolletino Postale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input disabled="" type="radio" <?=($contract->payment_type=='cc')?'checked':'';?> value="cc" name="payment_type">&nbsp;Addebido su Conto Corrente                 
+                                            <input disabled="" type="radio" <?=($contract->payment_type=='cc')?'checked':'';?> value="cc" name="payment_type">&nbsp;Addebido su Conto Corrente
                                         </div>
                                     </div>
                                 </div>
@@ -766,7 +766,7 @@
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
                                             Documents / Audio`s
-                                    </h4> 
+                                    </h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="col-sm-6" >
@@ -859,7 +859,7 @@
                     format: 'DD/MM/YYYY',
                     defaultDate:new Date(),
                  });
-                
+
                 //$('.cb').val('false')
                 $('.cb').on('click',function() {
                     $(this).val($(this).val()=='false'?'true':'false');
@@ -873,9 +873,9 @@
                 $('#luce_request_type').val('<?=$contract->luce_request_type;?>');
                 $('#ddf_toponimo').val('<?=$contract->ddf_toponimo;?>')
                 $('#uf_toponimo').val('<?=$contract->uf_toponimo;?>')
-                <?php 
+                <?php
                     if (isset($_SESSION['create_contract'])) {
-                        if ($_SESSION['create_contract']=='success') { ?>//if edit success 
+                        if ($_SESSION['create_contract']=='success') { ?>//if edit success
                             $.notify({
                               icon: "done",
                               message: "Contract Created!"
@@ -888,13 +888,13 @@
                               }
                             });
 
-                        <?php } 
+                        <?php }
 
                         unset($_SESSION['create_contract']);
-                    } 
+                    }
 
                     if (isset($_SESSION['edit_contract'])) {
-                        if ($_SESSION['edit_contract']=='success') { ?>//if edit success 
+                        if ($_SESSION['edit_contract']=='success') { ?>//if edit success
                             $.notify({
                               icon: "done",
                               message: "Contract Updated!"
@@ -921,9 +921,9 @@
                             });
 
                         <?php }
-                        
+
                         unset($_SESSION['edit_contract']);
-                    } 
+                    }
                 ?>
 
 function loadDocAndAudio() {
@@ -944,7 +944,7 @@ function loadDocAndAudio() {
     })
     .fail(function() {
           console.log("error");
-    })  
+    })
     $.ajax({//audio
         url: "<?=URL.$_SESSION['role']?>/getAudios/<?=$contract->contract_id;?>",
         type: 'GET',
@@ -963,7 +963,7 @@ function loadDocAndAudio() {
     })
     .fail(function() {
           console.log("error");
-    })        
+    })
 }
 
 </script>
@@ -1064,7 +1064,7 @@ function loadDocAndAudio() {
         <div class="modal-body row">
             <table class="table table-striped table-bordered table-responsive">
               <?php
-                $output='<thead><td>Date</td><td>User</td><td>Changes</td><td>IP</td></thead>'; 
+                $output='<thead><td>Date</td><td>User</td><td>Changes</td><td>IP</td></thead>';
                 foreach ($changelog as $log) {
                         $useri= $this->model->getUser($log['user_id']);
                         $useri=$useri->first_name." ".$useri->last_name;

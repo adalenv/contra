@@ -7,17 +7,17 @@ if($_SESSION['role']!='operator') { header('Location:'.URL); return; };
 class operator extends Controller
 {
 
-    public function index(){ 
+    public function index(){
         header('Location:'.URL.'operator/createContract');
     }
-    // function contracts(){   
+    // function contracts(){
     //     $contracts=$this->model->getContracts();
     //     $statuses=$this->model->getStatuses();
     //     require APP . 'view/operator/header.php';
     //     require APP . 'view/operator/contracts.php';
     //     require APP . 'view/operator/footer.php';
     // }
-    
+
     public function createContract(){ 
         if(isset($_POST['create_contract'])){
             $this->model->createContract();
@@ -31,7 +31,7 @@ class operator extends Controller
         require APP . 'view/operator/footer.php';
     }
 
-    public function viewContract($contract_id){ 
+    public function viewContract($contract_id){
         if (!isset($_SESSION['can_view'])) {
             header('Location:'.URL.$_SESSION['role'].'/createContract');
             echo 'You dont have permissions!';
@@ -54,25 +54,25 @@ class operator extends Controller
     }
 
     //////////-documents-//////////////
-    public function uploadDocuments(){ 
+    public function uploadDocuments(){
         $this->model->uploadDocuments();
     }
-    public function getDocuments($contract_id){ 
+    public function getDocuments($contract_id){
         $this->model->getDocuments($contract_id);
     }
-    public function getDocument($document_id){ 
+    public function getDocument($document_id){
         $this->model->getDocument($document_id);
     }
     /////////////////////////////////
 
     //////////-audio-//////////////
-    public function uploadAudios(){ 
+    public function uploadAudios(){
         $this->model->uploadAudios();
     }
-    public function getAudios($contract_id){ 
+    public function getAudios($contract_id){
         $this->model->getAudios($contract_id);
     }
-    public function getAudio($audio_id){ 
+    public function getAudio($audio_id){
         $this->model->getAudio($audio_id);
     }
     /////////////////////////////////

@@ -8,23 +8,23 @@
                                     <h4 class="title">Dati Contrattuali</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="row"> 
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Stipula</label>
                                                 <input disabled="" type="text" id="contract_date" name="date" class="form-control">
                                             </div>
-                                        
+
                                             <div class="checkbox">
-                                                <label class="control-label">                                             
+                                                <label class="control-label">
                                                     <input type="checkbox" class="cb" value="false" name="ugm_cb">Iniziative Promocionali
                                                 </label>
                                                 <label class="control-label">
-                                                    <input type="checkbox" class="cb" value="false" name="analisi_cb">Analisi di Mercato       
-                                                </label>                          
-                                                <label class="control-label">            
-                                                    <input type="checkbox" class="cb" value="false" name="iniziative_cb">Iniziative Promocionali da terze parti 
-                                                </label>  
+                                                    <input type="checkbox" class="cb" value="false" name="analisi_cb">Analisi di Mercato
+                                                </label>
+                                                <label class="control-label">
+                                                    <input type="checkbox" class="cb" value="false" name="iniziative_cb">Iniziative Promocionali da terze parti
+                                                </label>
                                             </div>
                                         </div>
 
@@ -34,7 +34,7 @@
                                                 <select class="form-control"  required name="operator" id="operator">
                                                     <option value=''></option>
                                                     <?php
-                                                        $output=''; 
+                                                        $output='';
                                                         foreach ($operators as $operator) {
                                                             $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                         }
@@ -47,7 +47,7 @@
                                                 <select class="form-control" required name="campaign" id="campaign">
                                                     <option value=''></option>
                                                     <?php
-                                                        $output=''; 
+                                                        $output='';
                                                         foreach ($campaigns as $campaign) {
                                                             $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
                                                         }
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                         <div class="col-sm-8">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
@@ -82,17 +82,17 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Sesso:</label>
-                                            <div class="checkbox">                                         
-                                                <input type="radio" class="gender_cb" value="male" name="gender" id="uomo_cb" checked="">&nbsp;Uomo 
+                                            <div class="checkbox">
+                                                <input type="radio" class="gender_cb" value="male" name="gender" id="uomo_cb" checked="">&nbsp;Uomo
                                                     &nbsp;&nbsp;&nbsp;
-                                                <input type="radio" class="gender_cb" value="female" name="gender" id="donna_cb">&nbsp;Donna                           
+                                                <input type="radio" class="gender_cb" value="female" name="gender" id="donna_cb">&nbsp;Donna
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Ragione Sociale</label>
                                                 <input type="text" name="rag_sociale" class="form-control">
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
@@ -118,24 +118,13 @@
                                                 <input type="text" class="form-control" name="partita_iva">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Data di Nascita*</label>
-                                                <input type="text" required  id="birth_date" class="form-control" name="birth_date">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Luogo di Nascita*</label>
-                                                <input type="text" required class="form-control" name="birth_nation">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Provincia di Nascita*</label>
-                                                <input type="text" required class="form-control" name="birth_municipality">
-                                            </div>
-                                        </div>
+
+                                        <input type="hidden" value="1970-01-01" required  id="birth_date" class="form-control" name="birth_date">
+
+                                        <input type="hidden" value="" required class="form-control" name="birth_nation">
+
+                                        <input type="hidden" value="" required class="form-control" name="birth_municipality">
+
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Tipo di Documento*</label>
@@ -257,19 +246,19 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-8">
-                                        <h4 class="title">Ubicazione Fornitura</h4> 
+                                        <h4 class="title">Ubicazione Fornitura</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="checkbox">                                         
-                                            <input type="radio"  value="resident" name="ubicazione_fornitura"  checked="">&nbsp; Residente  
+                                        <div class="checkbox">
+                                            <input type="radio"  value="resident" name="ubicazione_fornitura"  checked="">&nbsp; Residente
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" value="non_resident" name="ubicazione_fornitura" >&nbsp;Non Residente                           
+                                            <input type="radio" value="non_resident" name="ubicazione_fornitura" >&nbsp;Non Residente
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-content" id="ubicazioneif" style="display:none;">
 
-                                </div> 
+                                </div>
                             </div>
                         </div>
 
@@ -277,20 +266,20 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Domicillazione documenti e fatture</h4> 
+                                        <h4 class="title">Domicillazione documenti e fatture</h4>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="checkbox">                                         
-                                            <input type="radio" class="" value="residenza" name="domicillazione_documenti_fatture" checked="">&nbsp; Residenza/Sede Legale  
+                                        <div class="checkbox">
+                                            <input type="radio" class="" value="residenza" name="domicillazione_documenti_fatture" checked="">&nbsp; Residenza/Sede Legale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" class="" value="ubicazione_fornitura" name="domicillazione_documenti_fatture" id="">&nbsp;Ubicazione fornitura   
+                                            <input type="radio" class="" value="ubicazione_fornitura" name="domicillazione_documenti_fatture" id="">&nbsp;Ubicazione fornitura
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" class="" value="altro" name="domicillazione_documenti_fatture" >&nbsp;Altro                       
+                                            <input type="radio" class="" value="altro" name="domicillazione_documenti_fatture" >&nbsp;Altro
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-content" id="domicillazioneif"  style="display:none;" >
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -299,7 +288,7 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Contratto</h4> 
+                                        <h4 class="title">Contratto</h4>
                                     </div>
                                 </div>
                                  <div class="card-content">
@@ -330,7 +319,7 @@
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
                                         Richiede la fornitura di Gas Naturale
-                                    </h4> 
+                                    </h4>
                                 </div>
                                  <div class="card-content" id="gasifc">
                                     <div class="col-sm-3">
@@ -376,12 +365,12 @@
                                     <div class="col-sm-6">
                                         <div class="checkbox">
                                             Tipologia Uso*</br>
-                                            <label class="control-label">                                             
+                                            <label class="control-label">
                                                 <input type="checkbox" class="cb" value="false" name="gas_tipo_riscaldamento">Riscaldamento
                                             </label>
                                             <label class="control-label">
-                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                            </label>                           
+                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -393,7 +382,7 @@
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
                                         Richiede la fornitura di energia electtrica
-                                    </h4> 
+                                    </h4>
                                 </div>
                                  <div class="card-content" id="luceifc">
                                     <div class="col-sm-3">
@@ -452,12 +441,12 @@
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">
                                         <div class="checkbox">
-                                            <label class="control-label">                                             
+                                            <label class="control-label">
                                                 <input type="checkbox" class="cb" value="false" name="fature_via_email">
                                             </label>
                                             Richiede l`invio della fatura via mail
                                         </div>
-                                    </h4> 
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -466,13 +455,13 @@
                             <div class="card">
                                 <div class="card-header row" data-background-color="blue">
                                     <div class="col-sm-6">
-                                        <h4 class="title">Modalita di pagamento</h4> 
+                                        <h4 class="title">Modalita di pagamento</h4>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="checkbox">                                         
+                                        <div class="checkbox">
                                             <input type="radio" class="" value="postal" name="payment_type" id="" checked="">&nbsp; Bolletino Postale
                                                     &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" class="" value="cc" name="payment_type" id="">&nbsp;Addebido su Conto Corrente                
+                                            <input type="radio" class="" value="cc" name="payment_type" id="">&nbsp;Addebido su Conto Corrente
                                         </div>
                                     </div>
                                 </div>
@@ -483,11 +472,11 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Audio</h4> 
+                                    <h4 class="title">Audio</h4>
                                 </div>
                                 <div class="card-content">
                                     <!-- <input type='file' name="file" accept="audio/*" required /> -->
-                                
+
                                   <div class="form-group file-area">
                                     <input type="file" name="file" accept="audio/*" id="file" required="required"/>
                                     <div class="file-dummy">
@@ -556,7 +545,7 @@ $(window).ready(function(){
             $('#paymentmodif').html('');
         }
     });
-    
+
     $('[name="client_type"]').change(function(){
         if ($(this).val()=='delega') {
             $('#delegaif').show();
@@ -627,7 +616,7 @@ $(window).ready(function(){
                                             <label class="control-label">Cap*</label>
                                             <input type="text" required class="form-control" name="uf_cap">
                                         </div>
-                                    </div>`); 
+                                    </div>`);
         }
     })
     $('[name="domicillazione_documenti_fatture"]').change(function(){
@@ -770,12 +759,12 @@ $(window).ready(function(){
                                     <div class="col-sm-6">
                                         <div class="checkbox">
                                             Tipologia Uso*</br>
-                                            <label class="control-label">                                             
+                                            <label class="control-label">
                                                 <input type="checkbox" class="cb" value="false" name="gas_tipo_riscaldamento">Riscaldamento
                                             </label>
                                             <label class="control-label">
-                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                            </label>                           
+                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria
+                                            </label>
                                         </div>
                                     </div>`);
         }else if ($(this).val()=='luce') {
@@ -876,12 +865,12 @@ $(window).ready(function(){
                                     <div class="col-sm-6">
                                         <div class="checkbox">
                                             Tipologia Uso*</br>
-                                            <label class="control-label">                                             
+                                            <label class="control-label">
                                                 <input type="checkbox" class="cb" value="false" name="gas_tipo_riscaldamento">Riscaldamento
                                             </label>
                                             <label class="control-label">
-                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria      
-                                            </label>                           
+                                                <input type="checkbox" class="cb" value="false" name="gas_tipo_cottura_acqua">Cottura cibi/Acqua calda sanitaria
+                                            </label>
                                         </div>
                                     </div>`);
         }
@@ -1050,7 +1039,7 @@ function validate(){
 }
 </script>
 <style type="text/css">
-    
+
 .file-area {
   width: 100%;
   position: relative;
