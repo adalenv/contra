@@ -10,15 +10,15 @@ class operator extends Controller
     public function index(){
         header('Location:'.URL.'operator/createContract');
     }
-    // function contracts(){
-    //     $contracts=$this->model->getContracts();
-    //     $statuses=$this->model->getStatuses();
-    //     require APP . 'view/operator/header.php';
-    //     require APP . 'view/operator/contracts.php';
-    //     require APP . 'view/operator/footer.php';
-    // }
+    function contracts(){
+        $contracts=$this->model->getContracts();
+        $statuses=$this->model->getStatuses();
+        require APP . 'view/operator/header.php';
+        require APP . 'view/operator/contracts.php';
+        require APP . 'view/operator/footer.php';
+    }
 
-    public function createContract(){ 
+    public function createContract(){
         if(isset($_POST['create_contract'])){
             $this->model->createContract();
             return;
