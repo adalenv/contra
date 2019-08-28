@@ -63,6 +63,9 @@ class Controller
                 case 'operator':
                     require APP . 'model/operator.php';
                     break;
+              case 'formatore':
+                  require APP . 'model/formatore.php';
+                  break;
                 default:
                     require APP . 'model/model.php';
                     break;
@@ -70,7 +73,7 @@ class Controller
         }else{
             require APP . 'model/model.php';
         }
-        
+
 
         // create new "model" (and pass the database connection)
         $this->model = new Model($this->db);
