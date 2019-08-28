@@ -67,19 +67,44 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
+    public function getWorkhours($user_id,$date=null){
+        if (!$date) {
+           $datefrom=date('Y-m').'01';
+           $dateto=date('Y-m').'-31';
+
+        }else {
+          $date=explode('--',$date);
+          $datefrom=$date[0];
+          $dateto=$date[1];
+        }
+        $sql = "SELECT SUM(hours) as totalhours FROM workhours where `workhours`.user_id='$user_id' and (`workhours`.`date` BETWEEN '$datefrom' AND '$dateto')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $workhours=$query->fetch();
+        $workhours=$workhours->totalhours;
+        if (!$workhours) {
+            $workhours=0;
+        }
+        return $workhours;
+    }
 
     public function getContractsNumber($user_id,$date=null){
-        if (!$date) {
-           $date=date('Y-m');
-        }
-        $date.='-01';
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+      if (!$date) {
+         $datefrom=date('Y-m').'01';
+         $dateto=date('Y-m').'-31';
+
+      }else {
+        $date=explode('--',$date);
+        $datefrom=$date[0];
+        $dateto=$date[1];
+      }
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto')";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
         $contractsNumber=$contractsNumber->totalContracts;
 
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date')";
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto')";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumberDual=$query->fetch();
@@ -93,18 +118,22 @@ class Model
     }
 
     public function getContractsNumberOkInserito($user_id,$date=null){
-        if (!$date) {
-           $date=date('Y-m');
-        }
-        $date.='-01';
+      if (!$date) {
+         $datefrom=date('Y-m').'01';
+         $dateto=date('Y-m').'-31';
 
-       $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
+      }else {
+        $date=explode('--',$date);
+        $datefrom=$date[0];
+        $dateto=$date[1];
+      }
+       $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.operator='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto') and (`contracts`.status=2 OR `contracts`.status=4) ";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumber=$query->fetch();
         $contractsNumber=$contractsNumber->totalContracts;
 
-        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and MONTH(`contracts`.`date`) =MONTH('$date') and YEAR(`contracts`.`date`) =YEAR('$date') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.operator='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto') and (`contracts`.status=2 OR `contracts`.status=4) ";
         $query = $this->db->prepare($sql);
         $query->execute();
         $contractsNumberDual=$query->fetch();
@@ -116,6 +145,67 @@ class Model
         }
         return $contractsNumber;
     }
+
+    public function getContractsNumberSupervisor($user_id,$date=null){
+      if (!$date) {
+         $datefrom=date('Y-m').'01';
+         $dateto=date('Y-m').'-31';
+
+      }else {
+        $date=explode('--',$date);
+        $datefrom=$date[0];
+        $dateto=$date[1];
+      }
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.supervisor='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.supervisor='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+    public function getContractsNumberOkInseritoSupervisor($user_id,$date=null){
+      if (!$date) {
+         $datefrom=date('Y-m').'01';
+         $dateto=date('Y-m').'-31';
+
+      }else {
+        $date=explode('--',$date);
+        $datefrom=$date[0];
+        $dateto=$date[1];
+      }
+
+       $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type!='dual' AND `contracts`.supervisor='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumber=$query->fetch();
+        $contractsNumber=$contractsNumber->totalContracts;
+
+        $sql = "SELECT COUNT(contract_id) as totalContracts FROM contracts where `contracts`.contract_type='dual' AND `contracts`.supervisor='$user_id' and (`contracts`.`date` BETWEEN '$datefrom' AND '$dateto') and (`contracts`.status=2 OR `contracts`.status=4) ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $contractsNumberDual=$query->fetch();
+        $contractsNumberDual=(int)$contractsNumberDual->totalContracts*2;
+
+        $contractsNumber+=$contractsNumberDual;
+        if (!$contractsNumber) {
+            $contractsNumber=0;
+        }
+        return $contractsNumber;
+    }
+
+
     public function getContractById($contract_id ){
         $sql='SELECT * FROM contracts INNER JOIN status ON contracts.status = status.status_id WHERE contract_id=:contract_id AND supervisor=:supervisor_id ';
         $query = $this->db->prepare($sql);
@@ -136,26 +226,12 @@ class Model
         $query=$this->db->prepare($sql);
         $query->execute(array(':status_id' => $status_id));
         return $query->fetch();
-    } 
+    }
 
 
 
 ////////////////////////////////////////////////////
-    public function getWorkhours($user_id,$date=null){
-        if (!$date) {
-           $date=date('Y-m');
-        }
-        $date.='-01';
-        $sql = "SELECT SUM(hours) as totalhours FROM workhours where `workhours`.user_id='$user_id' and MONTH(`workhours`.`date`) =MONTH('$date') and YEAR(`workhours`.`date`) =YEAR('$date')";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        $workhours=$query->fetch();
-        $workhours=$workhours->totalhours;
-        if (!$workhours) {
-            $workhours=0;
-        }
-        return $workhours;
-    }
+
 
     public function getContracts($export=null){
         $page         = (int)(isset($_REQUEST['page'])? $_REQUEST['page']:0);
@@ -169,7 +245,7 @@ class Model
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $limiter      = 100;
         $pager        = $limiter*$page;
-       
+
 
         /////////////////////////////-date-////////////////////////////
         if ($date!='') {
@@ -191,13 +267,13 @@ class Model
             }else{                          // if one part
                 $first_name=$client_name.'%';
                 $last_name='%';
-            }   
+            }
         } else {                        //if none
                 $first_name='%';
                 $last_name='%';
         }
         ///////////////////////////////////////////////////////////////////
-        
+
         //////////////////////////--////////////////////////////////
         if ($codice_fiscale==''){$codice_fiscale='%';}else {$codice_fiscale.='%';};
         if ($phone==''){$phone='%';};
@@ -209,22 +285,22 @@ class Model
         }
         /////////////////////////////////////////////////
 
-        //            -- AND (   DATE(`date`) >= DATE(:date1) 
-        //            --     AND 
+        //            -- AND (   DATE(`date`) >= DATE(:date1)
+        //            --     AND
         //            --         DATE(`date`) <= DATE(:date2)
-        //            --     ) 
-        $sql="SELECT * FROM contracts 
-                WHERE contract_type LIKE :contract_type 
-                    AND  operator LIKE :operator 
+        //            --     )
+        $sql="SELECT * FROM contracts
+                WHERE contract_type LIKE :contract_type
+                    AND  operator LIKE :operator
 
-                    AND ( 
-                            (first_name LIKE :first_name AND last_name LIKE :last_name) 
+                    AND (
+                            (first_name LIKE :first_name AND last_name LIKE :last_name)
                         OR
                             (first_name LIKE :last_name AND last_name LIKE :first_name)
                         OR
                             (first_name LIKE :last2 OR last_name LIKE :last2)
                         )
-                    AND status LIKE :status  
+                    AND status LIKE :status
                     AND (   (tel_number LIKE :phone)
                         OR  (alt_number LIKE :phone)
                         OR  (cel_number LIKE :phone)
@@ -238,7 +314,7 @@ class Model
                             `date` >= last_day(now()) + interval 1 day - interval 2 month
                         )
                 ORDER BY contract_id DESC ";
-	    			  
+
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
@@ -255,9 +331,9 @@ class Model
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->execute();
 
-            $allpages=$query->rowCount();  
+            $allpages=$query->rowCount();
             $output=array();
-            array_push($output,$allpages); 
+            array_push($output,$allpages);
 
         if (!$export) {
             $sql.=" LIMIT :pager , :limiter";
@@ -294,7 +370,7 @@ class Model
                     $c_nr=$c_nr+1;
                 }
             }
-            
+
         if ($op_others) {
             //-------users------
             $uid=array();
@@ -310,13 +386,13 @@ class Model
                     array_push($outcnts,$cnt);
                 }
             }
-            array_push($output,$outcnts); 
+            array_push($output,$outcnts);
             array_push($output,$c_nr);
             return $output;
         }
 
         array_push($output,$cnts);
-        array_push($output,$c_nr); 
+        array_push($output,$c_nr);
         return $output;
     }
 
@@ -345,7 +421,7 @@ class Model
                 header("location:".URL.$_SESSION['role'].'/contracts');
                 return;
             }
-        
+
             $sql="INSERT INTO contracts
                                 (`date`,
                                     operator,
@@ -391,7 +467,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                 $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
                 $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
                 $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
-               
+
                 $query->bindParam(':tel_number', $_POST['tel_number']);
                 $query->bindParam(':alt_number', $_POST['alt_number']);
                 $query->bindParam(':cel_number', $_POST['cel_number']);
@@ -414,7 +490,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date', date('Y-m-d',strtotime($_POST['document_date'])));
                 $query->bindParam(':document_issue_place', $_POST['document_issue_place']);
-                
+
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
                 $query->bindParam(':civico', $_POST['civico']);
@@ -435,7 +511,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindValue(':uf_civico', '');
                     $query->bindValue(':uf_price', '');
                     $query->bindValue(':uf_location', '');
-                    $query->bindValue(':uf_cap', ''); 
+                    $query->bindValue(':uf_cap', '');
                 }
 
                 if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -450,7 +526,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindValue(':ddf_address', '');
                     $query->bindValue(':ddf_civico', '');
                     $query->bindValue(':ddf_price', '');
-                    $query->bindValue(':ddf_location', ''); 
+                    $query->bindValue(':ddf_location', '');
                     $query->bindValue(':ddf_cap', '');
                 }
 
@@ -466,15 +542,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
                     $query->bindParam(':gas_request_type', $_POST['gas_request_type']);
                     $query->bindParam(':gas_pdr', $_POST['gas_pdr']);
                     $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                     $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                     $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
                     $query->bindParam(':gas_remi', $_POST['gas_remi']);
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -486,7 +562,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                     $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                     $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
                     $query->bindParam(':gas_remi', $_POST['gas_remi']);
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -495,8 +571,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindValue(':luce_fornitore_uscente','');
                     $query->bindValue(':luce_opzione_oraria', '');
                     $query->bindValue(':luce_potenza','');
-                    $query->bindValue(':luce_tensione',''); 
-                    $query->bindValue(':luce_consume_annuo',''); 
+                    $query->bindValue(':luce_tensione','');
+                    $query->bindValue(':luce_consume_annuo','');
 
                 }elseif ($_POST['contract_type']=='luce') {
 
@@ -505,15 +581,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
                     $query->bindValue(':gas_request_type','');
                     $query->bindValue(':gas_pdr','');
                     $query->bindValue(':gas_fornitore_uscente','');
                     $query->bindValue(':gas_consume_annuo', '');
                     $query->bindValue(':gas_tipo_riscaldamento','');
-                    $query->bindValue(':gas_tipo_cottura_acqua',''); 
+                    $query->bindValue(':gas_tipo_cottura_acqua','');
                     $query->bindValue(':gas_remi', '');
                     $query->bindValue(':gas_matricola','');
                 }
@@ -530,9 +606,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
 
 
                 $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
-               
+
                 $query->bindParam(':payment_type', $_POST['payment_type']);
-                
+
                 if ($_POST['payment_type']=='cc') {
                     $query->bindParam(':iban_code', $_POST['iban_code']);
                     $query->bindParam(':iban_accounthoder', $_POST['iban_accounthoder']);
@@ -555,7 +631,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                     $allow_ext = array('mp3','wav','gsm','gsw');
                     $ext = pathinfo(basename($_FILES["file"]["name"]), PATHINFO_EXTENSION);
                     $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
-                    if (!in_array($ext,$allow_ext)) { 
+                    if (!in_array($ext,$allow_ext)) {
                         echo "ext_error: ";
                         echo $ext;
                         return;
@@ -569,8 +645,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
                         echo "fail";
                     }
                     //header('location: viewContract/'.$this->db->lastInsertId());
-                    header("location:".URL.$_SESSION['role'].'/contracts');  
-                    $_SESSION['create_contract']='success';   
+                    header("location:".URL.$_SESSION['role'].'/contracts');
+                    $_SESSION['create_contract']='success';
                 } else {
                     $_SESSION['create_contract']='fail';
                     header("location:".URL.$_SESSION['role'].'/contracts');
@@ -586,7 +662,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
         $allow_ext = array('pdf','doc','docx','csv','xls','xlsx','txt','jpg','jpeg');
         $ext = pathinfo($target_file, PATHINFO_EXTENSION);
         $target_file1 = $target_dir .date('d-m-Y').'_'.$client_name.'_'.$_FILES["file"]["name"];
-        if (!in_array($ext,$allow_ext)) { 
+        if (!in_array($ext,$allow_ext)) {
             echo "ext_error";
             return;
         }
@@ -623,29 +699,29 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
       //  print_r($document);
         $target_file = $target_dir . basename($document->url);
         //print_r($target_file);
-        $ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+        $ext = pathinfo($target_file, PATHINFO_EXTENSION);
         if (file_exists ($target_file)) {
-            switch(strtolower($ext)){  
-                case "txt": 
-                    header("Content-type: text/plain");  
+            switch(strtolower($ext)){
+                case "txt":
+                    header("Content-type: text/plain");
                     readfile($target_file);
-                break;  
-                case "jpg": 
-                    header("Content-type: image/jpg");  
+                break;
+                case "jpg":
+                    header("Content-type: image/jpg");
                     readfile($target_file);
-                break; 
-                case "jpeg": 
-                    header("Content-type: image/jpeg");  
+                break;
+                case "jpeg":
+                    header("Content-type: image/jpeg");
                     readfile($target_file);
-                break;  
-                case "png":                  
+                break;
+                case "png":
                     header("content-type: image/png");
                     readfile($target_file);
-                break;  
-                case "pdf":                  
+                break;
+                case "pdf":
                     header("content-type: application/pdf");
                     readfile($target_file);
-                break; 
+                break;
                 case 'docx':
                     //echo "not suppoted yet";
                     header('Content-Type: application/octet-stream');
@@ -675,7 +751,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
         $allow_ext = array('mp3','wav','gsm','gsw');
         $ext = pathinfo(basename($_FILES["file"]["name"]), PATHINFO_EXTENSION);
         $target_file1 = $target_dir .date('ymd').'_'.ucfirst($last_name).ucfirst($first_name).'.'.$ext;
-        if (!in_array($ext,$allow_ext)) { 
+        if (!in_array($ext,$allow_ext)) {
             echo "ext_error: ";
             echo $ext;
             return;
@@ -710,17 +786,17 @@ delega_first_name,delega_last_name,delega_vat_number,document_issue_place       
     	}
 		$target_dir = APP."audios/";
 		$target_file = $target_dir . basename($audio->url);
-		$ext = pathinfo($target_file, PATHINFO_EXTENSION);   
+		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
  		if (file_exists ($target_file)) {
-			switch(strtolower($ext)){  
-				case "mp3": 
-					header("Content-type: audio/mp3");  
+			switch(strtolower($ext)){
+				case "mp3":
+					header("Content-type: audio/mp3");
 					readfile($target_file);
-				break;  
-				case "wav": 
-					header("Content-type: audio/wav");  
+				break;
+				case "wav":
+					header("Content-type: audio/wav");
 					readfile($target_file);
-				break;  
+				break;
 
 			};
 		} else{
