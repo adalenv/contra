@@ -49,27 +49,27 @@
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
         Tip 2: you can also add an image using data-image tag
-    --> 
+    -->
             <div class="logo">
               <!--   <a href="<?=URL;?>" class="simple-text">
                     OPUS
                 </a> -->
-                <img style="width: 238px" src="<?php echo URL; ?>assets/img/jc.png"> 
+                <img style="width: 238px" src="<?php echo URL; ?>assets/img/jc.png">
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="contractsNav"> 
+                    <li class="contractsNav">
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
                             <p>Contratti</p>
                         </a>
                     </li>
-<!--                     <li class="createContractNav"> 
+                    <li class="createContractNav">
                         <a href="<?=URL.$_SESSION['role'].'/createContract';?>">
                             <i class="material-icons">note_add</i>
                             <p>Inserisci Contrato</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="usersNav">
                         <a href="<?=URL.$_SESSION['role'].'/users';?>">
                             <i class="material-icons">group</i>

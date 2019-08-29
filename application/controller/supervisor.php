@@ -8,11 +8,11 @@ class supervisor extends Controller
 {
 
 
-    public function index(){ 
+    public function index(){
         header('Location:'.URL.$_SESSION['role'].'/contracts');
     }
 
-    function contracts(){   
+    function contracts(){
         $operators=$this->model->getUsersByRole('operator');
         $allUsers=$this->model->getAllUsers();
         $output=$this->model->getContracts();
@@ -25,23 +25,23 @@ class supervisor extends Controller
         require APP . 'view/supervisor/contracts.php';
         require APP . 'view/supervisor/footer.php';
     }
-    
-    // public function createContract(){ 
-    //     if(isset($_POST['create_contract'])){
-    //         $this->model->createContract();
-    //         return;
-    //     }
-    //     $operators   =  $this->model->getUsersByRole('operator');
-    //     //$supervisors   =  $this->model->getUsersByRole('supervisor');
-    //     $campaigns=$this->model->getCampaigns();
-    //     require APP . 'view/supervisor/header.php';
-    //     require APP . 'view/supervisor/createContract.php';
-    //     require APP . 'view/supervisor/footer.php';
-    // }
+
+    public function createContract(){ 
+        if(isset($_POST['create_contract'])){
+            $this->model->createContract();
+            return;
+        }
+        $operators   =  $this->model->getUsersByRole('operator');
+        //$supervisors   =  $this->model->getUsersByRole('supervisor');
+        $campaigns=$this->model->getCampaigns();
+        require APP . 'view/supervisor/header.php';
+        require APP . 'view/supervisor/createContract.php';
+        require APP . 'view/supervisor/footer.php';
+    }
 
 
-    // public function viewContract($contract_id){ 
-        
+    // public function viewContract($contract_id){
+
     //     //$supervisors =  $this->model->getUsersByRole('supervisor');
     //     $contract = $this->model->getContractById($contract_id);
     //     if (!$contract) {
@@ -57,25 +57,25 @@ class supervisor extends Controller
     // }
 
     //////////-documents-//////////////
-    public function uploadDocuments(){ 
+    public function uploadDocuments(){
         $this->model->uploadDocuments();
     }
-    public function getDocuments($contract_id){ 
+    public function getDocuments($contract_id){
         $this->model->getDocuments($contract_id);
     }
-    public function getDocument($document_id){ 
+    public function getDocument($document_id){
         $this->model->getDocument($document_id);
     }
     /////////////////////////////////
 
     //////////-audio-//////////////
-    public function uploadAudios(){ 
+    public function uploadAudios(){
         $this->model->uploadAudios();
     }
-    public function getAudios($contract_id){ 
+    public function getAudios($contract_id){
         $this->model->getAudios($contract_id);
     }
-    public function getAudio($audio_id){ 
+    public function getAudio($audio_id){
         $this->model->getAudio($audio_id);
     }
     /////////////////////////////////
@@ -87,7 +87,7 @@ class supervisor extends Controller
             require APP . 'view/supervisor/workhours.php';
             require APP . 'view/supervisor/footer.php';
             return;
-        }elseif(!$showHours){ 
+        }elseif(!$showHours){
         $users=$this->model->getUsers();
             require APP . 'view/supervisor/header.php';
             require APP . 'view/supervisor/users.php';
@@ -95,7 +95,7 @@ class supervisor extends Controller
         }else header('location:'.APP);
     }
 
-    public function viewUser($user_id){ 
+    public function viewUser($user_id){
         $contracts=$this->model->getContractsByUser($user_id);
         require APP . 'view/supervisor/header.php';
         require APP . 'view/supervisor/viewUser.php';
