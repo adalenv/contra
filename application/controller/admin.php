@@ -22,13 +22,13 @@ class admin extends Controller
         $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
-    	$output=$this->model->getContracts();
+    	  $output=$this->model->getContracts();
         $contracts=$output[1];
         $pages=ceil($output[0]/100);
         $cnt_nr=$output[2];
         $campaigns=$this->model->getCampaigns();
         $statuses=$this->model->getStatuses();
-   		require APP . 'view/admin/header.php';
+   		  require APP . 'view/admin/header.php';
         require APP . 'view/admin/contracts.php';
         require APP . 'view/admin/footer.php';
     }

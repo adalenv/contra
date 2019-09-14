@@ -145,13 +145,13 @@
                             <tbody>
                                 <?php
                                     $output='';
-                                    $stat=array();
+                                    // $stat=array();
                                     foreach ($users as $user) {
-                                        $user_stat=array();
-                                        foreach ($statuses as $status) {
-                                          array_push($user_stat,array($status->status_name=>$this->model->getContractsNumberByStatus($user->user_id,$date,$status->status_id)));
-                                        }
-                                        array_push($stat,array($user->user_id =>$user_stat));
+                                        // $user_stat=array();
+                                        // foreach ($statuses as $status) {
+                                        //   array_push($user_stat,array($status->status_name=>$this->model->getContractsNumberByStatus($user->user_id,$date,$status->status_id)));
+                                        // }
+                                        // array_push($stat,array($user->user_id =>$user_stat));
 
                                       if ($user->role=='supervisor') {
                                         $contractsNumber1= (int)$this->model->getContractsNumberSupervisor($user->user_id,$date);
@@ -201,7 +201,7 @@
                   <div class="card-body">
                     <div id="chartPreferences" class="ct-chart"></div>
                   <div class="card-footer">
-                  
+
                   </div>
                 </div>
               </div>
@@ -388,63 +388,64 @@ $.ajax({
     function showStats(user_id,user_name){
       $('#u_name2').html(user_name);
 
-      stat_items= <?php echo json_encode($stat); ?>;
-      user_stat=stat_items.find((asset)=>{return asset[user_id]});
+			$.ajax({
+          url: '<?=URL?>api/showStats/'+user_id+'/<?=$date;?>',
+          type: 'POST',
+           dataType:'json',
+          // data: {user_id: user_id,
+          //        date:$('#dateToAdd').val(),
+          //       },
+        })
+        .done(function(data) {
+					console.log(data);
+					keys=data.map(value => Object.keys(value)[0]);
+					values=data.map(value => Object.values(value)[0]);
+					console.log(keys);
+					var dataPreferences = {
+		          labels: keys,
+		          series: values
+		      };
 
-      var obj = Object.values(user_stat[user_id]);
-      console.log(obj);
-      var keys = [];
-      var values = [];
+		      var optionsPreferences = {
+		          height: '230px',
+		          width:'100%',
 
-      for(var x in obj) {
-        keys.push(Object.keys(obj[x])[0]);
-        values.push(Object.values(obj[x])[0]);
-      }
-      console.log(keys);
-      console.log(values);
+		          showLabel: false,
+		            plugins: [
+		                Chartist.plugins.legend()
+		            ],
+		          fullWidth: true,
+		              chartPadding: {
+		                  right: 40
+		              }
+		      };
 
+		      var responsiveOptions = [
+					    ['screen and (min-width: 640px)', {
+					      chartPadding: 30,
+					      labelOffset: 100,
+					      labelDirection: 'explode',
+					      labelInterpolationFnc: function(value) {
+					        return value;
+					      }
+					    }],
+					    ['screen and (min-width: 1024px)', {
+					      labelOffset: 80,
+					      chartPadding: 20
+					    }]
+					  ];
 
+		      $('#show_stats').modal();
 
-      var dataPreferences = {
-          labels: keys,
-          series: values
-      };
-
-      var optionsPreferences = {
-          height: '230px',
-          width:'100%',
-
-          showLabel: false,
-            plugins: [
-                Chartist.plugins.legend()
-            ],
-          fullWidth: true,
-              chartPadding: {
-                  right: 40
-              }
-      };
-
-      var responsiveOptions = [
-    ['screen and (min-width: 640px)', {
-      chartPadding: 30,
-      labelOffset: 100,
-      labelDirection: 'explode',
-      labelInterpolationFnc: function(value) {
-        return value;
-      }
-    }],
-    ['screen and (min-width: 1024px)', {
-      labelOffset: 80,
-      chartPadding: 20
-    }]
-  ];
+		      Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences,responsiveOptions);
+        })
+        .fail(function(err) {
+          console.log(err);
+        });
+			}
 
 
 
-      $('#show_stats').modal();
-
-      Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences,responsiveOptions);
-    }
 
     $(document).ready(function() {
       $('#show_stats').on('shown.bs.modal', function() {

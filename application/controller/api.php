@@ -9,10 +9,10 @@ class api extends Controller
 
 
     public function index()
-    { 
+    {
         echo "api v1";
     }
-    
+
     public function ApigetUsersBySupervisor($supervisor){
         $sql="SELECT CONCAT_WS(' ',first_name,last_name) AS full_name,user_id FROM users where role='operator' AND supervisor = :supervisor";
         $query=$this->db->prepare($sql);
@@ -26,6 +26,14 @@ class api extends Controller
         $query->execute();
         echo json_encode($query->fetchAll());
     }
+    public function showStats($user_id,$date){
+      $statuses=$this->model->getStatuses();
+      $user_stat=array();
+      foreach ($statuses as $status) {
+        array_push($user_stat,array($status->status_name=>$this->model->getContractsNumberByStatus($user_id,$date,$status->status_id)));
+      }
+      echo json_encode($user_stat); //echo data json
+    }
 
     public function getWorkhours(){
       $user_id=$_POST['user_id'];
@@ -38,7 +46,7 @@ class api extends Controller
             array_push($output, $row);
         }
         header('Content-type: application/json');
-        echo json_encode($output); //echo data json 
+        echo json_encode($output); //echo data json
     }
 
     public function addHours(){
@@ -52,8 +60,8 @@ class api extends Controller
            echo "success";
         }else{
             echo "error";
-        } 
-    }  
+        }
+    }
     public function deleteHours(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
         $sql = "DELETE FROM workhours WHERE workhours_id=:workhours_id";
@@ -63,7 +71,7 @@ class api extends Controller
            echo "success";
         }else{
             echo "error";
-        } 
+        }
     }
     public function deleteAudio(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
@@ -76,7 +84,7 @@ class api extends Controller
            unlink($file);
         }else{
             echo "error";
-        } 
+        }
     }
     public function deleteDocument(){
         //if($_SESSION['role']!='backoffice' || $_SESSION['role']!='admin') { header('Location:'.URL); return; };
@@ -89,7 +97,7 @@ class api extends Controller
            unlink($file);
         }else{
             echo "error";
-        } 
+        }
     }
 
     public function bulkUpdateStatuses(){
@@ -166,8 +174,8 @@ class api extends Controller
 
         }else{
             echo "error";
-        } 
-    } 
+        }
+    }
     public function editContractStatusTemp(){
         //get old status
         $sql='SELECT s.status_name FROM contracts  inner join status s ON s.status_id=contracts.status  WHERE contract_id=:contract_id LIMIT 1';
@@ -208,7 +216,7 @@ class api extends Controller
 
         }else{
             echo "error";
-        } 
+        }
     }
 
     public function editContractCampaign(){
@@ -221,8 +229,8 @@ class api extends Controller
            echo "success";
         }else{
             echo "error";
-        } 
-    }      
+        }
+    }
 
     public function deleteContract(){
         if($_SESSION['role']!='admin') { header('Location:'.URL); return; };
@@ -233,7 +241,7 @@ class api extends Controller
            echo "success";
         }else{
             echo "error";
-        } 
+        }
     }
 
     public function convertCnt($toType,$toStatus){
@@ -255,7 +263,7 @@ class api extends Controller
                $_POST['status']='1';
                 break;
         }
-        
+
         $_POST['contract_type']=$toType;
 
         $sql="INSERT INTO contracts
@@ -302,7 +310,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
         $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
         $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
         $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
-       
+
         $query->bindParam(':tel_number', $_POST['tel_number']);
         $query->bindParam(':alt_number', $_POST['alt_number']);
         $query->bindParam(':cel_number', $_POST['cel_number']);
@@ -347,7 +355,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindValue(':uf_civico', '');
             $query->bindValue(':uf_price', '');
             $query->bindValue(':uf_location', '');
-            $query->bindValue(':uf_cap', ''); 
+            $query->bindValue(':uf_cap', '');
         }
 
         if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -362,7 +370,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindValue(':ddf_address', '');
             $query->bindValue(':ddf_civico', '');
             $query->bindValue(':ddf_price', '');
-            $query->bindValue(':ddf_location', ''); 
+            $query->bindValue(':ddf_location', '');
             $query->bindValue(':ddf_cap', '');
         }
 
@@ -378,15 +386,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
             $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
             $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-            $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-            $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+            $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+            $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
             $query->bindParam(':gas_request_type', $_POST['gas_request_type']);
             $query->bindParam(':gas_pdr', $_POST['gas_pdr']);
             $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
             $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
             $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-            $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+            $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
             $query->bindParam(':gas_remi', $_POST['gas_remi']);
             $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -398,7 +406,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
             $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
             $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-            $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+            $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
             $query->bindParam(':gas_remi', $_POST['gas_remi']);
             $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -407,8 +415,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindValue(':luce_fornitore_uscente','');
             $query->bindValue(':luce_opzione_oraria', '');
             $query->bindValue(':luce_potenza','');
-            $query->bindValue(':luce_tensione',''); 
-            $query->bindValue(':luce_consume_annuo',''); 
+            $query->bindValue(':luce_tensione','');
+            $query->bindValue(':luce_consume_annuo','');
 
         }elseif ($_POST['contract_type']=='luce') {
 
@@ -417,15 +425,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
             $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
             $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-            $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-            $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+            $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+            $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
             $query->bindValue(':gas_request_type','');
             $query->bindValue(':gas_pdr','');
             $query->bindValue(':gas_fornitore_uscente','');
             $query->bindValue(':gas_consume_annuo', '');
             $query->bindValue(':gas_tipo_riscaldamento','');
-            $query->bindValue(':gas_tipo_cottura_acqua',''); 
+            $query->bindValue(':gas_tipo_cottura_acqua','');
             $query->bindValue(':gas_remi', '');
             $query->bindValue(':gas_matricola','');
         }
@@ -442,7 +450,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
         $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
-       
+
         $query->bindParam(':payment_type', $_POST['payment_type']);
 
         if ($_POST['payment_type']=='cc') {
@@ -469,9 +477,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                  $sql="UPDATE contracts SET `date`=:date,operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry,document_issue_place=:document_issue_place,note_super=:note_super WHERE contract_id=:contract_id";
 
-                    $query = $this->db->prepare($sql);                
+                    $query = $this->db->prepare($sql);
                     $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
-                            
+
                     $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
                     $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                     $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
@@ -480,7 +488,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                     $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
                     $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
                     $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
-                   
+
                     $query->bindParam(':tel_number', $_POST['tel_number']);
                     $query->bindParam(':alt_number', $_POST['alt_number']);
                     $query->bindParam(':cel_number', $_POST['cel_number']);
@@ -519,14 +527,14 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindParam(':uf_civico', $_POST['uf_civico']);
                         $query->bindParam(':uf_price', $_POST['uf_price']);
                         $query->bindParam(':uf_location', $_POST['uf_location']);
-                        $query->bindValue(':uf_cap', $_POST['uf_cap']); 
+                        $query->bindValue(':uf_cap', $_POST['uf_cap']);
                     }else{
                         $query->bindValue(':uf_toponimo','');
                         $query->bindValue(':uf_address', '');
                         $query->bindValue(':uf_civico', '');
                         $query->bindValue(':uf_price', '');
                         $query->bindValue(':uf_location', '');
-                        $query->bindValue(':uf_cap', ''); 
+                        $query->bindValue(':uf_cap', '');
                     }
 
                     if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -541,8 +549,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindValue(':ddf_address', '');
                         $query->bindValue(':ddf_civico', '');
                         $query->bindValue(':ddf_price', '');
-                        $query->bindValue(':ddf_location', ''); 
-                        $query->bindValue(':ddf_cap', ''); 
+                        $query->bindValue(':ddf_location', '');
+                        $query->bindValue(':ddf_cap', '');
                     }
 
                     $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
@@ -557,15 +565,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                         $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                         $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                        $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-                        $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+                        $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+                        $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
                         $query->bindParam(':gas_request_type', $_POST['gas_request_type']);
                         $query->bindParam(':gas_pdr', $_POST['gas_pdr']);
                         $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                         $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                         $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                        $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+                        $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
                         $query->bindParam(':gas_remi', $_POST['gas_remi']);
                         $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -577,7 +585,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                         $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                         $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                        $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
+                        $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
                         $query->bindParam(':gas_remi', $_POST['gas_remi']);
                         $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -586,8 +594,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindValue(':luce_fornitore_uscente','');
                         $query->bindValue(':luce_opzione_oraria', '');
                         $query->bindValue(':luce_potenza','');
-                        $query->bindValue(':luce_tensione',''); 
-                        $query->bindValue(':luce_consume_annuo',''); 
+                        $query->bindValue(':luce_tensione','');
+                        $query->bindValue(':luce_consume_annuo','');
 
                     }elseif ($_POST['contract_type']=='luce') {
 
@@ -596,15 +604,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                         $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                         $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                        $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
-                        $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
+                        $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
+                        $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
 
                         $query->bindValue(':gas_request_type','');
                         $query->bindValue(':gas_pdr','');
                         $query->bindValue(':gas_fornitore_uscente','');
                         $query->bindValue(':gas_consume_annuo', '');
                         $query->bindValue(':gas_tipo_riscaldamento','');
-                        $query->bindValue(':gas_tipo_cottura_acqua',''); 
+                        $query->bindValue(':gas_tipo_cottura_acqua','');
                         $query->bindValue(':gas_remi', '');
                         $query->bindValue(':gas_matricola','');
                     }
@@ -621,7 +629,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
                     $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
-                   
+
                     $query->bindParam(':payment_type', $_POST['payment_type']);
 
                     if ($_POST['payment_type']=='cc') {
@@ -641,7 +649,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                      $query->execute();
             }
-        
+
 
 
     }
