@@ -1326,7 +1326,7 @@ function convertCnt(toType,toStatus){
     })
     .done(function() {
         console.log("success");
-        //window.location.href='../';
+        window.location.href='../';
     })
     .fail(function() {
         alert("An error ocurred!");
