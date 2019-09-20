@@ -116,11 +116,18 @@ class admin extends Controller
     public function users($showHours=false,$date=null){
         if ($showHours=='workhours') {
             $users=$this->model->getUsers();
-            $statuses=$this->model->getStatuses();
+            //$statuses=$this->model->getStatuses();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/workhours.php';
             require APP . 'view/admin/footer.php';
             return;
+        }elseif($showHours=='workhours_'){//full stats
+          $users=$this->model->getUsers();
+          $statuses=$this->model->getStatuses();
+          require APP . 'view/admin/header.php';
+          require APP . 'view/admin/workhours_.php';
+          require APP . 'view/admin/footer.php';
+          return;
         }elseif(!$showHours){
             $users=$this->model->getUsers();
             require APP . 'view/admin/header.php';
