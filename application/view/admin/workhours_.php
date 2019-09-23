@@ -403,10 +403,15 @@ $.ajax({
           //       },
         })
         .done(function(data) {
-					console.log(data);
+					//console.log(data);
 					keys=data.map(value => Object.keys(value)[0]);
 					values=data.map(value => Object.values(value)[0]);
-					console.log(keys);
+
+					keys.forEach(function(part, index) {
+					  this[index] = this[index]+' | '+values[index];
+					}, keys); // use arr as this
+
+
 					var dataPreferences = {
 		          labels: keys,
 		          series: values
