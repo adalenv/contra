@@ -107,18 +107,18 @@
                             Creare un utente
                         </a>
                     </li> -->
+										<li class="nav-item">
+                        <a class="nav-link" href="../workhours/<?=date('Y-m');?>" role="tablist">
+                            <i class="material-icons">access_time</i>
+                            Ore di Lavoro</br>
+                         </a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" role="tablist">
                             <i class="material-icons">access_time</i>
-                            Ore di Lavoro</br>
+                            Stats</br>
                             <input id="month" onchange="window.location.href=this.value;" name="month" style="background: white;color:grey;" type="month">
                         </a>
-                    </li>
-										<li class="nav-item">
-                        <a class="nav-link" href="../workhours_/<?=date('Y-m');?>" role="tablist">
-                            <i class="material-icons">access_time</i>
-                            Stats</br>
-                         </a>
                     </li>
                 </ul>
             </div>
@@ -142,20 +142,39 @@
                             <thead class="text-info">
                                 <th>Nominativo</th>
                                 <th>Ruolo</th>
+                                <th>Contratti</th>
+                                <th>OK/Inserito</th>
                                 <th>Ore</th>
+                                <th>Performanza</th>
                                 <th><center>Azione</center></th>
                             </thead>
                             <tbody>
                                 <?php
                                     $output='';
+                                    // $stat=array();
                                     foreach ($users as $user) {
+                                        // $user_stat=array();
+                                        // foreach ($statuses as $status) {
+                                        //   array_push($user_stat,array($status->status_name=>$this->model->getContractsNumberByStatus($user->user_id,$date,$status->status_id)));
+                                        // }
+                                        // array_push($stat,array($user->user_id =>$user_stat));
+
+                                      if ($user->role=='supervisor') {
+                                        $contractsNumber1= (int)$this->model->getContractsNumberSupervisor($user->user_id,$date);
+                                        $contractsNumberOkInserito= (int)$this->model->getContractsNumberOkInseritoSupervisor($user->user_id,$date);
+                                      } else{
+                                        $contractsNumber1= (int)$this->model->getContractsNumber($user->user_id,$date);
+                                        $contractsNumberOkInserito= (int)$this->model->getContractsNumberOkInserito($user->user_id,$date);
+                                      }
 
                                         $workhours1= (float)$this->model->getWorkhours($user->user_id,$date);
                                         $output.='<tr>
                                                     <td><a class="user_name_l" href="../../viewUser/'.$user->user_id.'">'.$user->first_name.' '.$user->last_name.'</a></td>
                                                     <td>'.$user->role.'</td>';
+                                        $output.='<td>'.$contractsNumber1.'</td>';
+                                        $output.='<td>'.$contractsNumberOkInserito.'</td>';
                                         $output.='<td>'.$workhours1.'</td>';
-
+                                        $output.='<td>'.(round(@($contractsNumberOkInserito/$workhours1),3)).'</td>';
                                         $output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" onclick="addHours('.$user->user_id.',\''.$user->first_name.' '.$user->last_name.'\')" ><i class="material-icons">access_time</i></a>';
                                         if ($user->role=='supervisor') {
                                           $output.='<a type="button" rel="tooltip" class="btn btn-info user_l" onclick="showStats('.$user->user_id.',\''.$user->first_name.' '.$user->last_name.'\')" ><i class="material-icons">pie_chart</i></a>';
@@ -384,13 +403,14 @@ $.ajax({
           //       },
         })
         .done(function(data) {
-					console.log(data);
+					//console.log(data);
 					keys=data.map(value => Object.keys(value)[0]);
 					values=data.map(value => Object.values(value)[0]);
 
 					keys.forEach(function(part, index) {
-						this[index] = this[index]+' | '+values[index];
+					  this[index] = this[index]+' | '+values[index];
 					}, keys); // use arr as this
+
 
 					var dataPreferences = {
 		          labels: keys,

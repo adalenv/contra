@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL; ?>assets/img/apple-icon.png" />
@@ -17,7 +17,7 @@
     <script src="<?php echo URL; ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>assets/js/material.min.js" type="text/javascript"></script>
-    <!--<script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>-->
+    <script src="<?php echo URL; ?>assets/js/chartist.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/arrive.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap-notify.js"></script>
@@ -40,16 +40,16 @@
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
         Tip 2: you can also add an image using data-image tag
-    --> 
+    -->
             <div class="logo">
               <!--   <a href="<?=URL;?>" class="simple-text">
                     OPUS
                 </a> -->
-                <img style="width: 238px" src="<?php echo URL; ?>assets/img/jc.png"> 
+                <img style="width: 238px" src="<?php echo URL; ?>assets/img/jc.png">
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="contractsNav"> 
+                    <li class="contractsNav">
                         <a href="<?=URL.$_SESSION['role'].'/contracts';?>">
                             <i class="material-icons">assignment</i>
                             <p>Contratti</p>

@@ -8,11 +8,11 @@ class floor_manager extends Controller
 {
 
 
-    public function index(){ 
+    public function index(){
         header('Location:'.URL.$_SESSION['role'].'/contracts');
     }
 
-    function contracts(){   
+    function contracts(){
         if (isset($_GET['export'])){
             if ($_GET['export']==true) {
                 $this->model->getContracts('export');
@@ -32,8 +32,8 @@ class floor_manager extends Controller
         require APP . 'view/floor_manager/contracts.php';
         require APP . 'view/floor_manager/footer.php';
     }
-    
-    // public function createContract(){ 
+
+    // public function createContract(){
     //     if(isset($_POST['create_contract'])){
     //         $this->model->createContract();
     //         return;
@@ -46,7 +46,7 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    // public function editContract($contract_id){ 
+    // public function editContract($contract_id){
     //     if(isset($_POST['edit_contract'])){
     //         $this->model->editContract($contract_id);
     //         return;
@@ -61,7 +61,7 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    public function viewContract($contract_id){ 
+    public function viewContract($contract_id){
         $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators   =  $this->model->getUsersByRole('operator');
         $supervisors =  $this->model->getUsersByRole('supervisor');
@@ -74,25 +74,25 @@ class floor_manager extends Controller
     }
 
     // //////////-documents-//////////////
-    // public function uploadDocuments(){ 
+    // public function uploadDocuments(){
     //     $this->model->uploadDocuments();
     // }
-    // public function getDocuments($contract_id){ 
+    // public function getDocuments($contract_id){
     //     $this->model->getDocuments($contract_id);
     // }
-    // public function getDocument($document_id){ 
+    // public function getDocument($document_id){
     //     $this->model->getDocument($document_id);
     // }
     // /////////////////////////////////
 
     // //////////-audio-//////////////
-    // public function uploadAudios(){ 
+    // public function uploadAudios(){
     //     $this->model->uploadAudios();
     // }
-    // public function getAudios($contract_id){ 
+    // public function getAudios($contract_id){
     //     $this->model->getAudios($contract_id);
     // }
-    // public function getAudio($audio_id){ 
+    // public function getAudio($audio_id){
     //     $this->model->getAudio($audio_id);
     // }
     // /////////////////////////////////
@@ -104,7 +104,14 @@ class floor_manager extends Controller
             require APP . 'view/floor_manager/workhours.php';
             require APP . 'view/floor_manager/footer.php';
             return;
-        }elseif(!$showHours){ 
+          }elseif($showHours=='workhours_'){//full stats
+            $users=$this->model->getUsers();
+            $statuses=$this->model->getStatuses();
+            require APP . 'view/floor_manager/header.php';
+            require APP . 'view/floor_manager/workhours_.php';
+            require APP . 'view/floor_manager/footer.php';
+            return;
+          }elseif(!$showHours){
             $users=$this->model->getUsers();
             require APP . 'view/floor_manager/header.php';
             require APP . 'view/floor_manager/users.php';
@@ -112,15 +119,15 @@ class floor_manager extends Controller
         }else header('location:'.APP);
     }
 
-    public function viewUser($user_id){ 
+    public function viewUser($user_id){
         $contracts=$this->model->getContractsByUser($user_id);
         require APP . 'view/floor_manager/header.php';
         require APP . 'view/floor_manager/viewUser.php';
         require APP . 'view/floor_manager/footer.php';
 
     }
-    
-    // public function createUser(){ 
+
+    // public function createUser(){
     //     if(isset($_POST['create_user'])){
     //         $this->model->createUser();
     //         return;
@@ -130,7 +137,7 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    // public function editUser($user_id){ 
+    // public function editUser($user_id){
     //     if(isset($_POST['edit_user'])){
     //         $this->model->editUser($user_id);
     //         return;
@@ -145,7 +152,7 @@ class floor_manager extends Controller
     //     if(!isset($user->user_id)){
     //         echo "No user found!";
     //     } else {
-    //         require APP . 'view/floor_manager/editUser.php'; 
+    //         require APP . 'view/floor_manager/editUser.php';
     //     }
     //     require APP . 'view/floor_manager/footer.php';
     // }
@@ -158,7 +165,7 @@ class floor_manager extends Controller
             require APP . 'view/floor_manager/footer.php';
     }
 
-    // public function createStatus(){ 
+    // public function createStatus(){
     //     if(isset($_POST['create_status'])){
     //         $this->model->createStatus();
     //         return;
@@ -168,7 +175,7 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    // public function editStatus($status_id){ 
+    // public function editStatus($status_id){
     //     if ($status_id==1) {
     //         header('Location: '.URL.$_SESSION['role'].'/statuses');
     //         return;
@@ -186,7 +193,7 @@ class floor_manager extends Controller
     //     if(!isset($status->status_id)){
     //         echo "No status found!";
     //     } else {
-    //         require APP . 'view/floor_manager/editStatus.php'; 
+    //         require APP . 'view/floor_manager/editStatus.php';
     //     }
     //     require APP . 'view/floor_manager/footer.php';
     // }
@@ -199,7 +206,7 @@ class floor_manager extends Controller
             require APP . 'view/floor_manager/footer.php';
     }
 
-    // public function createCampaign(){ 
+    // public function createCampaign(){
     //     if(isset($_POST['create_campaign'])){
     //         $this->model->createCampaign();
     //         return;
@@ -209,7 +216,7 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    // public function editCampaign($campaign_id){ 
+    // public function editCampaign($campaign_id){
     //     if ($campaign_id==1) {
     //         header('Location: '.URL.$_SESSION['role'].'/campaigns');
     //         return;
@@ -227,7 +234,7 @@ class floor_manager extends Controller
     //     if(!isset($campaign->campaign_id)){
     //         echo "No campaign found!";
     //     } else {
-    //         require APP . 'view/floor_manager/editCampaign.php'; 
+    //         require APP . 'view/floor_manager/editCampaign.php';
     //     }
     //     require APP . 'view/floor_manager/footer.php';
     // }
