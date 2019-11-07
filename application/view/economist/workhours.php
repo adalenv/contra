@@ -199,34 +199,35 @@
 
 
 <div class="modal fade" id="addHours" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-              <h5 class="modal-title" style="float: left;" id="u_name1"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-            <div class="modal-body row">
-            <div class="form-group col-sm-6" style="margin-bottom: 36px;">
-                <input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="6"  placeholder="Inserire il numero di ore">
-                <input type="hidden" id="h_user_id">
-            </div>
-            <div class="form-group col-sm-6" style="margin-bottom: 36px;">
-                <input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-            </div>
-            </br>
-            <table style="width: 100%" class="table table-bordered table-responsive table-striped ">
-              <thead>
-              </thead>
-              <tbody class ="whtable"></tbody>
-             </table>
-            </div>
-            </div>
-    </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" style="float: left;" id="u_name1"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body row">
+					<div class="form-group col-sm-6" style="margin-bottom: 36px;">
+							<input style="col-sm-6" type="text" class="form-control" id="hoursToAdd" value="6"  placeholder="Inserire il numero di ore">
+							<input type="hidden" id="h_user_id">
+					</div>
+					<div class="form-group col-sm-6" style="margin-bottom: 36px;">
+							<input type="date" style="col-sm-6" value="" class="form-control" id="dateToAdd"  placeholder="Inserisci il mese">
+					</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+				<button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungere ore</button>
+			</div>
+					</br>
+					<table style="width: 100%" class="table table-bordered table-responsive table-striped ">
+						<thead>
+						</thead>
+						<tbody class ="whtable"></tbody>
+					 </table>
+			</div>
+		</div>
+	</div>
 <style type="text/css">
 .whtable>tr>td{
 padding: 0px !important;
@@ -387,7 +388,7 @@ $.ajax({
 					console.log(data);
 					keys=data.map(value => Object.keys(value)[0]);
 					values=data.map(value => Object.values(value)[0]);
-					
+
 					keys.forEach(function(part, index) {
 						this[index] = this[index]+' | '+values[index];
 					}, keys); // use arr as this

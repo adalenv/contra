@@ -236,6 +236,8 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+						<button type="button" onclick="addHoursM()" class="btn btn-info">Aggiungere ore</button>
+						
             </div>
             </br>
             <table style="width: 100%" class="table table-bordered table-responsive table-striped ">

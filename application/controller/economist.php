@@ -117,22 +117,22 @@ class economist extends Controller
         if ($showHours=='workhours') {
             $users=$this->model->getUsers();
             //$statuses=$this->model->getStatuses();
-            require APP . 'view/admin/header.php';
-            require APP . 'view/admin/workhours.php';
-            require APP . 'view/admin/footer.php';
+            require APP . 'view/economist/header.php';
+            require APP . 'view/economist/workhours.php';
+            require APP . 'view/economist/footer.php';
             return;
         }elseif($showHours=='workhours_'){//full stats
           $users=$this->model->getUsers();
           $statuses=$this->model->getStatuses();
-          require APP . 'view/admin/header.php';
-          require APP . 'view/admin/workhours_.php';
-          require APP . 'view/admin/footer.php';
+          require APP . 'view/economist/header.php';
+          require APP . 'view/economist/workhours_.php';
+          require APP . 'view/economist/footer.php';
           return;
         }elseif(!$showHours){
             $users=$this->model->getUsers();
-            require APP . 'view/admin/header.php';
-            require APP . 'view/admin/users.php';
-            require APP . 'view/admin/footer.php';
+            require APP . 'view/economist/header.php';
+            require APP . 'view/economist/users.php';
+            require APP . 'view/economist/footer.php';
         }else header('location:'.APP);
     }
 
