@@ -228,7 +228,7 @@
                                                                         $output.= '<td></td>';
                                                                     }
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
-                                                    $output.='<td onclick="$(\'#note_modal\').html(\''.$contract->note.'\');$(\'#open_note\').modal();">'.$note.'</td>';
+                                                    $output.='<td onclick="$(\'#note_modal\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->note).'\');$(\'#open_note\').modal();">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
