@@ -228,7 +228,7 @@
                                                                         $output.= '<td></td>';
                                                                     }
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
-                                                    $output.='<td onclick="$(\'#note_modal\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->note).'\');$(\'#open_note\').modal();">'.$note.'</td>';
+                                                    $output.='<td onclick="$(\'#note_name\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->first_name.' '.$contract->last_name).'\');$(\'#note_modal\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->note).'\');$(\'#open_note\').modal();">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
@@ -449,7 +449,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" >
       <div class="modal-header">
-        <h5 class="modal-title" style="float: left;" >Note</h5>
+        <h5 class="modal-title" style="float: left;" id="note_name"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

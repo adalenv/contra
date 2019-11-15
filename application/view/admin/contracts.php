@@ -274,7 +274,7 @@
 
                                                     $note=(strlen($contract->note_super)>20)?substr($contract->note_super, 0,20).'...':$contract->note_super;
                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
-                                                               <td onclick="$(\'#note_modal\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->note_super).'\');$(\'#open_note\').modal();">'.$note.'</td>';
+                                                               <td onclick="$(\'#note_name\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->first_name.' '.$contract->last_name).'\');$(\'#note_modal\').html(\''.preg_replace("/[^0-9a-zA-Z ]/", "",$contract->note_super).'\');$(\'#open_note\').modal();">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
