@@ -1,6 +1,6 @@
             <div class="content" style="margin-top: 20px">
                 <div class="container-fluid">
-                    <div class="row">  
+                    <div class="row">
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <div class="row" style="margin-left:5px;margin-right:5px">
@@ -27,7 +27,7 @@
                                             <select class="form-control" name="status" id="status">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($statuses as $status) {
                                                         $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
                                                     }
@@ -42,7 +42,7 @@
                                             <select class="form-control" name="campaign" id="campaign">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($campaigns as $campaign) {
                                                         $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
                                                     }
@@ -57,7 +57,7 @@
                                             <select class="form-control" name="operator" id="operator">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($operators as $operator) {
                                                         $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                     }
@@ -103,14 +103,14 @@
                                     </div>
                                         <input class="page_val" id="page_val" type="hidden" name="page" value='<?php echo (isset($_GET['page'])?$_GET['page']:0)?>'>
 
-                                    
+
                                            <!--  <div class="form-group label-floating "> -->
                                                 <input type="submit" name="" value="Ricerca" class="btn btn-info submit_btn">
                                                 <a href="#" class="btn reset_btn">Ripristina</a>
                                             <span class="material-input"></span>
                                           <!--   </div>
                                          -->
-   
+
                                 </div>
                             </ul>
                         </form>
@@ -134,7 +134,7 @@
                                                     <a onclick="$('.page_val').val(<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo ($_GET['page']-1); } } else {  } ?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >< Precedente</a>
                                                 </li>
                                                 <li class="paginate_button page-item last" id="datatables_last">
-                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>                                
+                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>
                                                 </li>
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
@@ -148,7 +148,7 @@
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
                                                 console.log($page);
-                                            </script>   
+                                            </script>
 
                                               <ul class="pagination" style="cursor:pointer;">
                                                 <?php if ($page>=1) { ?>
@@ -186,9 +186,9 @@
                                             <th>Località</th>
                                             <th>Operatore</th>
                                             <th>Note</th>
-                                        </thead> 
+                                        </thead>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                                 $output='';
                                                 foreach ($contracts as $contract) {
                                                     $output.='<tr class="tdColor'.$contract->status.'">';
@@ -215,7 +215,7 @@
                                                                     }
                                                                 }
                                                     $output.='<td>'.$campaign1.'</td>';
-                                                    $output.='<td>'.$contract->location.'</td>';	
+                                                    $output.='<td>'.$contract->location.'</td>';
                                                                     foreach($allUsers as $user) {
                                                                         if ($contract->operator == $user->user_id) {
                                                                             $operator = $user;
@@ -228,7 +228,7 @@
                                                                         $output.= '<td></td>';
                                                                     }
                                                     $note=(strlen($contract->note)>20)?substr($contract->note, 0,20).'...':$contract->note;
-                                                    $output.='<td title="'.$contract->note.'">'.$note.'</td>';
+                                                    $output.='<td onclick="$(\'#note_modal\').html(\''.$contract->note.'\');$(\'#open_note\').modal();">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             <script type="text/javascript">
 
                     $(function() {
@@ -261,7 +261,7 @@
 
 
 
-                        <?php 
+                        <?php
                             if (isset($_SESSION['contract_exist'])) {
                                 if ($_SESSION['contract_exist']=='true') { ?> //if fail
                                     $.notify({
@@ -280,7 +280,7 @@
                             }
                         ?>
 
-                        <?php 
+                        <?php
                             if (isset($_SESSION['create_contract'])) {
                                 if ($_SESSION['create_contract']=='fail') { ?> //if fail
                                     $.notify({
@@ -319,7 +319,7 @@
                         $('#status').val(status);
 
                         $('#date').val(date);
-                        
+
 
                         // $('#id').val(id);
                         // $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
@@ -336,7 +336,7 @@
                         $('.page-item').on('click',function(e) {
                             e.preventDefault();
                             if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#codice_fiscale').val()!=codice_fiscale || $('#campaign').val()!=campaign || $('#date').val()!=date || $('#phone').val()!=phone || $('#client_name').val()!=client_name) {
-                                $('.page_val').val(0);   
+                                $('.page_val').val(0);
                             }
                             document.forms[0].submit();
                         });
@@ -344,10 +344,10 @@
                             e.preventDefault();
                             $('.page_val').val(0);
                             document.forms[0].submit();
-                        }); 
+                        });
                         // if (date!='') {
-                        //     var start =date.split('-')[0]; 
-                        //     var end = date.split('-')[1]; 
+                        //     var start =date.split('-')[0];
+                        //     var end = date.split('-')[1];
                         //     $('#date').daterangepicker({
                         //         startDate: start,
                         //         endDate: end,
@@ -444,3 +444,19 @@
         border: 1px solid #00bcd4;
     }
 </style>
+
+<div class="modal fade" id="open_note" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" style="float: left;" >Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <font id='note_modal'></font>
+      </div>
+    </div>
+  </div>
+</div>

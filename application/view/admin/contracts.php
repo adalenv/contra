@@ -1,6 +1,6 @@
             <div class="content" style="margin-top: 20px">
                 <div class="container-fluid">
-                    <div class="row">  
+                    <div class="row">
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <div class="row" style="margin-left:5px;margin-right:5px">
@@ -27,7 +27,7 @@
                                             <select class="form-control" name="status" id="status">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($statuses as $status) {
                                                         $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
                                                     }
@@ -42,7 +42,7 @@
                                             <select class="form-control" name="operator" id="operator">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($operators as $operator) {
                                                         $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
                                                     }
@@ -57,7 +57,7 @@
                                             <select class="form-control" name="supervisor" id="supervisor">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($supervisors as $supervisor) {
                                                         $output.='<option value="'.$supervisor->user_id.'" >'.$supervisor->first_name.' '.$supervisor->last_name.'</option>';
                                                     }
@@ -74,7 +74,7 @@
                                             <select class="form-control" name="campaign" id="campaign">
                                                 <option value='%'>Tutti</option>
                                                 <?php
-                                                    $output=''; 
+                                                    $output='';
                                                     foreach ($campaigns as $campaign) {
                                                         $output.='<option value="'.$campaign->campaign_id.'" >'.$campaign->campaign_name.'</option>';
                                                     }
@@ -151,7 +151,7 @@
                                                     <a onclick="$('.page_val').val(<?php if(isset($_GET['page'])){ if($_GET['page']<1){ } else { echo ($_GET['page']-1); } } else {  } ?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >< Precedente</a>
                                                 </li>
                                                 <li class="paginate_button page-item last" id="datatables_last">
-                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>                                
+                                                    <a onclick="$('.page_val').val(<?=(int)(isset($_GET['page'])? $_GET['page']+1:1);?>);"  aria-controls="datatables" href="#"  tabindex="0" class="page-link pagination_btn"  >Successivo ></a>
                                                 </li>
                                             </ul> -->
                                             <?php if (isset($_GET['page'])) {
@@ -164,7 +164,7 @@
                                             } ?>
                                             <script type="text/javascript">
                                                 $page=<?=$page?>;
-                                            </script>   
+                                            </script>
 
                                               <ul class="pagination" style="cursor:pointer;">
                                                 <?php if ($page>0) { ?>
@@ -204,7 +204,7 @@
                                             <th>Note</th>
                                         </thead>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                                 $output='';
                                                 foreach ($contracts as $contract) {
 
@@ -274,7 +274,7 @@
 
                                                     $note=(strlen($contract->note_super)>20)?substr($contract->note_super, 0,20).'...':$contract->note_super;
                                                     $output.='<td>'.date('d-m-Y',strtotime($contract->date)).'</td>
-                                                               <td title="'.$contract->note_super.'">'.$note.'</td>';
+                                                               <td onclick="$(\'#note_modal\').html(\''.$contract->note_super.'\');$(\'#open_note\').modal();">'.$note.'</td>';
                                                     $output.='</tr>';
                                                 }
                                                 echo $output;
@@ -286,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             <script type="text/javascript">
 function exportContracts() {
     window.location.href+='&export=true';
@@ -329,8 +329,8 @@ function editContractStatus(contract_id,status_id){
 //                campaign_id:campaign_id,
 //               },
 //       })
-//       .done(function(data) { 
-//         //console.log(data.responseText);      
+//       .done(function(data) {
+//         //console.log(data.responseText);
 //       })
 //       .fail(function(err) {
 //         console.log(err);
@@ -358,7 +358,7 @@ function editContractStatus(contract_id,status_id){
 
 
 
-                        <?php 
+                        <?php
                             if (isset($_SESSION['contract_exist'])) {
                                 if ($_SESSION['contract_exist']=='true') { ?> //if fail
                                     $.notify({
@@ -377,7 +377,7 @@ function editContractStatus(contract_id,status_id){
                             }
                         ?>
 
-                        <?php 
+                        <?php
                             if (isset($_SESSION['create_contract'])) {
                                 if ($_SESSION['create_contract']=='fail') { ?> //if fail
                                     $.notify({
@@ -408,7 +408,7 @@ function editContractStatus(contract_id,status_id){
                         var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
 
                         var codice_fiscale='<?=(isset($_GET['codice_fiscale'])?$_GET['codice_fiscale']:'')?>';
-                        
+
                         var phone='<?=(isset($_GET['phone'])?$_GET['phone']:'')?>';
                         var date='<?=(isset($_GET['date'])?$_GET['date']:'')?>';
                         var client_name='<?=(isset($_GET['client_name'])?$_GET['client_name']:'')?>';
@@ -421,7 +421,7 @@ function editContractStatus(contract_id,status_id){
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
                         $('#payment_type').val(payment_type);
-                        
+
 
                         // $('#id').val(id);
                         // $('#id').val()!=''? $('#id').parent().addClass('is-focused'):'';
@@ -441,9 +441,9 @@ function editContractStatus(contract_id,status_id){
 
                         $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
-                            //|| $('#id').val()!=id 
+                            //|| $('#id').val()!=id
                             if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
-                                $('.page_val').val(0);   
+                                $('.page_val').val(0);
                             }
                             document.forms[0].submit();
                         });
@@ -451,10 +451,10 @@ function editContractStatus(contract_id,status_id){
                             e.preventDefault();
                             $('.page_val').val(0);
                             document.forms[0].submit();
-                        }); 
+                        });
                         if (date!='') {
-                            var start =date.split('-')[0]; 
-                            var end = date.split('-')[1]; 
+                            var start =date.split('-')[0];
+                            var end = date.split('-')[1];
                             $('#date').daterangepicker({
                                 startDate: start,
                                 endDate: end,
@@ -557,5 +557,18 @@ function editContractStatus(contract_id,status_id){
         border: 1px solid #00bcd4;
     }
 </style>
-
-
+<div class="modal fade" id="open_note" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" style="float: left;" >Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <font id='note_modal'></font>
+      </div>
+    </div>
+  </div>
+</div>
