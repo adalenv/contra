@@ -46,20 +46,26 @@ class floor_manager extends Controller
     //     require APP . 'view/floor_manager/footer.php';
     // }
 
-    // public function editContract($contract_id){
-    //     if(isset($_POST['edit_contract'])){
-    //         $this->model->editContract($contract_id);
-    //         return;
-    //     }
-    //     $operators   =  $this->model->getUsersByRole('operator');
-    //     $supervisors =  $this->model->getUsersByRole('supervisor');
-    //     $contract    =  $this->model->getContractById($contract_id);
-    //     $statuses=$this->model->getStatuses();
-    //     $campaigns=$this->model->getCampaigns();
-    //     require APP . 'view/floor_manager/header.php';
-    //     require APP . 'view/floor_manager/editContract.php';
-    //     require APP . 'view/floor_manager/footer.php';
-    // }
+    public function editContract($contract_id){ 
+        if(isset($_POST['edit_contract'])){
+            $this->model->editContract($contract_id);
+            return;
+        }
+        $operatorsAll=$this->model->getUsersByRoleAll('operator');
+        $operators   =  $this->model->getUsersByRole('operator');
+        $supervisors =  $this->model->getUsersByRole('supervisor');
+        $contract    =  $this->model->getContractById($contract_id);
+        $statuses=$this->model->getStatuses();
+        $campaigns=$this->model->getCampaigns();
+
+        if ($contract->status_id==2) {
+            echo 'Not permited!';
+            return; 
+        }
+        require APP . 'view/backoffice/header.php';
+        require APP . 'view/backoffice/editContract.php';
+        require APP . 'view/backoffice/footer.php';
+    }
 
     public function viewContract($contract_id){
         $operatorsAll=$this->model->getUsersByRoleAll('operator');

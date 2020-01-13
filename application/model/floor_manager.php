@@ -899,11 +899,17 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry            
 
 
     public function editContract($contract_id){
-        $sql="UPDATE contracts SET `date`=:date,
-operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry WHERE contract_id=:contract_id";
 
+        $sql="SELECT * FROM contracts WHERE `contract_id`=:contract_id LIMIT 1";
+        $query=$this->db->prepare($sql);
+        $query->execute(array(':contract_id' =>$contract_id));
+        $old_c=$query->fetch(PDO::FETCH_ASSOC);
+
+        $sql="UPDATE contracts SET 
+operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,analisi_cb=:analisi_cb,iniziative_cb=:iniziative_cb, tel_number=:tel_number,alt_number=:alt_number,cel_number=:cel_number,cel_number2=:cel_number2,cel_number3=:cel_number3,email=:email,alt_email=:alt_email,client_type=:client_type,gender=:gender,rag_sociale=:rag_sociale,first_name=:first_name,last_name=:last_name,vat_number=:vat_number,partita_iva=:partita_iva,birth_date=:birth_date,birth_nation=:birth_nation,birth_municipality=:birth_municipality,document_type=:document_type,document_number=:document_number,document_date=:document_date,toponimo=:toponimo,address=:address,civico=:civico,price=:price,location=:location,cap=:cap,uf_toponimo=:uf_toponimo,uf_address=:uf_address,uf_civico=:uf_civico,uf_price=:uf_price,uf_location=:uf_location,uf_cap=:uf_cap,ddf_toponimo=:ddf_toponimo,ddf_address=:ddf_address,ddf_civico=:ddf_civico,ddf_price=:ddf_price,ddf_location=:ddf_location,ddf_cap=:ddf_cap,ubicazione_fornitura=:ubicazione_fornitura,domicillazione_documenti_fatture=:domicillazione_documenti_fatture,contract_type=:contract_type,listino=:listino,gas_request_type=:gas_request_type,gas_pdr=:gas_pdr,gas_fornitore_uscente=:gas_fornitore_uscente,gas_consume_annuo=:gas_consume_annuo,gas_tipo_riscaldamento=:gas_consume_annuo,gas_tipo_cottura_acqua=:gas_tipo_cottura_acqua,gas_remi=:gas_remi,gas_matricola=:gas_matricola,luce_request_type=:luce_request_type,luce_pod=:luce_pod,luce_tensione=:luce_tensione,luce_potenza=:luce_potenza,luce_fornitore_uscente=:luce_fornitore_uscente,luce_opzione_oraria=:luce_opzione_oraria,luce_consume_annuo=:luce_consume_annuo,fature_via_email=:fature_via_email,payment_type=:payment_type,iban_code=:iban_code,iban_accounthoder=:iban_accounthoder,iban_fiscal_code=:iban_fiscal_code,note=:note,status=:status,delega_first_name=:delega_first_name,delega_last_name=:delega_last_name,delega_vat_number=:delega_vat_number,document_expiry=:document_expiry,document_issue_place=:document_issue_place,note_super=:note_super  WHERE contract_id=:contract_id";
+            
                 $query = $this->db->prepare($sql);
-                $query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
+                //$query->bindValue(':date',date('Y-m-d',strtotime($_POST['date'])));
                 $query->bindParam(':operator', $_POST['operator'], PDO::PARAM_INT);
                 $query->bindParam(':supervisor', $_POST['supervisor'],PDO::PARAM_INT);
                 $query->bindParam(':campaign', $_POST['campaign'],PDO::PARAM_INT);
@@ -912,7 +918,7 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                 $query->bindValue(':ugm_cb',(isset($_POST['ugm_cb'])?$_POST['ugm_cb']:'false'));
                 $query->bindValue(':analisi_cb',(isset($_POST['analisi_cb'])?$_POST['analisi_cb']:'false'));
                 $query->bindValue(':iniziative_cb',(isset($_POST['iniziative_cb'])?$_POST['iniziative_cb']:'false'));
-
+               
                 $query->bindParam(':tel_number', $_POST['tel_number']);
                 $query->bindParam(':alt_number', $_POST['alt_number']);
                 $query->bindParam(':cel_number', $_POST['cel_number']);
@@ -924,8 +930,8 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                 $query->bindParam(':client_type', $_POST['client_type']);
                 $query->bindParam(':gender', $_POST['gender']);
                 $query->bindParam(':rag_sociale', $_POST['rag_sociale']);
-                $query->bindParam(':first_name', $_POST['first_name']);
-                $query->bindParam(':last_name', $_POST['last_name']);
+                $query->bindValue(':first_name', trim($_POST['first_name']));
+                $query->bindValue(':last_name', trim($_POST['last_name']));
                 $query->bindParam(':vat_number', $_POST['vat_number']);
                 $query->bindParam(':partita_iva', $_POST['partita_iva']);
                 $query->bindValue(':birth_date', date('Y-m-d',strtotime($_POST['birth_date'])));
@@ -935,6 +941,7 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                 $query->bindParam(':document_number', $_POST['document_number']);
                 $query->bindValue(':document_date',date('Y-m-d',strtotime($_POST['document_date'])));
                 $query->bindValue(':document_expiry',date('Y-m-d',strtotime($_POST['document_expiry'])));
+                $query->bindValue(':document_issue_place', $_POST['document_issue_place']);
 
                 $query->bindParam(':toponimo', $_POST['toponimo']);
                 $query->bindParam(':address', $_POST['address']);
@@ -942,6 +949,7 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                 $query->bindParam(':price', $_POST['price']);
                 $query->bindParam(':location', $_POST['location']);
                 $query->bindParam(':cap', $_POST['cap']);
+                $query->bindParam(':note_super', $_POST['note_super']);
 
                 if ($_POST['ubicazione_fornitura']=='non_resident') {
                     $query->bindParam(':uf_toponimo', $_POST['uf_toponimo']);
@@ -949,14 +957,14 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindParam(':uf_civico', $_POST['uf_civico']);
                     $query->bindParam(':uf_price', $_POST['uf_price']);
                     $query->bindParam(':uf_location', $_POST['uf_location']);
-                    $query->bindValue(':uf_cap', $_POST['uf_cap']);
+                    $query->bindValue(':uf_cap', $_POST['uf_cap']); 
                 }else{
                     $query->bindValue(':uf_toponimo','');
                     $query->bindValue(':uf_address', '');
                     $query->bindValue(':uf_civico', '');
                     $query->bindValue(':uf_price', '');
                     $query->bindValue(':uf_location', '');
-                    $query->bindValue(':uf_cap', '');
+                    $query->bindValue(':uf_cap', ''); 
                 }
 
                 if ($_POST['domicillazione_documenti_fatture']=='altro') {
@@ -971,8 +979,8 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindValue(':ddf_address', '');
                     $query->bindValue(':ddf_civico', '');
                     $query->bindValue(':ddf_price', '');
-                    $query->bindValue(':ddf_location', '');
-                    $query->bindValue(':ddf_cap', '');
+                    $query->bindValue(':ddf_location', ''); 
+                    $query->bindValue(':ddf_cap', ''); 
                 }
 
                 $query->bindParam(':ubicazione_fornitura', $_POST['ubicazione_fornitura']);
@@ -987,15 +995,15 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
-                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
+                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
+                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
 
                     $query->bindParam(':gas_request_type', $_POST['gas_request_type']);
                     $query->bindParam(':gas_pdr', $_POST['gas_pdr']);
                     $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                     $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                     $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
+                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
                     $query->bindParam(':gas_remi', $_POST['gas_remi']);
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -1007,7 +1015,7 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindParam(':gas_fornitore_uscente', $_POST['gas_fornitore_uscente']);
                     $query->bindParam(':gas_consume_annuo', $_POST['gas_consume_annuo']);
                     $query->bindValue(':gas_tipo_riscaldamento',(isset($_POST['gas_tipo_riscaldamento'])?$_POST['gas_tipo_riscaldamento']:'false'));
-                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false'));
+                    $query->bindValue(':gas_tipo_cottura_acqua',(isset($_POST['gas_tipo_cottura_acqua'])?$_POST['gas_tipo_cottura_acqua']:'false')); 
                     $query->bindParam(':gas_remi', $_POST['gas_remi']);
                     $query->bindParam(':gas_matricola', $_POST['gas_matricola']);
 
@@ -1016,8 +1024,8 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindValue(':luce_fornitore_uscente','');
                     $query->bindValue(':luce_opzione_oraria', '');
                     $query->bindValue(':luce_potenza','');
-                    $query->bindValue(':luce_tensione','');
-                    $query->bindValue(':luce_consume_annuo','');
+                    $query->bindValue(':luce_tensione',''); 
+                    $query->bindValue(':luce_consume_annuo',''); 
 
                 }elseif ($_POST['contract_type']=='luce') {
 
@@ -1026,15 +1034,15 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
                     $query->bindParam(':luce_fornitore_uscente',$_POST['luce_fornitore_uscente']);
                     $query->bindParam(':luce_opzione_oraria',$_POST['luce_opzione_oraria']);
                     $query->bindParam(':luce_potenza',$_POST['luce_potenza']);
-                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']);
-                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']);
+                    $query->bindParam(':luce_tensione',$_POST['luce_tensione']); 
+                    $query->bindValue(':luce_consume_annuo',$_POST['luce_consume_annuo']); 
 
                     $query->bindValue(':gas_request_type','');
                     $query->bindValue(':gas_pdr','');
                     $query->bindValue(':gas_fornitore_uscente','');
                     $query->bindValue(':gas_consume_annuo', '');
                     $query->bindValue(':gas_tipo_riscaldamento','');
-                    $query->bindValue(':gas_tipo_cottura_acqua','');
+                    $query->bindValue(':gas_tipo_cottura_acqua',''); 
                     $query->bindValue(':gas_remi', '');
                     $query->bindValue(':gas_matricola','');
                 }
@@ -1051,7 +1059,7 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
 
 
                 $query->bindValue(':fature_via_email',(isset($_POST['fature_via_email'])?$_POST['fature_via_email']:'false'));
-
+               
                 $query->bindParam(':payment_type', $_POST['payment_type']);
 
                 if ($_POST['payment_type']=='cc') {
@@ -1071,13 +1079,60 @@ operator=:operator,supervisor=:supervisor,campaign=:campaign,ugm_cb=:ugm_cb,anal
 
         //error handler
         if ($query->execute()) {
-            header('location: ../viewContract/'.$contract_id);
-            $_SESSION['edit_contract']='success';
+                        //log changes
+            $sql="SELECT * FROM contracts WHERE `contract_id`=:contract_id LIMIT 1";
+            $query=$this->db->prepare($sql);
+            $query->execute(array(':contract_id' =>$contract_id));
+            $new_c=$query->fetch(PDO::FETCH_ASSOC);
+             $old_a=array_diff($old_c,$new_c);
+            $new_a=array_diff($new_c,$old_c);
+            $diff="";
+            foreach ($old_a as $index=>$value) {
+                if ($index=='status') {//old status name
+                    $sql='SELECT status_name FROM status where status_id=:status_id';
+                    $query = $this->db->prepare($sql);
+                    $query->bindParam(':status_id', $value,PDO::PARAM_INT);
+                    $query->execute();
+                    $oldstatus=$query->fetch();
+                    //new status name
+                    $sql='SELECT status_name FROM status where status_id=:status_id';
+                    $query = $this->db->prepare($sql);
+                    $query->bindParam(':status_id', $new_a[$index],PDO::PARAM_INT);
+                    $query->execute();
+                    $newstatus=$query->fetch();
+                    //log status names
+                    $diff.=$index."[".$oldstatus->status_name."=>".$newstatus->status_name."]|";
+                }else{
+                    $diff.=$index."[".$value."=>".$new_a[$index]."]|";
+                }  
+            }
+
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+
+            if (!empty($diff)) {
+                $sql="INSERT INTO log(user_id,contract_id,diff,ip) VALUES(:user_id,:contract_id,:diff,:ip)";
+                $query=$this->db->prepare($sql);
+                $query->bindValue(':user_id',$_SESSION['user_id'],PDO::PARAM_INT);
+                $query->bindValue(':contract_id',$contract_id,PDO::PARAM_INT);
+                $query->bindValue(':diff',$diff);
+                $query->bindValue(':ip',$ip);
+                $query->execute();     
+            }
+            
+            header('location: ../viewContract/'.$contract_id); 
+            $_SESSION['edit_contract']='success';     
         } else {
-            //$_SESSION['edit_contract']='success';
+            //$_SESSION['edit_contract']='fail'; 
             echo "An error occurred!";
         }
     }
+
 
     public function uploadDocuments(){
         $contract_id=$_POST['contract_id'];

@@ -16,14 +16,12 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Stato</label>
-                                                <select   class="form-control" required name="status" id="status">
+                                                <select  class="form-control" required name="status" id="status">
                                                     <?php
                                                         $output=''; 
                                                         foreach ($statuses as $status) {
                                                             if ($contract->status==$status->status_id) {
                                                                 $output.='<option selected="" value="'.$status->status_id.'" >'.$status->status_name.'</option>';
-                                                            }else{
-                                                                $output.='<option value="'.$status->status_id.'" >'.$status->status_name.'</option>';
                                                             }
                                                         }
                                                         echo $output;
@@ -46,7 +44,8 @@
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Supervisore</label>
-                                                <select class="form-control" onchange="getOperators(this.value)" required name="supervisor" id="supervisor">
+                                                <!-- onchange="getOperators(this.value)" -->
+                                                <select class="form-control"  required name="supervisor" id="supervisor">
                                                     <?php
                                                         $output=''; 
                                                         foreach ($supervisors as $supervisor) {
@@ -63,7 +62,17 @@
                                             <div class="form-group label-floating is-focused">
                                                 <label class="control-label">Operatore</label>
                                                 <select class="form-control" required name="operator" id="operator">
-                                                <option value="<?=$contract->operator;?>"></option>
+                                                   <?php
+                                                        $output=''; 
+                                                        foreach ($operatorsAll as $operator) {
+                                                            if ($contract->operator==$operator->user_id) {
+                                                                $output.='<option selected="" value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
+                                                            }else{
+                                                                $output.='<option value="'.$operator->user_id.'" >'.$operator->first_name.' '.$operator->last_name.'</option>';
+                                                            }
+                                                        }
+                                                        echo $output;
+                                                        ?>
                                                 </select>
                                             </div>
                                             <div class="form-group label-floating">
@@ -214,6 +223,12 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Data Scadenza Documento*</label>
                                                 <input type="text" autocomplete="off" value="<?=date('d-m-Y',strtotime($contract->document_expiry))?>" id="document_expiry" name="document_expiry" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Luogo di rilascio*</label>
+                                                <input type="text" autocomplete="off" value="<?=$contract->document_issue_place;?>"  id="document_issue_place" name="document_issue_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -768,13 +783,13 @@
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
                                             </div>
                                         </div>
                                     </div>
@@ -856,6 +871,12 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">BO Note:</label>
+                                            <textarea class="form-control" name="note_super"><?=$contract->note_super;?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
                                         <input type="hidden" name="edit_contract" value="true">
                                         <a href="../" class="btn btn-info pull-left">Annulla</a>
                                         <button type="submit" class="submit-btn btn btn-warning  pull-right">Update</button>
@@ -882,13 +903,13 @@ $(document).ready(function(){
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_accounthoder;?>" class="form-control" name="iban_accounthoder">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Codice ficsale Intestario IBAN</label>
-                                                <input type="text" autocomplete="off" value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
+                                                <input type="text" autocomplete="off" required value="<?=$contract->iban_fiscal_code;?>" class="form-control" name="iban_fiscal_code">
                                             </div>
                                         </div>`);
         } else{
@@ -1235,32 +1256,32 @@ $(document).ready(function(){
 });
 
 
-function getOperators(supervisor_id){
-    $.ajax({
-      url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
-      type: 'GET',
-      dataType: 'json',
-    })
-    .done(function(data) {
-        dataa=data;
-        $('#operator').html('');
-        $('#operator').focus();
-        for (var i=0;i<data.length;i++) {
-           $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
-        };
+// function getOperators(supervisor_id){
+//     $.ajax({
+//       url: '<?=URL;?>api/ApigetUsersBySupervisor/'+supervisor_id,
+//       type: 'GET',
+//       dataType: 'json',
+//     })
+//     .done(function(data) {
+//         dataa=data;
+//         $('#operator').html('');
+//         $('#operator').focus();
+//         for (var i=0;i<data.length;i++) {
+//            $('#operator').append('<option value='+data[i].user_id+'>'+data[i].full_name+'</option>');
+//         };
 
-    })
-    .fail(function(err) {
-        console.log(err);
-    })
-}
+//     })
+//     .fail(function(err) {
+//         console.log(err);
+//     })
+// }
 
 
 $(document).ready(function(){
     initDocUploader("#zdrop");
     initAudioUploader("#adrop");
     loadDocAndAudio();
-    getOperators($('#supervisor').val());
+    // getOperators($('#supervisor').val());
     $('.contractsNav').addClass('active');
 
     $('#form').on('submit',function(e){
@@ -1270,20 +1291,18 @@ $(document).ready(function(){
     });
 });
 
-
-
-    $('#contract_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#birth_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#document_date').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
-    $('#document_expiry').datetimepicker({
-        format: 'DD-MM-YYYY',
-     });
+$('#contract_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#birth_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#document_date').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
+$('#document_expiry').datetimepicker({
+    format: 'DD-MM-YYYY',
+ });
 
 $('.cb').on('click',function() {
     $(this).val($(this).val()=='false'?'true':'false');
@@ -1312,7 +1331,7 @@ function loadDocAndAudio() {
         if (data.length>0) {
             $('.doc-container').html('');
             $.each(data, function (i) {
-                $('.doc-container').append('<tr><td><a href="<?=URL.$_SESSION['role']?>/getDocument/'+data[i].document_id+'">'+data[i].url+'</a></td><td><b onclick="deleteDocument('+data[i].document_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
+                $('.doc-container').append(`<tr><td><a href=\'<?=URL.$_SESSION['role']?>/getDocument/${data[i].document_id}">${data[i].url}</a></td><td><b onclick=\'deleteDocument(${data[i].document_id},\"${data[i].url.replace(/\'/g, '__')}\") \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
             });
         }else {
             $('.doc-container').html('<tr><td>No documents!</td></tr>');
@@ -1331,7 +1350,7 @@ function loadDocAndAudio() {
             $('.audio-container').html('');
             console.log(data);
             $.each(data, function (i) {
-                $('.audio-container').append('<tr><td><a target="_blank" href="<?=URL.$_SESSION['role']?>/getAudio/'+data[i].audio_id+'">'+data[i].url+'</a></td><td><b onclick="deleteAudio('+data[i].audio_id+',\''+data[i].url+'\')" style="color:red;cursor:pointer;">X</b></td></tr>');
+                $('.audio-container').append(`<tr><td><a target=\'_blank\' href=\'<?=URL.$_SESSION['role']?>/getAudio/${data[i].audio_id}\'>${data[i].url}</a></td><td><b onclick=\'deleteAudio(${data[i].audio_id},\"${data[i].url.replace(/\'/g, '__')}\") \' style=\'color:red;cursor:pointer;\'>X</b></td></tr>`);
             });
         }else {
             $('.audio-container').html('<tr><td>No Audio!</td></tr>');
@@ -1356,7 +1375,7 @@ function deleteAudio(audio_id,url){
             $.ajax({//document
                 url: "<?=URL;?>/api/deleteAudio",
                 type: 'POST',
-                data:{audio_id:audio_id,url:url},
+                data:{audio_id:audio_id,url:url.replace(/__/g, '\'')},
             })
             .done(function(data) {
                 loadDocAndAudio();
@@ -1382,7 +1401,7 @@ function deleteDocument(document_id,url){
             $.ajax({//document
                 url: "<?=URL;?>/api/deleteDocument",
                 type: 'POST',
-                data:{document_id:document_id,url:url},
+                data:{document_id:document_id,url:url.replace(/__/g, '\'')},
             })
             .done(function(data) {
                 loadDocAndAudio();
@@ -1566,7 +1585,7 @@ function validate(){
 
     if (typeof($('[name="cel_number"]').val())!='undefined') {
         var a=Number($('[name="cel_number"]').val());
-        if ($('[name="cel_number"]').val().length< 10 || $('[name="cel_number"]').val().length>13 || !a) {
+        if ($('[name="cel_number"]').val().length< 9 || $('[name="cel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
@@ -1622,7 +1641,7 @@ function validate(){
         var a=Number($('[name="tel_number"]').val());
         ee=a;
         
-        if ($('[name="tel_number"]').val().length< 10 || $('[name="tel_number"]').val().length>13 || !a) {
+        if ($('[name="tel_number"]').val().length< 9 || $('[name="tel_number"]').val().length>13 || !a) {
             $.notify({
               icon: "done",
               message: "Invalid phone number!"
@@ -1638,7 +1657,13 @@ function validate(){
             valid=false;
         };
     };
-
+    $("input[type='text']").keyup(function () {
+        this.value=this.value.replace("\n"," ");
+        this.value=this.value.replace("\'","");
+        this.value=this.value.replace("\"","");
+        this.value = this.value.toLocaleUpperCase();
+        this.value = this.value.trim();
+    });
     return valid;
 }
 
@@ -1749,3 +1774,8 @@ function validate(){
                     </div>
                 </div>
             </div>
+<script type="text/javascript">
+    $("input[type='text']").keyup(function () {
+        this.value = this.value.toLocaleUpperCase();
+    });
+</script>

@@ -791,7 +791,9 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <a href="../" class="btn btn-info pull-left">Back</a>
-                                        <!-- <a  href="../editContract/<?=$contract->contract_id;?>" class="btn btn-warning pull-right">Edit</a> -->
+                                        <?php if ($contract->status_id!=2): ?>
+                                            <a  href="../editContract/<?=$contract->contract_id;?>" class="btn btn-warning pull-right">Edit</a>
+                                        <?php endif ?>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
