@@ -62,9 +62,9 @@ class floor_manager extends Controller
             echo 'Not permited!';
             return; 
         }
-        require APP . 'view/backoffice/header.php';
-        require APP . 'view/backoffice/editContract.php';
-        require APP . 'view/backoffice/footer.php';
+        require APP . 'view/floor_manager/header.php';
+        require APP . 'view/floor_manager/editContract.php';
+        require APP . 'view/floor_manager/footer.php';
     }
 
     public function viewContract($contract_id){

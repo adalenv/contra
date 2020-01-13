@@ -1,5 +1,8 @@
             <div class="content" style="margin-top: 20px">
                 <div class="container-fluid">
+                    <?php
+                        $status=(isset($_GET['status'])?$_GET['status']:'%');        
+                    ?>
                     <div class="row">
                         <form action="" method="GET" id="main_form">
                             <ul class="card nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
