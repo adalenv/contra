@@ -599,6 +599,23 @@ class Model
             $podpdr='%';
         }
 
+
+        if ($status!='%') {
+          if ($status[0]!='%') {
+              $status_ids=array();
+              foreach ($status as $value) {
+                array_push($status_ids,$value);
+              }
+              $status_ids1=implode(',', array_map('intval', $status_ids));
+              $status_ids1='in('.$status_ids1.')';
+          }else{
+              $status_ids1="like '%'";
+          }
+        }else{
+          $status_ids1="like '%'";
+        }
+
+
         $sql="SELECT * FROM contracts
         		WHERE contract_type LIKE :contract_type
         			AND  operator LIKE :operator
@@ -613,7 +630,7 @@ class Model
                         OR
                             (first_name LIKE :last2 OR last_name LIKE :last2)
                         )
-        			AND status LIKE :status
+        			AND status  ".$status_ids1."
                     AND (   (tel_number LIKE :phone)
                         OR  (alt_number LIKE :phone)
                         OR  (cel_number LIKE :phone)
@@ -639,7 +656,7 @@ class Model
             $query->bindParam(':date2', $date2);
             $query->bindParam(':first_name', $first_name);
             $query->bindParam(':last_name', $last_name);
-            $query->bindParam(':status', $status);
+            //  $query->bindParam(':status', $status);
             $query->bindParam(':phone', $phone);
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->bindParam(':campaign', $campaign);
@@ -672,7 +689,7 @@ class Model
         $query->bindParam(':date2', $date2);
       	$query->bindParam(':first_name', $first_name);
         $query->bindParam(':last_name', $last_name);
-        $query->bindParam(':status', $status);
+        //$query->bindParam(':status', $status);
         $query->bindParam(':phone', $phone);
         $query->bindParam(':codice_fiscale', $codice_fiscale);
         $query->bindParam(':campaign', $campaign);

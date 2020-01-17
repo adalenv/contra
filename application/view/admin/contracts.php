@@ -1,7 +1,10 @@
+<script type="text/javascript" src="<?php echo URL; ?>assets/js/chosen.jquery.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/chosen.min.css" />
+
             <div class="content" style="margin-top: 20px">
                 <div class="container-fluid">
                     <?php
-                        $status=(isset($_GET['status'])?$_GET['status']:'%');        
+                        $status=(isset($_GET['status'])?$_GET['status']:'%');
                     ?>
                     <div class="row">
                         <form action="" method="GET" id="main_form">
@@ -27,7 +30,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Stato Pratica</label>
-                                            <select class="form-control" name="status" id="status">
+                                            <select class="form-control cho" data-placeholder=" " multiple name="status[]" id="status">
                                                 <option value='%'>Tutti</option>
                                                 <?php
                                                     $output='';
@@ -362,6 +365,29 @@ function editContractStatus(contract_id,status_id){
 
 
                         <?php
+                                  if (isset($_GET['status'])) {
+                                      if (is_array($_GET['status'])) {
+                                        if ($_GET['status'][0]!='%') {
+                                          $status_ids=array();
+                                          foreach ($_GET['status'] as $value) {
+                                            array_push($status_ids,$value);
+                                          }
+                                          $status_ids1=implode(',', array_map('intval', $status_ids));
+                                          $status_ids1="[".$status_ids1."]";
+                                          //echo "var status_ids1=".$status_ids1.";";
+                                        }else{
+                                          $status_ids1="'%'";
+                                          //echo "var status_ids1='%';";
+                                        }
+                                      }else{
+                                        $status_ids1="'%'";
+                                        //echo "var status_ids1='%';";
+                                      }
+                                  }else{
+                                    $status_ids1="'%'";
+                                    //echo "var status_ids1='%';";
+                                  }
+
                             if (isset($_SESSION['contract_exist'])) {
                                 if ($_SESSION['contract_exist']=='true') { ?> //if fail
                                     $.notify({
@@ -399,11 +425,15 @@ function editContractStatus(contract_id,status_id){
                             }
                         ?>
 
+
+                        $(".cho").chosen();
+
                         $('.contractsNav').addClass('active');
 
                         var contract_type='<?=(isset($_GET['contract_type'])?$_GET['contract_type']:'%')?>';
                         var operator='<?=(isset($_GET['operator'])?$_GET['operator']:'%')?>';
-                        var status='<?=(isset($_GET['status'])?$_GET['status']:'%')?>';
+                        var status=<?=$status_ids1;?>;
+                        $('#status').val(status).trigger("chosen:updated");
                         var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
                         var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
