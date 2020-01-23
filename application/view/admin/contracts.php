@@ -475,7 +475,7 @@ function editContractStatus(contract_id,status_id){
                         $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
                             //|| $('#id').val()!=id
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val()!=status || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
+                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val().toString()!=status.toString() || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
                                 $('.page_val').val(0);
                             }
                             document.forms[0].submit();
