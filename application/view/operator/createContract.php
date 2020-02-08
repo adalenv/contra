@@ -564,12 +564,22 @@
             </div>
             <script type="text/javascript">
 $(window).ready(function(){
+	
     $('#form').on('submit',function(e){
         if (!validate()) {
             e.preventDefault();
         };
     });
 
+	 $('[name="campaign"]').change(function(){
+        if ($(this).val()==16) {
+            //console.log('16');
+            $('[name="file"]').removeAttr('required');
+        } else{
+             $('[name="file"]').attr('required','required');
+        }
+    });
+	
     $('[name="payment_type"]').change(function(){
         if ($(this).val()=='cc') {
             $('#paymentmodif').html(`<div class="card-content">
