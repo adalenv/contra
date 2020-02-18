@@ -95,7 +95,7 @@
                                             <input type="text" class="form-control" name="codice_fiscale" id="codice_fiscale">
                                         <span class="material-input"></span></div>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <div class="form-group label-floating ">
                                             <label class="control-label">Cellulare</label>
                                             <input type="text" class="form-control" name="phone" id="phone">
@@ -121,6 +121,17 @@
                                                 <option value="%">Tutti</option>
                                                 <option value="postal">Bolletino Postale</option>
                                                 <option value="cc">Addebido su Conto Corrente</option>
+                                            </select>
+                                        <span class="material-input"></span></div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">IB</label>
+                                            <select class="form-control" name="ib" id="ib">
+                                                <option value="0">None</option>
+                                                <option value="%">Tutti</option>
+                                                <option value="1">Opus</option>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
@@ -352,6 +363,7 @@ function editContractStatus(contract_id,status_id){
                             $('#campaign').val('%');
                             $('#supervisor').val('%');
                             $('#payment_type').val('%');
+                            $('#ib').val('0')
                             $('#codice_fiscale').val('');
                             $('#id').val('');
                             $('#phone').val('');
@@ -437,6 +449,8 @@ function editContractStatus(contract_id,status_id){
                         var campaign='<?=(isset($_GET['campaign'])?$_GET['campaign']:'%')?>';
                         var supervisor='<?=(isset($_GET['supervisor'])?$_GET['supervisor']:'%')?>';
                         var payment_type='<?=(isset($_GET['payment_type'])?$_GET['payment_type']:'%')?>';
+                        var ib='<?=(isset($_GET['ib'])?$_GET['ib']:'0')?>';
+
 
                         var podpdr='<?=(isset($_GET['podpdr'])?$_GET['podpdr']:'')?>';
 
@@ -454,6 +468,7 @@ function editContractStatus(contract_id,status_id){
                         $('#campaign').val(campaign);
                         $('#supervisor').val(supervisor);
                         $('#payment_type').val(payment_type);
+                        $('#ib').val(ib);
 
 
                         // $('#id').val(id);
@@ -475,7 +490,7 @@ function editContractStatus(contract_id,status_id){
                         $('.page-item').on('click',function(e) {//.pagination_btn
                             e.preventDefault();
                             //|| $('#id').val()!=id
-                            if ($('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val().toString()!=status.toString() || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
+                            if ($('#ib').val()!=ib || $('#contract_type').val()!=contract_type || $('#operator').val()!=operator || $('#status').val().toString()!=status.toString() || $('#campaign').val()!=campaign || $('#codice_fiscale').val()!=codice_fiscale || $('#phone').val()!=phone || $('#date').val()!=date || $('#client_name').val()!=client_name || $('#podpdr').val()!=podpdr || $('#payment_type').val()!=payment_type ) {
                                 $('.page_val').val(0);
                             }
                             document.forms[0].submit();

@@ -187,12 +187,38 @@ class admin extends Controller
         }
         require APP . 'view/admin/footer.php';
     }
+
+
+    public function ibUpload($ib_id){
+        $ib=$this->model->getIB($ib_id);
+
+        if(isset($_POST['import'])){
+            //print_r($_REQUEST);
+            $this->model->uploadList($ib_id);
+            return;
+        }
+        //$operators=$this->model->getUsersByRole('operator');
+        //$statuses=$this->model->getStatuses();
+        //$list->count=$this->model->countList($list_id);
+
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/ibUpload.php';
+        require APP . 'view/admin/footer.php';
+    }
+
 ////////////////////////////////////////////////////////
 
     public function statuses(){
             $statuses=$this->model->getStatuses();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/statuses.php';
+            require APP . 'view/admin/footer.php';
+    }
+
+    public function ib(){
+            $ibs=$this->model->getIBs();
+            require APP . 'view/admin/header.php';
+            require APP . 'view/admin/ib.php';
             require APP . 'view/admin/footer.php';
     }
 

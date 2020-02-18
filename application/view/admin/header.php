@@ -89,6 +89,12 @@
                             <p>Stats</p>
                         </a>
                     </li>
+                    <li class="ibNav">
+                        <a href="<?=URL.$_SESSION['role'].'/ib';?>">
+                            <i class="material-icons">supervised_user_circle</i>
+                            <p>IBs</p>
+                        </a>
+                    </li>
 
 <!--                     <li class="active-pro">
                         <a href="mailto:adalenvladi@gmail.com">

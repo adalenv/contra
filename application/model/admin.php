@@ -222,6 +222,20 @@ class Model
         $query->execute();
         return $query->fetchAll();
     }
+
+    public function getIBs(){
+        $sql='SELECT * FROM ib';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function getIB($ib_id){
+        $sql='SELECT * FROM ib where ib_id=:ib_id';
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':ib_id'=>$ib_id));
+        return $query->fetch();
+    }
     public function getStatusById($id){
         $sql='SELECT * FROM status where status_id=:id limit 1';
         $query = $this->db->prepare($sql);
@@ -536,6 +550,8 @@ class Model
         $codice_fiscale= (isset($_REQUEST['codice_fiscale'])?$_REQUEST['codice_fiscale']:'%');
         $podpdr        = (isset($_REQUEST['podpdr'])?$_REQUEST['podpdr']:'%');
         $payment_type        = (isset($_REQUEST['payment_type'])?$_REQUEST['payment_type']:'%');
+        $ib        = (isset($_REQUEST['ib'])?$_REQUEST['ib']:'0');
+
 
 
         $limiter      = 100;
@@ -639,6 +655,7 @@ class Model
                         )
                     AND vat_number LIKE :codice_fiscale
                     AND campaign LIKE :campaign
+                    AND ib LIKE :ib
                     AND supervisor LIKE :supervisor
                     AND payment_type like :payment_type
                     AND (
@@ -663,6 +680,7 @@ class Model
             $query->bindParam(':supervisor', $supervisor);
             $query->bindParam(':podpdr', $podpdr);
             $query->bindParam(':payment_type', $payment_type);
+            $query->bindParam(':ib', $ib);
 
             $query->execute();
 
@@ -696,6 +714,7 @@ class Model
         $query->bindParam(':supervisor', $supervisor);
         $query->bindParam(':podpdr', $podpdr);
         $query->bindParam(':payment_type', $payment_type);
+        $query->bindParam(':ib', $ib);
 
         $query->execute();
 
@@ -1287,6 +1306,89 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
             echo "An error occurred!";
         }
     }
+
+
+    public function uploadList($list_id){
+
+
+      if (isset($_POST["import"])) {
+
+          $fileName = $_FILES["file"]["tmp_name"];
+
+          if ($_FILES["file"]["size"] > 0) {
+
+              $file = fopen($fileName, "r");
+
+              $header=array();
+              $values=array();
+
+              foreach ($_POST as $key => $value) {
+                if ($value!="" && $value!="empty") {
+                  array_push($header,$key);
+                  array_push($values,$value);
+                }
+              }
+
+              if ($_POST['first_name']=="" || count($header)<2 ) {
+                    echo "At least First Name and Phone Number required!";
+                return;
+              }
+
+              function build_sql_insert($table, $header,$values,$column,$list_id) {
+                  $key = array_values($header);
+                  $val = array_values($values);
+                  $col=  array_values($column);
+                  $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib) ";
+                       //. "VALUES ('" . implode("', '", $col[$val]) . "')";
+
+                  $sql.="VALUES(";
+                  foreach ($values as $k=> $v) {
+                      $sql.='"'.$column[$v].'",';
+                  }
+                  //$sql=rtrim($sql, ",");
+                  $sql.=$list_id.")";
+                  print_r($sql);
+                  return($sql);
+              }
+
+              //print_r($_POST);
+              while (($column = fgetcsv($file, 50000, ",")) !== FALSE) {
+                // $check_sql="SELECT count(contract_id) as total FROM leads WHERE phone_number=:phone_number";
+                // $check_query = $this->db->prepare($check_sql);
+                // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
+                // $check=$check_query->fetch();
+
+                //if ($check->total<1) {
+                  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
+
+                   $query = $this->db->prepare($sql);
+                   if ($query->execute()) {
+                     $_SESSION['import_list']="success";
+                   }else {
+                     $_SESSION['import_list']="fail";
+                   }
+                //}
+
+
+
+             //header("location:".URL.$_SESSION['role'].'/lists');
+
+
+                  //$sqlInsert = "INSERT into users (first_name,last_name,phone_number,email,country)
+                         //values ('" . $column[$_POST["first_name"]] . "','" . $column[$_POST["last_name"]] . "','" . $column[$_POST["phone_number"]] . "','" . $column[$_POST["email"]] . "','" . $column[$_POST["country"]] . "')";
+                  //  $result = mysqli_query($conn, $sqlInsert);
+                  // if (! empty($result)) {
+                  //     $type = "success";
+                  //     $message = "CSV Data Imported into the Database";
+                  // } else {
+                  //     $type = "error";
+                  //     $message = "Problem in Importing CSV Data";
+                  // }
+              }
+          }
+      }
+    }
+
 
     public function uploadDocuments(){
         $contract_id=$_POST['contract_id'];
