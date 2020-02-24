@@ -19,6 +19,7 @@ class admin extends Controller
                 return;
             }
         }
+        $ibs=$this->model->getIBs();
         $operatorsAll=$this->model->getUsersByRoleAll('operator');
         $operators=$this->model->getUsersByRole('operator');
         $supervisors=$this->model->getUsersByRole('supervisor');
@@ -191,6 +192,7 @@ class admin extends Controller
 
     public function ibUpload($ib_id){
         $ib=$this->model->getIB($ib_id);
+        $campaigns=$this->model->getCampaigns();
 
         if(isset($_POST['import'])){
             //print_r($_REQUEST);
@@ -220,6 +222,15 @@ class admin extends Controller
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/ib.php';
             require APP . 'view/admin/footer.php';
+    }
+    public function createIB(){
+        if(isset($_POST['create_ib'])){
+            $this->model->createIB();
+            return;
+        }
+        require APP . 'view/admin/header.php';
+        require APP . 'view/admin/createIB.php';
+        require APP . 'view/admin/footer.php';
     }
 
     public function createStatus(){

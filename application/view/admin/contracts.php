@@ -131,7 +131,13 @@
                                             <select class="form-control" name="ib" id="ib">
                                                 <option value="0">None</option>
                                                 <option value="%">Tutti</option>
-                                                <option value="1">Opus</option>
+                                                <?php
+                                                    $output='';
+                                                    foreach ($ibs as $ib) {
+                                                        $output.='<option value="'.$ib->ib_id.'" >'.$ib->ib_name.'</option>';
+                                                    }
+                                                    echo $output;
+                                                ?>
                                             </select>
                                         <span class="material-input"></span></div>
                                     </div>
@@ -436,6 +442,38 @@ function editContractStatus(contract_id,status_id){
                                   unset($_SESSION['create_contract']);
                             }
                         ?>
+
+                        <?php
+                              if (isset($_SESSION['import_list'])) {
+                                    if ($_SESSION['import_list']=='success') { ?>//if edit success
+                                        $.notify({
+                                          icon: "done",
+                                          message: "Uploaded!"
+                                        },{
+                                          type: 'success',
+                                          timer: 300,
+                                          placement: {
+                                              from: 'top',
+                                              align: 'right'
+                                          }
+                                        });
+
+                                    <?php } elseif($_SESSION['import_list']=='fail') { ?> //if fail
+                                        $.notify({
+                                          icon: "error_outline",
+                                          message: "An error occurred!"
+                                        },{
+                                          type: 'danger',
+                                          timer: 300,
+                                          placement: {
+                                              from: 'top',
+                                              align: 'right'
+                                          }
+                                        });
+                                    <?php }
+                                    unset($_SESSION['import_list']);
+                                }
+                             ?>
 
 
                         $(".cho").chosen();

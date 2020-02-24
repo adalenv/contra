@@ -273,6 +273,34 @@ class Model
         header("location:".URL.$_SESSION['role'].'/statuses');
     }
 
+
+    public function createIB(){
+        $sql="SELECT ib_id  FROM ib WHERE ib_name=:ib_name";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':ib_name' => $_POST['ib_name']));
+
+        if ($query->rowCount()>0) {
+            $_SESSION['create_ib']='fail';
+            header("location:".URL.$_SESSION['role'].'/ib');
+            return;
+        }
+
+        if ($_POST['ib_name']=='') {
+            $_SESSION['create_ib']='fail';
+            header("location:".URL.$_SESSION['role'].'/ib');
+            return;
+        }
+        $sql="INSERT INTO ib(ib_name) VALUES (:ib_name)";
+        $query = $this->db->prepare($sql);
+        $parameters=array(':ib_name' => $_POST['ib_name']);
+        if($query->execute($parameters)){
+            $_SESSION['create_ib']='success';
+        } else {
+            $_SESSION['create_ib']='fail';
+        }
+        header("location:".URL.$_SESSION['role'].'/ib');
+    }
+
     public function editStatus($status_id){
         $sql="UPDATE status SET status_name=:status_name,status_description=:status_description WHERE status_id=:status_id";
         $query = $this->db->prepare($sql);
@@ -1343,7 +1371,13 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                   $sql.="VALUES(";
                   foreach ($values as $k=> $v) {
-                      $sql.='"'.$column[$v].'",';
+                      if ($key[$k]=="date") {
+                        $sql.='"'.date('Y-m-d',strtotime($column[$v])).'",';
+                      }elseif ($key[$k]=="campaign") {
+                        $sql.='"'.$_POST['campaign'].'",';
+                      }else{
+                        $sql.='"'.$column[$v].'",';
+                      }
                   }
                   //$sql=rtrim($sql, ",");
                   $sql.=$list_id.")";
@@ -1352,7 +1386,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
               }
 
               //print_r($_POST);
+              fgetcsv($file);//removes first line
               while (($column = fgetcsv($file, 50000, ",")) !== FALSE) {
+                //print_r($column);
                 // $check_sql="SELECT count(contract_id) as total FROM leads WHERE phone_number=:phone_number";
                 // $check_query = $this->db->prepare($check_sql);
                 // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
@@ -1371,7 +1407,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
 
-             //header("location:".URL.$_SESSION['role'].'/lists');
+                  header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
 
 
                   //$sqlInsert = "INSERT into users (first_name,last_name,phone_number,email,country)
