@@ -217,7 +217,17 @@ class admin extends Controller
             require APP . 'view/admin/footer.php';
     }
 
-    public function ib(){
+    public function ib($dup=""){
+            $ibs=$this->model->getIBs();
+            if ($dup=="dup") {
+              $statuses=$this->model->getStatuses();
+              $contracts=$this->model->getContractByPodPdr($_GET['ids']);
+              require APP . 'view/admin/header.php';
+              require APP . 'view/admin/dup.php';
+              require APP . 'view/admin/footer.php';
+              return;
+            }
+
             $ibs=$this->model->getIBs();
             require APP . 'view/admin/header.php';
             require APP . 'view/admin/ib.php';

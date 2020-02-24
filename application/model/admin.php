@@ -215,6 +215,13 @@ class Model
         $query->execute(array(':contract_id'=>$contract_id));
         return $query->fetch();
     }
+
+    public function getContractByPodPdr($ids){
+        $sql="SELECT * FROM contracts WHERE (gas_pdr in (".$ids.") and  gas_pdr <> '')  or (luce_pod in (".$ids.") and luce_pod <> '')";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
 ///////////////////////////////////////////////////////////////////
     public function getStatuses(){
         $sql='SELECT * FROM status';
@@ -1357,8 +1364,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 }
               }
 
-              if ($_POST['first_name']=="" || count($header)<2 ) {
-                    echo "At least First Name and Phone Number required!";
+              if ($_POST['luce_pod']=="" && $_POST['gas_pdr']=="" ) {
+                    echo "POD / PDR required!";
                 return;
               }
 
@@ -1381,7 +1388,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                   }
                   //$sql=rtrim($sql, ",");
                   $sql.=$list_id.")";
-                  print_r($sql);
+                  //print_r($sql);
                   return($sql);
               }
 
@@ -1394,20 +1401,45 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
                 // $check=$check_query->fetch();
 
-                //if ($check->total<1) {
-                  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
+                if (!isset($column[$_POST['gas_pdr']])) {
+                  $column[$_POST['gas_pdr']]=0;
+                }
 
-                   $query = $this->db->prepare($sql);
-                   if ($query->execute()) {
-                     $_SESSION['import_list']="success";
-                   }else {
-                     $_SESSION['import_list']="fail";
+                if (!isset($column[$_POST['luce_pod']])) {
+                    $column[$_POST['luce_pod']]=0;
+                }
+
+                $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
+                $check_query = $this->db->prepare($check_sql);
+                $check_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']]));
+                $check=$check_query->fetchAll();
+
+
+
+                $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
+
+                 $query = $this->db->prepare($sql);
+                 if ($query->execute()) {
+                   $_SESSION['import_list']="success";
+                 }else {
+                   $_SESSION['import_list']="fail";
+                 }
+
+
+                 if (count($check)>0) {
+                   $link="";
+                   foreach ($check as $key => $value) {
+                     $link.="'".$value->luce_pod."',";
+                     $link.="'".$value->gas_pdr."',";
                    }
-                //}
+                   $link=rtrim($link, ",");
+
+                   header("location:".URL.$_SESSION['role']."/ib/dup?ids=".$link);
+                 }else{
+                   header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
+                 }
 
 
-
-                  header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
 
 
                   //$sqlInsert = "INSERT into users (first_name,last_name,phone_number,email,country)

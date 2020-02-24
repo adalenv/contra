@@ -178,7 +178,7 @@
                   </tr>
                   <tr>
                     <td>Data Stipula:</td>
-                    <td><select class="date" name="date"><option value="" >Empty</option></select></td>
+                    <td><select  required class="date" name="date"><option value="" >Empty</option></select></td>
                   </tr>
                   <tr>
                     <td>Indirizzo:</td>
