@@ -1402,11 +1402,11 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check=$check_query->fetch();
 
                 if (!isset($column[$_POST['gas_pdr']])) {
-                  $column[$_POST['gas_pdr']]=0;
+                  $column[$_POST['gas_pdr']]=99999;
                 }
 
                 if (!isset($column[$_POST['luce_pod']])) {
-                    $column[$_POST['luce_pod']]=0;
+                    $column[$_POST['luce_pod']]=99999;
                 }
 
                 $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
