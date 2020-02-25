@@ -37,7 +37,7 @@
                                                                 <td>'.$ib->ib_id.'</td>
                                                                 <td><a href="../admin/contracts?ib='.$ib->ib_id.'">'.$ib->ib_name.'</a></td>';
 
-                                                   		$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/ibUpload/'.$ib->ib_id.'" ><i class="material-icons">cloud_upload</i></a><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/editIB/'.$ib->ib_id.'" ><i class="material-icons">edit</i></a></center></td></tr>';
+                                                   		$output.='<td><center><a type="button" rel="tooltip" class="btn btn-info user_l" href="'.URL.$_SESSION['role'].'/ibUpload/'.$ib->ib_id.'" ><i class="material-icons">cloud_upload</i></a></center></td></tr>';
                                                 }
                                                 echo $output;
                                              ?>

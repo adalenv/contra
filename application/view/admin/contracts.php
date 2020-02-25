@@ -275,24 +275,44 @@
                                                         if ($contract->operator == $user->user_id) {
                                                             $operator = $user;
                                                             break;
+                                                        }else {
+                                                          unset($operator);
                                                         }
                                                     }
                                                     if (isset($operator)) {
                                                         $output.='<td><a href="viewUser/'.$operator->user_id.'">'.$operator->first_name.' '.$operator->last_name.'</td>';
                                                     } else {
-                                                        $output.= '<td></td>';
+                                                      foreach ($ibs as $key => $ib) {
+                                                          if ($ib->ib_id==$contract->ib) {
+                                                              $operator=$ib->ib_name;
+                                                              break;
+                                                          }else{
+                                                            $operator="";
+                                                          }
+                                                      }
+                                                        $output.= '<td>'.$operator.'</td>';
                                                     }
 
                                                     foreach($supervisors as $user) {
                                                         if ($contract->supervisor == $user->user_id) {
                                                             $supervisor = $user;
                                                             break;
+                                                        }else {
+                                                          unset($supervisor);
                                                         }
                                                     }
                                                     if (isset($supervisor)) {
                                                         $output.='<td>'.$supervisor->first_name.' '.$supervisor->last_name.'</td>';
                                                     } else {
-                                                        $output.= '<td></td>';
+                                                      foreach ($ibs as $key => $ib) {
+                                                          if ($ib->ib_id==$contract->ib) {
+                                                              $supervisor=$ib->ib_name;
+                                                              break;
+                                                          }else{
+                                                            $supervisor="";
+                                                          }
+                                                      }
+                                                        $output.= '<td>'.$supervisor.'</td>';
                                                     }
 
                                                     $note=(strlen($contract->note_super)>20)?substr($contract->note_super, 0,20).'...':$contract->note_super;

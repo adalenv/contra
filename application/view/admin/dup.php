@@ -194,5 +194,34 @@
                         unset($_SESSION['update_statuses']);
                     }
 
-                ?>
+                    if (isset($_SESSION['import_list'])) {
+                          if ($_SESSION['import_list']=='success') { ?>//if edit success
+                              $.notify({
+                                icon: "done",
+                                message: "Uploaded!"
+                              },{
+                                type: 'success',
+                                timer: 300,
+                                placement: {
+                                    from: 'top',
+                                    align: 'right'
+                                }
+                              });
+
+                          <?php } elseif($_SESSION['import_list']=='fail') { ?> //if fail
+                              $.notify({
+                                icon: "error_outline",
+                                message: "An error occurred!"
+                              },{
+                                type: 'danger',
+                                timer: 300,
+                                placement: {
+                                    from: 'top',
+                                    align: 'right'
+                                }
+                              });
+                          <?php }
+                          unset($_SESSION['import_list']);
+                      }?>
+
             </script>

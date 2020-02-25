@@ -60,6 +60,7 @@
       // $(o).html("First Name");
       aa.forEach(function(k,i) {
           var o = new Option(k,i);
+          console.log(i);
           o=o.outerHTML;
           $(".first_name").append(o);
           $(".last_name").append(o);
@@ -129,7 +130,7 @@
                   <tr>
                     <td>Campagna:</td>
                     <td>
-                      <select class="campaign" name="campaign"><option>Empty</option>
+                      <select class="campaign" name="campaign" required>
                         <?php
                             $output='';
                             foreach ($campaigns as $campaign) {

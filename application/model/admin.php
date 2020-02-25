@@ -217,7 +217,7 @@ class Model
     }
 
     public function getContractByPodPdr($ids){
-        $sql="SELECT * FROM contracts WHERE (gas_pdr in (".$ids.") and  gas_pdr <> '')  or (luce_pod in (".$ids.") and luce_pod <> '')";
+        $sql="SELECT * FROM contracts WHERE (gas_pdr in (".$ids.") and  gas_pdr <> '')  or (luce_pod in (".$ids.") and luce_pod <> '') order by contract_id desc";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -1376,7 +1376,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                   $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib) ";
                        //. "VALUES ('" . implode("', '", $col[$val]) . "')";
 
-                  $sql.="VALUES(";
+                  $sql.="SELECT ";
                   foreach ($values as $k=> $v) {
                       if ($key[$k]=="date") {
                         $sql.='"'.date('Y-m-d',strtotime($column[$v])).'",';
@@ -1387,7 +1387,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                       }
                   }
                   //$sql=rtrim($sql, ",");
-                  $sql.=$list_id.")";
+                  $sql.=$list_id;
                   //print_r($sql);
                   return($sql);
               }
@@ -1417,23 +1417,28 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                     $column[$_POST['luce_pod']]=99999;
                 }
 
+                $check1_sql="SELECT luce_pod,gas_pdr,ib FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
+                $check1_query = $this->db->prepare($check1_sql);
+                $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
+                $check1=$check1_query->fetchAll();
 
-                $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
-                $check_query = $this->db->prepare($check_sql);
-                $check_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']]));
-                $check=$check_query->fetchAll();
-
-
+                if (count($check1)<1) {
 
                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
-
+                print_r($sql);
                  $query = $this->db->prepare($sql);
                  if ($query->execute()) {
                    $_SESSION['import_list']="success";
                  }else {
                    $_SESSION['import_list']="fail";
                  }
+               }
 
+
+                 $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
+                 $check_query = $this->db->prepare($check_sql);
+                 $check_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']]));
+                 $check=$check_query->fetchAll();
 
                  if (count($check)>0) {
                    $link="";
@@ -1443,9 +1448,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                    }
                    $link=rtrim($link, ",");
 
-                   header("location:".URL.$_SESSION['role']."/ib/dup?ids=".$link);
+                   //header("location:".URL.$_SESSION['role']."/ib/dup?ids=".$link);
                  }else{
-                   header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
+                   //header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
                  }
 
 
