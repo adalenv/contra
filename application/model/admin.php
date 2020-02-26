@@ -1425,7 +1425,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 if (count($check1)<1) {
 
                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
-                print_r($sql);
+                //print_r($sql);
                  $query = $this->db->prepare($sql);
                  if ($query->execute()) {
                    $_SESSION['import_list']="success";
@@ -1448,9 +1448,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                    }
                    $link=rtrim($link, ",");
 
-                   //header("location:".URL.$_SESSION['role']."/ib/dup?ids=".$link);
+                   header("location:".URL.$_SESSION['role']."/ib/dup?ids=".$link);
                  }else{
-                   //header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
+                   header("location:".URL.$_SESSION['role'].'/contracts?ib='.$list_id);
                  }
 
 
