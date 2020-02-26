@@ -1417,12 +1417,42 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                     $column[$_POST['luce_pod']]=99999;
                 }
 
-                $check1_sql="SELECT luce_pod,gas_pdr,ib FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
-                $check1_query = $this->db->prepare($check1_sql);
-                $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
-                $check1=$check1_query->fetchAll();
 
-                if (count($check1)<1) {
+
+
+                switch ($column[$_POST['contract_type']]) {
+                    case 'dual':
+                        $check1_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
+                        $check1_query = $this->db->prepare($check1_sql);
+                        $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
+                        break;
+                    case 'luce':
+                        $check1_sql="SELECT contract_id  FROM contracts WHERE luce_pod=:luce_pod  and ib=:ib";
+                        $check1_query = $this->db->prepare($check1_sql);
+                        $check1_query->execute(array(':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
+                        break;
+                    case 'gas':
+                        $check1_sql="SELECT contract_id  FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:gas_pdr)  and ib=:ib";
+                        $check1_query = $this->db->prepare($check1_sql);
+                        $check1_query->execute(array(':gas_pdr' => $column[$_POST['gas_pdr']],':ib'=>$list_id));
+                        break;
+                    default:
+                        break;
+                }
+                // if ($query->rowCount()>0) {
+                //     $_SESSION['contract_exist']='true';
+                //     header("location:".URL.$_SESSION['role'].'/contracts');
+                //     return;
+                // }
+
+
+
+                // $check1_sql="SELECT luce_pod,gas_pdr,ib FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
+                // $check1_query = $this->db->prepare($check1_sql);
+                // $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
+                // $check1=$check1_query->fetchAll();
+
+                if ($check1_query->rowCount()<1) {
 
                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
