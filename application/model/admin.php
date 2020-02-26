@@ -217,7 +217,7 @@ class Model
     }
 
     public function getContractByPodPdr($ids){
-        $sql="SELECT * FROM contracts WHERE (gas_pdr in (".$ids.") and  gas_pdr <> '')  or (luce_pod in (".$ids.") and luce_pod <> '') order by contract_id desc";
+        $sql="SELECT * FROM contracts WHERE (gas_pdr in (".$ids.") and  luce_pod in (".$ids."))  or (gas_pdr in (".$ids.") and  gas_pdr <> '')  or (luce_pod in (".$ids.") and luce_pod <> '') order by contract_id desc";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
