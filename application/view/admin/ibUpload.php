@@ -155,7 +155,7 @@
                   </tr>
                   <tr>
                     <td>Tipo CNT:</td>
-                    <td><select class="contract_type" name="contract_type"><option value=""  >Empty</option></select></td>
+                    <td><select required class="contract_type" name="contract_type"><option value=""  >Empty</option></select></td>
                   </tr>
                   <tr>
                     <td>Email:</td>
