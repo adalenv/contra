@@ -700,8 +700,8 @@ class Model
                         )
                 ORDER BY contract_id DESC ";
 
-                print_r($ib);
-                print_r($podpdr);
+                // print_r($ib);
+                // print_r($podpdr);
 
 
             $query = $this->db->prepare($sql);
@@ -717,7 +717,7 @@ class Model
             $query->bindParam(':codice_fiscale', $codice_fiscale);
             $query->bindParam(':campaign', $campaign);
             $query->bindParam(':supervisor', $supervisor);
-            $query->bindParam(':podpdr', $podpdr);
+            $query->bindParam(':podpdr', $podpdr, PDO::PARAM_STR);
             $query->bindParam(':payment_type', $payment_type);
             $query->bindParam(':ib', $ib);
 
