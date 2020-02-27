@@ -1373,7 +1373,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                   $key = array_values($header);
                   $val = array_values($values);
                   $col=  array_values($column);
-                  $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib) ";
+                  $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib,status) ";
                        //. "VALUES ('" . implode("', '", $col[$val]) . "')";
 
                   $sql.="SELECT ";
@@ -1383,7 +1383,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                       }elseif ($key[$k]=="campaign") {
                         $sql.='"'.$_POST['campaign'].'",';
                       }else{
-                        $sql.='"'.$column[$v].'",';
+                        $sql.='"'.$column[$v].'",3';
                       }
                   }
                   //$sql=rtrim($sql, ",");
