@@ -1383,11 +1383,11 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                       }elseif ($key[$k]=="campaign") {
                         $sql.='"'.$_POST['campaign'].'",';
                       }else{
-                        $sql.='"'.$column[$v].'",3';
+                        $sql.='"'.$column[$v].'",';
                       }
                   }
                   //$sql=rtrim($sql, ",");
-                  $sql.=$list_id;
+                  $sql.=$list_id.",3";
                   //print_r($sql);
                   return($sql);
               }
