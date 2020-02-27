@@ -700,6 +700,8 @@ class Model
                         )
                 ORDER BY contract_id DESC ";
 
+                print($sql);
+
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
             $query->bindParam(':contract_type', $contract_type);
