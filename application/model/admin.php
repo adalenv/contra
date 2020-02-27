@@ -700,7 +700,9 @@ class Model
                         )
                 ORDER BY contract_id DESC ";
 
-                print($ib);
+                print_r($ib);
+                print_r($podpdr);
+
 
             $query = $this->db->prepare($sql);
             $query->bindParam(':last2', $last2);
