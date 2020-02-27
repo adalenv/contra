@@ -1422,16 +1422,19 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                 switch ($column[$_POST['contract_type']]) {
                     case 'dual':
+                    case 'DUAL':
                         $check1_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
                         $check1_query = $this->db->prepare($check1_sql);
                         $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
                         break;
                     case 'luce':
+                    case 'LUCE':
                         $check1_sql="SELECT contract_id  FROM contracts WHERE luce_pod=:luce_pod  and ib=:ib";
                         $check1_query = $this->db->prepare($check1_sql);
                         $check1_query->execute(array(':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
                         break;
                     case 'gas':
+                    case 'GAS':
                         $check1_sql="SELECT contract_id  FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:gas_pdr)  and ib=:ib";
                         $check1_query = $this->db->prepare($check1_sql);
                         $check1_query->execute(array(':gas_pdr' => $column[$_POST['gas_pdr']],':ib'=>$list_id));
