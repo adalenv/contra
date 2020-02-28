@@ -1459,7 +1459,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
                 // $check1=$check1_query->fetchAll();
 
-                if ($check1_query->rowCount()<1) {
+                // if ($check1_query->rowCount()<1) {
 
                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
@@ -1469,7 +1469,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                  }else {
                    $_SESSION['import_list']="fail";
                  }
-               }
+               // }
 
 
                  $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
