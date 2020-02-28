@@ -1446,7 +1446,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                     default:
                         break;
                 }
-                 if ($query->rowCount()>0) {
+                 //if ($query->rowCount()>0) {
                 //     $_SESSION['contract_exist']='true';
                 //     header("location:".URL.$_SESSION['role'].'/contracts');
                 //     return;
