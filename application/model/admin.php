@@ -1383,7 +1383,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                   $sql.="SELECT ";
                   foreach ($values as $k=> $v) {
                       if ($key[$k]=="date") {
-                        $sql.='"'.date('Y-m-d',strtotime($column[$v])).'",';
+                        $sql.='"'.date('Y-m-d',strtotime(str_replace('/', '-', $column[$v]))).'",';
                       }elseif ($key[$k]=="campaign") {
                         $sql.='"'.$_POST['campaign'].'",';
                       }else{
