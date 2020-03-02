@@ -1373,7 +1373,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 return;
               }
 
-              function build_sql_insert($table, $header,$values,$column,$list_id) {
+              function build_sql_insert($table, $header,$values,$column,$list_id,$status) {
                   $key = array_values($header);
                   $val = array_values($values);
                   $col=  array_values($column);
@@ -1391,7 +1391,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                       }
                   }
                   //$sql=rtrim($sql, ",");
-                  $sql.=$list_id.",3";
+                  $sql.=$list_id.",".$status;
                   //print_r($sql);
                   return($sql);
               }
@@ -1454,14 +1454,20 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
 
-                // $check1_sql="SELECT luce_pod,gas_pdr,ib FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
-                // $check1_query = $this->db->prepare($check1_sql);
-                // $check1_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
-                // $check1=$check1_query->fetchAll();
+                $check2_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib!=:ib";
+                $check2_query = $this->db->prepare($check2_sql);
+                $check2_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
+                //$check2=$check2_query->fetchAll();
+
+                if ($check2_query->rowCount()>0) {
+                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3");
+               }else{
+                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1");
+               }
 
                 if ($check1_query->rowCount()<1) {
 
-                $sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
+                //$sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
                  $query = $this->db->prepare($sql);
                  if ($query->execute()) {
