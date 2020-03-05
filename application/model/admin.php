@@ -1454,18 +1454,19 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
 
-                $check2_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib!=:ib";
+                $check2_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and  ib!=:ib";
                 $check2_query = $this->db->prepare($check2_sql);
                 $check2_query->execute(array(':gas_pdr' =>$column[$_POST['gas_pdr']],':luce_pod'=>$column[$_POST['luce_pod']],':ib'=>$list_id));
                 //$check2=$check2_query->fetchAll();
 
-                if ($check2_query->rowCount()>0) {
-                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3");
-               }else{
-                 $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1");
-               }
+
 
                 if ($check1_query->rowCount()<1) {
+                  if ($check2_query->rowCount()>0) {
+                     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3");
+                 }else{
+                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1");
+                 }
 
                 //$sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
