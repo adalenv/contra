@@ -1377,7 +1377,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                   $key = array_values($header);
                   $val = array_values($values);
                   $col=  array_values($column);
-                  $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib,status) ";
+                  $sql = "INSERT INTO $table (" . implode(', ', $key) . ",ib,status,contract_type) ";
                        //. "VALUES ('" . implode("', '", $col[$val]) . "')";
 
                   $sql.="SELECT ";
@@ -1386,15 +1386,13 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $sql.='"'.date('Y-m-d',strtotime(str_replace('/', '-', $column[$v]))).'",';
                       }elseif ($key[$k]=="campaign") {
                         $sql.='"'.$_POST['campaign'].'",';
-                      } elseif ($key[$k]=="contract_type") {
-                        $sql.='"'.$contracttype.'",';
                       }else{
                         $sql.='"'.$column[$v].'",';
                       }
                   }
                   //$sql=rtrim($sql, ",");
-                  $sql.=$list_id.",".$status;
-                  //print_r($sql);
+                  $sql.=$list_id.",".$status.",'".$contracttype."'";
+                  print_r($sql);
                   return($sql);
               }
 
@@ -1406,8 +1404,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check_query = $this->db->prepare($check_sql);
                 // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
                 // $check=$check_query->fetch();
-                $_POST['gas_pdr']="gas_pdr";
-                $_POST['luce_pod']="luce_pod";
+                // $_POST['gas_pdr']="gas_pdr";
+                // $_POST['luce_pod']="luce_pod";
+                print_r($column);
 
 
                 if($column[$_POST['gas_pdr']]!="" &&  $column[$_POST['luce_pod']]!=""){
@@ -1416,11 +1415,11 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                 if ($column[$_POST['gas_pdr']]=="") {
                   $contracttype="luce";
-                }else{
+                }elseif($column[$_POST['luce_pod']]==""){
                   $contracttype="gas";
                 }
 
-
+                print_r($contracttype);
 
 
                 if (!isset($column[$_POST['gas_pdr']])) {
