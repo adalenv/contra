@@ -1386,6 +1386,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         $sql.='"'.date('Y-m-d',strtotime(str_replace('/', '-', $column[$v]))).'",';
                       }elseif ($key[$k]=="campaign") {
                         $sql.='"'.$_POST['campaign'].'",';
+                      } elseif ($key[$k]=="contract_type") {
+                        $sql.='"'.$contracttype.'",';
                       }else{
                         $sql.='"'.$column[$v].'",';
                       }
@@ -1475,10 +1477,10 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                 if ($check1_query->rowCount()<1) {
                   if ($check2_query->rowCount()>0) {
-                     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3");
+                     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3",$contracttype);
 
                  }else{
-                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1");
+                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
                  }
 
                 //$sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
