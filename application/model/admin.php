@@ -1407,11 +1407,14 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                 if($column[$_POST['gas_pdr']]!="" &&  $column[$_POST['luce_pod']]!=""){
                   $contracttype="dual";
-                }elseif ($column[$_POST['gas_pdr']]!="") {
-                  $contracttype="gas";
-                }elseif ($column[$_POST['luce_pod']]!="") {
-                  $contracttype="luce";
+                }else{
+                  if ($column[$_POST['gas_pdr']]!="") {
+                    $contracttype="gas";
+                  }else{
+                    $contracttype="luce";
+                  }
                 }
+
 
 
 
