@@ -1405,6 +1405,16 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
                 // $check=$check_query->fetch();
 
+                if($column[$_POST['gas_pdr']]!="" &&  $column[$_POST['luce_pod']]!=""){
+                  $contracttype="dual";
+                }elseif ($column[$_POST['gas_pdr']]!="") {
+                  $contracttype="gas";
+                }elseif ($column[$_POST['luce_pod']]!="") {
+                  $contracttype="luce";
+                }
+
+
+
                 if (!isset($column[$_POST['gas_pdr']])) {
                   $column[$_POST['gas_pdr']]=99999;
                 }
@@ -1422,9 +1432,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 }
 
 
-
-
-                switch ($column[$_POST['contract_type']]) {
+              
+                switch ($contracttype) {
                     case 'dual':
                     case 'DUAL':
                         $check1_sql="SELECT contract_id FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:luce_pod) and ib=:ib";
@@ -1439,7 +1448,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                         break;
                     case 'gas':
                     case 'GAS':
-                        $check1_sql="SELECT contract_id  FROM contracts WHERE (gas_pdr=:gas_pdr OR luce_pod=:gas_pdr)  and ib=:ib";
+                        $check1_sql="SELECT contract_id  FROM contracts WHERE (gas_pdr=:gas_pdr )  and ib=:ib";
                         $check1_query = $this->db->prepare($check1_sql);
                         $check1_query->execute(array(':gas_pdr' => $column[$_POST['gas_pdr']],':ib'=>$list_id));
                         break;
@@ -1463,7 +1472,8 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
                 if ($check1_query->rowCount()<1) {
                   if ($check2_query->rowCount()>0) {
-                     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3");
+                     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3")
+
                  }else{
                    $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1");
                  }
