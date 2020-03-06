@@ -1373,7 +1373,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 return;
               }
 
-              function build_sql_insert($table, $header,$values,$column,$list_id,$status) {
+              function build_sql_insert($table, $header,$values,$column,$list_id,$status,$contracttype) {
                   $key = array_values($header);
                   $val = array_values($values);
                   $col=  array_values($column);
