@@ -65,7 +65,7 @@
           $(".first_name").append(o);
           $(".last_name").append(o);
           $(".vat_number").append(o);
-          $(".contract_type").append(o);
+          //$(".contract_type").append(o);
           $(".email").append(o);
           $(".rag_sociale").append(o);
           $(".document_number").append(o);
@@ -153,10 +153,10 @@
                     <td>Codice Fiscale*:</td>
                     <td><select class="vat_number" name="vat_number"><option value=""  >Empty</option></select></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Tipo CNT:</td>
                     <td><select required class="contract_type" name="contract_type"><option value=""  >Empty</option></select></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td>Email:</td>
                     <td><select class="email" name="email"><option value="" >Empty</option></select></td>
