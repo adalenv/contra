@@ -1406,6 +1406,9 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 // $check_query = $this->db->prepare($check_sql);
                 // $check_query->execute(array(':phone_number' => $column[$_POST['phone_number']]));
                 // $check=$check_query->fetch();
+                $_POST['gas_pdr']="gas_pdr";
+                $_POST['luce_pod']="luce_pod";
+
 
                 if($column[$_POST['gas_pdr']]!="" &&  $column[$_POST['luce_pod']]!=""){
                   $contracttype="dual";
