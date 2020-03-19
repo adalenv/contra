@@ -1485,7 +1485,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                 //    $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
                 //  }
 
-                  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype)
+                  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
 
                 //$sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
