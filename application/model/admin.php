@@ -1495,7 +1495,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
                  }else {
                    $_SESSION['import_list']="fail";
                  }
-               }
+               //}
 
 
                  $check_sql="SELECT luce_pod,gas_pdr FROM contracts WHERE gas_pdr=:gas_pdr OR luce_pod=:luce_pod";
