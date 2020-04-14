@@ -1477,15 +1477,15 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
 
 
-                // if ($check1_query->rowCount()<1) {
-                //   if ($check2_query->rowCount()>0) {
-                //      $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3",$contracttype);
-                //
-                //  }else{
-                //    $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
-                //  }
+                if ($check1_query->rowCount()<1) {
+                 //  if ($check2_query->rowCount()>0) {
+                 //     $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"3",$contracttype);
+                 //
+                 // }else{
+                   $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
+                 // }
 
-                  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype);
+                //  $sql=build_sql_insert("contracts",$header,$values,$column,$list_id,"1",$contracttype)
 
                 //$sql=build_sql_insert("contracts",$header,$values,$column,$list_id);
                 //print_r($sql);
