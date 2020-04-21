@@ -1370,7 +1370,7 @@ delega_first_name,delega_last_name,delega_vat_number,document_expiry,document_is
 
               if ($_POST['luce_pod']=="" && $_POST['gas_pdr']=="" ) {
                     echo "POD / PDR required!";
-                return;
+                //return;
               }
 
               function build_sql_insert($table, $header,$values,$column,$list_id,$status,$contracttype) {
